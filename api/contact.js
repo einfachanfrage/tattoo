@@ -1,6 +1,10 @@
 'use strict';
 
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const FROM    = 'Einfach Anfrage <anfrage@einfach-anfrage.com>';
+const TO      = process.env.CONTACT_EMAIL || 'einfachanfrage@outlook.com';
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end();
@@ -10,24 +14,7 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Name, E-Mail und Nachricht sind Pflicht.' });
   }
 
-  try {
-    let transporter;
-    if (process.env.SMTP_HOST) {
-      transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT || '587', 10),
-        secure: process.env.SMTP_SECURE === 'true',
-        auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-      });
-    } else {
-      const account = await nodemailer.createTestAccount();
-      transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email', port: 587, secure: false,
-        auth: { user: account.user, pass: account.pass },
-      });
-    }
-
-    const html = `<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html lang="de"><head><meta charset="UTF-8"></head>
 <body style="margin:0;padding:0;background:#F0EDE8;font-family:Arial,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="padding:32px 0;">
@@ -55,15 +42,17 @@ module.exports = async (req, res) => {
 </table></td></tr></table>
 </body></html>`;
 
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || `"Einfach Anfrage" <${process.env.SMTP_USER || 'noreply@einfachanfrage.de'}>`,
-      to: process.env.CONTACT_EMAIL || 'einfachanfrage@outlook.com',
+  try {
+    const { error } = await resend.emails.send({
+      from:    FROM,
+      to:      TO,
       replyTo: email,
       subject: `Neue Anfrage von ${name} – Einfach Anfrage`,
       html,
     });
+    if (error) console.error('Contact email error:', JSON.stringify(error));
   } catch (err) {
-    console.error('Kontaktformular-Fehler:', err.message);
+    console.error('Contact email exception:', err.message);
   }
 
   res.json({ success: true });
