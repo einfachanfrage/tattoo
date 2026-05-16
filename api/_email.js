@@ -140,22 +140,26 @@ async function sendEmails(submission, photographerEmail, photographerName) {
   const weddingDate = wedding.dateUnclear ? 'Datum offen' : formatDate(wedding.date);
 
   // Mail an Fotografen
-  await resend.emails.send({
+  const r1 = await resend.emails.send({
     from:     FROM,
     to,
     replyTo:  contact.email,
     subject:  `📸 Neue Anfrage: ${names} · Hochzeit am ${weddingDate}`,
     html:     buildPhotographerHtml(submission),
   });
+  if (r1.error) console.error('Resend error (photographer):', JSON.stringify(r1.error));
+  else console.log('Email sent to photographer:', to);
 
   // Bestätigung an Brautpaar
   if (contact.email) {
-    await resend.emails.send({
+    const r2 = await resend.emails.send({
       from:    FROM,
       to:      contact.email,
       subject: `Eure Anfrage bei ${photoName} ist eingegangen 🤍`,
       html:    buildCoupleHtml(submission, photoName),
     });
+    if (r2.error) console.error('Resend error (couple):', JSON.stringify(r2.error));
+    else console.log('Confirmation sent to couple:', contact.email);
   }
 
   return true;
