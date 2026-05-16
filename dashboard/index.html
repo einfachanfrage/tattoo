@@ -855,19 +855,32 @@
       <!-- Theme -->
       <div style="margin-bottom:28px;">
         <div style="font-size:11px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #F0EDE8;">Widget-Design</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="theme-options">
-          ${[
-            {id:'champagne',label:'Champagne',desc:'Gold & Elfenbein (Standard)'},
-            {id:'nacht',label:'Nacht',desc:'Editorial Dark'},
-            {id:'sage',label:'Sage',desc:'Organisch & Natürlich'},
-            {id:'clean',label:'Clean',desc:'Ultra-minimal'},
-            {id:'modern',label:'Modern',desc:'Bold & Grafisch'}
-          ].map(t => `
-            <label id="theme-opt-${t.id}" style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;">
-              <input type="radio" name="theme" value="${t.id}" onchange="previewTheme('${t.id}')" style="display:none;">
-              <div style="font-weight:600;font-size:13px;color:#1A1A1A;">${t.label}</div>
-              <div style="font-size:11px;color:#8A8580;margin-top:2px;">${t.desc}</div>
-            </label>`).join('')}
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-champagne">
+            <input type="radio" name="theme" value="champagne" onchange="previewTheme('champagne')" style="display:none;">
+            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Champagne</div>
+            <div style="font-size:11px;color:#8A8580;margin-top:2px;">Gold &amp; Elfenbein (Standard)</div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-nacht">
+            <input type="radio" name="theme" value="nacht" onchange="previewTheme('nacht')" style="display:none;">
+            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Nacht</div>
+            <div style="font-size:11px;color:#8A8580;margin-top:2px;">Editorial Dark</div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-sage">
+            <input type="radio" name="theme" value="sage" onchange="previewTheme('sage')" style="display:none;">
+            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Sage</div>
+            <div style="font-size:11px;color:#8A8580;margin-top:2px;">Organisch &amp; Natürlich</div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-clean">
+            <input type="radio" name="theme" value="clean" onchange="previewTheme('clean')" style="display:none;">
+            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Clean</div>
+            <div style="font-size:11px;color:#8A8580;margin-top:2px;">Ultra-minimal</div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-modern">
+            <input type="radio" name="theme" value="modern" onchange="previewTheme('modern')" style="display:none;">
+            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Modern</div>
+            <div style="font-size:11px;color:#8A8580;margin-top:2px;">Bold &amp; Grafisch</div>
+          </label>
         </div>
       </div>
 
@@ -875,18 +888,27 @@
       <div style="margin-bottom:28px;">
         <div style="font-size:11px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #F0EDE8;">Anfragen-Empfang</div>
         <div style="display:flex;flex-direction:column;gap:8px;">
-          ${[
-            {id:'both',label:'E-Mail & Dashboard',desc:'Anfragen kommen per Mail und erscheinen im Dashboard'},
-            {id:'email',label:'Nur E-Mail',desc:'Nur E-Mail-Benachrichtigung, kein Dashboard-Eintrag'},
-            {id:'dashboard',label:'Nur Dashboard',desc:'Nur im Dashboard, keine E-Mail'}
-          ].map(d => `
-            <label id="delivery-opt-${d.id}" style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;">
-              <input type="radio" name="delivery" value="${d.id}" onchange="selectDelivery('${d.id}')" style="margin-top:3px;">
-              <div>
-                <div style="font-weight:600;font-size:13px;color:#1A1A1A;">${d.label}</div>
-                <div style="font-size:11px;color:#8A8580;margin-top:2px;">${d.desc}</div>
-              </div>
-            </label>`).join('')}
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-both">
+            <input type="radio" name="delivery" value="both" onchange="selectDelivery('both')" style="margin-top:3px;">
+            <div>
+              <div style="font-weight:600;font-size:13px;color:#1A1A1A;">E-Mail &amp; Dashboard</div>
+              <div style="font-size:11px;color:#8A8580;margin-top:2px;">Anfragen kommen per Mail und erscheinen im Dashboard</div>
+            </div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-email">
+            <input type="radio" name="delivery" value="email" onchange="selectDelivery('email')" style="margin-top:3px;">
+            <div>
+              <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Nur E-Mail</div>
+              <div style="font-size:11px;color:#8A8580;margin-top:2px;">Nur E-Mail-Benachrichtigung, kein Dashboard-Eintrag</div>
+            </div>
+          </label>
+          <label style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-dashboard">
+            <input type="radio" name="delivery" value="dashboard" onchange="selectDelivery('dashboard')" style="margin-top:3px;">
+            <div>
+              <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Nur Dashboard</div>
+              <div style="font-size:11px;color:#8A8580;margin-top:2px;">Nur im Dashboard, keine E-Mail</div>
+            </div>
+          </label>
         </div>
       </div>
 
