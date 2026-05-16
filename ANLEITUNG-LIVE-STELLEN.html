@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anleitung: Website live stellen</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F5F4F1;
+      color: #1A1A1A;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: #1A1A1A;
+      padding: 32px 40px;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #C9A96E;
+      margin-bottom: 8px;
+    }
+    .header p { color: rgba(255,255,255,0.5); font-size: 15px; }
+
+    /* Progress */
+    .progress-bar {
+      background: #E8E4DC;
+      height: 6px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #C9A96E;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* Main layout */
+    .main { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+
+    /* Phase header */
+    .phase {
+      background: #1A1A1A;
+      color: #C9A96E;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    /* Step card */
+    .step-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 20px;
+      border: 2px solid #E8E4DC;
+      transition: border-color 0.2s;
+    }
+    .step-card.active { border-color: #C9A96E; }
+    .step-card.done { border-color: #4CAF50; background: #F9FFF9; }
+
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .step-num {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: #1A1A1A;
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-card.done .step-num { background: #4CAF50; }
+
+    .step-title { font-size: 20px; font-weight: 700; color: #1A1A1A; margin-bottom: 4px; }
+    .step-desc { font-size: 14px; color: #8A8580; }
+
+    /* Action box */
+    .action {
+      background: #FAF7F2;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 16px 0;
+      border-left: 4px solid #C9A96E;
+    }
+    .action-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #C9A96E;
+      margin-bottom: 8px;
+    }
+    .action p { font-size: 15px; color: #1A1A1A; line-height: 1.7; }
+
+    /* Screen mockup */
+    .mockup {
+      background: #2A2A2A;
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .mockup-bar {
+      background: #1A1A1A;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .mockup-dots { display: flex; gap: 5px; }
+    .mockup-dots span { width: 9px; height: 9px; border-radius: 50%; }
+    .mockup-dots span:nth-child(1) { background: #FF5F57; }
+    .mockup-dots span:nth-child(2) { background: #FFBD2E; }
+    .mockup-dots span:nth-child(3) { background: #28CA41; }
+    .mockup-url {
+      background: #3A3A3A;
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      flex: 1;
+    }
+    .mockup-body {
+      background: white;
+      padding: 24px;
+    }
+
+    /* Click target highlight */
+    .click-target {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #C9A96E;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      position: relative;
+      cursor: default;
+    }
+    .click-target::after {
+      content: '← HIER KLICKEN';
+      position: absolute;
+      left: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: #FF4444;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .click-target-green {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #2DA44E;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: 8px;
+      position: relative;
+      cursor: default;
+    }
+    .click-target-green::after {
+      content: '← HIER KLICKEN';
+      position: absolute;
+      left: calc(100% + 10px);
+      top: 50%;
+      transform: translateY(-50%);
+      background: #FF4444;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .highlight-box {
+      border: 3px solid #FF4444;
+      border-radius: 8px;
+      padding: 12px 16px;
+      position: relative;
+      margin: 8px 0;
+    }
+    .highlight-label {
+      position: absolute;
+      top: -12px;
+      left: 12px;
+      background: #FF4444;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* Form mockup elements */
+    .fake-input {
+      border: 2px solid #E2DDD6;
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: #8A8580;
+      margin: 4px 0 12px;
+      width: 100%;
+    }
+    .fake-input.filled {
+      border-color: #4CAF50;
+      color: #1A1A1A;
+    }
+
+    /* Upload zone */
+    .upload-zone {
+      border: 2px dashed #C9A96E;
+      border-radius: 10px;
+      padding: 32px;
+      text-align: center;
+      background: rgba(201,169,110,0.04);
+      margin: 12px 0;
+    }
+    .upload-icon { font-size: 36px; margin-bottom: 8px; }
+    .upload-text { font-size: 14px; color: #8A8580; }
+
+    /* File list */
+    .file-list { margin: 12px 0; }
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: #F5F4F1;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    .file-item .file-icon { font-size: 18px; }
+    .file-item .file-name { font-weight: 500; }
+    .file-item .file-check { margin-left: auto; color: #4CAF50; font-size: 18px; }
+
+    /* Warning box */
+    .warning {
+      background: #FFF8E7;
+      border: 1px solid #F0C040;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .warning-icon { font-size: 20px; flex-shrink: 0; }
+    .warning p { font-size: 14px; color: #7A5F00; line-height: 1.6; }
+
+    /* Success box */
+    .success {
+      background: #F0FFF4;
+      border: 1px solid #4CAF50;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .success-icon { font-size: 20px; flex-shrink: 0; }
+    .success p { font-size: 14px; color: #1A5C2A; line-height: 1.6; }
+
+    /* Done button */
+    .done-btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      transition: background 0.15s;
+    }
+    .done-btn:hover { background: #3D9140; }
+
+    /* Link button */
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #1A1A1A;
+      color: white;
+      text-decoration: none;
+      padding: 12px 22px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: background 0.15s;
+    }
+    .link-btn:hover { background: #C9A96E; }
+
+    /* Divider between phases */
+    .phase-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 36px 0 20px;
+    }
+    .phase-divider-line { flex: 1; height: 1px; background: #E8E4DC; }
+    .phase-divider-text {
+      font-size: 12px;
+      color: #B0A898;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* DNS table */
+    .dns-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+    .dns-table th {
+      background: #1A1A1A;
+      color: #C9A96E;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .dns-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #E8E4DC;
+    }
+    .dns-table tr:last-child td { border-bottom: none; }
+    .dns-table code {
+      background: #F0EDE8;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 13px;
+      color: #C4917A;
+    }
+
+    /* Celebration */
+    .celebration {
+      background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 32px;
+    }
+    .celebration-icon { font-size: 56px; margin-bottom: 16px; }
+    .celebration h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #C9A96E;
+      margin-bottom: 10px;
+    }
+    .celebration p { color: rgba(255,255,255,0.5); font-size: 15px; }
+
+    @media (max-width: 600px) {
+      .click-target::after, .click-target-green::after { display: none; }
+      .main { padding: 24px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🚀 Deine Website live stellen</h1>
+  <p>Schritt-für-Schritt · Auf Deutsch · Kein Vorwissen nötig</p>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="main">
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PHASE 1: GITHUB                                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="phase">Phase 1 von 3 · GitHub</div>
+  <h2 style="font-size:24px;font-weight:700;margin-bottom:6px;">GitHub – deine Dateien ins Internet</h2>
+  <p style="color:#8A8580;margin-bottom:28px;">GitHub ist so eine Art Dropbox für Website-Dateien. Kostenlos, kein technisches Wissen nötig.</p>
+
+  <!-- Schritt 1 -->
+  <div class="step-card" id="step1">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">GitHub-Konto erstellen</div>
+        <div class="step-desc">Einmalig, kostenlos, dauert 2 Minuten</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>Öffne deinen Browser und geh auf diese Adresse:</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">github.com/signup</div>
+      </div>
+      <div class="mockup-body">
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:22px;font-weight:700;margin-bottom:20px;">Konto erstellen</div>
+          <div style="text-align:left;max-width:320px;margin:0 auto;">
+            <div style="font-size:12px;color:#8A8580;margin-bottom:4px;">Deine E-Mail-Adresse</div>
+            <div class="fake-input filled">einfachanfrage@outlook.com</div>
+            <div style="font-size:12px;color:#8A8580;margin-bottom:4px;">Passwort wählen</div>
+            <div class="fake-input">••••••••••</div>
+            <div style="font-size:12px;color:#8A8580;margin-bottom:4px;">Benutzername wählen</div>
+            <div class="fake-input filled">einfachanfrage</div>
+            <div style="margin-top:16px;" class="highlight-box">
+              <div class="highlight-label">HIER KLICKEN</div>
+              <div style="background:#2DA44E;color:white;text-align:center;padding:10px;border-radius:6px;font-weight:600;">Continue →</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warning">
+      <div class="warning-icon">⚠️</div>
+      <p><strong>Hinweis:</strong> GitHub ist auf Englisch. Du musst aber fast nichts lesen – einfach die Felder ausfüllen. Benutzername kann alles sein, z. B. <strong>einfachanfrage</strong>.</p>
+    </div>
+
+    <button class="done-btn" onclick="markDone(1)">✓ Konto erstellt – weiter</button>
+  </div>
+
+  <!-- Schritt 2 -->
+  <div class="step-card" id="step2" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Neues "Repository" erstellen</div>
+        <div class="step-desc">Ein Repository ist ein Ordner für deine Website-Dateien</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>Wenn du eingeloggt bist, siehst du oben rechts ein <strong>„+"</strong> Zeichen. Klick darauf.</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">github.com</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #E8E4DC;margin-bottom:16px;">
+          <span style="color:#8A8580;font-size:13px;">Dein Profilbild</span>
+          <div class="highlight-box" style="margin:0;padding:6px 12px;">
+            <div class="highlight-label">HIER KLICKEN</div>
+            <span style="font-size:18px;font-weight:700;">+▾</span>
+          </div>
+        </div>
+        <div style="background:#F5F4F1;border-radius:8px;padding:12px;width:180px;margin-left:auto;">
+          <div style="padding:8px 12px;border-radius:6px;background:#1A1A1A;color:white;font-size:13px;font-weight:600;margin-bottom:4px;">New repository</div>
+          <div style="padding:8px 12px;font-size:13px;color:#8A8580;">New project</div>
+          <div style="padding:8px 12px;font-size:13px;color:#8A8580;">Import repository</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Dann</div>
+      <p>Klick auf <strong>„New repository"</strong> (das oberste in der Liste)</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">github.com/new</div>
+      </div>
+      <div class="mockup-body">
+        <div style="font-size:18px;font-weight:700;margin-bottom:20px;">Create a new repository</div>
+        <div style="font-size:12px;color:#8A8580;margin-bottom:4px;">Repository name</div>
+        <div class="highlight-box">
+          <div class="highlight-label">DIESEN NAMEN EINGEBEN</div>
+          <div class="fake-input filled">einfachanfrage-website</div>
+        </div>
+        <div style="margin:16px 0;font-size:14px;">
+          <label style="display:flex;align-items:center;gap:8px;">
+            <input type="radio" checked> <strong>Public</strong> <span style="color:#8A8580;font-size:12px;">(lass das so)</span>
+          </label>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">GANZ UNTEN – HIER KLICKEN</div>
+          <div style="background:#2DA44E;color:white;display:inline-block;padding:10px 20px;border-radius:6px;font-weight:600;">Create repository</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="done-btn" onclick="markDone(2)">✓ Repository erstellt – weiter</button>
+  </div>
+
+  <!-- Schritt 3 -->
+  <div class="step-card" id="step3" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Deine 3 Website-Dateien hochladen</div>
+        <div class="step-desc">Einfach reinziehen – wie bei Dropbox</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>Auf der nächsten Seite siehst du einen Link <strong>„uploading an existing file"</strong> – klick darauf.</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">github.com/einfachanfrage/einfachanfrage-website</div>
+      </div>
+      <div class="mockup-body">
+        <div style="text-align:center;padding:24px;border:2px dashed #E2DDD6;border-radius:8px;">
+          <div style="font-size:13px;color:#8A8580;margin-bottom:8px;">Quick setup — if you've done this kind of thing before</div>
+          <div style="font-size:14px;margin-top:16px;">
+            …or <div class="highlight-box" style="display:inline-block;margin:4px;">
+              <div class="highlight-label">HIER KLICKEN</div>
+              <span style="color:#0969DA;text-decoration:underline;cursor:pointer;">uploading an existing file</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Dann – diese 3 Dateien hochladen</div>
+      <p>Öffne den Ordner auf deinem PC:<br><strong>C:\Users\runni\Documents\Claude Code\einfach-anfrage\landing\</strong><br><br>Zieh diese Dateien in das Upload-Fenster:</p>
+    </div>
+
+    <div class="file-list">
+      <div class="file-item"><span class="file-icon">📄</span><span class="file-name">index.html</span><span class="file-check">✓</span></div>
+      <div class="file-item"><span class="file-icon">📄</span><span class="file-name">impressum.html</span><span class="file-check">✓</span></div>
+      <div class="file-item"><span class="file-icon">📄</span><span class="file-name">datenschutz.html</span><span class="file-check">✓</span></div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">github.com/einfachanfrage/einfachanfrage-website/upload</div>
+      </div>
+      <div class="mockup-body">
+        <div class="upload-zone">
+          <div class="upload-icon">📂</div>
+          <div class="upload-text"><strong>Dateien hier reinziehen</strong><br>oder klicke zum Auswählen</div>
+        </div>
+        <div style="margin-top:16px;">
+          <div style="font-size:13px;color:#8A8580;margin-bottom:8px;">Commit changes (einfach so lassen)</div>
+          <div class="highlight-box">
+            <div class="highlight-label">GANZ UNTEN KLICKEN</div>
+            <div style="background:#2DA44E;color:white;display:inline-block;padding:10px 20px;border-radius:6px;font-weight:600;">Commit changes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success">
+      <div class="success-icon">✅</div>
+      <p>Nach dem Hochladen siehst du die 3 Dateien in deinem Repository. Das bedeutet: deine Dateien sind jetzt sicher auf GitHub gespeichert!</p>
+    </div>
+
+    <button class="done-btn" onclick="markDone(3)">✓ Dateien hochgeladen – weiter</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PHASE 2: VERCEL                                        -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="phase-divider"><div class="phase-divider-line"></div><div class="phase-divider-text">Phase 2 von 3</div><div class="phase-divider-line"></div></div>
+
+  <div class="phase">Phase 2 von 3 · Vercel</div>
+  <h2 style="font-size:24px;font-weight:700;margin-bottom:6px;">Vercel – macht deine Website live</h2>
+  <p style="color:#8A8580;margin-bottom:28px;">Vercel verbindet sich mit GitHub und veröffentlicht deine Website automatisch. Kostenlos.</p>
+
+  <!-- Schritt 4 -->
+  <div class="step-card" id="step4" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Bei Vercel anmelden</div>
+        <div class="step-desc">Mit deinem GitHub-Konto – kein neues Passwort nötig</div>
+      </div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com/signup</div>
+      </div>
+      <div class="mockup-body">
+        <div style="text-align:center;padding:20px 0;">
+          <div style="font-size:20px;font-weight:700;margin-bottom:24px;">Create your Vercel account</div>
+          <div class="highlight-box" style="max-width:280px;margin:0 auto;">
+            <div class="highlight-label">HIER KLICKEN</div>
+            <div style="border:2px solid #E2DDD6;border-radius:8px;padding:12px 20px;font-size:15px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:10px;">
+              <span>🐙</span> Continue with GitHub
+            </div>
+          </div>
+          <div style="font-size:12px;color:#8A8580;margin-top:12px;">Du wirst zu GitHub weitergeleitet – einfach bestätigen</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="done-btn" onclick="markDone(4)">✓ Bei Vercel angemeldet – weiter</button>
+  </div>
+
+  <!-- Schritt 5 -->
+  <div class="step-card" id="step5" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div>
+        <div class="step-title">Dein Projekt importieren</div>
+        <div class="step-desc">Vercel holt sich deine Dateien von GitHub</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>Klick auf <strong>„Add New…"</strong> → dann auf <strong>„Project"</strong></p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com/dashboard</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <span style="font-size:16px;font-weight:700;">Overview</span>
+          <div class="highlight-box" style="margin:0;">
+            <div class="highlight-label">HIER KLICKEN</div>
+            <div style="background:#1A1A1A;color:white;padding:8px 16px;border-radius:6px;font-weight:600;font-size:14px;">Add New… ▾</div>
+          </div>
+        </div>
+        <div style="background:#F5F4F1;border-radius:8px;padding:8px;width:160px;margin-left:auto;">
+          <div style="padding:8px 12px;border-radius:6px;background:#1A1A1A;color:white;font-size:13px;font-weight:600;">Project</div>
+          <div style="padding:8px 12px;font-size:13px;color:#8A8580;">Domain</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Dann</div>
+      <p>Du siehst jetzt dein GitHub-Repository <strong>„einfachanfrage-website"</strong> in der Liste. Klick auf <strong>„Import"</strong> daneben.</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com/new</div>
+      </div>
+      <div class="mockup-body">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px;">Import Git Repository</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border:1px solid #E2DDD6;border-radius:8px;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span>📁</span>
+            <div>
+              <div style="font-weight:600;font-size:14px;">einfachanfrage-website</div>
+              <div style="font-size:12px;color:#8A8580;">Updated just now</div>
+            </div>
+          </div>
+          <div class="highlight-box" style="margin:0;">
+            <div class="highlight-label">HIER KLICKEN</div>
+            <div style="background:#1A1A1A;color:white;padding:7px 16px;border-radius:6px;font-weight:600;font-size:13px;">Import</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="done-btn" onclick="markDone(5)">✓ Projekt importiert – weiter</button>
+  </div>
+
+  <!-- Schritt 6 -->
+  <div class="step-card" id="step6" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div>
+        <div class="step-title">Deploy drücken – fertig!</div>
+        <div class="step-desc">Ein Klick, dann ist deine Seite live</div>
+      </div>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com/new/configure</div>
+      </div>
+      <div class="mockup-body">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px;">Configure Project</div>
+        <div style="font-size:13px;color:#8A8580;margin-bottom:20px;">
+          Project Name: einfachanfrage-website<br>
+          Framework: Other<br>
+          Root Directory: ./
+        </div>
+        <div class="warning" style="margin-bottom:16px;">
+          <div class="warning-icon">💡</div>
+          <p><strong>Nichts ändern!</strong> Einfach alles so lassen wie es ist.</p>
+        </div>
+        <div class="highlight-box">
+          <div class="highlight-label">NUR DIESEN BUTTON KLICKEN</div>
+          <div style="background:#1A1A1A;color:white;text-align:center;padding:14px;border-radius:8px;font-weight:700;font-size:16px;">🚀 Deploy</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success">
+      <div class="success-icon">🎉</div>
+      <p><strong>Vercel deployt jetzt deine Seite</strong> – das dauert ca. 30 Sekunden. Du siehst eine Animation mit Konfetti wenn es fertig ist. Danach bekommst du eine Adresse wie:<br><br><strong>einfachanfrage-website.vercel.app</strong><br><br>→ Das ist deine Website, jetzt live im Internet!</p>
+    </div>
+
+    <button class="done-btn" onclick="markDone(6)">✓ Website ist live – weiter zur Domain</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- PHASE 3: IONOS DOMAIN                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <div class="phase-divider"><div class="phase-divider-line"></div><div class="phase-divider-text">Phase 3 von 3</div><div class="phase-divider-line"></div></div>
+
+  <div class="phase">Phase 3 von 3 · IONOS + Domain</div>
+  <h2 style="font-size:24px;font-weight:700;margin-bottom:6px;">Eigene Domain verbinden</h2>
+  <p style="color:#8A8580;margin-bottom:28px;">Damit deine Seite nicht <em>xyz.vercel.app</em> heißt, sondern deine echte Domain.</p>
+
+  <!-- Schritt 7 -->
+  <div class="step-card" id="step7" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div>
+        <div class="step-title">Domain in Vercel eintragen</div>
+        <div class="step-desc">Vercel sagen welche Domain du verwenden willst</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>In Vercel: Klick auf dein Projekt → oben auf <strong>„Settings"</strong> → links auf <strong>„Domains"</strong></p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com/einfachanfrage/einfachanfrage-website/settings/domains</div>
+      </div>
+      <div class="mockup-body">
+        <div style="font-size:16px;font-weight:700;margin-bottom:16px;">Domains</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:8px;">
+          <div class="highlight-box" style="flex:1;margin:0;">
+            <div class="highlight-label">DEINE DOMAIN EINGEBEN</div>
+            <div class="fake-input filled" style="margin:0;">einfachanfrage.de</div>
+          </div>
+          <div style="background:#1A1A1A;color:white;padding:10px 16px;border-radius:6px;font-weight:600;font-size:13px;white-space:nowrap;">Add</div>
+        </div>
+        <div style="font-size:12px;color:#8A8580;">Trag deine Domain ein und klick „Add"</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Danach</div>
+      <p>Vercel zeigt dir zwei Werte an – die brauchst du gleich für IONOS. Schreib sie auf oder lass dieses Fenster offen:</p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">vercel.com · Domains</div>
+      </div>
+      <div class="mockup-body">
+        <div style="background:#FFF3CD;border:1px solid #F0C040;border-radius:8px;padding:14px;margin-bottom:12px;font-size:13px;">
+          ⚠️ einfachanfrage.de – DNS-Einstellungen erforderlich
+        </div>
+        <table class="dns-table">
+          <tr><th>Typ</th><th>Name</th><th>Wert</th></tr>
+          <tr><td>A</td><td><code>@</code></td><td><code>76.76.21.21</code></td></tr>
+          <tr><td>CNAME</td><td><code>www</code></td><td><code>cname.vercel-dns.com</code></td></tr>
+        </table>
+        <div style="font-size:12px;color:#8A8580;margin-top:8px;">Diese zwei Zeilen trägst du gleich bei IONOS ein</div>
+      </div>
+    </div>
+
+    <button class="done-btn" onclick="markDone(7)">✓ Domain bei Vercel eingetragen – weiter</button>
+  </div>
+
+  <!-- Schritt 8 -->
+  <div class="step-card" id="step8" style="opacity:0.4;">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div>
+        <div class="step-title">Bei IONOS die DNS-Einträge setzen</div>
+        <div class="step-desc">IONOS sagen: „Schick Besucher zu Vercel"</div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Was du tust</div>
+      <p>Geh auf <strong>mein.ionos.de</strong> → meld dich an → klick auf <strong>„Domains & SSL"</strong></p>
+    </div>
+
+    <div class="mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dots"><span></span><span></span><span></span></div>
+        <div class="mockup-url">mein.ionos.de</div>
+      </div>
+      <div class="mockup-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:8px 0;">
+          <div style="border:2px solid #E2DDD6;border-radius:8px;padding:16px;text-align:center;font-size:13px;">
+            <div style="font-size:24px;margin-bottom:6px;">🌐</div>
+            <div class="highlight-box" style="margin:0;">
+              <div class="highlight-label">HIER</div>
+              <strong>Domains & SSL</strong>
+            </div>
+          </div>
+          <div style="border:1px solid #E2DDD6;border-radius:8px;padding:16px;text-align:center;font-size:13px;opacity:0.4;">
+            <div style="font-size:24px;margin-bottom:6px;">📧</div>
+            <strong>E-Mail</strong>
+          </div>
+          <div style="border:1px solid #E2DDD6;border-radius:8px;padding:16px;text-align:center;font-size:13px;opacity:0.4;">
+            <div style="font-size:24px;margin-bottom:6px;">🖥️</div>
+            <strong>Hosting</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Dann</div>
+      <p>Klick auf deine Domain (z. B. <strong>einfachanfrage.de</strong>) → dann auf <strong>„DNS"</strong> oder <strong>„DNS-Einstellungen"</strong></p>
+    </div>
+
+    <div class="action">
+      <div class="action-label">Jetzt diese 2 Einträge hinzufügen</div>
+      <p>Klick auf <strong>„Eintrag hinzufügen"</strong> und trag folgendes ein:</p>
+    </div>
+
+    <table class="dns-table">
+      <tr><th>Typ wählen</th><th>Name</th><th>Wert / Ziel</th></tr>
+      <tr>
+        <td><code>A</code></td>
+        <td><code>@</code></td>
+        <td><code>76.76.21.21</code></td>
+      </tr>
+      <tr>
+        <td><code>CNAME</code></td>
+        <td><code>www</code></td>
+        <td><code>cname.vercel-dns.com</code></td>
+      </tr>
+    </table>
+
+    <div class="warning">
+      <div class="warning-icon">⏰</div>
+      <p><strong>Geduld:</strong> Nachdem du gespeichert hast, kann es <strong>bis zu 24 Stunden</strong> dauern bis deine Domain funktioniert. Meistens geht es aber in 10–30 Minuten.</p>
+    </div>
+
+    <button class="done-btn" onclick="markDone(8)">✓ DNS eingetragen – fertig!</button>
+  </div>
+
+  <!-- CELEBRATION -->
+  <div class="celebration" id="celebration" style="display:none;">
+    <div class="celebration-icon">🎉</div>
+    <h2>Deine Website ist live!</h2>
+    <p style="margin-bottom:20px;">einfachanfrage.de ist jetzt im Internet erreichbar.<br>Ab jetzt können Fotografen dich finden und kontaktieren.</p>
+    <div style="background:rgba(201,169,110,0.1);border-radius:10px;padding:20px;margin-top:16px;text-align:left;">
+      <div style="font-size:12px;color:#C9A96E;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;">Nächste Schritte</div>
+      <div style="color:rgba(255,255,255,0.6);font-size:14px;line-height:2;">
+        ✦ Server live stellen (für Widget + E-Mails)<br>
+        ✦ Erste Fotografen ansprechen<br>
+        ✦ Kontaktformular testen
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const totalSteps = 8;
+  let doneSteps = 0;
+
+  function markDone(stepNum) {
+    const card = document.getElementById('step' + stepNum);
+    card.classList.add('done');
+    card.querySelector('.done-btn').textContent = '✓ Erledigt';
+    card.querySelector('.done-btn').disabled = true;
+    card.querySelector('.done-btn').style.background = '#4CAF50';
+
+    const next = document.getElementById('step' + (stepNum + 1));
+    if (next) {
+      next.style.opacity = '1';
+      next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    doneSteps++;
+    document.getElementById('progress').style.width = (doneSteps / totalSteps * 100) + '%';
+
+    if (doneSteps === totalSteps) {
+      setTimeout(() => {
+        const cel = document.getElementById('celebration');
+        cel.style.display = 'block';
+        cel.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+  }
+</script>
+
+</body>
+</html>

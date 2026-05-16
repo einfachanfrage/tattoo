@@ -1,0 +1,14 @@
+{
+  "sandravogt": {
+    "name": "Sandra Vogt Fotografie",
+    "email": "hallo@sandravogt.de",
+    "theme": "champagne",
+    "delivery": "both"
+  },
+  "demo": {
+    "name": "Deine Hochzeitsfotografie Website",
+    "email": "demo@einfachanfrage.de",
+    "theme": "champagne",
+    "delivery": "dashboard"
+  }
+}

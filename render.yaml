@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: einfach-anfrage
+    env: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: SMTP_HOST
+        value: smtp-mail.outlook.com
+      - key: SMTP_PORT
+        value: 587
+      - key: SMTP_SECURE
+        value: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        value: "Einfach Anfrage <einfachanfrage@outlook.com>"
+      - key: CONTACT_EMAIL
+        value: einfachanfrage@outlook.com
