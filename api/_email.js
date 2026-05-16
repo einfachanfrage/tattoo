@@ -3,7 +3,7 @@
 const { Resend } = require('resend');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = 'Einfach Anfrage <anfrage@einfachanfrage.de>';
+const FROM = 'Einfach Anfrage <anfrage@einfach-anfrage.com>';
 
 function formatDate(isoDate) {
   if (!isoDate) return 'Noch unklar';
