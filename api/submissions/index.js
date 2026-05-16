@@ -75,17 +75,20 @@ module.exports = async (req, res) => {
       if (dbErr) console.error('DB insert error:', dbErr.message);
     }
 
-    // Respond immediately – send email async
-    res.json({ success: true, id });
-
+    // Send email before responding (serverless functions stop after res.json)
     if (delivery !== 'dashboard') {
-      sendEmails(
-        submission,
-        body.photographerEmail || process.env.PHOTOGRAPHER_EMAIL,
-        body.photographerName  || process.env.PHOTOGRAPHER_NAME,
-      ).catch(err => console.error('Email error:', err.message));
+      try {
+        await sendEmails(
+          submission,
+          body.photographerEmail || process.env.PHOTOGRAPHER_EMAIL,
+          body.photographerName  || process.env.PHOTOGRAPHER_NAME,
+        );
+      } catch (err) {
+        console.error('Email error:', err.message);
+      }
     }
 
+    res.json({ success: true, id });
     return;
   }
 
