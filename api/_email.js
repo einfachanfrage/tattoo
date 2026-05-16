@@ -20,7 +20,7 @@ function formatDateTime(isoDate) {
 }
 
 function buildPhotographerHtml(submission) {
-  const { contact, wedding, location, wishes, budget } = submission;
+  const { contact, wedding, location, style, services, budget } = submission;
   const weddingDate = wedding.dateUnclear ? 'Noch unklar' : formatDate(wedding.date);
   const names = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`;
 
@@ -54,26 +54,26 @@ function buildPhotographerHtml(submission) {
       <tr>
         <td style="padding:16px 20px;">
           <span style="font-size:11px;color:#8A8580;text-transform:uppercase;">Gäste</span><br>
-          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${wishes.guestCount || 'Noch unklar'}</span>
+          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${(style || {}).guestCount || 'Noch unklar'}</span>
         </td>
         <td style="padding:16px 20px;border-left:1px solid #F0EDE8;">
           <span style="font-size:11px;color:#8A8580;text-transform:uppercase;">Budget</span><br>
-          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${budget.range || 'Keine Angabe'}</span>
+          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${(budget || {}).range || 'Keine Angabe'}</span>
         </td>
       </tr>
     </table>
   </td></tr>
   <tr><td style="padding:0 36px 24px;">
     <table width="100%" cellpadding="0" cellspacing="0">
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;width:160px;">Dauer</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${wedding.duration || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Uhrzeit Trauung</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${wedding.ceremonyTime || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Typen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(location.types || []).join(', ') || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Stil-Wünsche</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(wishes.style || []).join(', ') || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Videograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${wishes.videographer || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">2. Fotograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${wishes.secondPhotographer || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;width:160px;">Dauer</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(wedding || {}).duration || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Uhrzeit Trauung</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(wedding || {}).ceremonyTime || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Typen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${((location || {}).types || []).join(', ') || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Stil-Wünsche</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${((style || {}).styles || []).join(', ') || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Medien</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(services || {}).mediaType || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">2. Fotograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(services || {}).secondPhotographer || 'Noch unklar'}</td></tr>
     </table>
   </td></tr>
-  ${budget.notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${budget.notes}</p></div></td></tr>` : ''}
+  ${(budget || {}).notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${budget.notes}</p></div></td></tr>` : ''}
   <tr><td style="padding:0 36px 36px;">
     <div style="background:#1A1A1A;border-radius:12px;padding:24px;">
       <p style="margin:0 0 12px;font-size:12px;color:#C9A96E;text-transform:uppercase;">Kontakt aufnehmen</p>
