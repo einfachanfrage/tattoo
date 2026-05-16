@@ -65,9 +65,7 @@ module.exports = async (req, res) => {
 
     // Save to Supabase (unless email-only delivery)
     if (delivery !== 'email') {
-      const slug = body.photographerSlug
-        || body.photographerEmail?.split('@')[0]?.replace(/[^a-z0-9]/gi, '').toLowerCase()
-        || 'unknown';
+      const slug = (body.photographerSlug || '').toLowerCase().trim() || 'unknown';
 
       const { error: dbErr } = await supabase.from('inquiries').insert({
         id,

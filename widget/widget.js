@@ -24,6 +24,7 @@
     photographerEmail: currentScript.getAttribute('data-email') || '',
     photographerName:
       currentScript.getAttribute('data-name') || 'Ihr/e Fotograf/in',
+    photographerSlug: currentScript.getAttribute('data-slug') || '',
     webhookUrl: currentScript.getAttribute('data-webhook') || '',
     apiUrl:
       currentScript.getAttribute('data-api') ||
@@ -1416,6 +1417,7 @@
     return {
       photographerEmail: CONFIG.photographerEmail,
       photographerName:  CONFIG.photographerName,
+      photographerSlug:  CONFIG.photographerSlug,
       delivery:          CONFIG.delivery,
       wedding: {
         date:         dateUnclear ? null : (dateEl.value || null),
