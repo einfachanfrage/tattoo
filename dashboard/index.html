@@ -756,6 +756,9 @@
       </button>
 
       <div class="nav-label" style="margin-top:12px;">Sonstiges</div>
+      <button class="nav-item" id="nav-settings" onclick="showSettings()">
+        <span class="nav-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Einstellungen
+      </button>
       <a class="nav-item" href="/">
         <span class="nav-item-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span> Zur Website
       </a>
@@ -841,6 +844,65 @@
 
     </div>
   </main>
+
+  <!-- Settings overlay -->
+  <div id="settings-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:500;align-items:center;justify-content:center;">
+    <div style="background:#fff;border-radius:18px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:36px 40px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.18);">
+      <button onclick="hideSettings()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#8A8580;">✕</button>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#1A1A1A;margin-bottom:6px;">Einstellungen</div>
+      <div style="font-size:12px;color:#8A8580;margin-bottom:28px;" id="settings-slug-hint"></div>
+
+      <!-- Theme -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:11px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #F0EDE8;">Widget-Design</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;" id="theme-options">
+          ${[
+            {id:'champagne',label:'Champagne',desc:'Gold & Elfenbein (Standard)'},
+            {id:'nacht',label:'Nacht',desc:'Editorial Dark'},
+            {id:'sage',label:'Sage',desc:'Organisch & Natürlich'},
+            {id:'clean',label:'Clean',desc:'Ultra-minimal'},
+            {id:'modern',label:'Modern',desc:'Bold & Grafisch'}
+          ].map(t => `
+            <label id="theme-opt-${t.id}" style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:block;">
+              <input type="radio" name="theme" value="${t.id}" onchange="previewTheme('${t.id}')" style="display:none;">
+              <div style="font-weight:600;font-size:13px;color:#1A1A1A;">${t.label}</div>
+              <div style="font-size:11px;color:#8A8580;margin-top:2px;">${t.desc}</div>
+            </label>`).join('')}
+        </div>
+      </div>
+
+      <!-- Delivery -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:11px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #F0EDE8;">Anfragen-Empfang</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          ${[
+            {id:'both',label:'E-Mail & Dashboard',desc:'Anfragen kommen per Mail und erscheinen im Dashboard'},
+            {id:'email',label:'Nur E-Mail',desc:'Nur E-Mail-Benachrichtigung, kein Dashboard-Eintrag'},
+            {id:'dashboard',label:'Nur Dashboard',desc:'Nur im Dashboard, keine E-Mail'}
+          ].map(d => `
+            <label id="delivery-opt-${d.id}" style="border:2px solid #E2DDD6;border-radius:10px;padding:12px 14px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;">
+              <input type="radio" name="delivery" value="${d.id}" onchange="selectDelivery('${d.id}')" style="margin-top:3px;">
+              <div>
+                <div style="font-weight:600;font-size:13px;color:#1A1A1A;">${d.label}</div>
+                <div style="font-size:11px;color:#8A8580;margin-top:2px;">${d.desc}</div>
+              </div>
+            </label>`).join('')}
+        </div>
+      </div>
+
+      <button onclick="saveSettings()" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:13px;background:#1A1A1A;color:#FAF7F2;border:none;border-radius:9px;cursor:pointer;margin-bottom:24px;transition:background 0.18s;" onmouseover="this.style.background='#C9A96E';this.style.color='#1A1A1A'" onmouseout="this.style.background='#1A1A1A';this.style.color='#FAF7F2'">Design & Empfang speichern</button>
+
+      <!-- Password -->
+      <div>
+        <div style="font-size:11px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #F0EDE8;">Passwort ändern</div>
+        <input id="pw-current" type="password" placeholder="Aktuelles Passwort" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;border:1.5px solid #E2DDD6;border-radius:9px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:10px;">
+        <input id="pw-new" type="password" placeholder="Neues Passwort (mind. 6 Zeichen)" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;border:1.5px solid #E2DDD6;border-radius:9px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:10px;">
+        <input id="pw-confirm" type="password" placeholder="Neues Passwort bestätigen" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;border:1.5px solid #E2DDD6;border-radius:9px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:10px;">
+        <div id="pw-error" style="font-size:12px;color:#C04040;min-height:18px;margin-bottom:8px;"></div>
+        <button onclick="changePassword()" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:13px;background:#1A1A1A;color:#FAF7F2;border:none;border-radius:9px;cursor:pointer;transition:background 0.18s;" onmouseover="this.style.background='#C9A96E';this.style.color='#1A1A1A'" onmouseout="this.style.background='#1A1A1A';this.style.color='#FAF7F2'">Passwort speichern</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Toast -->
   <div class="toast" id="toast"></div>
@@ -1184,6 +1246,89 @@
           <div style="font-size:13px;">Klicke auf eine Anfrage links.</div>
         </div>`;
       loadSubmissions();
+    }
+
+    // ── Settings ───────────────────────────────────────────────────────────
+    let currentSettings = {};
+
+    function showSettings() {
+      const overlay = document.getElementById('settings-overlay');
+      overlay.style.display = 'flex';
+      document.getElementById('settings-slug-hint').textContent = 'URL: ' + (authSlug || '–');
+      // Load current settings
+      fetch('/api/photographers/' + authSlug, { headers: authHeaders() })
+        .then(r => r.json()).then(data => {
+          currentSettings = data;
+          setThemeUI(data.theme || 'champagne');
+          setDeliveryUI(data.delivery || 'both');
+        }).catch(() => {});
+    }
+
+    function hideSettings() {
+      document.getElementById('settings-overlay').style.display = 'none';
+      document.getElementById('pw-current').value = '';
+      document.getElementById('pw-new').value = '';
+      document.getElementById('pw-confirm').value = '';
+      document.getElementById('pw-error').textContent = '';
+    }
+
+    function setThemeUI(theme) {
+      document.querySelectorAll('input[name="theme"]').forEach(r => {
+        r.checked = r.value === theme;
+        const lbl = r.closest('label');
+        lbl.style.borderColor = r.value === theme ? '#C9A96E' : '#E2DDD6';
+      });
+    }
+
+    function previewTheme(theme) { setThemeUI(theme); }
+
+    function setDeliveryUI(delivery) {
+      document.querySelectorAll('input[name="delivery"]').forEach(r => {
+        r.checked = r.value === delivery;
+        const lbl = r.closest('label');
+        lbl.style.borderColor = r.value === delivery ? '#C9A96E' : '#E2DDD6';
+      });
+    }
+
+    function selectDelivery(delivery) { setDeliveryUI(delivery); }
+
+    async function saveSettings() {
+      const theme    = document.querySelector('input[name="theme"]:checked')?.value;
+      const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
+      if (!theme || !delivery) { showToast('Bitte Design und Empfang wählen.'); return; }
+      try {
+        const r = await fetch('/api/photographers/' + authSlug, {
+          method: 'PATCH',
+          headers: authHeaders(),
+          body: JSON.stringify({ theme, delivery }),
+        });
+        if (!r.ok) { const d = await r.json(); showToast(d.error || 'Fehler.'); return; }
+        showToast('✓ Einstellungen gespeichert!');
+      } catch { showToast('Verbindungsfehler.'); }
+    }
+
+    async function changePassword() {
+      const current  = document.getElementById('pw-current').value;
+      const next     = document.getElementById('pw-new').value;
+      const confirm  = document.getElementById('pw-confirm').value;
+      const errEl    = document.getElementById('pw-error');
+      errEl.textContent = '';
+      if (!current) { errEl.textContent = 'Bitte aktuelles Passwort eingeben.'; return; }
+      if (next.length < 6) { errEl.textContent = 'Neues Passwort mind. 6 Zeichen.'; return; }
+      if (next !== confirm) { errEl.textContent = 'Passwörter stimmen nicht überein.'; return; }
+      try {
+        const r = await fetch('/api/photographers/' + authSlug, {
+          method: 'PATCH',
+          headers: authHeaders(),
+          body: JSON.stringify({ currentPassword: current, newPassword: next }),
+        });
+        const d = await r.json();
+        if (!r.ok) { errEl.textContent = d.error || 'Fehler.'; return; }
+        document.getElementById('pw-current').value = '';
+        document.getElementById('pw-new').value = '';
+        document.getElementById('pw-confirm').value = '';
+        showToast('✓ Passwort gespeichert!');
+      } catch { errEl.textContent = 'Verbindungsfehler.'; }
     }
 
     // ── Init ───────────────────────────────────────────────────────────────
