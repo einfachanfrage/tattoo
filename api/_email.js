@@ -74,6 +74,7 @@ function buildPhotographerHtml(submission) {
     </table>
   </td></tr>
   ${(budget || {}).notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${budget.notes}</p></div></td></tr>` : ''}
+  ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border:1px solid #E2DDD6;border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:14px;"><span style="font-size:28px;">🖼️</span><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#1A1A1A;">${style.inspirationImageCount} Inspirationsbild${style.inspirationImageCount > 1 ? 'er' : ''} hochgeladen</p><p style="margin:0;font-size:12px;color:#8A8580;">Die Bilder sind in deinem Dashboard einsehbar.</p></div></div></td></tr>` : ''}
   <tr><td style="padding:0 36px 36px;">
     <div style="background:#1A1A1A;border-radius:12px;padding:24px;">
       <p style="margin:0 0 12px;font-size:12px;color:#C9A96E;text-transform:uppercase;">Kontakt aufnehmen</p>
