@@ -719,9 +719,10 @@
   <div class="login-overlay" id="login-overlay">
     <div class="login-box">
       <div class="login-logo">einfach <span>anfrage</span></div>
-      <div class="login-sub">Dashboard · Nur für Admins</div>
+      <div class="login-sub">Dashboard · Mit deiner persönlichen URL anmelden</div>
       <form onsubmit="doLogin(event)">
-        <input class="login-field" type="password" id="login-pw" placeholder="Passwort eingeben" autocomplete="current-password">
+        <input class="login-field" type="text" id="login-slug" placeholder="Deine URL (z.B. sandraholm)" autocomplete="username" autocorrect="off" autocapitalize="none" spellcheck="false">
+        <input class="login-field" type="password" id="login-pw" placeholder="Passwort" autocomplete="current-password">
         <button class="login-btn" type="submit">Anmelden →</button>
         <div class="login-error" id="login-error"></div>
       </form>
@@ -850,6 +851,8 @@
 
     // ── Auth ───────────────────────────────────────────────────────────────
     let authToken = sessionStorage.getItem('da_token') || '';
+    let authSlug  = sessionStorage.getItem('da_slug')  || '';
+    let authName  = sessionStorage.getItem('da_name')  || '';
 
     function authHeaders() {
       return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken };
@@ -857,20 +860,34 @@
 
     async function doLogin(e) {
       e.preventDefault();
-      const pw = document.getElementById('login-pw').value;
-      const err = document.getElementById('login-error');
+      const slug = (document.getElementById('login-slug').value || '').trim().toLowerCase();
+      const pw   = document.getElementById('login-pw').value;
+      const err  = document.getElementById('login-error');
       err.textContent = '';
+
+      if (!slug) { err.textContent = 'Bitte deine URL eingeben.'; return; }
+      if (!pw)   { err.textContent = 'Bitte Passwort eingeben.'; return; }
+
       try {
         const res = await fetch('/api/auth', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: pw }),
+          body: JSON.stringify({ slug, password: pw }),
         });
-        if (!res.ok) { err.textContent = 'Falsches Passwort.'; return; }
+        if (!res.ok) {
+          const d = await res.json().catch(() => ({}));
+          err.textContent = d.error || 'Falsche Zugangsdaten.';
+          return;
+        }
         const data = await res.json();
         authToken = data.token;
+        authSlug  = data.slug  || slug;
+        authName  = data.name  || slug;
         sessionStorage.setItem('da_token', authToken);
+        sessionStorage.setItem('da_slug',  authSlug);
+        sessionStorage.setItem('da_name',  authName);
         document.getElementById('login-overlay').style.display = 'none';
+        document.querySelector('.logo-sub').textContent = authName;
         loadSubmissions();
       } catch {
         err.textContent = 'Verbindungsfehler.';
@@ -1113,10 +1130,10 @@
 
           <div class="detail-section">
             <div class="detail-section-title">Wünsche &amp; Stil</div>
-            <div class="detail-row"><div class="detail-key">Gäste</div><div class="detail-val">${valOrBadge(s.wishes?.guestCount)}</div></div>
-            <div class="detail-row"><div class="detail-key">Stil</div><div class="detail-val">${valOrBadge(s.wishes?.style)}</div></div>
-            <div class="detail-row"><div class="detail-key">Videograf</div><div class="detail-val">${valOrBadge(s.wishes?.videographer)}</div></div>
-            <div class="detail-row"><div class="detail-key">2. Fotograf</div><div class="detail-val">${valOrBadge(s.wishes?.secondPhotographer)}</div></div>
+            <div class="detail-row"><div class="detail-key">Gäste</div><div class="detail-val">${valOrBadge(s.style?.guestCount)}</div></div>
+            <div class="detail-row"><div class="detail-key">Stil</div><div class="detail-val">${valOrBadge(s.style?.styles)}</div></div>
+            <div class="detail-row"><div class="detail-key">Medien</div><div class="detail-val">${valOrBadge(s.services?.mediaType)}</div></div>
+            <div class="detail-row"><div class="detail-key">2. Fotograf</div><div class="detail-val">${valOrBadge(s.services?.secondPhotographer)}</div></div>
           </div>
 
           <div class="detail-section">
@@ -1177,6 +1194,7 @@
       loadSubmissions();
     } else if (authToken) {
       document.getElementById('login-overlay').style.display = 'none';
+      if (authName) document.querySelector('.logo-sub').textContent = authName;
       loadSubmissions();
     }
   </script>

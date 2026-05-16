@@ -30,8 +30,13 @@ module.exports = async (req, res) => {
       .select('*')
       .order('created_at', { ascending: false });
 
-    if (photographer_slug) query = query.eq('photographer_slug', photographer_slug);
-    if (status)            query = query.eq('status', status);
+    // Photographers only see their own submissions; admins can filter or see all
+    if (req.photographerSlug) {
+      query = query.eq('photographer_slug', req.photographerSlug);
+    } else if (photographer_slug) {
+      query = query.eq('photographer_slug', photographer_slug);
+    }
+    if (status) query = query.eq('status', status);
 
     const { data, error } = await query;
     if (error) return res.status(500).json({ error: error.message });
