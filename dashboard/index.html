@@ -1231,6 +1231,22 @@
             <div class="notes-box">"${s.budget.notes}"</div>
           </div>` : ''}
 
+          ${s.style?.inspirationImages?.length ? `
+          <div class="detail-section">
+            <div class="detail-section-title">Inspirationsbilder (${s.style.inspirationImages.length})</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;">
+              ${s.style.inspirationImages.map(img => `
+                <a href="${img.url}" target="_blank" style="display:block;border-radius:8px;overflow:hidden;border:1.5px solid var(--grey-border);">
+                  <img src="${img.url}" alt="${img.name}" style="width:90px;height:90px;object-fit:cover;display:block;">
+                </a>
+              `).join('')}
+            </div>
+          </div>` : (s.style?.inspirationImageCount > 0 ? `
+          <div class="detail-section">
+            <div class="detail-section-title">Inspirationsbilder</div>
+            <div style="font-size:13px;color:var(--grey-mid);">${s.style.inspirationImageCount} Bild(er) hochgeladen</div>
+          </div>` : '')}
+
           <div class="contact-box">
             <div class="contact-box-label">Kontakt aufnehmen</div>
             <div class="contact-box-name">${names}</div>

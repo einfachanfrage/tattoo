@@ -1471,8 +1471,7 @@
     try {
       formData = collectFormData();
 
-      // Strip image data for the main API call to keep payload small,
-      // send image count instead
+      // Strip image data for the main API call to keep payload small
       var payloadForApi = JSON.parse(JSON.stringify(formData));
       payloadForApi.style.inspirationImageCount = uploadedFiles.length;
       delete payloadForApi.style.inspirationImages;
@@ -1483,6 +1482,30 @@
         body:    JSON.stringify(payloadForApi),
       });
       if (!res.ok) throw new Error('API error ' + res.status);
+
+      var resData = await res.json();
+      var submissionId = resData.id;
+
+      // Upload inspiration images separately to storage
+      if (uploadedFiles.length > 0 && submissionId) {
+        var uploadBase = CONFIG.apiUrl.replace('/submissions', '');
+        for (var i = 0; i < uploadedFiles.length; i++) {
+          try {
+            await fetch(uploadBase + '/upload', {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify({
+                submissionId: submissionId,
+                imageData:    uploadedFiles[i].data,
+                imageName:    uploadedFiles[i].name,
+                imageType:    uploadedFiles[i].type,
+              }),
+            });
+          } catch (imgErr) {
+            console.warn('[EinfachAnfrage] Bild-Upload fehlgeschlagen:', imgErr.message);
+          }
+        }
+      }
 
       if (CONFIG.webhookUrl) {
         fetch(CONFIG.webhookUrl, {
