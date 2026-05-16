@@ -2,8 +2,11 @@
   "name": "einfach-anfrage",
   "version": "1.0.0",
   "scripts": {
-    "start": "node server/index.js",
-    "install": "cd server && npm install"
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4",
+    "nodemailer": "^6.9.7"
   },
   "engines": {
     "node": ">=18.0.0"

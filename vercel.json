@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/p/:slug", "destination": "/api/p/[slug]" },
+    { "source": "/widget.js", "destination": "/widget/widget.js" },
+    { "source": "/demo", "destination": "/landing/demo.html" },
+    { "source": "/dashboard", "destination": "/dashboard/index.html" },
+    { "source": "/", "destination": "/landing/index.html" }
+  ]
+}
