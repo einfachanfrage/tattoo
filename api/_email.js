@@ -1,6 +1,9 @@
 'use strict';
 
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+const FROM = 'Einfach Anfrage <anfrage@einfachanfrage.de>';
 
 function formatDate(isoDate) {
   if (!isoDate) return 'Noch unklar';
@@ -130,45 +133,28 @@ function buildCoupleHtml(submission, photographerName) {
 }
 
 async function sendEmails(submission, photographerEmail, photographerName) {
-  let transporter;
-
-  if (process.env.SMTP_HOST) {
-    transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587', 10),
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-    });
-  } else {
-    const account = await nodemailer.createTestAccount();
-    transporter = nodemailer.createTransport({
-      host: 'smtp.ethereal.email', port: 587, secure: false,
-      auth: { user: account.user, pass: account.pass },
-    });
-    console.log('Ethereal test mode – no SMTP configured');
-  }
-
-  const to         = photographerEmail || process.env.PHOTOGRAPHER_EMAIL || 'demo@einfachanfrage.de';
-  const photoName  = photographerName  || process.env.PHOTOGRAPHER_NAME  || 'Ihr/e Fotograf/in';
+  const to        = photographerEmail || process.env.PHOTOGRAPHER_EMAIL || 'demo@einfachanfrage.de';
+  const photoName = photographerName  || process.env.PHOTOGRAPHER_NAME  || 'Ihr/e Fotograf/in';
   const { contact, wedding } = submission;
-  const names      = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`;
+  const names     = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`;
   const weddingDate = wedding.dateUnclear ? 'Datum offen' : formatDate(wedding.date);
-  const fromAddress = process.env.SMTP_FROM || 'Einfach Anfrage <noreply@einfachanfrage.de>';
 
-  await transporter.sendMail({
-    from: fromAddress,
+  // Mail an Fotografen
+  await resend.emails.send({
+    from:     FROM,
     to,
-    replyTo: contact.email,
-    subject: `📸 Neue Anfrage: ${names} · Hochzeit am ${weddingDate}`,
-    html: buildPhotographerHtml(submission),
+    replyTo:  contact.email,
+    subject:  `📸 Neue Anfrage: ${names} · Hochzeit am ${weddingDate}`,
+    html:     buildPhotographerHtml(submission),
   });
 
+  // Bestätigung an Brautpaar
   if (contact.email) {
-    await transporter.sendMail({
-      from: fromAddress,
-      to: contact.email,
+    await resend.emails.send({
+      from:    FROM,
+      to:      contact.email,
       subject: `Eure Anfrage bei ${photoName} ist eingegangen 🤍`,
-      html: buildCoupleHtml(submission, photoName),
+      html:    buildCoupleHtml(submission, photoName),
     });
   }
 
