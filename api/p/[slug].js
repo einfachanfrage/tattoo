@@ -4,9 +4,7 @@ const supabase = require('../_supabase');
 
 function standalonePage(photographer) {
   const { name, slug, theme = 'champagne', email, delivery } = photographer;
-  const apiBase = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : '';
+  const apiBase = '';
 
   return `<!DOCTYPE html>
 <html lang="de">
