@@ -5,6 +5,16 @@ const { Resend } = require('resend');
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = 'Einfach Anfrage <anfrage@einfach-anfrage.com>';
 
+function esc(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function formatDate(isoDate) {
   if (!isoDate) return 'Noch unklar';
   const d = new Date(isoDate);
@@ -22,7 +32,7 @@ function formatDateTime(isoDate) {
 function buildPhotographerHtml(submission) {
   const { contact, wedding, location, style, services, budget } = submission;
   const weddingDate = wedding.dateUnclear ? 'Noch unklar' : formatDate(wedding.date);
-  const names = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`;
+  const names = `${esc(contact.partner1) || '–'} &amp; ${esc(contact.partner2) || '–'}`;
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -48,32 +58,32 @@ function buildPhotographerHtml(submission) {
         </td>
         <td style="padding:16px 20px;border-bottom:1px solid #F0EDE8;border-left:1px solid #F0EDE8;">
           <span style="font-size:11px;color:#8A8580;text-transform:uppercase;">Location</span><br>
-          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${location.city || '–'}, ${location.state || '–'}</span>
+          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${esc(location.city) || '–'}, ${esc(location.state) || '–'}</span>
         </td>
       </tr>
       <tr>
         <td style="padding:16px 20px;">
           <span style="font-size:11px;color:#8A8580;text-transform:uppercase;">Gäste</span><br>
-          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${(style || {}).guestCount || 'Noch unklar'}</span>
+          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${esc((style || {}).guestCount) || 'Noch unklar'}</span>
         </td>
         <td style="padding:16px 20px;border-left:1px solid #F0EDE8;">
           <span style="font-size:11px;color:#8A8580;text-transform:uppercase;">Budget</span><br>
-          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${(budget || {}).range || 'Keine Angabe'}</span>
+          <span style="font-size:16px;color:#1A1A1A;font-weight:600;">${esc((budget || {}).range) || 'Keine Angabe'}</span>
         </td>
       </tr>
     </table>
   </td></tr>
   <tr><td style="padding:0 36px 24px;">
     <table width="100%" cellpadding="0" cellspacing="0">
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;width:160px;">Dauer</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(wedding || {}).duration || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Uhrzeit Trauung</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(wedding || {}).ceremonyTime || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Typen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${((location || {}).types || []).join(', ') || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Stil-Wünsche</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${((style || {}).styles || []).join(', ') || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Medien</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(services || {}).mediaType || 'Noch unklar'}</td></tr>
-      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">2. Fotograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${(services || {}).secondPhotographer || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;width:160px;">Dauer</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((wedding || {}).duration) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Uhrzeit Trauung</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((wedding || {}).ceremonyTime) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Typen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc(((location || {}).types || []).join(', ')) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Stil-Wünsche</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc(((style || {}).styles || []).join(', ')) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Medien</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).mediaType) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">2. Fotograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).secondPhotographer) || 'Noch unklar'}</td></tr>
     </table>
   </td></tr>
-  ${(budget || {}).notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${budget.notes}</p></div></td></tr>` : ''}
+  ${(budget || {}).notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${esc(budget.notes)}</p></div></td></tr>` : ''}
   ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border:1px solid #E2DDD6;border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:14px;"><span style="font-size:28px;">🖼️</span><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#1A1A1A;">${style.inspirationImageCount} Inspirationsbild${style.inspirationImageCount > 1 ? 'er' : ''} hochgeladen</p><p style="margin:0;font-size:12px;color:#8A8580;">Die Bilder sind in deinem Dashboard einsehbar.</p></div></div></td></tr>` : ''}
   <tr><td style="padding:0 36px 20px;text-align:center;">
     <a href="${process.env.DASHBOARD_URL || 'https://einfachanfrage-hochzeitsfotografie.de/dashboard'}" style="display:inline-block;background:#C9A96E;color:#1A1A1A;font-family:Arial,sans-serif;font-size:14px;font-weight:700;padding:14px 32px;border-radius:9px;text-decoration:none;">→ Im Dashboard ansehen</a>
@@ -82,9 +92,9 @@ function buildPhotographerHtml(submission) {
     <div style="background:#1A1A1A;border-radius:12px;padding:24px;">
       <p style="margin:0 0 12px;font-size:12px;color:#C9A96E;text-transform:uppercase;">Kontakt aufnehmen</p>
       <p style="margin:0 0 4px;font-size:22px;color:#FAF7F2;font-family:Georgia,serif;">${names}</p>
-      <p style="margin:0 0 12px;font-size:14px;"><a href="mailto:${contact.email}" style="color:#C9A96E;">${contact.email}</a></p>
-      ${contact.phone ? `<p style="margin:0;font-size:14px;color:#8A8580;">${contact.phone}</p>` : ''}
-      <p style="margin:12px 0 0;font-size:12px;color:#8A8580;">Gefunden über: ${contact.howFound || '–'}</p>
+      <p style="margin:0 0 12px;font-size:14px;"><a href="mailto:${esc(contact.email)}" style="color:#C9A96E;">${esc(contact.email)}</a></p>
+      ${contact.phone ? `<p style="margin:0;font-size:14px;color:#8A8580;">${esc(contact.phone)}</p>` : ''}
+      <p style="margin:12px 0 0;font-size:12px;color:#8A8580;">Gefunden über: ${esc(contact.howFound) || '–'}</p>
     </div>
   </td></tr>
   <tr><td style="background:#F0EDE8;padding:20px 36px;text-align:center;">
@@ -97,7 +107,7 @@ function buildPhotographerHtml(submission) {
 function buildCoupleHtml(submission, photographerName) {
   const { contact, wedding } = submission;
   const weddingDate = wedding.dateUnclear ? 'Noch unklar' : formatDate(wedding.date);
-  const names = `${contact.partner1 || ''} & ${contact.partner2 || ''}`.trim().replace(/^&\s*/, '').replace(/\s*&$/, '');
+  const names = `${esc(contact.partner1) || ''} &amp; ${esc(contact.partner2) || ''}`.trim().replace(/^&amp;\s*/, '').replace(/\s*&amp;$/, '');
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -123,9 +133,9 @@ function buildCoupleHtml(submission, photographerName) {
     <div style="background:#fff;border-radius:10px;border:1px solid #E2DDD6;padding:20px;">
       <p style="margin:0 0 14px;font-size:11px;color:#8A8580;text-transform:uppercase;">Eure Angaben</p>
       <table width="100%" cellpadding="0" cellspacing="0">
-        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;width:130px;">Hochzeitsdatum</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${weddingDate}</td></tr>
-        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;">Ort</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${submission.location.city || '–'}</td></tr>
-        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;">E-Mail</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${contact.email}</td></tr>
+        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;width:130px;">Hochzeitsdatum</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${esc(weddingDate)}</td></tr>
+        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;">Ort</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${esc(submission.location.city) || '–'}</td></tr>
+        <tr><td style="padding:5px 0;font-size:13px;color:#8A8580;">E-Mail</td><td style="padding:5px 0;font-size:13px;color:#1A1A1A;">${esc(contact.email)}</td></tr>
       </table>
     </div>
   </td></tr>
@@ -140,7 +150,7 @@ async function sendEmails(submission, photographerEmail, photographerName) {
   const to        = photographerEmail || process.env.PHOTOGRAPHER_EMAIL || 'demo@einfachanfrage.de';
   const photoName = photographerName  || process.env.PHOTOGRAPHER_NAME  || 'Ihr/e Fotograf/in';
   const { contact, wedding } = submission;
-  const names     = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`;
+  const names     = `${contact.partner1 || '–'} & ${contact.partner2 || '–'}`.replace(/[<>]/g, '');
   const weddingDate = wedding.dateUnclear ? 'Datum offen' : formatDate(wedding.date);
 
   // Mail an Fotografen

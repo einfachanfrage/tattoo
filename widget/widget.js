@@ -25,6 +25,7 @@
     photographerName:
       currentScript.getAttribute('data-name') || 'Ihr/e Fotograf/in',
     photographerSlug: currentScript.getAttribute('data-slug') || '',
+    privacyUrl: currentScript.getAttribute('data-privacy') || 'https://einfachanfrage-hochzeitsfotografie.de/datenschutz',
     webhookUrl: currentScript.getAttribute('data-webhook') || '',
     apiUrl:
       currentScript.getAttribute('data-api') ||
@@ -38,7 +39,7 @@
   // CSS
   // ──────────────────────────────────────────────────────────────────────────
   const SHADOW_CSS = `
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; }
     :host { all: initial; }
@@ -406,7 +407,7 @@
 
   // ── NACHT: Editorial Dark – schwarz, eckig, Playfair italic, Terrakotta ──
   const THEME_CSS_NACHT = `
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,700&display=swap');
+    @import url('https://fonts.bunny.net/css2?family=Playfair+Display:ital,wght@0,400;1,400;1,700&display=swap');
 
     /* Overlay & Modal – SCHWARZ, kantig, null Radius */
     .overlay { background: rgba(0,0,0,0.9); }
@@ -590,7 +591,7 @@
 
   // ── CLEAN: Ultra-minimal & Abstrakt – weiß, monospace, kein Farbrauschen ──
   const THEME_CSS_CLEAN = `
-    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
+    @import url('https://fonts.bunny.net/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
     .overlay { background: rgba(0,0,0,0.35); }
     .modal { background: #FFFFFF; border-radius: 2px; box-shadow: 0 4px 40px rgba(0,0,0,0.12); }
@@ -1104,6 +1105,16 @@
             <option>Sonstiges</option>
           </select>
         </div>
+
+        <div class="field" style="margin-top:4px;">
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid var(--border,#E2DDD6);border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
+            <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#C9A96E;">
+            <span style="font-size:12.5px;color:var(--text-mid,#6A6560);line-height:1.5;">
+              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#C9A96E;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#C4917A;">*</span>
+            </span>
+          </label>
+          <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
+        </div>
       </div>
 
       <!-- ── Step 8: Bestätigung ── -->
@@ -1372,6 +1383,19 @@
         showError('ea-email-err', 'ea-email');
         return false;
       }
+      var privacyCb = shadowRoot.getElementById('ea-privacy-consent');
+      if (!privacyCb || !privacyCb.checked) {
+        showError('ea-privacy-err', null);
+        var lbl = shadowRoot.getElementById('ea-privacy-label');
+        if (lbl) lbl.style.borderColor = '#C4917A';
+        return false;
+      }
+      if (privacyCb) {
+        privacyCb.addEventListener('change', function () {
+          var lbl = shadowRoot.getElementById('ea-privacy-label');
+          if (lbl) lbl.style.borderColor = privacyCb.checked ? '#C9A96E' : 'var(--border,#E2DDD6)';
+        }, { once: true });
+      }
     }
 
     return true;
@@ -1452,11 +1476,13 @@
         notes: shadowRoot.getElementById('ea-notes').value.trim() || null,
       },
       contact: {
-        partner1: shadowRoot.getElementById('ea-partner1').value.trim() || null,
-        partner2: shadowRoot.getElementById('ea-partner2').value.trim() || null,
-        email:    shadowRoot.getElementById('ea-email').value.trim(),
-        phone:    shadowRoot.getElementById('ea-phone').value.trim() || null,
-        howFound: shadowRoot.getElementById('ea-found').value || null,
+        partner1:        shadowRoot.getElementById('ea-partner1').value.trim() || null,
+        partner2:        shadowRoot.getElementById('ea-partner2').value.trim() || null,
+        email:           shadowRoot.getElementById('ea-email').value.trim(),
+        phone:           shadowRoot.getElementById('ea-phone').value.trim() || null,
+        howFound:        shadowRoot.getElementById('ea-found').value || null,
+        consentGiven:    true,
+        consentGivenAt:  new Date().toISOString(),
       },
     };
   }

@@ -34,12 +34,18 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: uploadError.message });
     }
 
-    // Get public URL
-    const { data: urlData } = supabase.storage
+    // Get signed URL (valid for 5 years – private bucket access only)
+    // 5 years in seconds: 5 * 365 * 24 * 60 * 60 = 157680000
+    const { data: urlData, error: signError } = await supabase.storage
       .from('inquiry-images')
-      .getPublicUrl(path);
+      .createSignedUrl(path, 157680000);
 
-    const publicUrl = urlData?.publicUrl;
+    if (signError) {
+      console.error('Signed URL error:', signError.message);
+      return res.status(500).json({ error: signError.message });
+    }
+
+    const publicUrl = urlData?.signedUrl;
 
     // Append image URL to the submission in the DB
     const { data: existing } = await supabase
