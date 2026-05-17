@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
   const { id } = req.query;
   const { status } = req.body || {};
 
-  const VALID = ['neu', 'in_bearbeitung', 'angebot_gesendet', 'beauftragt'];
+  const VALID = ['neu', 'in_bearbeitung', 'angebot_gesendet', 'beauftragt', 'archiviert'];
   if (!VALID.includes(status)) {
     return res.status(400).json({ error: 'Ungültiger Status.' });
   }
