@@ -12,6 +12,15 @@ function standalonePage(photographer) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Anfrage – ${name}</title>
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://einfachanfrage-hochzeitsfotografie.de/p/${slug}">
+  <meta property="og:title" content="Hochzeitsanfrage bei ${name}">
+  <meta property="og:description" content="Stelle deine Hochzeitsanfrage bei ${name} – einfach, schnell und vollständig. In wenigen Minuten fertig.">
+  <meta property="og:image" content="https://einfachanfrage-hochzeitsfotografie.de/api/og/p/${encodeURIComponent(name)}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
