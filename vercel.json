@@ -1,10 +1,16 @@
 {
+  "redirects": [
+    { "source": "/impressum.html", "destination": "/impressum", "permanent": true },
+    { "source": "/datenschutz.html", "destination": "/datenschutz", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/p/:slug", "destination": "/api/p/[slug]" },
     { "source": "/api/og/p/:name", "destination": "/api/og/p/[name]" },
     { "source": "/widget.js", "destination": "/widget/widget.js" },
     { "source": "/demo", "destination": "/landing/demo.html" },
     { "source": "/dashboard", "destination": "/dashboard/index.html" },
+    { "source": "/impressum", "destination": "/landing/impressum.html" },
+    { "source": "/datenschutz", "destination": "/landing/datenschutz.html" },
     { "source": "/", "destination": "/landing/index.html" }
   ],
   "crons": [

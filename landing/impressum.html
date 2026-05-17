@@ -46,7 +46,7 @@
     .page-wrap {
       max-width: 680px;
       margin: 72px auto;
-      padding: 0 5vw;
+      padding: 0 5vw 80px;
     }
     .eyebrow {
       font-size: 11px; font-weight: 600; color: var(--champagne);
@@ -61,11 +61,13 @@
       font-size: 13px; font-weight: 600; color: var(--dark);
       text-transform: uppercase; letter-spacing: 0.08em;
       margin: 36px 0 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--grey-border);
     }
+    h2:first-of-type { border-top: none; }
     p { color: var(--grey-mid); margin-bottom: 8px; }
     a { color: var(--champagne); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .divider { height: 1px; background: var(--grey-border); margin: 48px 0; }
     footer {
       border-top: 1px solid var(--grey-border);
       padding: 28px 5vw;
@@ -87,6 +89,7 @@
     <div class="eyebrow">Rechtliches</div>
     <h1>Impressum</h1>
 
+    <h2>Angaben gemäß § 5 TMG</h2>
     <p>
       Sandra Holm<br>
       Einfach Anfrage<br>
@@ -95,18 +98,33 @@
     </p>
 
     <h2>Kontakt</h2>
-    <p>E-Mail: <a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a></p>
+    <p>
+      E-Mail: <a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a><br>
+      Telefon: <a href="tel:+4915120791652">015120791652</a>
+    </p>
 
-    <h2>Verbraucher&shy;streit&shy;beilegung / Universal&shy;schlichtungs&shy;stelle</h2>
+    <h2>Umsatzsteuer</h2>
+    <p>Gemäß § 19 UStG wird keine Umsatzsteuer berechnet (Kleinunternehmerregelung).</p>
+
+    <h2>Redaktionell verantwortlich</h2>
+    <p>Sandra Holm, Wielandstr. 11, 12159 Berlin</p>
+
+    <h2>EU-Streitschlichtung</h2>
+    <p>
+      Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">https://ec.europa.eu/consumers/odr/</a>.<br>
+      Unsere E-Mail-Adresse finden Sie oben im Impressum.
+    </p>
+
+    <h2>Verbraucherstreitbeilegung</h2>
     <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
 
-    <p style="margin-top:40px;font-size:12px;color:var(--grey-mid);">Quelle: <a href="https://www.e-recht24.de" target="_blank" rel="noopener">eRecht24</a></p>
   </div>
 
   <footer>
     <a href="/">Startseite</a>
-    <a href="/impressum.html">Impressum</a>
-    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
   </footer>
 
 </body>

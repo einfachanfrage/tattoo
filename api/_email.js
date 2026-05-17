@@ -78,11 +78,17 @@ function buildPhotographerHtml(submission) {
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;width:160px;">Dauer</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((wedding || {}).duration) || 'Noch unklar'}</td></tr>
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Uhrzeit Trauung</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((wedding || {}).ceremonyTime) || 'Noch unklar'}</td></tr>
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Typen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc(((location || {}).types || []).join(', ')) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Innen / Außen</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((location || {}).indoorOutdoor) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Mehrere Locations</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((location || {}).multipleLocations) || 'Keine Angabe'}</td></tr>
+      ${(location || {}).address ? `<tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Location-Adresse</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc(location.address)}</td></tr>` : ''}
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Stil-Wünsche</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc(((style || {}).styles || []).join(', ')) || 'Noch unklar'}</td></tr>
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Medien</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).mediaType) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Getting Ready</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).gettingReady) || 'Keine Angabe'}</td></tr>
       <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">2. Fotograf</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).secondPhotographer) || 'Noch unklar'}</td></tr>
+      <tr><td style="padding:6px 0;font-size:13px;color:#8A8580;">Album</td><td style="padding:6px 0;font-size:13px;color:#1A1A1A;">${esc((services || {}).album) || 'Keine Angabe'}</td></tr>
     </table>
   </td></tr>
+  ${(style || {}).styleNotes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Stil in eigenen Worten</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${esc(style.styleNotes)}</p></div></td></tr>` : ''}
   ${(budget || {}).notes ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border-left:3px solid #C9A96E;padding:16px 20px;border-radius:0 8px 8px 0;"><p style="margin:0 0 6px;font-size:11px;color:#C9A96E;text-transform:uppercase;">Besondere Wünsche</p><p style="margin:0;font-size:14px;color:#1A1A1A;line-height:1.6;">${esc(budget.notes)}</p></div></td></tr>` : ''}
   ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 36px 24px;"><div style="background:#fff;border:1px solid #E2DDD6;border-radius:10px;padding:16px 20px;display:flex;align-items:center;gap:14px;"><span style="font-size:28px;">🖼️</span><div><p style="margin:0 0 4px;font-size:13px;font-weight:600;color:#1A1A1A;">${style.inspirationImageCount} Inspirationsbild${style.inspirationImageCount > 1 ? 'er' : ''} hochgeladen</p><p style="margin:0;font-size:12px;color:#8A8580;">Die Bilder sind in deinem Dashboard einsehbar.</p></div></div></td></tr>` : ''}
   <tr><td style="padding:0 36px 20px;text-align:center;">
@@ -161,8 +167,8 @@ async function sendEmails(submission, photographerEmail, photographerName) {
     subject:  `📸 Neue Anfrage: ${names} · Hochzeit am ${weddingDate}`,
     html:     buildPhotographerHtml(submission),
   });
-  if (r1.error) console.error('Resend error (photographer):', JSON.stringify(r1.error));
-  else console.log('Email sent to photographer:', to);
+  if (r1.error) console.error('Resend error (photographer mail):', JSON.stringify(r1.error));
+  else console.log('Email sent to photographer.');
 
   // Bestätigung an Brautpaar
   if (contact.email) {
@@ -172,8 +178,8 @@ async function sendEmails(submission, photographerEmail, photographerName) {
       subject: `Eure Anfrage bei ${photoName} ist eingegangen 🤍`,
       html:    buildCoupleHtml(submission, photoName),
     });
-    if (r2.error) console.error('Resend error (couple):', JSON.stringify(r2.error));
-    else console.log('Confirmation sent to couple:', contact.email);
+    if (r2.error) console.error('Resend error (couple mail):', JSON.stringify(r2.error));
+    else console.log('Confirmation sent to couple.');
   }
 
   return true;

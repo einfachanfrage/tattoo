@@ -1540,7 +1540,7 @@
           <li>Einrichtung komplett übernommen – du machst nichts</li>
           <li>Eigene Seite unter einfachanfrage.de/p/deinname – für Instagram-Bio oder überall</li>
           <li>Widget in 5 Designs, passend zu deiner Website</li>
-          <li>Vollständiges Briefing per E-Mail + PDF-Anhang</li>
+          <li>Vollständiges Briefing per E-Mail – strukturiert &amp; übersichtlich</li>
           <li>Brautpaar bekommt automatisch eine Bestätigung</li>
           <li>Dashboard mit allen Anfragen auf einen Blick</li>
           <li>Status-Tracking: Neu → In Bearbeitung → Angebot gesendet → Beauftragt</li>
@@ -1636,7 +1636,7 @@
             <button class="form-submit" type="submit">Nachricht senden →</button>
             <p style="margin-top:12px;font-size:12px;color:var(--grey-mid);line-height:1.5;">
               Mit dem Absenden stimmst du der Verarbeitung deiner Daten gemäß unserer
-              <a href="/datenschutz.html" style="color:var(--champagne);text-decoration:underline;">Datenschutzerklärung</a> zu.
+              <a href="/datenschutz" style="color:var(--champagne);text-decoration:underline;">Datenschutzerklärung</a> zu.
             </p>
           </form>
           <div class="form-success" id="form-success">
@@ -1660,8 +1660,8 @@
         <div class="footer-tagline">Das Anfrage-Widget für Hochzeitsfotografen</div>
       </div>
       <ul class="footer-links">
-        <li><a href="/datenschutz.html">Datenschutz</a></li>
-        <li><a href="/impressum.html">Impressum</a></li>
+        <li><a href="/datenschutz">Datenschutz</a></li>
+        <li><a href="/impressum">Impressum</a></li>
       </ul>
     </div>
     <div class="footer-bottom">© 2026 Einfach Anfrage</div>
@@ -1677,8 +1677,11 @@
       });
     }
 
-    function submitContact(e) {
+    async function submitContact(e) {
       e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const origText = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
 
       const payload = {
         name: document.getElementById('cf-name').value,
@@ -1688,16 +1691,19 @@
         message: document.getElementById('cf-msg').value,
       };
 
-      // Formular-Daten an die API senden (best effort)
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      }).catch(() => {});
-
-      // Direkt Success-State zeigen
-      document.getElementById('contact-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error('Server error ' + res.status);
+        document.getElementById('contact-form').style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } catch (err) {
+        if (btn) { btn.disabled = false; btn.textContent = origText; }
+        alert('Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder schreib uns direkt an einfachanfrage@outlook.com');
+      }
     }
 
     // Smooth scroll

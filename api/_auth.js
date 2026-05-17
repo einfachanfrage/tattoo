@@ -2,8 +2,12 @@
 
 const crypto = require('crypto');
 
-const DASHBOARD_PASS = process.env.DASHBOARD_PASS || 'einfach2026';
-const TOKEN_SECRET   = process.env.TOKEN_SECRET   || 'einfach-secret-2026';
+const DASHBOARD_PASS = process.env.DASHBOARD_PASS || null;
+const TOKEN_SECRET   = process.env.TOKEN_SECRET   || null;
+
+if (!TOKEN_SECRET) {
+  console.error('FATAL: TOKEN_SECRET environment variable is not set. All authentication will fail.');
+}
 
 // ── Admin token ───────────────────────────────────────────────────────────────
 function makeAdminToken() {

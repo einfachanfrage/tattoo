@@ -1037,6 +1037,9 @@
           </div>
           <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
+          <div style="margin-top:10px;padding:10px 12px;background:rgba(201,169,110,0.08);border-left:3px solid #C9A96E;border-radius:0 6px 6px 0;font-size:11.5px;color:#8A8580;line-height:1.55;">
+            <strong style="color:#6B5A3A;font-size:11.5px;">Hinweis:</strong> Bitte lade keine Fotos hoch, auf denen erkennbare Personen abgebildet sind, ohne deren ausdrückliche Einwilligung. Ausnahmen gelten für euch selbst als Brautpaar.
+          </div>
         </div>
       </div>
 
@@ -1115,6 +1118,9 @@
           </label>
           <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
         </div>
+        <div id="ea-submit-err" style="display:none;margin-top:12px;padding:12px 14px;background:#FFF3F0;border:1px solid #F5C6BC;border-radius:8px;font-size:13px;color:#C0392B;line-height:1.5;">
+          Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt.
+        </div>
       </div>
 
       <!-- ── Step 8: Bestätigung ── -->
@@ -1190,6 +1196,18 @@
     shadowRoot.getElementById('ea-start').addEventListener('click', function () { goToStep(2); });
     backBtn.addEventListener('click', function () { if (currentStep > 2) goToStep(currentStep - 1, true); });
     nextBtn.addEventListener('click', handleNext);
+
+    // Enter key in input/select fields triggers Next (not in textarea)
+    shadowRoot.getElementById('ea-content').addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'textarea') return;
+      if (tag === 'input' && (e.target.type === 'checkbox' || e.target.type === 'radio')) return;
+      e.preventDefault();
+      // Blur first so date/select values are committed before validation
+      if (e.target.blur) e.target.blur();
+      handleNext();
+    });
 
     // Check-item interactivity — use 'change' to avoid double-toggle from wrapping label
     shadowRoot.querySelectorAll('.check-grid').forEach(function (grid) {
@@ -1541,12 +1559,15 @@
         }).catch(function () {});
       }
 
+      nextBtn.disabled    = false;
+      nextBtn.textContent = 'Weiter →';
       showThankYou();
     } catch (err) {
       console.error('[EinfachAnfrage] Fehler:', err);
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Erneut versuchen';
-      showThankYou();
+      nextBtn.textContent = 'Erneut versuchen →';
+      var submitErr = shadowRoot.getElementById('ea-submit-err');
+      if (submitErr) submitErr.style.display = 'block';
     }
   }
 
@@ -1610,6 +1631,7 @@
     currentStep   = 1;
     formData      = {};
     uploadedFiles = [];
+    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Weiter →'; }
     goToStep(1);
 
     // Reset form fields
@@ -1632,6 +1654,8 @@
       if (labelEl) labelEl.style.display = '';
       var areaEl = shadowRoot.getElementById('ea-upload-area');
       if (areaEl) areaEl.classList.remove('has-files');
+      var submitErrEl = shadowRoot.getElementById('ea-submit-err');
+      if (submitErrEl) submitErrEl.style.display = 'none';
     }
 
     overlay.style.display = 'flex';
