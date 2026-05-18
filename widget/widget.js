@@ -405,96 +405,95 @@
   // THEME OVERRIDES
   // ──────────────────────────────────────────────────────────────────────────
 
-  // ── STUDIO: Bold & Grafisch – near-black, Syne 800, Electric Red ──
+  // ── ROSÉ: Zartes Blush – warm Ivory, Dusty Rose, Cormorant, luftig ──
   const THEME_CSS_NACHT = `
-    @import url('https://fonts.bunny.net/css2?family=Syne:wght@700;800&display=swap');
-
-    .overlay { background: rgba(0,0,0,0.88); }
-    .modal { background: #111010; border-radius: 20px; box-shadow: 0 48px 120px rgba(0,0,0,0.85); }
+    .overlay { background: rgba(80,40,50,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+    .modal { background: #FDF2F4; border-radius: 22px; box-shadow: 0 32px 80px rgba(140,80,90,0.18), 0 2px 8px rgba(140,80,90,0.07); }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
 
-    .progress-bar { background: #1E1A1A; height: 3px; }
-    .progress-fill { background: #FF3355; border-radius: 2px; }
+    .progress-bar { background: #F5E0E4; height: 1px; }
+    .progress-fill { background: linear-gradient(90deg, #C97A8C, #E0A0B0); border-radius: 1px; }
 
-    .logo { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 800; color: #FF3355; letter-spacing: 0; text-transform: uppercase; font-style: normal; }
-    .close-btn { color: #3A2828; border-radius: 10px; }
-    .close-btn:hover { background: #1C1818; color: #F5EDED; border-radius: 10px; }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; color: #B86878; letter-spacing: 0.16em; text-transform: uppercase; font-style: italic; }
+    .close-btn { color: #D4A0AA; border-radius: 10px; }
+    .close-btn:hover { background: #F5E0E4; color: #7A3040; border-radius: 10px; }
 
-    .modal-content { scrollbar-color: #FF3355 transparent; }
-    .modal-content::-webkit-scrollbar-thumb { background: #FF3355; border-radius: 2px; }
+    .modal-content { scrollbar-color: #E0B0BA transparent; }
+    .modal-content::-webkit-scrollbar-thumb { background: #E0B0BA; border-radius: 2px; }
 
-    .step-title { font-family: 'Syne', sans-serif; font-size: 38px; font-weight: 800; color: #F5EDED; line-height: 0.95; letter-spacing: -0.03em; font-style: normal; }
-    .step-subtitle { color: #4A3838; font-size: 13px; line-height: 1.65; }
-    .field-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600; color: #3A2828; text-transform: uppercase; letter-spacing: 0.1em; }
-    .field-label .req { color: #FF3355; }
+    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #5A2830; line-height: 1.05; letter-spacing: 0.01em; font-style: italic; }
+    .step-subtitle { color: #C09098; font-size: 13px; line-height: 1.7; }
+    .field-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; color: #C4909A; text-transform: uppercase; letter-spacing: 0.15em; }
+    .field-label .req { color: #C97A8C; }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
-      background: #1A1616;
-      border: 1.5px solid #2A2020;
-      border-radius: 12px;
-      color: #F5EDED;
-      padding: 14px 16px;
-      font-size: 15px;
-      transition: border-color 0.2s, background 0.2s;
+      background: #FFFFFF;
+      border: 1px solid #EDD0D8;
+      border-radius: 13px;
+      color: #5A2830;
+      padding: 14px 18px;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input::placeholder, textarea::placeholder { color: #302828; }
-    input:focus, textarea:focus { border-color: #FF3355; background: #1D1919; outline: none; }
-    input.err { border-color: #FF3355; }
+    input::placeholder, textarea::placeholder { color: #E0C0C8; }
+    input:focus, textarea:focus { border-color: #C97A8C; box-shadow: 0 0 0 3px rgba(201,122,140,0.1); outline: none; }
+    input.err { border-color: #C97A8C; }
     select {
-      background: #1A1616;
-      border: 1.5px solid #2A2020;
-      border-radius: 12px;
-      color: #F5EDED;
-      padding: 14px 40px 14px 16px;
-      font-size: 15px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23443838' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background: #FFFFFF;
+      border: 1px solid #EDD0D8;
+      border-radius: 13px;
+      color: #5A2830;
+      padding: 14px 40px 14px 18px;
+      font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C4909A' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 14px center;
     }
-    select:focus { border-color: #FF3355; outline: none; }
-    select.err { border-color: #FF3355; }
+    select:focus { border-color: #C97A8C; outline: none; }
+    select.err { border-color: #C97A8C; }
 
-    .check-item { background: #1A1616; border: 1.5px solid #2A2020; border-radius: 12px; color: #5A4848; transition: all 0.18s; }
-    .check-item:hover { border-color: #3A2828; background: #1D1919; color: #F5EDED; }
-    .check-item.checked { border-color: #FF3355; background: rgba(255,51,85,0.08); color: #F5EDED; }
-    .check-item input[type="checkbox"] { accent-color: #FF3355; }
+    .check-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 13px; color: #C09098; transition: all 0.18s; }
+    .check-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
+    .check-item.checked { border-color: #C97A8C; background: rgba(201,122,140,0.07); color: #5A2830; }
+    .check-item input[type="checkbox"] { accent-color: #C97A8C; }
 
-    .radio-item { background: #1A1616; border: 1.5px solid #2A2020; border-radius: 12px; color: #5A4848; }
-    .radio-item:hover { border-color: #3A2828; color: #F5EDED; }
-    .radio-item.checked { border-color: #FF3355; background: #FF3355; color: #111010; font-weight: 700; }
+    .radio-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 13px; color: #C09098; }
+    .radio-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
+    .radio-item.checked { border-color: #C97A8C; background: #C97A8C; color: #FDF2F4; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; }
 
-    .media-item { background: #1A1616; border: 1.5px solid #2A2020; border-radius: 14px; color: #5A4848; }
-    .media-item:hover { border-color: #3A2828; color: #F5EDED; }
-    .media-item.checked { border-color: #FF3355; background: rgba(255,51,85,0.1); color: #FF3355; }
+    .media-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 14px; color: #C09098; }
+    .media-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
+    .media-item.checked { border-color: #C97A8C; background: rgba(201,122,140,0.08); color: #5A2830; }
 
-    .unclear-row span { color: #4A3838; }
-    .unclear-row input[type="checkbox"] { accent-color: #FF3355; }
+    .unclear-row span { color: #C4909A; }
+    .unclear-row input[type="checkbox"] { accent-color: #C97A8C; }
 
-    .upload-area { border-color: #2A2020; border-radius: 14px; }
-    .upload-area:hover { border-color: #FF3355; background: rgba(255,51,85,0.04); }
-    .upload-area.has-files { border-color: #FF3355; background: rgba(255,51,85,0.04); }
-    .upload-label { color: #4A3838; }
-    .upload-label strong { color: #F5EDED; }
+    .upload-area { border-color: #EDD0D8; border-radius: 14px; background: #FFFFFF; }
+    .upload-area:hover { border-color: #C97A8C; background: #FFF8F9; }
+    .upload-area.has-files { border-color: #C97A8C; background: rgba(201,122,140,0.04); }
+    .upload-label { color: #C4909A; }
+    .upload-label strong { color: #5A2830; }
 
-    .divider { background: #1E1A1A; }
-    .welcome-icon { background: rgba(255,51,85,0.1); border-radius: 14px; }
-    .feature-list li { color: #4A3838; }
-    .feature-list li::before { content: '→'; color: #FF3355; font-size: 12px; margin-top: 2px; }
+    .divider { background: #F5E0E4; }
+    .welcome-icon { background: rgba(201,122,140,0.1); border-radius: 50%; }
+    .feature-list li { color: #C09098; }
+    .feature-list li::before { content: '✦'; color: #C97A8C; font-size: 10px; margin-top: 3px; }
 
-    .modal-nav { background: #111010; border-top: 1px solid #1E1A1A; }
-    .btn-primary { background: #FF3355; color: #111010; border-radius: 12px; font-weight: 800; font-size: 13px; letter-spacing: 0.02em; padding: 13px 28px; font-family: 'Syne', sans-serif; text-transform: uppercase; }
-    .btn-primary:hover { background: #FF5570; }
-    .btn-primary:disabled:hover { background: #FF3355; }
-    .btn-ghost { color: #4A3838; border: 1.5px solid #2A2020; border-radius: 12px; background: transparent; }
-    .btn-ghost:hover { color: #F5EDED; border-color: #554040; }
-    .step-counter { color: #2A2020; }
+    .modal-nav { background: #FDF2F4; border-top: 1px solid #F5E0E4; }
+    .btn-primary { background: #C97A8C; color: #FDF2F4; border-radius: 13px; font-weight: 400; font-size: 13px; letter-spacing: 0.06em; padding: 13px 28px; font-family: 'Cormorant Garamond', serif; font-style: italic; transition: all 0.2s; }
+    .btn-primary:hover { background: #B86878; }
+    .btn-primary:disabled { opacity: 0.35; }
+    .btn-primary:disabled:hover { background: #C97A8C; }
+    .btn-ghost { color: #D4A0AA; border: 1px solid #EDD0D8; border-radius: 13px; background: transparent; }
+    .btn-ghost:hover { color: #5A2830; border-color: #C97A8C; }
+    .step-counter { color: #E0C0C8; letter-spacing: 0.06em; }
 
-    .thankyou-icon { background: rgba(255,51,85,0.1); border-radius: 14px; }
-    .summary-card { background: #1A1616; border-color: #2A2020; border-radius: 14px; }
-    .summary-card-title { color: #4A3838; }
-    .summary-row { border-bottom-color: #1E1A1A; }
-    .summary-label { color: #4A3838; }
-    .summary-value { color: #F5EDED; }
+    .thankyou-icon { background: rgba(201,122,140,0.1); border-radius: 50%; }
+    .summary-card { background: #FFFFFF; border-color: #EDD0D8; border-radius: 14px; }
+    .summary-card-title { color: #C4909A; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
+    .summary-row { border-bottom-color: #F8ECF0; }
+    .summary-label { color: #C4909A; }
+    .summary-value { color: #5A2830; font-weight: 400; }
   `;
 
   // ── LUNA: Cinematisch & Seidig – tiefschwarz, Cormorant, warmes Perlweiß ──
