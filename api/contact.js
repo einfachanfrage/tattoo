@@ -19,7 +19,7 @@ const TO      = process.env.CONTACT_EMAIL || 'einfachanfrage@outlook.com';
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { name, email, website, volume, message } = req.body || {};
+  const { name, email, website, instabio, volume, message } = req.body || {};
   if (!name || !email || !message) {
     return res.status(400).json({ error: 'Name, E-Mail und Nachricht sind Pflicht.' });
   }
@@ -40,7 +40,8 @@ module.exports = async (req, res) => {
   </td></tr>
   <tr><td style="padding:8px 28px 28px;">
     <table width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #E2DDD6;margin-top:16px;">
-      ${website ? `<tr><td style="padding:9px 0;font-size:13px;color:#8A8580;width:150px;border-bottom:1px solid #F0EDE8;">Website</td><td style="padding:9px 0;font-size:13px;color:#1A1A1A;border-bottom:1px solid #F0EDE8;">${esc(website)}</td></tr>` : ''}
+      ${website ? `<tr><td style="padding:9px 0;font-size:13px;color:#8A8580;width:150px;border-bottom:1px solid #F0EDE8;">Website</td><td style="padding:9px 0;font-size:13px;color:#1A1A1A;border-bottom:1px solid #F0EDE8;"><a href="${esc(website)}" style="color:#C9A96E;">${esc(website)}</a></td></tr>` : ''}
+      ${instabio ? `<tr><td style="padding:9px 0;font-size:13px;color:#8A8580;border-bottom:1px solid #F0EDE8;">Instagram</td><td style="padding:9px 0;font-size:13px;color:#1A1A1A;border-bottom:1px solid #F0EDE8;"><a href="${esc(instabio)}" style="color:#C9A96E;">${esc(instabio)}</a></td></tr>` : ''}
       ${volume ? `<tr><td style="padding:9px 0;font-size:13px;color:#8A8580;border-bottom:1px solid #F0EDE8;">Anfragen / Monat</td><td style="padding:9px 0;font-size:13px;color:#1A1A1A;border-bottom:1px solid #F0EDE8;">${esc(volume)}</td></tr>` : ''}
       <tr><td colspan="2" style="padding:16px 0 8px;font-size:11px;color:#8A8580;text-transform:uppercase;letter-spacing:0.1em;">Nachricht</td></tr>
       <tr><td colspan="2" style="background:#fff;padding:16px;border-radius:8px;font-size:14px;color:#1A1A1A;line-height:1.65;border:1px solid #E2DDD6;">${esc(message).replace(/\n/g, '<br>')}</td></tr>
