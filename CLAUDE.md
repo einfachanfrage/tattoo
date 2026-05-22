@@ -6,30 +6,28 @@ Dieses Dokument beschreibt die vollständige Architektur, alle relevanten Dateie
 
 ## Was ist dieses Projekt?
 
-**Einfach Anfrage** ist ein SaaS-Produkt für Hochzeitsfotografen. Es besteht aus:
+**Einfach Anfrage** ist ein SaaS-Produkt für Tätowierer. Es besteht aus:
 
-1. **Widget** – Ein Shadow-DOM-Widget, das Fotografen per `<script>`-Tag auf ihrer Website einbinden. Besucher (Brautpaare) füllen einen mehrstufigen Fragebogen aus. Das Widget läuft komplett im Browser des Kunden, benötigt keine eigene Seite des Fotografen.
-2. **Dashboard** – Eine passwortgeschützte Single-Page-App unter `/dashboard`, in der Fotografen eingegangene Anfragen sehen und verwalten können.
+1. **Widget** – Ein Shadow-DOM-Widget, das Tätowierer per `<script>`-Tag auf ihrer Website einbinden. Besucher (Kunden) füllen einen mehrstufigen Fragebogen aus. Das Widget läuft komplett im Browser des Kunden, benötigt keine eigene Seite des Tätowierers.
+2. **Dashboard** – Eine passwortgeschützte Single-Page-App unter `/dashboard`, in der Tätowierer eingegangene Anfragen sehen und verwalten können.
 3. **Landingpage** – Marketing-Website unter `/`, inkl. Widget-Vorschau (Mockup), Preise und Kontaktformular.
-4. **API** – Serverless-Funktionen (Vercel), die Anfragen entgegennehmen, E-Mails versenden, Fotograf-Accounts verwalten.
-5. **Standalone-Seite** – Für jeden Fotografen gibt es eine eigene URL `/p/[slug]`, die das Widget direkt öffnet (für Linktree o.ä.).
+4. **API** – Serverless-Funktionen (Vercel), die Anfragen entgegennehmen, E-Mails versenden, Tätowierer-Accounts verwalten.
+5. **Standalone-Seite** – Für jeden Tätowierer gibt es eine eigene URL `/p/[slug]`, die das Widget direkt öffnet (für Instagram-Bio o.ä.).
 
-**Zielgruppe der Endnutzer:** Brautpaare, die beim Fotografen anfragen.  
-**Zahlende Kunden:** Fotografen, die das Widget auf ihrer Website einbinden.
+**Zielgruppe der Endnutzer:** Kunden, die beim Tätowierer eine Anfrage stellen.  
+**Zahlende Kunden:** Tätowierer, die das Widget auf ihrer Website oder in der Instagram-Bio einbinden.
 
 ---
 
 ## Branche & Inhalt
 
-> ⚠️ Dieser Abschnitt ist der erste, der bei einem Branchenwechsel angepasst wird.
-
-| Variable | Wert (Hochzeitsfotografie) |
+| Variable | Wert (Tattoo) |
 |---|---|
-| **Branche** | Hochzeitsfotografie |
+| **Branche** | Tattoo / Tätowierer |
 | **Produkt-Name** | Einfach Anfrage |
-| **Domain** | einfachanfrage-hochzeitsfotografie.de |
-| **Zielgruppe (Kunden)** | Hochzeitsfotografen |
-| **Anfragesteller** | Brautpaare |
+| **Domain** | einfachanfrage-tattoo.de |
+| **Zielgruppe (Kunden)** | Tätowierer |
+| **Anfragesteller** | Tattoo-Kunden |
 | **DB-Tabelle (Customers)** | `photographers` |
 | **DB-Spalte (Slug)** | `slug` |
 | **Preis** | 29 € / Monat |
@@ -123,7 +121,7 @@ Rewrites:
 ### Tabelle: `photographers`
 | Spalte | Typ | Beschreibung |
 |---|---|---|
-| `slug` | text (PK) | URL-Kennung z.B. `julia-meier` |
+| `slug` | text (PK) | URL-Kennung z.B. `ink-by-nova` |
 | `name` | text | Anzeigename |
 | `email` | text | E-Mail für Anfrage-Benachrichtigungen |
 | `theme` | text | Widget-Theme (`champagne`/`nacht`/`sage`/`clean`/`modern`) |
@@ -135,12 +133,12 @@ Enthält alle Anfragen. Wird von `api/submissions/index.js` geschrieben.
 Das Submissions-Objekt hat folgende Struktur:
 ```js
 {
-  contact:  { partner1, partner2, email, phone, howFound },
-  wedding:  { date, dateUnclear, duration, ceremonyTime },
-  location: { city, state, types[], indoorOutdoor, multipleLocations, address },
-  style:    { styles[], guestCount, styleNotes, inspirationImageCount },
-  services: { mediaType, gettingReady, secondPhotographer, album },
-  budget:   { range, notes }
+  motif:       { description, placement, size, isCoverUp, coverUpNotes },
+  style:       { styles[], colorPreference, styleNotes, inspirationImages[], inspirationImageCount },
+  health:      { isFirstTattoo, knownAllergies, allergiesDetail },
+  appointment: { timeframe, preferredTime },
+  budget:      { range, notes },
+  contact:     { name, email, phone, instagram, howFound, consentGiven, consentGivenAt }
 }
 ```
 
@@ -171,22 +169,23 @@ Es gibt 5 Themes. Das CSS ist in zwei Schichten aufgebaut:
 
 | Interne ID | Display-Name | Beschreibung |
 |---|---|---|
-| `champagne` | Champagne | Basis-Theme, warmes Elfenbein, Gold |
-| `nacht` | Rosé | Zartes Blush/Rosa, Cormorant Garamond italic |
-| `sage` | Luna | Tief-Schwarz/Nacht, Pearl-Weiß, cineastisch |
-| `clean` | Papier | Warmes Ivory, Editorial, Bodoni Moda |
-| `modern` | Modern | Beige-Editorial, Uppercase, minimalistisch |
+| `champagne` | Studio | Basis-Theme, warm Off-White, Plus Jakarta Sans, minimal |
+| `nacht` | Bloom | Dusty Rose/Blush, Cormorant italic, Fine-Line-Ästhetik |
+| `sage` | Noir | Tief-Schwarz, Pearl-Weiß, cineastisch, Blackwork-Feeling |
+| `clean` | Atelier | Warmes Ivory, Editorial, Bodoni Moda, hochwertig |
+| `modern` | Script | Beige-Editorial, Uppercase, stark & grafisch |
 
-### Widget-Schritte (Hochzeitsfotografie)
-Das Widget hat folgende Schritte:
+### Widget-Schritte (Tattoo)
+Das Widget hat folgende Schritte (9 gesamt):
 1. **Willkommen** – Intro-Screen, Feature-Liste
-2. **Kontakt** – Partner1, Partner2, E-Mail, Telefon, Wie gefunden
-3. **Hochzeit** – Datum (oder "noch unklar"), Dauer, Uhrzeit Trauung
-4. **Location** – Stadt, Bundesland, Location-Typen, Innen/Außen, Mehrere Locations, Adresse
-5. **Stil** – Foto-Stile (Checkboxen), Gästeanzahl, Stil in eigenen Worten, Inspirationsbilder (Upload)
-6. **Leistungen** – Media-Typ (Foto/Video/Beides), Getting Ready, 2. Fotograf, Album
-7. **Budget** – Budget-Range (Radio), besondere Wünsche
-8. **Danke** – Bestätigung mit Zusammenfassung
+2. **Das Motiv** – Beschreibung (Pflichtfeld), Körperstelle, Größe, Cover-Up (Ja/Nein), bedingt: Cover-Up-Details
+3. **Stil & Look** – 12 Stil-Checkboxen (Fine Line, Realistisch, Traditional, etc.), Farbe/SW-Präferenz
+4. **Referenzen & Wünsche** – Stil in eigenen Worten, Inspirationsbild-Upload (max. 3, je 2 MB)
+5. **Deine Haut** – Erstes Tattoo (Ja/Nein), Allergien (Nein/Ja/Nicht sicher), bedingt: Allergie-Details
+6. **Wann soll's losgehen?** – Wunsch-Zeitraum (Select), bevorzugte Tageszeit (Radio)
+7. **Budget & Anmerkungen** – Budget-Range (unter 150 € bis über 1.500 €), freie Anmerkungen
+8. **Kontakt** – Name, E-Mail (Pflichtfeld), Telefon, Instagram, Wie gefunden, Datenschutz (Pflichtfeld)
+9. **Danke** – Bestätigung mit Zusammenfassung
 
 ---
 
@@ -196,15 +195,15 @@ Das Widget hat folgende Schritte:
 - **Nav** – Logo + CTA-Button
 - **Hero** – Headline + Widget-Vorschau (Mockup)
 - **Wie es funktioniert** – 3-Step-Erklärung
-- **Features / Benefits** – Was bringt es dem Fotografen
+- **Features / Benefits** – Was bringt es dem Tätowierer
 - **Pricing** – 29 €/Monat
 - **Kontaktformular** – Name, E-Mail, Website (optional), Instagram-Bio (optional), Anfragen/Monat, Nachricht
 
 ### Mockup-System
 Die Widget-Vorschau auf der Landingpage ist **kein echtes Widget**, sondern CSS-Mockup. Tabs wechseln zwischen Designs.
 
-- **Tab-Reihenfolge:** Champagne | Luna | Papier | Rosé | Modern
-- **Interne CSS-Klassen:** `.dk-nacht` (Rosé), `.dk-sage` (Luna), `.dk-clean` (Papier), `.dk-modern` (Modern)
+- **Tab-Reihenfolge:** Studio | Bloom | Noir | Atelier | Script
+- **Interne CSS-Klassen:** `.dk-nacht` (Bloom), `.dk-sage` (Noir), `.dk-clean` (Atelier), `.dk-modern` (Script)
 - **Basis-Mockup-Klassen:** `.mk-bar`, `.mk-head`, `.mk-body`, `.mk-field`, `.mk-check`, `.mk-pill`, `.mk-tile`, `.mk-nav`, `.mk-btn`, usw.
 - `switchDesign(name)` JS-Funktion toggled die `.dk-*` Klasse auf dem Mockup-Container
 
@@ -213,8 +212,8 @@ Die Widget-Vorschau auf der Landingpage ist **kein echtes Widget**, sondern CSS-
 ## E-Mail-System (api/_email.js)
 
 Zwei E-Mails pro Einreichung:
-1. **An Fotografen** – Vollständige Briefing-E-Mail mit allen Daten
-2. **An Brautpaar** – Bestätigungs-E-Mail mit Zusammenfassung
+1. **An Tätowierer** (`buildArtistHtml`) – Vollständiges Briefing mit Motiv, Stil, Gesundheit, Termin, Budget, Kontakt
+2. **An Kunden** (`buildClientHtml`) – Bestätigungs-E-Mail mit Zusammenfassung (singular "du/dir")
 
 Absender: `Einfach Anfrage <anfrage@einfach-anfrage.com>`  
 Provider: Resend (`RESEND_API_KEY`)
@@ -245,15 +244,15 @@ Im Dashboard gibt es eine "Neu anlegen"-Funktion. Alternativ direkt per API:
 POST /api/photographers
 Authorization: Bearer [TOKEN_SECRET]
 {
-  "slug": "julia-meier",
-  "name": "Julia Meier Fotografie",
-  "email": "julia@example.com",
+  "slug": "ink-by-nova",
+  "name": "Ink by Nova",
+  "email": "nova@example.com",
   "theme": "champagne",
   "delivery": "both"
 }
 ```
 
-Die Widget-URL des Kunden lautet dann: `https://[domain]/p/julia-meier`
+Die Widget-URL des Kunden lautet dann: `https://[domain]/p/ink-by-nova`
 
 ---
 

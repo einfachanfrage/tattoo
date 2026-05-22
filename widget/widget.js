@@ -1,6 +1,6 @@
 /*!
  * Einfach Anfrage Widget v2.0.0
- * Das elegante Anfrage-Widget für Hochzeitsfotografen
+ * Das elegante Anfrage-Widget für Tätowierer
  * https://einfachanfrage.de
  */
 (function (w, d) {
@@ -23,9 +23,9 @@
   const CONFIG = {
     photographerEmail: currentScript.getAttribute('data-email') || '',
     photographerName:
-      currentScript.getAttribute('data-name') || 'Ihr/e Fotograf/in',
+      currentScript.getAttribute('data-name') || 'Dein/e Tätowierer/in',
     photographerSlug: currentScript.getAttribute('data-slug') || '',
-    privacyUrl: currentScript.getAttribute('data-privacy') || 'https://einfachanfrage-hochzeitsfotografie.de/datenschutz',
+    privacyUrl: currentScript.getAttribute('data-privacy') || 'https://einfachanfrage-tattoo.de/datenschutz',
     webhookUrl: currentScript.getAttribute('data-webhook') || '',
     apiUrl:
       currentScript.getAttribute('data-api') ||
@@ -39,7 +39,7 @@
   // CSS
   // ──────────────────────────────────────────────────────────────────────────
   const SHADOW_CSS = `
-    @import url('https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap');
+    @import url('https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; }
     :host { all: initial; }
@@ -47,7 +47,7 @@
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(26,26,26,0.65);
+      background: rgba(27,27,27,0.60);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 2147483646;
@@ -57,12 +57,12 @@
       padding: 16px;
       opacity: 0;
       transition: opacity 0.32s ease;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     }
     .overlay.visible { opacity: 1; }
 
     .modal {
-      background: #FAF7F2;
+      background: #F7F6F3;
       border-radius: 24px;
       width: 100%;
       max-width: 560px;
@@ -70,16 +70,16 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 32px 80px rgba(26,26,26,0.18), 0 8px 24px rgba(26,26,26,0.08);
+      box-shadow: 0 32px 80px rgba(27,27,27,0.18), 0 8px 24px rgba(27,27,27,0.08);
       transform: translateY(28px) scale(0.97);
       transition: transform 0.36s cubic-bezier(0.34,1.56,0.64,1);
     }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
 
-    .progress-bar { height: 2px; background: #EDE8E0; flex-shrink: 0; }
+    .progress-bar { height: 2px; background: #E9E7E2; flex-shrink: 0; }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #C9A96E 0%, #C4917A 100%);
+      background: #BA897F;
       transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
       border-radius: 2px;
     }
@@ -92,11 +92,12 @@
       flex-shrink: 0;
     }
     .logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: #C9A96E;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #1B1B1B;
       letter-spacing: 0.06em;
+      text-transform: uppercase;
       line-height: 1;
     }
     .close-btn {
@@ -104,11 +105,11 @@
       border: none; background: transparent; cursor: pointer;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      color: #B0A898;
+      color: #9A9590;
       transition: background 0.2s, color 0.2s;
       flex-shrink: 0;
     }
-    .close-btn:hover { background: rgba(26,26,26,0.06); color: #1A1A1A; }
+    .close-btn:hover { background: rgba(27,27,27,0.06); color: #1B1B1B; }
     .close-btn svg { display: block; }
 
     .modal-content {
@@ -116,10 +117,10 @@
       overflow-y: auto;
       padding: 8px 32px 36px;
       scrollbar-width: thin;
-      scrollbar-color: #D8D0C4 transparent;
+      scrollbar-color: #D1CDC7 transparent;
     }
     .modal-content::-webkit-scrollbar { width: 3px; }
-    .modal-content::-webkit-scrollbar-thumb { background: #D8D0C4; border-radius: 2px; }
+    .modal-content::-webkit-scrollbar-thumb { background: #D1CDC7; border-radius: 2px; }
 
     .step { display: none; }
     .step.active { display: block; animation: fadeSlideIn 0.3s ease; }
@@ -135,9 +136,10 @@
     }
 
     .step-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px; font-weight: 400;
-      color: #1A1A1A; line-height: 1.15;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 26px; font-weight: 700;
+      color: #1B1B1B; line-height: 1.2;
+      letter-spacing: -0.02em;
       margin: 0 0 8px;
     }
     .step-subtitle {
@@ -147,11 +149,11 @@
 
     .field { margin-bottom: 22px; }
     .field-label {
-      display: block; font-size: 11px; font-weight: 500;
-      color: #A8A09A; text-transform: uppercase;
+      display: block; font-size: 11px; font-weight: 600;
+      color: #9A9590; text-transform: uppercase;
       letter-spacing: 0.1em; margin-bottom: 8px;
     }
-    .field-label .req { color: #C4917A; margin-left: 2px; }
+    .field-label .req { color: #BA897F; margin-left: 2px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     input[type="text"],
@@ -162,21 +164,21 @@
     textarea {
       width: 100%;
       padding: 14px 18px;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px; color: #1A1A1A;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 14px; color: #1B1B1B;
       background: #fff;
-      border: 1px solid #E8E2DA;
+      border: 1px solid #D1CDC7;
       border-radius: 14px;
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
       appearance: none; -webkit-appearance: none;
     }
-    input::placeholder, textarea::placeholder { color: #C8C0B8; }
+    input::placeholder, textarea::placeholder { color: #C8C4BF; }
     input:focus, select:focus, textarea:focus {
-      border-color: #C9A96E;
-      box-shadow: 0 0 0 3px rgba(201,169,110,0.12);
+      border-color: #BA897F;
+      box-shadow: 0 0 0 3px rgba(186,137,127,0.12);
     }
-    input.err, select.err { border-color: #C4917A; }
+    input.err, select.err { border-color: #BA897F; }
 
     select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9590' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -187,7 +189,7 @@
     }
     textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
 
-    .err-msg { font-size: 12px; color: #C4917A; margin-top: 6px; display: none; }
+    .err-msg { font-size: 12px; color: #BA897F; margin-top: 6px; display: none; }
     .err-msg.show { display: block; }
 
     /* Checkboxes */
@@ -195,26 +197,26 @@
     .check-item {
       display: flex; align-items: center; gap: 10px;
       padding: 14px 16px;
-      background: #fff; border: 1px solid #EAE4DC;
+      background: #fff; border: 1px solid #D1CDC7;
       border-radius: 14px; cursor: pointer;
-      font-size: 13px; color: #2A2420;
+      font-size: 13px; color: #1B1B1B;
       line-height: 1.35;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
       user-select: none;
     }
     .check-item:hover {
-      border-color: #C9A96E;
-      background: #FEFCF8;
-      box-shadow: 0 2px 8px rgba(201,169,110,0.1);
+      border-color: #BA897F;
+      background: #F7F6F3;
+      box-shadow: 0 2px 8px rgba(186,137,127,0.10);
     }
     .check-item.checked {
-      border-color: #C9A96E;
-      background: rgba(201,169,110,0.07);
-      box-shadow: 0 2px 8px rgba(201,169,110,0.12);
+      border-color: #BA897F;
+      background: rgba(186,137,127,0.07);
+      box-shadow: 0 2px 8px rgba(186,137,127,0.12);
     }
     .check-item input[type="checkbox"] {
       width: 15px; height: 15px;
-      accent-color: #C9A96E; flex-shrink: 0; cursor: pointer;
+      accent-color: #BA897F; flex-shrink: 0; cursor: pointer;
     }
 
     /* Radio pills */
@@ -223,23 +225,23 @@
       flex: 1; min-width: 70px;
       display: flex; align-items: center; justify-content: center;
       padding: 12px 14px;
-      background: #fff; border: 1px solid #EAE4DC;
+      background: #fff; border: 1px solid #D1CDC7;
       border-radius: 100px; cursor: pointer;
-      font-size: 13px; color: #2A2420;
+      font-size: 13px; color: #1B1B1B;
       text-align: center;
       transition: border-color 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
       user-select: none;
     }
     .radio-item:hover {
-      border-color: #C9A96E;
-      background: #FEFCF8;
-      box-shadow: 0 2px 8px rgba(201,169,110,0.1);
+      border-color: #BA897F;
+      background: #F7F6F3;
+      box-shadow: 0 2px 8px rgba(186,137,127,0.10);
     }
     .radio-item.checked {
-      border-color: #C9A96E;
-      background: rgba(201,169,110,0.09);
-      color: #8A6A2E; font-weight: 600;
-      box-shadow: 0 2px 10px rgba(201,169,110,0.15);
+      border-color: #1B1B1B;
+      background: #1B1B1B;
+      color: #F7F6F3; font-weight: 600;
+      box-shadow: 0 2px 10px rgba(27,27,27,0.15);
     }
     .radio-item input[type="radio"] { display: none; }
 
@@ -249,23 +251,23 @@
       display: flex; flex-direction: column;
       align-items: center; justify-content: center; gap: 8px;
       padding: 20px 10px;
-      background: #fff; border: 1px solid #EAE4DC;
+      background: #fff; border: 1px solid #D1CDC7;
       border-radius: 16px; cursor: pointer;
-      font-size: 13px; color: #2A2420; text-align: center;
+      font-size: 13px; color: #1B1B1B; text-align: center;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
       user-select: none;
     }
     .media-item:hover {
-      border-color: #C9A96E;
-      background: #FEFCF8;
-      box-shadow: 0 4px 14px rgba(201,169,110,0.12);
+      border-color: #BA897F;
+      background: #F7F6F3;
+      box-shadow: 0 4px 14px rgba(186,137,127,0.12);
       transform: translateY(-1px);
     }
     .media-item.checked {
-      border-color: #C9A96E;
-      background: rgba(201,169,110,0.08);
-      color: #8A6A2E; font-weight: 600;
-      box-shadow: 0 4px 16px rgba(201,169,110,0.16);
+      border-color: #1B1B1B;
+      background: #1B1B1B;
+      color: #F7F6F3; font-weight: 600;
+      box-shadow: 0 4px 16px rgba(27,27,27,0.16);
       transform: translateY(-1px);
     }
     .media-item input[type="radio"] { display: none; }
@@ -278,13 +280,13 @@
     }
     .unclear-row input[type="checkbox"] {
       width: 14px; height: 14px;
-      accent-color: #C9A96E; cursor: pointer;
+      accent-color: #BA897F; cursor: pointer;
     }
     .unclear-row span { font-size: 12px; color: #9A9590; }
 
     /* File upload */
     .upload-area {
-      border: 1.5px dashed #DDD8D0;
+      border: 1.5px dashed #D1CDC7;
       border-radius: 16px;
       padding: 24px 20px;
       text-align: center;
@@ -292,16 +294,16 @@
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     }
     .upload-area:hover {
-      border-color: #C9A96E;
-      background: #FEFCF8;
-      box-shadow: 0 4px 14px rgba(201,169,110,0.08);
+      border-color: #BA897F;
+      background: #F7F6F3;
+      box-shadow: 0 4px 14px rgba(186,137,127,0.08);
     }
     .upload-area.has-files {
-      border-color: #C9A96E;
-      background: rgba(201,169,110,0.04);
+      border-color: #BA897F;
+      background: rgba(186,137,127,0.05);
     }
     .upload-label { font-size: 13px; color: #9A9590; line-height: 1.65; }
-    .upload-label strong { color: #1A1A1A; }
+    .upload-label strong { color: #1B1B1B; }
     input[type="file"] { display: none; }
     .upload-previews {
       display: flex; gap: 10px; margin-top: 14px;
@@ -311,29 +313,29 @@
     .upload-thumb {
       width: 72px; height: 72px;
       object-fit: cover; border-radius: 10px;
-      border: 1px solid #E8E2DA; display: block;
+      border: 1px solid #D1CDC7; display: block;
     }
     .upload-thumb-del {
       position: absolute; top: -6px; right: -6px;
       width: 20px; height: 20px;
-      background: #1A1A1A; color: #FAF7F2;
+      background: #1B1B1B; color: #F7F6F3;
       border: none; border-radius: 50%;
       font-size: 13px; line-height: 1;
       cursor: pointer; display: flex;
       align-items: center; justify-content: center;
       padding: 0;
     }
-    .upload-hint { font-size: 11px; color: #B8B0A8; margin-top: 8px; }
-    .upload-err { font-size: 12px; color: #C4917A; margin-top: 6px; display: none; }
+    .upload-hint { font-size: 11px; color: #9A9590; margin-top: 8px; }
+    .upload-err { font-size: 12px; color: #BA897F; margin-top: 6px; display: none; }
     .upload-err.show { display: block; }
 
     /* Divider */
-    .divider { height: 1px; background: #EDE8E0; margin: 28px 0; }
+    .divider { height: 1px; background: #E9E7E2; margin: 28px 0; }
 
     /* Welcome */
     .welcome-icon {
       width: 66px; height: 66px;
-      background: rgba(201,169,110,0.1);
+      background: rgba(186,137,127,0.10);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 26px;
@@ -341,11 +343,11 @@
     .feature-list { list-style: none; padding: 0; margin: 0 0 32px; }
     .feature-list li {
       display: flex; align-items: flex-start; gap: 12px;
-      font-size: 14px; color: #6A6560;
+      font-size: 14px; color: #6B6B6B;
       padding: 7px 0; line-height: 1.55;
     }
     .feature-list li::before {
-      content: '✦'; color: #C9A96E;
+      content: '✦'; color: #BA897F;
       font-size: 11px; margin-top: 3px; flex-shrink: 0;
     }
 
@@ -355,50 +357,50 @@
       padding: 18px 32px;
       border-top: 1px solid rgba(0,0,0,0.06);
       flex-shrink: 0;
-      background: #FAF7F2;
+      background: #F7F6F3;
     }
     .btn {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px; font-weight: 500;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600;
       padding: 13px 28px;
       border-radius: 100px; border: none;
       cursor: pointer;
       transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
       display: inline-flex; align-items: center; gap: 6px;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
     }
     .btn-primary {
-      background: #1A1A1A; color: #FAF7F2;
-      box-shadow: 0 2px 8px rgba(26,26,26,0.18);
+      background: #1B1B1B; color: #F7F6F3;
+      box-shadow: 0 2px 8px rgba(27,27,27,0.16);
     }
     .btn-primary:hover {
-      background: #C9A96E;
-      box-shadow: 0 4px 16px rgba(201,169,110,0.32);
+      background: #333;
+      box-shadow: 0 4px 16px rgba(27,27,27,0.22);
       transform: translateY(-1px);
     }
     .btn-primary:active { transform: translateY(0); }
     .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
-    .btn-primary:disabled:hover { background: #1A1A1A; transform: none; }
+    .btn-primary:disabled:hover { background: #1B1B1B; transform: none; }
     .btn-ghost {
       background: transparent; color: #9A9590;
       border: none;
     }
     .btn-ghost:hover {
-      color: #1A1A1A;
-      background: rgba(26,26,26,0.05);
+      color: #1B1B1B;
+      background: rgba(27,27,27,0.05);
     }
     .btn-full {
       width: 100%; justify-content: center;
       padding: 16px; font-size: 15px;
       border-radius: 100px; margin-top: 8px;
     }
-    .step-counter { font-size: 12px; color: #B8B0A8; letter-spacing: 0.04em; }
+    .step-counter { font-size: 12px; color: #9A9590; letter-spacing: 0.04em; }
 
     /* Thank you */
     .thankyou-wrap { text-align: center; padding: 12px 0 6px; }
     .thankyou-icon {
       width: 80px; height: 80px;
-      background: rgba(201,169,110,0.1);
+      background: rgba(186,137,127,0.10);
       border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
@@ -411,23 +413,23 @@
       80%      { transform: scale(1.04); }
     }
     .summary-card {
-      background: #fff; border: 1px solid #EAE4DC;
+      background: #fff; border: 1px solid #D1CDC7;
       border-radius: 16px; padding: 20px 22px;
       margin-top: 26px; text-align: left;
     }
     .summary-card-title {
-      font-size: 11px; color: #A8A09A;
+      font-size: 11px; color: #9A9590;
       text-transform: uppercase; letter-spacing: 0.1em;
       margin-bottom: 14px;
     }
     .summary-row {
       display: flex; gap: 10px;
       padding: 7px 0; font-size: 13px;
-      border-bottom: 1px solid #F4F0EA;
+      border-bottom: 1px solid #EFEDE9;
     }
     .summary-row:last-child { border-bottom: none; }
     .summary-label { color: #9A9590; width: 130px; flex-shrink: 0; }
-    .summary-value { color: #1A1A1A; font-weight: 500; }
+    .summary-value { color: #1B1B1B; font-weight: 500; }
 
     /* Responsive */
     @media (max-width: 520px) {
@@ -435,7 +437,7 @@
       .modal-header { padding: 18px 20px 12px; }
       .modal-content { padding: 4px 20px 28px; }
       .modal-nav { padding: 16px 20px; }
-      .step-title { font-size: 26px; }
+      .step-title { font-size: 22px; }
       .field-row { grid-template-columns: 1fr; }
       .check-grid { grid-template-columns: 1fr; }
       .radio-group { flex-direction: column; }
@@ -447,7 +449,7 @@
   // THEME OVERRIDES
   // ──────────────────────────────────────────────────────────────────────────
 
-  // ── ROSÉ: Zartes Blush – warm Ivory, Dusty Rose, Cormorant, luftig ──
+  // ── BLOOM: Dusty Rose – Fine Line, zartes Blush, feminine Tattoo-Ästhetik ──
   const THEME_CSS_NACHT = `
     .overlay { background: rgba(80,40,50,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
     .modal { background: #FDF2F4; border-radius: 22px; box-shadow: 0 32px 80px rgba(140,80,90,0.18), 0 2px 8px rgba(140,80,90,0.07); }
@@ -538,7 +540,7 @@
     .summary-value { color: #5A2830; font-weight: 400; }
   `;
 
-  // ── LUNA: Cinematisch & Seidig – tiefschwarz, Cormorant, warmes Perlweiß ──
+  // ── NOIR: Cinematisch · tiefschwarz · Blackwork &amp; Dark Tattoo-Ästhetik ──
   const THEME_CSS_SAGE = `
     .overlay { background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .modal { background: #0A0A0D; border-radius: 22px; box-shadow: 0 48px 120px rgba(0,0,0,0.95), inset 0 1px 0 rgba(200,184,160,0.08); }
@@ -629,7 +631,7 @@
     .summary-value { color: #EAE0D4; font-weight: 400; }
   `;
 
-  // ── PAPIER: Editorial Stationery – warmes Ivory, Bodoni, Blush-Akzent ──
+  // ── ATELIER: Editorial · Warm Ivory · Bodoni · Hochwertig wie ein Tattoo-Studio ──
   const THEME_CSS_CLEAN = `
     @import url('https://fonts.bunny.net/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
@@ -723,7 +725,7 @@
     .summary-value { color: #1E1A18; font-weight: 400; }
   `;
 
-  // ── MODERN: Bold & Grafisch – navy, Outfit ExtraBold, Coral, Pill-Formen ──
+  // ── SCRIPT: Bold &amp; Grafisch · Uppercase · Stark wie Traditional Tattoo-Art ──
   const THEME_CSS_MODERN = `
     .overlay { background: rgba(30,26,22,0.65); }
     .modal { background: #EDEAE4; border-radius: 0; box-shadow: 0 32px 80px rgba(0,0,0,0.18); }
@@ -811,13 +813,13 @@
   // ──────────────────────────────────────────────────────────────────────────
   const ICON_CLOSE =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-  const ICON_RINGS =
-    '<svg width="34" height="34" viewBox="0 0 60 60" fill="none" stroke="#C9A96E" stroke-width="2.5" stroke-linecap="round"><circle cx="22" cy="30" r="13"/><circle cx="38" cy="30" r="13"/></svg>';
-  const ICON_CAMERA =
-    '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+  const ICON_DONE =
+    '<svg width="34" height="34" viewBox="0 0 60 60" fill="none" stroke="#BA897F" stroke-width="2.5" stroke-linecap="round"><circle cx="30" cy="30" r="22"/><path d="M20 30 L27 37 L41 21"/></svg>';
+  const ICON_NEEDLE =
+    '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BA897F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><line x1="15" y1="5" x2="19" y2="9"/></svg>';
 
   // ──────────────────────────────────────────────────────────────────────────
-  // HTML (8 Steps)
+  // HTML (9 Steps)
   // ──────────────────────────────────────────────────────────────────────────
   const MODAL_HTML = `
     <div class="progress-bar"><div class="progress-fill" id="ea-progress"></div></div>
@@ -830,303 +832,238 @@
 
       <!-- ── Step 1: Willkommen ── -->
       <div class="step active" data-step="1">
-        <div class="welcome-icon">${ICON_CAMERA}</div>
-        <h2 class="step-title">Herzlich<br>willkommen!</h2>
+        <div class="welcome-icon">${ICON_NEEDLE}</div>
+        <h2 class="step-title">Tattoo-Anfrage<br>stellen</h2>
         <p class="step-subtitle">
-          Damit wir euch und eure Vorstellungen für euren besonderen Tag<br>
-          kennenlernen – ein paar Fragen, dauert nur <strong>3 Minuten</strong>.
+          Damit wir dein Projekt verstehen und ein passendes Angebot machen können –<br>
+          ein paar Fragen, dauert nur <strong>3 Minuten</strong>.
         </p>
         <ul class="feature-list">
           <li>Alle Angaben auch als "noch unklar" beantwortbar</li>
           <li>Keine unerwünschten Abonnements oder Werbung</li>
-          <li>Deine Daten werden nur an den Fotografen weitergeleitet</li>
+          <li>Deine Daten werden nur an den Tätowierer weitergeleitet</li>
         </ul>
         <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten →</button>
       </div>
 
-      <!-- ── Step 2: Euer großer Tag ── -->
+      <!-- ── Step 2: Das Motiv ── -->
       <div class="step" data-step="2">
-        <h2 class="step-title">Euer großer Tag</h2>
-        <p class="step-subtitle">Wann und wie lange – auch "noch unklar" ist eine gültige Antwort.</p>
+        <h2 class="step-title">Das Motiv</h2>
+        <p class="step-subtitle">Was soll gestochen werden – und wo?</p>
 
         <div class="field">
-          <label class="field-label" for="ea-date">Hochzeitsdatum <span class="req">*</span></label>
-          <input type="date" id="ea-date" name="date">
-          <label class="unclear-row" id="ea-date-unclear-wrap">
-            <input type="checkbox" id="ea-date-unclear"> <span>Datum noch unklar</span>
-          </label>
-          <div class="err-msg" id="ea-date-err">Bitte ein Datum angeben oder "noch unklar" wählen.</div>
+          <label class="field-label" for="ea-motif-desc">Beschreibe dein Tattoo <span class="req">*</span></label>
+          <textarea id="ea-motif-desc" name="motifDesc" rows="4" placeholder="z. B. „Ein botanisches Arrangement aus Rosen und Eukalyptus, fein und detailliert – auf dem Unterarm.""></textarea>
+          <div class="err-msg" id="ea-motif-err">Bitte beschreibe kurz dein Tattoo-Motiv.</div>
         </div>
-
-        <div class="field">
-          <label class="field-label" for="ea-time">Uhrzeit der Trauung</label>
-          <select id="ea-time" name="ceremonyTime">
-            <option value="">– bitte wählen –</option>
-            <option value="noch unklar">Noch unklar</option>
-            <option value="09:00">09:00 Uhr</option>
-            <option value="10:00">10:00 Uhr</option>
-            <option value="11:00">11:00 Uhr</option>
-            <option value="12:00">12:00 Uhr</option>
-            <option value="13:00">13:00 Uhr</option>
-            <option value="14:00">14:00 Uhr</option>
-            <option value="15:00">15:00 Uhr</option>
-            <option value="16:00">16:00 Uhr</option>
-            <option value="17:00">17:00 Uhr</option>
-            <option value="18:00">18:00 Uhr</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="field-label" for="ea-duration">Ungefähre Dauer</label>
-          <select id="ea-duration" name="duration">
-            <option value="">– bitte wählen –</option>
-            <option value="noch unklar">Noch unklar</option>
-            <option value="Nur Trauung (~2h)">Nur Trauung (~2h)</option>
-            <option value="Trauung + Feier (~6h)">Trauung + Feier (~6h)</option>
-            <option value="Ganztag (~10h+)">Ganztag (~10h+)</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- ── Step 3: Location ── -->
-      <div class="step" data-step="3">
-        <h2 class="step-title">Die Location</h2>
-        <p class="step-subtitle">Wo feiert ihr? Mehrfachauswahl ist möglich.</p>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label" for="ea-state">Bundesland</label>
-            <select id="ea-state" name="state">
-              <option value="">– wählen –</option>
-              <option>Ausland / Destination</option>
-              <option>Baden-Württemberg</option>
-              <option>Bayern</option>
-              <option>Berlin</option>
-              <option>Brandenburg</option>
-              <option>Bremen</option>
-              <option>Hamburg</option>
-              <option>Hessen</option>
-              <option>Mecklenburg-Vorpommern</option>
-              <option>Niedersachsen</option>
-              <option>Nordrhein-Westfalen</option>
-              <option>Rheinland-Pfalz</option>
-              <option>Saarland</option>
-              <option>Sachsen</option>
-              <option>Sachsen-Anhalt</option>
-              <option>Schleswig-Holstein</option>
-              <option>Thüringen</option>
+            <label class="field-label" for="ea-placement">Körperstelle</label>
+            <select id="ea-placement" name="placement">
+              <option value="">– bitte wählen –</option>
+              <option>Unterarm</option>
+              <option>Oberarm</option>
+              <option>Schulter / Schulterblatt</option>
+              <option>Brust / Sternum</option>
+              <option>Rücken</option>
+              <option>Rippen / Seite</option>
+              <option>Bauch</option>
+              <option>Hüfte / Hüftknochen</option>
+              <option>Oberschenkel</option>
+              <option>Unterschenkel / Schienbein</option>
+              <option>Knöchel / Fuß</option>
+              <option>Hand / Finger</option>
+              <option>Hals / Nacken</option>
+              <option>Kopf</option>
+              <option>Noch unklar</option>
             </select>
           </div>
           <div class="field">
-            <label class="field-label" for="ea-city">Stadt / Ort</label>
-            <input type="text" id="ea-city" name="city" placeholder="z. B. München">
+            <label class="field-label" for="ea-size">Ungefähre Größe</label>
+            <select id="ea-size" name="size">
+              <option value="">– bitte wählen –</option>
+              <option value="Klein (&lt; 5 cm)">Klein (&lt; 5 cm)</option>
+              <option value="Mittel (5–10 cm)">Mittel (5–10 cm)</option>
+              <option value="Groß (10–20 cm)">Groß (10–20 cm)</option>
+              <option value="Sehr groß / Sleeve (&gt; 20 cm)">Sehr groß / Sleeve (&gt; 20 cm)</option>
+              <option value="Noch unklar">Noch unklar</option>
+            </select>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Art der Location</label>
-          <div class="check-grid" id="ea-location-types">
-            <label class="check-item"><input type="checkbox" value="Standesamt"> Standesamt</label>
-            <label class="check-item"><input type="checkbox" value="Kirche"> Kirche</label>
-            <label class="check-item"><input type="checkbox" value="Freie Trauung"> Freie Trauung</label>
-            <label class="check-item"><input type="checkbox" value="Schloss / Villa"> Schloss / Villa</label>
-            <label class="check-item"><input type="checkbox" value="Hotel / Restaurant"> Hotel / Restaurant</label>
-            <label class="check-item"><input type="checkbox" value="Weingut / Scheune"> Weingut / Scheune</label>
-            <label class="check-item"><input type="checkbox" value="Outdoor / Natur"> Outdoor / Natur</label>
-            <label class="check-item"><input type="checkbox" value="Strand / Wasser"> Strand / Wasser</label>
-            <label class="check-item"><input type="checkbox" value="Noch unklar"> Noch unklar</label>
+          <label class="field-label">Cover-Up (Übertattoo)?</label>
+          <div class="radio-group" id="ea-coverup">
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Nein"> Nein</label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
 
-        <div class="field">
-          <label class="field-label">Setting – drinnen oder draußen?</label>
-          <div class="radio-group" id="ea-indoor-outdoor">
-            <label class="radio-item"><input type="radio" name="indoorOutdoor" value="Hauptsächlich drinnen"> Drinnen</label>
-            <label class="radio-item"><input type="radio" name="indoorOutdoor" value="Hauptsächlich draußen"> Draußen</label>
-            <label class="radio-item"><input type="radio" name="indoorOutdoor" value="Drinnen & draußen"> Beides</label>
-            <label class="radio-item"><input type="radio" name="indoorOutdoor" value="Noch unklar"> Noch unklar</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Mehrere Locations an dem Tag?</label>
-          <div class="radio-group" id="ea-multi-location">
-            <label class="radio-item"><input type="radio" name="multiLocation" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="multiLocation" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="multiLocation" value="Noch unklar"> Noch unklar</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label" for="ea-location-address">Adresse(n) der Location(s) <span style="font-weight:400;text-transform:none;letter-spacing:0;opacity:0.6;">(optional)</span></label>
-          <textarea id="ea-location-address" name="locationAddress" rows="3" placeholder="z. B. Schloss Nymphenburg, Schlossrondell 1, 80638 München&#10;Bei mehreren Locations einfach untereinander eintragen."></textarea>
+        <div class="field" id="ea-coverup-notes-wrap" style="display:none;">
+          <label class="field-label" for="ea-coverup-notes">Was soll abgedeckt werden? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des bestehenden Tattoos – hilft beim Einschätzen der Machbarkeit."></textarea>
         </div>
       </div>
 
-      <!-- ── Step 4: Leistungen ── -->
-      <div class="step" data-step="4">
-        <h2 class="step-title">Was soll festgehalten werden?</h2>
-        <p class="step-subtitle">Foto, Video oder beides – und was soll alles dazu gehören?</p>
+      <!-- ── Step 3: Stil & Look ── -->
+      <div class="step" data-step="3">
+        <h2 class="step-title">Stil &amp; Look</h2>
+        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl möglich.</p>
 
         <div class="field">
-          <label class="field-label">Foto & Video <span class="req">*</span></label>
-          <div class="media-group" id="ea-media-type">
-            <label class="media-item">
-              <input type="radio" name="mediaType" value="Nur Fotos">
-              <span class="media-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
-              <span>Nur Fotos</span>
-            </label>
-            <label class="media-item">
-              <input type="radio" name="mediaType" value="Fotos + Video">
-              <span class="media-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="3"/><polygon points="17,10 22,7 22,17 17,14" fill="currentColor" stroke="none" style="transform:scale(0.5) translate(14px,6px)"/></svg></span>
-              <span>Fotos + Video</span>
-            </label>
-            <label class="media-item">
-              <input type="radio" name="mediaType" value="Nur Video">
-              <span class="media-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="23,7 16,12 23,17 23,7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></span>
-              <span>Nur Video</span>
-            </label>
-          </div>
-          <div class="err-msg" id="ea-media-err">Bitte eine Option wählen.</div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Getting Ready dabei?</label>
-          <div class="radio-group" id="ea-getting-ready">
-            <label class="radio-item"><input type="radio" name="gettingReady" value="Ja, beide Partner"> Ja, beide</label>
-            <label class="radio-item"><input type="radio" name="gettingReady" value="Ja, ein Partner"> Ja, einer</label>
-            <label class="radio-item"><input type="radio" name="gettingReady" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="gettingReady" value="Noch unklar"> Noch unklar</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Zweiter Fotograf / Kameramann?</label>
-          <div class="radio-group" id="ea-second-photographer">
-            <label class="radio-item"><input type="radio" name="secondPhotographer" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="secondPhotographer" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="secondPhotographer" value="Noch unklar"> Noch unklar</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Fotobuch / Album gewünscht?</label>
-          <div class="radio-group" id="ea-album">
-            <label class="radio-item"><input type="radio" name="album" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="album" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="album" value="Noch unklar"> Noch unklar</label>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── Step 5: Stil & Stimmung ── -->
-      <div class="step" data-step="5">
-        <h2 class="step-title">Stil &amp; Stimmung</h2>
-        <p class="step-subtitle">Welchen Look wünscht ihr euch? Mehrfachauswahl möglich.</p>
-
-        <div class="field">
-          <label class="field-label" for="ea-guests">Anzahl Gäste</label>
-          <select id="ea-guests" name="guestCount">
-            <option value="">– bitte wählen –</option>
-            <option value="Noch unklar">Noch unklar</option>
-            <option value="unter 20 (Intim)">unter 20 (Intim)</option>
-            <option value="20–50">20–50</option>
-            <option value="50–100">50–100</option>
-            <option value="100–150">100–150</option>
-            <option value="über 150">über 150</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Gewünschter Stil</label>
+          <label class="field-label">Tattoo-Stil</label>
           <div class="check-grid" id="ea-styles">
-            <label class="check-item"><input type="checkbox" value="Reportage / Natürlich"> Reportage / Natürlich</label>
-            <label class="check-item"><input type="checkbox" value="Romantisch & Inszeniert"> Romantisch & Inszeniert</label>
-            <label class="check-item"><input type="checkbox" value="Modern & Editorial"> Modern & Editorial</label>
-            <label class="check-item"><input type="checkbox" value="Klassisch & Elegant"> Klassisch & Elegant</label>
-            <label class="check-item"><input type="checkbox" value="Fine Art"> Fine Art</label>
-            <label class="check-item"><input type="checkbox" value="Dark & Moody"> Dark & Moody</label>
-            <label class="check-item"><input type="checkbox" value="Boho / Verspielt"> Boho / Verspielt</label>
-            <label class="check-item"><input type="checkbox" value="Hell & Luftig"> Hell & Luftig</label>
-            <label class="check-item"><input type="checkbox" value="Vintage"> Vintage</label>
-            <label class="check-item"><input type="checkbox" value="Klassisch & Zeitlos"> Klassisch & Zeitlos</label>
-            <label class="check-item"><input type="checkbox" value="Filmisch / Analog"> Filmisch / Analog</label>
-            <label class="check-item"><input type="checkbox" value="Schwarz-Weiß"> Schwarz-Weiß</label>
-            <label class="check-item"><input type="checkbox" value="Farbenfroh & Lebendig"> Farbenfroh & Lebendig</label>
-            <label class="check-item"><input type="checkbox" value="Luxuriös & Glamourös"> Luxuriös & Glamourös</label>
-            <label class="check-item"><input type="checkbox" value="Clean & Minimalistisch"> Clean & Minimalistisch</label>
+            <label class="check-item"><input type="checkbox" value="Fine Line"> Fine Line</label>
+            <label class="check-item"><input type="checkbox" value="Realistisch"> Realistisch</label>
+            <label class="check-item"><input type="checkbox" value="Traditional / Old School"> Traditional</label>
+            <label class="check-item"><input type="checkbox" value="Neo Traditional"> Neo Traditional</label>
+            <label class="check-item"><input type="checkbox" value="Japanisch"> Japanisch</label>
+            <label class="check-item"><input type="checkbox" value="Watercolor"> Watercolor</label>
+            <label class="check-item"><input type="checkbox" value="Tribal"> Tribal</label>
+            <label class="check-item"><input type="checkbox" value="Geometric"> Geometric</label>
+            <label class="check-item"><input type="checkbox" value="Blackwork / Dotwork"> Blackwork / Dotwork</label>
+            <label class="check-item"><input type="checkbox" value="Illustrativ"> Illustrativ</label>
+            <label class="check-item"><input type="checkbox" value="Minimalistisch"> Minimalistisch</label>
             <label class="check-item"><input type="checkbox" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-style-notes">Stil in eigenen Worten <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-style-notes" name="styleNotes" placeholder="z. B. „Ruhige Stimmung, nicht zu viel Inszenierung – lieber echte Momente als gestellte Posen.""></textarea>
+          <label class="field-label">Farbe oder Schwarz-Grau?</label>
+          <div class="radio-group" id="ea-color-pref">
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Schwarz-Grau"> Schwarz-Grau</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Farbe"> Farbe</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides möglich"> Beides möglich</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Noch unklar"> Noch unklar</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Step 4: Referenzbilder ── -->
+      <div class="step" data-step="4">
+        <h2 class="step-title">Referenzen &amp; Wünsche</h2>
+        <p class="step-subtitle">Zeig uns, was dir gefällt – ein Bild sagt mehr als tausend Worte.</p>
+
+        <div class="field">
+          <label class="field-label" for="ea-style-notes">Beschreibe deinen Wunsch-Look <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-style-notes" name="styleNotes" placeholder="z. B. „Weiche Linien, viel Schattierung – ich mag den Look von alten botanischen Zeichnungen.""></textarea>
         </div>
 
         <div class="field">
-          <label class="field-label">Inspirationsbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional · max. 3 Fotos)</span></label>
+          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional · max. 3 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
               <strong>Klicken zum Hochladen</strong> oder Bilder hierher ziehen<br>
-              <span style="font-size:12px;color:#B0A898;">Zeigt dem Fotografen euren Wunsch-Look</span>
+              <span style="font-size:12px;color:#B0A898;">Screenshots, Pinterest-Pins, Fotos von Tattoos die dir gefallen</span>
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
           <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
-          <div style="margin-top:10px;padding:10px 12px;background:rgba(201,169,110,0.08);border-left:3px solid #C9A96E;border-radius:0 6px 6px 0;font-size:11.5px;color:#8A8580;line-height:1.55;">
-            <strong style="color:#6B5A3A;font-size:11.5px;">Hinweis:</strong> Bitte lade keine Fotos hoch, auf denen erkennbare Personen abgebildet sind, ohne deren ausdrückliche Einwilligung. Ausnahmen gelten für euch selbst als Brautpaar.
+          <div style="margin-top:10px;padding:10px 12px;background:rgba(186,137,127,0.07);border-left:3px solid #BA897F;border-radius:0 6px 6px 0;font-size:11.5px;color:#6B6B6B;line-height:1.55;">
+            <strong style="color:#1B1B1B;font-size:11.5px;">Hinweis:</strong> Bitte lade keine Fotos hoch, auf denen erkennbare Personen ohne deren Einwilligung abgebildet sind. Tattoo-Referenzbilder sind natürlich in Ordnung.
           </div>
         </div>
       </div>
 
-      <!-- ── Step 6: Budget ── -->
-      <div class="step" data-step="6">
-        <h2 class="step-title">Budget &amp; Vorstellung</h2>
-        <p class="step-subtitle">Keine Pflicht – aber es hilft uns, das passende Paket zu empfehlen.</p>
+      <!-- ── Step 5: Deine Haut ── -->
+      <div class="step" data-step="5">
+        <h2 class="step-title">Deine Haut</h2>
+        <p class="step-subtitle">Damit wir dich optimal beraten können – alles freiwillig.</p>
 
         <div class="field">
-          <label class="field-label" for="ea-budget">Euer Budgetrahmen</label>
-          <select id="ea-budget" name="budget">
+          <label class="field-label">Ist das dein erstes Tattoo?</label>
+          <div class="radio-group" id="ea-first-tattoo">
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Nein"> Nein</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Bekannte Allergien oder Hautunverträglichkeiten?</label>
+          <div class="radio-group" id="ea-allergies">
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"> Nein</label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nicht sicher"> Nicht sicher</label>
+          </div>
+        </div>
+
+        <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
+          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder Unverträglichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickel-Allergie, empfindliche Haut, Neurodermitis…"></textarea>
+        </div>
+      </div>
+
+      <!-- ── Step 6: Termin ── -->
+      <div class="step" data-step="6">
+        <h2 class="step-title">Wann soll's losgehen?</h2>
+        <p class="step-subtitle">Ungefähr reicht – kein verbindlicher Termin.</p>
+
+        <div class="field">
+          <label class="field-label" for="ea-timeframe">Wunsch-Zeitraum</label>
+          <select id="ea-timeframe" name="timeframe">
             <option value="">– bitte wählen –</option>
-            <option value="Noch unklar">Noch unklar</option>
-            <option value="Möchte ich nicht angeben">Möchte ich nicht angeben</option>
-            <option value="unter 1.000 €">unter 1.000 €</option>
-            <option value="1.000–1.500 €">1.000–1.500 €</option>
-            <option value="1.500–2.500 €">1.500–2.500 €</option>
-            <option value="2.500–4.000 €">2.500–4.000 €</option>
-            <option value="4.000–6.000 €">4.000–6.000 €</option>
-            <option value="über 6.000 €">über 6.000 €</option>
+            <option value="So bald wie möglich">So bald wie möglich</option>
+            <option value="In 1–3 Monaten">In 1–3 Monaten</option>
+            <option value="In 3–6 Monaten">In 3–6 Monaten</option>
+            <option value="In 6–12 Monaten">In 6–12 Monaten</option>
+            <option value="Kein fester Zeitdruck">Kein fester Zeitdruck</option>
           </select>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-notes">Besondere Wünsche <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-notes" name="notes" placeholder="Was ist euch besonders wichtig? Gibt es spezielle Momente, Personen oder Ideen, die unbedingt festgehalten werden sollen?"></textarea>
+          <label class="field-label">Bevorzugte Tageszeit</label>
+          <div class="radio-group" id="ea-preferred-time">
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Vormittags"> Vormittags</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Nachmittags"> Nachmittags</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Abends"> Abends</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine Präferenz"> Keine Präferenz</label>
+          </div>
         </div>
       </div>
 
-      <!-- ── Step 7: Kontakt ── -->
+      <!-- ── Step 7: Budget ── -->
       <div class="step" data-step="7">
-        <h2 class="step-title">Wie können wir<br>euch erreichen?</h2>
+        <h2 class="step-title">Budget &amp; Anmerkungen</h2>
+        <p class="step-subtitle">Hilft uns, realistisch planen zu können – keine Pflicht.</p>
+
+        <div class="field">
+          <label class="field-label" for="ea-budget">Dein Budgetrahmen</label>
+          <select id="ea-budget" name="budget">
+            <option value="">– bitte wählen –</option>
+            <option value="Noch unklar">Noch unklar</option>
+            <option value="Möchte ich nicht angeben">Möchte ich nicht angeben</option>
+            <option value="unter 150 €">unter 150 €</option>
+            <option value="150–300 €">150–300 €</option>
+            <option value="300–500 €">300–500 €</option>
+            <option value="500–800 €">500–800 €</option>
+            <option value="800–1.500 €">800–1.500 €</option>
+            <option value="über 1.500 €">über 1.500 €</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="ea-notes">Noch etwas, das wir wissen sollten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-notes" name="notes" placeholder="Besondere Wünsche, Fragen, Vorüberlegungen…"></textarea>
+        </div>
+      </div>
+
+      <!-- ── Step 8: Kontakt ── -->
+      <div class="step" data-step="8">
+        <h2 class="step-title">Wie können wir<br>dich erreichen?</h2>
         <p class="step-subtitle">Nur die E-Mail ist Pflicht – alles andere ist freiwillig.</p>
 
-        <div class="field-row">
-          <div class="field">
-            <label class="field-label" for="ea-partner1">Vorname Partner 1</label>
-            <input type="text" id="ea-partner1" name="partner1" placeholder="z. B. Sophie">
-          </div>
-          <div class="field">
-            <label class="field-label" for="ea-partner2">Vorname Partner 2</label>
-            <input type="text" id="ea-partner2" name="partner2" placeholder="z. B. Lisa">
-          </div>
+        <div class="field">
+          <label class="field-label" for="ea-name">Dein Name</label>
+          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia Müller">
         </div>
 
         <div class="field">
           <label class="field-label" for="ea-email">E-Mail-Adresse <span class="req">*</span></label>
-          <input type="email" id="ea-email" name="email" placeholder="eure@email.de">
+          <input type="email" id="ea-email" name="email" placeholder="deine@email.de">
           <div class="err-msg" id="ea-email-err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
         </div>
 
@@ -1136,23 +1073,29 @@
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-found">Wie habt ihr uns gefunden?</label>
+          <label class="field-label" for="ea-instagram">Instagram-Handle <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <input type="text" id="ea-instagram" name="instagram" placeholder="@deinname">
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="ea-found">Wie hast du uns gefunden?</label>
           <select id="ea-found" name="howFound">
             <option value="">– bitte wählen –</option>
-            <option>Google</option>
             <option>Instagram</option>
-            <option>Pinterest</option>
+            <option>Google</option>
+            <option>TikTok</option>
             <option>Empfehlung</option>
-            <option>Hochzeitsportal</option>
+            <option>Walk-In</option>
+            <option>Pinterest</option>
             <option>Sonstiges</option>
           </select>
         </div>
 
         <div class="field" style="margin-top:4px;">
-          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid var(--border,#E2DDD6);border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
-            <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#C9A96E;">
-            <span style="font-size:12.5px;color:var(--text-mid,#6A6560);line-height:1.5;">
-              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#C9A96E;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#C4917A;">*</span>
+          <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid #D1CDC7;border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
+            <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#BA897F;">
+            <span style="font-size:12.5px;color:#6B6B6B;line-height:1.5;">
+              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BA897F;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BA897F;">*</span>
             </span>
           </label>
           <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
@@ -1162,14 +1105,14 @@
         </div>
       </div>
 
-      <!-- ── Step 8: Bestätigung ── -->
-      <div class="step" data-step="8">
+      <!-- ── Step 9: Bestätigung ── -->
+      <div class="step" data-step="9">
         <div class="thankyou-wrap">
-          <div class="thankyou-icon">${ICON_RINGS}</div>
+          <div class="thankyou-icon">${ICON_DONE}</div>
           <h2 class="step-title">Vielen Dank!</h2>
           <p class="step-subtitle" id="ea-thankyou-text">
             <strong>${CONFIG.photographerName}</strong> meldet sich innerhalb von<br>
-            <strong>48 Stunden</strong> bei euch.
+            <strong>48 Stunden</strong> bei dir.
           </p>
           <div class="summary-card" id="ea-summary"></div>
         </div>
@@ -1187,7 +1130,7 @@
   // ──────────────────────────────────────────────────────────────────────────
   // STATE
   // ──────────────────────────────────────────────────────────────────────────
-  const TOTAL_STEPS = 8;
+  const TOTAL_STEPS = 9;
   let currentStep = 1;
   let formData = {};
   let uploadedFiles = []; // [{name, data, type}]
@@ -1281,13 +1224,20 @@
       });
     }
 
-    // Date "noch unklar" toggle
-    var dateInput   = shadowRoot.getElementById('ea-date');
-    var dateUnclear = shadowRoot.getElementById('ea-date-unclear');
-    dateUnclear.addEventListener('change', function () {
-      dateInput.disabled = dateUnclear.checked;
-      dateInput.style.opacity = dateUnclear.checked ? '0.4' : '1';
-      if (dateUnclear.checked) dateInput.value = '';
+    // Cover-Up toggle
+    shadowRoot.querySelectorAll('input[name="isCoverUp"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var wrap = shadowRoot.getElementById('ea-coverup-notes-wrap');
+        if (wrap) wrap.style.display = radio.value === 'Ja' ? 'block' : 'none';
+      });
+    });
+
+    // Allergies detail toggle
+    shadowRoot.querySelectorAll('input[name="knownAllergies"]').forEach(function (radio) {
+      radio.addEventListener('change', function () {
+        var wrap = shadowRoot.getElementById('ea-allergies-detail-wrap');
+        if (wrap) wrap.style.display = radio.value === 'Ja' ? 'block' : 'none';
+      });
     });
 
     // File upload
@@ -1321,10 +1271,10 @@
 
     area.addEventListener('dragover', function (e) {
       e.preventDefault();
-      area.style.borderColor = '#C9A96E';
+      area.style.borderColor = '#BA897F';
     });
     area.addEventListener('dragleave', function () {
-      area.style.borderColor = uploadedFiles.length ? '#C9A96E' : '';
+      area.style.borderColor = uploadedFiles.length ? '#BA897F' : '';
     });
     area.addEventListener('drop', function (e) {
       e.preventDefault();
@@ -1400,13 +1350,13 @@
     navEl.style.display = (isFirst || isLast) ? 'none' : 'flex';
     if (!isFirst && !isLast) {
       backBtn.style.visibility = currentStep === 2 ? 'hidden' : 'visible';
-      nextBtn.textContent = currentStep === 7 ? 'Abschicken ✓' : 'Weiter →';
-      counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 6';
+      nextBtn.textContent = currentStep === 8 ? 'Abschicken ✓' : 'Weiter →';
+      counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 7';
     }
   }
 
   function updateProgress() {
-    var pct = currentStep === 1 ? 0 : Math.round(((currentStep - 1) / 7) * 100);
+    var pct = currentStep === 1 ? 0 : Math.round(((currentStep - 1) / 8) * 100);
     progressFill.style.width = pct + '%';
   }
 
@@ -1417,23 +1367,14 @@
     clearErrors();
 
     if (step === 2) {
-      var dateInput   = shadowRoot.getElementById('ea-date');
-      var dateUnclear = shadowRoot.getElementById('ea-date-unclear');
-      if (!dateUnclear.checked && !dateInput.value) {
-        showError('ea-date-err', 'ea-date');
+      var motifDesc = shadowRoot.getElementById('ea-motif-desc');
+      if (!motifDesc || !motifDesc.value.trim()) {
+        showError('ea-motif-err', 'ea-motif-desc');
         return false;
       }
     }
 
-    if (step === 4) {
-      var mediaRadio = shadowRoot.querySelector('input[name="mediaType"]:checked');
-      if (!mediaRadio) {
-        showError('ea-media-err', null);
-        return false;
-      }
-    }
-
-    if (step === 7) {
+    if (step === 8) {
       var emailInput = shadowRoot.getElementById('ea-email');
       var emailVal   = emailInput.value.trim();
       if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
@@ -1444,13 +1385,13 @@
       if (!privacyCb || !privacyCb.checked) {
         showError('ea-privacy-err', null);
         var lbl = shadowRoot.getElementById('ea-privacy-label');
-        if (lbl) lbl.style.borderColor = '#C4917A';
+        if (lbl) lbl.style.borderColor = '#BA897F';
         return false;
       }
       if (privacyCb) {
         privacyCb.addEventListener('change', function () {
           var lbl = shadowRoot.getElementById('ea-privacy-label');
-          if (lbl) lbl.style.borderColor = privacyCb.checked ? '#C9A96E' : 'var(--border,#E2DDD6)';
+          if (lbl) lbl.style.borderColor = privacyCb.checked ? '#BA897F' : '#D1CDC7';
         }, { once: true });
       }
     }
@@ -1476,15 +1417,6 @@
   // COLLECT FORM DATA
   // ──────────────────────────────────────────────────────────────────────────
   function collectFormData() {
-    var dateEl        = shadowRoot.getElementById('ea-date');
-    var dateUnclearEl = shadowRoot.getElementById('ea-date-unclear');
-    var dateUnclear   = dateUnclearEl.checked;
-
-    var locationTypes = [];
-    shadowRoot.querySelectorAll('#ea-location-types input:checked').forEach(function (cb) {
-      locationTypes.push(cb.value);
-    });
-
     var styles = [];
     shadowRoot.querySelectorAll('#ea-styles input:checked').forEach(function (cb) {
       styles.push(cb.value);
@@ -1500,46 +1432,42 @@
       photographerName:  CONFIG.photographerName,
       photographerSlug:  CONFIG.photographerSlug,
       delivery:          CONFIG.delivery,
-      wedding: {
-        date:         dateUnclear ? null : (dateEl.value || null),
-        dateUnclear:  dateUnclear,
-        ceremonyTime: shadowRoot.getElementById('ea-time').value || null,
-        duration:     shadowRoot.getElementById('ea-duration').value || null,
-      },
-      location: {
-        state:             shadowRoot.getElementById('ea-state').value || null,
-        city:              shadowRoot.getElementById('ea-city').value.trim() || null,
-        types:             locationTypes,
-        indoorOutdoor:     getVal('indoorOutdoor'),
-        multipleLocations: getVal('multiLocation'),
-        address:           shadowRoot.getElementById('ea-location-address').value.trim() || null,
-      },
-      services: {
-        mediaType:         getVal('mediaType'),
-        gettingReady:      getVal('gettingReady'),
-        secondPhotographer: getVal('secondPhotographer'),
-        album:             getVal('album'),
+      motif: {
+        description: (shadowRoot.getElementById('ea-motif-desc') || {}).value ? shadowRoot.getElementById('ea-motif-desc').value.trim() : null,
+        placement:   (shadowRoot.getElementById('ea-placement') || {}).value || null,
+        size:        (shadowRoot.getElementById('ea-size') || {}).value || null,
+        isCoverUp:   getVal('isCoverUp'),
+        coverUpNotes: (shadowRoot.getElementById('ea-coverup-notes') || {}).value ? shadowRoot.getElementById('ea-coverup-notes').value.trim() || null : null,
       },
       style: {
-        guestCount:  shadowRoot.getElementById('ea-guests').value || null,
         styles:      styles,
-        styleNotes:  shadowRoot.getElementById('ea-style-notes').value.trim() || null,
+        colorPreference: getVal('colorPreference'),
+        styleNotes:  (shadowRoot.getElementById('ea-style-notes') || {}).value ? shadowRoot.getElementById('ea-style-notes').value.trim() || null : null,
         inspirationImages: uploadedFiles.map(function (f) {
           return { name: f.name, data: f.data };
         }),
       },
+      health: {
+        isFirstTattoo:   getVal('isFirstTattoo'),
+        knownAllergies:  getVal('knownAllergies'),
+        allergiesDetail: (shadowRoot.getElementById('ea-allergies-detail') || {}).value ? shadowRoot.getElementById('ea-allergies-detail').value.trim() || null : null,
+      },
+      appointment: {
+        timeframe:     (shadowRoot.getElementById('ea-timeframe') || {}).value || null,
+        preferredTime: getVal('preferredTime'),
+      },
       budget: {
-        range: shadowRoot.getElementById('ea-budget').value || null,
-        notes: shadowRoot.getElementById('ea-notes').value.trim() || null,
+        range: (shadowRoot.getElementById('ea-budget') || {}).value || null,
+        notes: (shadowRoot.getElementById('ea-notes') || {}).value ? shadowRoot.getElementById('ea-notes').value.trim() || null : null,
       },
       contact: {
-        partner1:        shadowRoot.getElementById('ea-partner1').value.trim() || null,
-        partner2:        shadowRoot.getElementById('ea-partner2').value.trim() || null,
-        email:           shadowRoot.getElementById('ea-email').value.trim(),
-        phone:           shadowRoot.getElementById('ea-phone').value.trim() || null,
-        howFound:        shadowRoot.getElementById('ea-found').value || null,
-        consentGiven:    true,
-        consentGivenAt:  new Date().toISOString(),
+        name:           (shadowRoot.getElementById('ea-name') || {}).value ? shadowRoot.getElementById('ea-name').value.trim() || null : null,
+        email:          shadowRoot.getElementById('ea-email').value.trim(),
+        phone:          (shadowRoot.getElementById('ea-phone') || {}).value ? shadowRoot.getElementById('ea-phone').value.trim() || null : null,
+        instagram:      (shadowRoot.getElementById('ea-instagram') || {}).value ? shadowRoot.getElementById('ea-instagram').value.trim() || null : null,
+        howFound:       (shadowRoot.getElementById('ea-found') || {}).value || null,
+        consentGiven:   true,
+        consentGivenAt: new Date().toISOString(),
       },
     };
   }
@@ -1557,7 +1485,7 @@
       // Strip image data for the main API call to keep payload small
       var payloadForApi = JSON.parse(JSON.stringify(formData));
       payloadForApi.style.inspirationImageCount = uploadedFiles.length;
-      delete payloadForApi.style.inspirationImages;
+      if (payloadForApi.style) delete payloadForApi.style.inspirationImages;
 
       var res = await fetch(CONFIG.apiUrl, {
         method:  'POST',
@@ -1612,7 +1540,7 @@
 
   function showThankYou() {
     buildSummary();
-    goToStep(8);
+    goToStep(9);
   }
 
   function buildSummary() {
@@ -1621,20 +1549,16 @@
     var summary = shadowRoot.getElementById('ea-summary');
     if (!summary) return;
 
-    var weddingDate = fd.wedding.dateUnclear
-      ? 'Noch unklar'
-      : (fd.wedding.date ? formatDate(fd.wedding.date) : 'Noch unklar');
-
     var rows = [
-      ['Datum',      weddingDate],
-      ['Ort',        [fd.location.city, fd.location.state].filter(Boolean).join(', ') || '–'],
-      ['Leistung',   fd.services.mediaType || '–'],
-      ['Stil',       fd.style.styles.length ? fd.style.styles.join(', ') : '–'],
-      ['Budget',     fd.budget.range || '–'],
-      ['E-Mail',     fd.contact.email],
+      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? '…' : '') : '–'],
+      ['Körperstelle', (fd.motif && fd.motif.placement) || '–'],
+      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : '–'],
+      ['Termin',       (fd.appointment && fd.appointment.timeframe) || '–'],
+      ['Budget',       (fd.budget && fd.budget.range) || '–'],
+      ['E-Mail',       fd.contact.email],
     ];
 
-    summary.innerHTML = '<div class="summary-card-title">Eure Zusammenfassung</div>' +
+    summary.innerHTML = '<div class="summary-card-title">Deine Zusammenfassung</div>' +
       rows.map(function (r) {
         return '<div class="summary-row">' +
           '<span class="summary-label">' + r[0] + '</span>' +
@@ -1654,9 +1578,9 @@
   // ──────────────────────────────────────────────────────────────────────────
   function handleNext() {
     if (!validateStep(currentStep)) return;
-    if (currentStep === 7) {
+    if (currentStep === 8) {
       submitForm();
-    } else if (currentStep < 7) {
+    } else if (currentStep < 8) {
       goToStep(currentStep + 1);
     }
   }
@@ -1685,8 +1609,6 @@
       shadowRoot.querySelectorAll('.check-item, .radio-item, .media-item').forEach(function (el) {
         el.classList.remove('checked');
       });
-      var dateInput = shadowRoot.getElementById('ea-date');
-      if (dateInput) { dateInput.disabled = false; dateInput.style.opacity = '1'; }
       var previewsEl = shadowRoot.getElementById('ea-upload-previews');
       if (previewsEl) previewsEl.innerHTML = '';
       var labelEl = shadowRoot.getElementById('ea-upload-label');

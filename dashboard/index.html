@@ -5,25 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard – Einfach Anfrage</title>
   <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --champagne: #C9A96E;
-      --ivory:     #FAF7F2;
-      --dark:      #1A1A1A;
-      --rose:      #C4917A;
-      --grey-light:#F0EDE8;
-      --grey-border:#E2DDD6;
-      --grey-mid:  #8A8580;
-      --white:     #FFFFFF;
-      --sidebar-w: 240px;
+      --bg:          #F7F6F3;
+      --bg-alt:      #EFEDE9;
+      --surface:     #FFFFFF;
+      --surface-dim: #E9E7E2;
+      --border:      #D1CDC7;
+      --text:        #1B1B1B;
+      --text-2:      #6B6B6B;
+      --muted:       #9A9590;
+      --accent:      #BA897F;
+      --accent-dark: #9A6E65;
+      --white:       #FFFFFF;
+      --dark-bg:     #1B1B1B;
+      /* legacy aliases */
+      --champagne:   #BA897F;
+      --ivory:       #F7F6F3;
+      --dark:        #1B1B1B;
+      --grey-light:  #EFEDE9;
+      --grey-border: #D1CDC7;
+      --grey-mid:    #6B6B6B;
+      --rose:        #BA897F;
+      --sidebar-w:   240px;
     }
 
     body {
-      font-family: 'Inter', sans-serif;
-      background: var(--grey-light);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background: var(--bg-alt);
       color: var(--dark);
       font-size: 14px;
       line-height: 1.55;
@@ -49,15 +61,17 @@
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .logo-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px;
-      font-weight: 500;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: var(--ivory);
       text-decoration: none;
       display: block;
     }
-    .logo-text span { color: var(--champagne); }
-    .logo-sub { font-size: 11px; color: rgba(250,247,242,0.3); margin-top: 2px; }
+    .logo-text span { color: var(--accent); }
+    .logo-sub { font-size: 11px; color: rgba(247,246,243,0.35); margin-top: 2px; }
 
     .sidebar-nav {
       flex: 1;
@@ -71,7 +85,7 @@
     .nav-label {
       font-size: 9.5px;
       font-weight: 600;
-      color: rgba(250,247,242,0.22);
+      color: rgba(247,246,243,0.28);
       text-transform: uppercase;
       letter-spacing: 0.12em;
       padding: 10px 10px 5px;
@@ -85,16 +99,17 @@
       border-radius: 7px;
       cursor: pointer;
       font-size: 13px;
-      color: rgba(250,247,242,0.52);
+      color: rgba(247,246,243,0.52);
       transition: background 0.13s, color 0.13s;
       border: none;
       background: transparent;
       width: 100%;
       text-align: left;
       text-decoration: none;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     }
-    .nav-item:hover  { background: rgba(255,255,255,0.06); color: var(--ivory); }
-    .nav-item.active { background: rgba(201,169,110,0.14); color: var(--champagne); }
+    .nav-item:hover  { background: rgba(255,255,255,0.07); color: var(--ivory); }
+    .nav-item.active { background: rgba(186,137,127,0.18); color: var(--ivory); }
     .nav-item-icon   { font-size: 15px; flex-shrink: 0; opacity: 0.8; }
 
     .sidebar-footer {
@@ -110,7 +125,7 @@
       gap: 6px;
       transition: color 0.15s;
     }
-    .sidebar-footer a:hover { color: var(--champagne); }
+    .sidebar-footer a:hover { color: var(--accent); }
 
     /* ── Main ─────────────────────────────────────── */
     .main {
@@ -123,8 +138,8 @@
 
     /* ── Topbar ───────────────────────────────────── */
     .topbar {
-      background: var(--ivory);
-      border-bottom: 1px solid var(--grey-border);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
       padding: 0 28px;
       height: 56px;
       display: flex;
@@ -133,10 +148,12 @@
       flex-shrink: 0;
     }
     .topbar-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--text);
     }
     .topbar-right { display: flex; align-items: center; gap: 10px; }
     .icon-btn {
@@ -151,7 +168,7 @@
       color: var(--grey-mid);
       transition: border-color 0.15s, color 0.15s;
     }
-    .icon-btn:hover { border-color: var(--champagne); color: var(--champagne); }
+    .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── Content ──────────────────────────────────── */
     .content {
@@ -187,10 +204,10 @@
       margin-bottom: 5px;
     }
     .stat-value {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      font-weight: 400;
-      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text);
       line-height: 1;
       margin-bottom: 2px;
     }
@@ -234,17 +251,17 @@
       align-items: start;
     }
     .submission-item:last-child { border-bottom: none; }
-    .submission-item:hover { background: #faf8f5; }
+    .submission-item:hover { background: var(--bg); }
     .submission-item.selected {
-      background: rgba(201,169,110,0.07);
-      border-left: 2.5px solid var(--champagne);
+      background: rgba(186,137,127,0.07);
+      border-left: 2.5px solid var(--accent);
     }
     .submission-item.is-archived { opacity: 0.5; }
 
     .item-names {
-      font-size: 14.5px;
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 500;
+      font-size: 14px;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-weight: 600;
       color: var(--dark);
       margin-bottom: 2px;
       line-height: 1.2;
@@ -265,8 +282,8 @@
       padding: 3px 8px;
       border-radius: 20px;
     }
-    .status-neu              { background: rgba(196,145,122,0.13); color: #B07060; }
-    .status-in_bearbeitung   { background: rgba(201,169,110,0.14); color: #9A7A3E; }
+    .status-neu              { background: rgba(186,137,127,0.14); color: #9A6A60; }
+    .status-in_bearbeitung   { background: rgba(107,107,107,0.11); color: #555550; }
     .status-angebot_gesendet { background: rgba(80,180,120,0.12);  color: #2F8F5A; }
     .status-beauftragt       { background: rgba(80,120,200,0.12);  color: #3A5FAA; }
     .status-archiviert       { background: rgba(140,140,140,0.12); color: #888480; }
@@ -304,19 +321,19 @@
     .status-popup-item:hover   { background: var(--grey-light); }
     .status-popup-item.current { background: var(--grey-light); font-weight: 600; }
     .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .dot-neu              { background: #C4917A; }
-    .dot-in_bearbeitung   { background: #C9A96E; }
+    .dot-neu              { background: #BA897F; }
+    .dot-in_bearbeitung   { background: #9A9590; }
     .dot-angebot_gesendet { background: #2F8F5A; }
     .dot-beauftragt       { background: #3A5FAA; }
     .dot-archiviert       { background: #A0A0A0; }
 
     /* ── Preview banner ───────────────────────────── */
     .preview-banner {
-      background: rgba(201,169,110,0.13);
-      border-bottom: 1px solid rgba(201,169,110,0.28);
+      background: rgba(186,137,127,0.10);
+      border-bottom: 1px solid rgba(186,137,127,0.22);
       padding: 7px 28px;
       font-size: 12px;
-      color: #9A7A3E;
+      color: var(--accent-dark);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -379,9 +396,9 @@
     .detail-close-btn:hover { background: var(--grey-border); }
 
     .detail-names {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 24px;
-      font-weight: 400;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
       color: var(--dark);
       margin-bottom: 7px;
       padding-right: 40px;
@@ -400,7 +417,7 @@
     .detail-section-title {
       font-size: 9.5px;
       font-weight: 600;
-      color: var(--champagne);
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.1em;
       margin-bottom: 9px;
@@ -427,8 +444,8 @@
       font-weight: 400;
     }
     .notes-box {
-      background: rgba(201,169,110,0.06);
-      border-left: 2.5px solid var(--champagne);
+      background: rgba(186,137,127,0.06);
+      border-left: 2.5px solid var(--accent);
       border-radius: 0 7px 7px 0;
       padding: 10px 13px;
       font-size: 13px;
@@ -444,7 +461,7 @@
     }
     .detail-footer-row { display: flex; align-items: center; gap: 10px; }
     .archive-btn {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       font-size: 12px;
       font-weight: 500;
       padding: 7px 13px;
@@ -461,14 +478,14 @@
     }
     .archive-btn:hover { border-color: #A0A0A0; color: var(--dark); background: var(--grey-light); }
     .restore-btn {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       font-size: 12px;
       font-weight: 500;
       padding: 7px 13px;
       border-radius: 7px;
-      border: 1.5px solid rgba(201,169,110,0.4);
-      background: rgba(201,169,110,0.08);
-      color: #9A7A3E;
+      border: 1.5px solid rgba(186,137,127,0.35);
+      background: rgba(186,137,127,0.08);
+      color: var(--accent-dark);
       cursor: pointer;
       transition: all 0.15s;
       white-space: nowrap;
@@ -476,13 +493,13 @@
       align-items: center;
       gap: 5px;
     }
-    .restore-btn:hover { background: rgba(201,169,110,0.14); }
+    .restore-btn:hover { background: rgba(186,137,127,0.14); }
 
     .status-select-wrap { flex: 1; display: flex; align-items: center; gap: 8px; }
     .status-select-label { font-size: 11px; color: var(--grey-mid); white-space: nowrap; }
     .status-select {
       flex: 1;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       font-size: 12px;
       padding: 7px 10px;
       border: 1.5px solid var(--grey-border);
@@ -492,13 +509,13 @@
       cursor: pointer;
       outline: none;
       appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8580' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6B6B' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 9px center;
       padding-right: 28px;
       transition: border-color 0.15s;
     }
-    .status-select:focus { border-color: var(--champagne); }
+    .status-select:focus { border-color: var(--accent); }
 
     .contact-box {
       background: var(--dark);
@@ -506,10 +523,10 @@
       padding: 14px 16px;
       margin-top: 14px;
     }
-    .contact-box-label { font-size: 9.5px; color: var(--champagne); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; }
-    .contact-box-name  { font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--ivory); margin-bottom: 3px; }
-    .contact-box-email { font-size: 13px; color: var(--champagne); }
-    .contact-box-phone { font-size: 12px; color: rgba(250,247,242,0.45); margin-top: 2px; }
+    .contact-box-label { font-size: 9.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 7px; }
+    .contact-box-name  { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; font-size: 17px; font-weight: 600; color: var(--ivory); margin-bottom: 3px; }
+    .contact-box-email { font-size: 13px; color: var(--accent); }
+    .contact-box-phone { font-size: 12px; color: rgba(247,246,243,0.45); margin-top: 2px; }
 
     /* ── Loading / Empty ──────────────────────────── */
     .loading {
@@ -523,8 +540,8 @@
     }
     .spinner {
       width: 16px; height: 16px;
-      border: 2px solid var(--grey-border);
-      border-top-color: var(--champagne);
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
@@ -553,7 +570,7 @@
     .login-overlay {
       position: fixed;
       inset: 0;
-      background: #F0EDE8;
+      background: var(--bg-alt);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -569,12 +586,12 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.08);
       text-align: center;
     }
-    .login-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--dark); margin-bottom: 3px; }
-    .login-logo span { color: var(--champagne); }
+    .login-logo { font-family: 'Plus Jakarta Sans', 'Inter', sans-serif; font-size: 18px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text); margin-bottom: 3px; }
+    .login-logo span { color: var(--accent); }
     .login-sub { font-size: 12px; color: var(--grey-mid); margin-bottom: 28px; }
     .login-field {
       width: 100%;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       font-size: 14px;
       padding: 12px 14px;
       border: 1.5px solid var(--grey-border);
@@ -586,10 +603,10 @@
       transition: border-color 0.15s;
       text-align: left;
     }
-    .login-field:focus { border-color: var(--champagne); }
+    .login-field:focus { border-color: var(--accent); }
     .login-btn {
       width: 100%;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       font-size: 14px;
       font-weight: 600;
       padding: 12px;
@@ -600,7 +617,7 @@
       cursor: pointer;
       transition: background 0.18s;
     }
-    .login-btn:hover { background: var(--champagne); color: var(--dark); }
+    .login-btn:hover { background: #333; }
     .login-error { font-size: 12px; color: #C04040; margin-top: 10px; min-height: 18px; }
 
     /* ── Archive section divider ──────────────────── */
@@ -619,7 +636,7 @@
       transition: background 0.13s;
       user-select: none;
     }
-    .archive-divider:hover { background: #e8e4de; }
+    .archive-divider:hover { background: var(--surface-dim); }
     .archive-divider svg { opacity: 0.5; transition: transform 0.2s; }
     .archive-divider.open svg { transform: rotate(90deg); }
 
@@ -663,7 +680,7 @@
       transition: color 0.15s;
       min-width: 52px;
     }
-    .mobile-nav-btn.active { color: var(--champagne); }
+    .mobile-nav-btn.active { color: var(--accent); }
     .mobile-nav-btn svg { flex-shrink: 0; }
 
     /* ── Responsive ───────────────────────────────── */
@@ -744,7 +761,7 @@
   <aside class="sidebar">
     <div class="sidebar-logo">
       <a href="/" class="logo-text">einfach <span>anfrage</span></a>
-      <div class="logo-sub" id="sidebar-name">Fotograf-Dashboard</div>
+      <div class="logo-sub" id="sidebar-name">Tätowierer-Dashboard</div>
     </div>
 
     <nav class="sidebar-nav">
@@ -756,7 +773,7 @@
       <button class="nav-item" id="nav-neu" onclick="setFilter('neu', 'nav-neu')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></span>
         Neu
-        <span id="nav-badge-neu" style="margin-left:auto;background:rgba(196,145,122,0.25);color:var(--rose);font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;display:none;"></span>
+        <span id="nav-badge-neu" style="margin-left:auto;background:rgba(186,137,127,0.25);color:var(--accent);font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;display:none;"></span>
       </button>
       <button class="nav-item" id="nav-progress" onclick="setFilter('in_bearbeitung', 'nav-progress')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
@@ -898,72 +915,72 @@
 
   <!-- Settings overlay -->
   <div id="settings-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:500;align-items:center;justify-content:center;padding:16px;">
-    <div style="background:#fff;border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:32px 36px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.18);">
-      <button onclick="hideSettings()" style="position:absolute;top:14px;right:14px;background:var(--grey-light);border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:16px;color:#8A8580;display:flex;align-items:center;justify-content:center;">✕</button>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#1A1A1A;margin-bottom:4px;">Einstellungen</div>
-      <div style="font-size:12px;color:#8A8580;margin-bottom:24px;" id="settings-slug-hint"></div>
+    <div style="background:#fff;border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:32px 36px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.14);">
+      <button onclick="hideSettings()" style="position:absolute;top:14px;right:14px;background:#EFEDE9;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:16px;color:#6B6B6B;display:flex;align-items:center;justify-content:center;">✕</button>
+      <div style="font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.02em;color:#1B1B1B;margin-bottom:4px;">Einstellungen</div>
+      <div style="font-size:12px;color:#6B6B6B;margin-bottom:24px;" id="settings-slug-hint"></div>
 
       <!-- Theme -->
       <div style="margin-bottom:24px;">
-        <div style="font-size:10px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #F0EDE8;">Widget-Design</div>
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Widget-Design</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-champagne">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-champagne">
             <input type="radio" name="theme" value="champagne" onchange="previewTheme('champagne')" style="display:none;">
-            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Champagne</div>
-            <div style="font-size:11px;color:#8A8580;margin-top:1px;">Gold &amp; Elfenbein</div>
+            <div style="font-weight:600;font-size:13px;color:#1B1B1B;">Studio</div>
+            <div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Warm &amp; Minimal</div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-nacht">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-nacht">
             <input type="radio" name="theme" value="nacht" onchange="previewTheme('nacht')" style="display:none;">
-            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Rosé</div>
-            <div style="font-size:11px;color:#8A8580;margin-top:1px;">Zart &amp; Romantisch</div>
+            <div style="font-weight:600;font-size:13px;color:#1B1B1B;">Bloom</div>
+            <div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Dusty Rose · Fine Line</div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-sage">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-sage">
             <input type="radio" name="theme" value="sage" onchange="previewTheme('sage')" style="display:none;">
-            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Luna</div>
-            <div style="font-size:11px;color:#8A8580;margin-top:1px;">Cinematisch &amp; Elegant</div>
+            <div style="font-weight:600;font-size:13px;color:#1B1B1B;">Noir</div>
+            <div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Tief-Schwarz · Cinematic</div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-clean">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-clean">
             <input type="radio" name="theme" value="clean" onchange="previewTheme('clean')" style="display:none;">
-            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Papier</div>
-            <div style="font-size:11px;color:#8A8580;margin-top:1px;">Editorial &amp; Stationery</div>
+            <div style="font-weight:600;font-size:13px;color:#1B1B1B;">Atelier</div>
+            <div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Editorial · Ivory</div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-modern">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-modern">
             <input type="radio" name="theme" value="modern" onchange="previewTheme('modern')" style="display:none;">
-            <div style="font-weight:600;font-size:13px;color:#1A1A1A;">Modern</div>
-            <div style="font-size:11px;color:#8A8580;margin-top:1px;">Bold &amp; Grafisch</div>
+            <div style="font-weight:600;font-size:13px;color:#1B1B1B;">Script</div>
+            <div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Stark &amp; Grafisch</div>
           </label>
         </div>
       </div>
 
       <!-- Delivery -->
       <div style="margin-bottom:24px;">
-        <div style="font-size:10px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #F0EDE8;">Anfragen-Empfang</div>
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Anfragen-Empfang</div>
         <div style="display:flex;flex-direction:column;gap:7px;">
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-both">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-both">
             <input type="radio" name="delivery" value="both" onchange="selectDelivery('both')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">E-Mail &amp; Dashboard</div><div style="font-size:11px;color:#8A8580;margin-top:1px;">Per Mail und im Dashboard</div></div>
+            <div><div style="font-weight:600;font-size:13px;">E-Mail &amp; Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Per Mail und im Dashboard</div></div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-email">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-email">
             <input type="radio" name="delivery" value="email" onchange="selectDelivery('email')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Nur E-Mail</div><div style="font-size:11px;color:#8A8580;margin-top:1px;">Kein Dashboard-Eintrag</div></div>
+            <div><div style="font-weight:600;font-size:13px;">Nur E-Mail</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Kein Dashboard-Eintrag</div></div>
           </label>
-          <label style="border:2px solid #E2DDD6;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-dashboard">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-dashboard">
             <input type="radio" name="delivery" value="dashboard" onchange="selectDelivery('dashboard')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Nur Dashboard</div><div style="font-size:11px;color:#8A8580;margin-top:1px;">Keine E-Mail-Benachrichtigung</div></div>
+            <div><div style="font-weight:600;font-size:13px;">Nur Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Keine E-Mail-Benachrichtigung</div></div>
           </label>
         </div>
       </div>
 
-      <button onclick="saveSettings()" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1A1A1A;color:#FAF7F2;border:none;border-radius:9px;cursor:pointer;margin-bottom:20px;transition:background 0.18s;" onmouseover="this.style.background='#C9A96E';this.style.color='#1A1A1A'" onmouseout="this.style.background='#1A1A1A';this.style.color='#FAF7F2'">Einstellungen speichern</button>
+      <button onclick="saveSettings()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;margin-bottom:20px;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'">Einstellungen speichern</button>
 
       <!-- Password -->
       <div>
-        <div style="font-size:10px;font-weight:600;color:#C9A96E;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #F0EDE8;">Passwort ändern</div>
-        <input id="pw-current" type="password" placeholder="Aktuelles Passwort" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #E2DDD6;border-radius:8px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:9px;">
-        <input id="pw-new"     type="password" placeholder="Neues Passwort (mind. 6 Zeichen)" style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #E2DDD6;border-radius:8px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:9px;">
-        <input id="pw-confirm" type="password" placeholder="Neues Passwort bestätigen"        style="width:100%;font-family:'Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #E2DDD6;border-radius:8px;background:#FAF7F2;color:#1A1A1A;outline:none;margin-bottom:9px;">
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Passwort ändern</div>
+        <input id="pw-current" type="password" placeholder="Aktuelles Passwort" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
+        <input id="pw-new"     type="password" placeholder="Neues Passwort (mind. 6 Zeichen)" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
+        <input id="pw-confirm" type="password" placeholder="Neues Passwort bestätigen"        style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
         <div id="pw-error" style="font-size:12px;color:#C04040;min-height:18px;margin-bottom:7px;"></div>
-        <button onclick="changePassword()" style="width:100%;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1A1A1A;color:#FAF7F2;border:none;border-radius:9px;cursor:pointer;transition:background 0.18s;" onmouseover="this.style.background='#C9A96E';this.style.color='#1A1A1A'" onmouseout="this.style.background='#1A1A1A';this.style.color='#FAF7F2'">Passwort speichern</button>
+        <button onclick="changePassword()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'">Passwort speichern</button>
       </div>
     </div>
   </div>
@@ -1220,9 +1237,9 @@
       const popupStatuses = Object.entries(STATUS_META);
 
       list.innerHTML = filtered.map(s => {
-        const names      = [s.contact?.partner1, s.contact?.partner2].filter(Boolean).join(' & ') || '–';
-        const weddingDate = s.wedding?.dateUnclear ? 'Datum offen' : formatDate(s.wedding?.date);
-        const city       = s.location?.city || '';
+        const names      = s.contact?.name || s.contact?.email || '–';
+        const placement  = s.motif?.placement || '';
+        const styleHint  = (s.style?.styles || []).slice(0,2).join(' · ') || s.motif?.size || '';
         const isSelected = s.id === selectedId;
         const isArchived = s.status === 'archiviert';
 
@@ -1235,7 +1252,7 @@
         return `<div class="submission-item${isSelected ? ' selected' : ''}${isArchived ? ' is-archived' : ''}" onclick="selectSubmission('${s.id}')">
           <div>
             <div class="item-names">${names}</div>
-            <div class="item-meta">${weddingDate}${city ? ' · ' + city : ''}</div>
+            <div class="item-meta">${styleHint}${placement ? ' · ' + placement : ''}</div>
             <div style="margin-top:5px;position:relative;display:inline-block;">
               <span class="status-badge ${statusClass(s.status)} status-badge-btn"
                 onclick="togglePopup(event,'${s.id}')" title="Status ändern">
@@ -1255,8 +1272,7 @@
 
     // ── Build detail HTML ─────────────────────────────────────────────────
     function buildDetailHTML(s) {
-      const names      = [s.contact?.partner1, s.contact?.partner2].filter(Boolean).join(' & ') || '–';
-      const weddingDate = s.wedding?.dateUnclear ? null : s.wedding?.date;
+      const names      = s.contact?.name || s.contact?.email || '–';
       const isArchived  = s.status === 'archiviert';
 
       const popupItems = Object.entries(STATUS_META).map(([key, meta]) =>
@@ -1298,26 +1314,28 @@
 
         <div class="detail-body">
           <div class="detail-section">
-            <div class="detail-section-title">Hochzeit</div>
-            <div class="detail-row"><div class="detail-key">Datum</div><div class="detail-val">${weddingDate ? formatDate(weddingDate) : '<span class="badge-unclear">Noch unklar</span>'}</div></div>
-            <div class="detail-row"><div class="detail-key">Uhrzeit</div><div class="detail-val">${valOrBadge(s.wedding?.ceremonyTime)}</div></div>
-            <div class="detail-row"><div class="detail-key">Dauer</div><div class="detail-val">${valOrBadge(s.wedding?.duration)}</div></div>
+            <div class="detail-section-title">Das Motiv</div>
+            <div class="detail-row"><div class="detail-key">Körperstelle</div><div class="detail-val">${valOrBadge(s.motif?.placement)}</div></div>
+            <div class="detail-row"><div class="detail-key">Größe</div><div class="detail-val">${valOrBadge(s.motif?.size)}</div></div>
+            <div class="detail-row"><div class="detail-key">Cover-Up</div><div class="detail-val">${valOrBadge(s.motif?.isCoverUp)}</div></div>
+            ${s.motif?.description ? `<div class="detail-row"><div class="detail-key">Beschreibung</div><div class="detail-val" style="white-space:pre-line;">${s.motif.description}</div></div>` : ''}
+            ${s.motif?.coverUpNotes ? `<div class="detail-row"><div class="detail-key">Cover-Up Details</div><div class="detail-val" style="white-space:pre-line;">${s.motif.coverUpNotes}</div></div>` : ''}
           </div>
 
           <div class="detail-section">
-            <div class="detail-section-title">Location</div>
-            <div class="detail-row"><div class="detail-key">Bundesland</div><div class="detail-val">${valOrBadge(s.location?.state)}</div></div>
-            <div class="detail-row"><div class="detail-key">Stadt</div><div class="detail-val">${valOrBadge(s.location?.city)}</div></div>
-            <div class="detail-row"><div class="detail-key">Art</div><div class="detail-val">${valOrBadge(s.location?.types)}</div></div>
-            ${s.location?.address ? `<div class="detail-row"><div class="detail-key">Adresse</div><div class="detail-val" style="white-space:pre-line;">${s.location.address}</div></div>` : ''}
+            <div class="detail-section-title">Stil &amp; Look</div>
+            <div class="detail-row"><div class="detail-key">Stile</div><div class="detail-val">${valOrBadge((s.style?.styles || []).join(', ') || null)}</div></div>
+            <div class="detail-row"><div class="detail-key">Farbe</div><div class="detail-val">${valOrBadge(s.style?.colorPreference)}</div></div>
+            ${s.style?.styleNotes ? `<div class="detail-row"><div class="detail-key">Notizen</div><div class="detail-val" style="white-space:pre-line;">${s.style.styleNotes}</div></div>` : ''}
           </div>
 
           <div class="detail-section">
-            <div class="detail-section-title">Wünsche &amp; Stil</div>
-            <div class="detail-row"><div class="detail-key">Gäste</div><div class="detail-val">${valOrBadge(s.style?.guestCount)}</div></div>
-            <div class="detail-row"><div class="detail-key">Stil</div><div class="detail-val">${valOrBadge(s.style?.styles)}</div></div>
-            <div class="detail-row"><div class="detail-key">Medien</div><div class="detail-val">${valOrBadge(s.services?.mediaType)}</div></div>
-            <div class="detail-row"><div class="detail-key">2. Fotograf</div><div class="detail-val">${valOrBadge(s.services?.secondPhotographer)}</div></div>
+            <div class="detail-section-title">Gesundheit &amp; Termin</div>
+            <div class="detail-row"><div class="detail-key">Erstes Tattoo</div><div class="detail-val">${valOrBadge(s.health?.isFirstTattoo)}</div></div>
+            <div class="detail-row"><div class="detail-key">Allergien</div><div class="detail-val">${valOrBadge(s.health?.knownAllergies)}</div></div>
+            ${s.health?.allergiesDetail ? `<div class="detail-row"><div class="detail-key">Allergie-Details</div><div class="detail-val">${s.health.allergiesDetail}</div></div>` : ''}
+            <div class="detail-row"><div class="detail-key">Zeitraum</div><div class="detail-val">${valOrBadge(s.appointment?.timeframe)}</div></div>
+            <div class="detail-row"><div class="detail-key">Uhrzeit</div><div class="detail-val">${valOrBadge(s.appointment?.preferredTime)}</div></div>
           </div>
 
           <div class="detail-section">
@@ -1347,6 +1365,7 @@
             <div class="contact-box-name">${names}</div>
             <div class="contact-box-email"><a href="mailto:${s.contact?.email || ''}" style="color:inherit;">${s.contact?.email || '–'}</a></div>
             ${s.contact?.phone ? `<div class="contact-box-phone">${s.contact.phone}</div>` : ''}
+            ${s.contact?.instagram ? `<div style="font-size:11px;color:rgba(250,247,242,0.45);margin-top:4px;">@${s.contact.instagram}</div>` : ''}
             ${s.contact?.howFound ? `<div style="font-size:11px;color:rgba(250,247,242,0.28);margin-top:7px;">Über: ${s.contact.howFound}</div>` : ''}
           </div>
         </div>
@@ -1455,7 +1474,7 @@
     function setThemeUI(theme) {
       document.querySelectorAll('input[name="theme"]').forEach(r => {
         r.checked = r.value === theme;
-        r.closest('label').style.borderColor = r.value === theme ? '#C9A96E' : '#E2DDD6';
+        r.closest('label').style.borderColor = r.value === theme ? '#BA897F' : '#D1CDC7';
       });
     }
     function previewTheme(theme) { setThemeUI(theme); }
@@ -1463,7 +1482,7 @@
     function setDeliveryUI(delivery) {
       document.querySelectorAll('input[name="delivery"]').forEach(r => {
         r.checked = r.value === delivery;
-        r.closest('label').style.borderColor = r.value === delivery ? '#C9A96E' : '#E2DDD6';
+        r.closest('label').style.borderColor = r.value === delivery ? '#BA897F' : '#D1CDC7';
       });
     }
     function selectDelivery(delivery) { setDeliveryUI(delivery); }
