@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin · Einfach Anfrage</title>
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F7F6F3;
+      --surface: #FFFFFF;
+      --border:  #D1CDC7;
+      --text:    #1B1B1B;
+      --muted:   #9A9590;
+      --accent:  #BA897F;
+      --dark:    #1B1B1B;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: var(--dark);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .header-logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #F7F6F3;
+    }
+    .header-logo span { color: var(--accent); }
+    .header-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,246,243,0.4);
+      background: rgba(255,255,255,0.07);
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    .logout-btn {
+      font-size: 12px;
+      color: rgba(247,246,243,0.45);
+      background: none;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+    }
+    .logout-btn:hover { color: #F7F6F3; }
+
+    /* ── Login ── */
+    .login-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 60px);
+      padding: 32px;
+    }
+    .login-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 44px;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    }
+    .login-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+    .login-sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+    .login-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+    .login-input {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--dark);
+      background: var(--bg);
+      margin-bottom: 16px;
+      transition: border-color 0.15s;
+    }
+    .login-input:focus { outline: none; border-color: var(--accent); }
+    .login-btn {
+      width: 100%;
+      background: var(--dark);
+      color: #F7F6F3;
+      border: none;
+      border-radius: 100px;
+      padding: 13px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .login-btn:hover { background: #333; }
+    .login-error {
+      font-size: 12px;
+      color: #C04040;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* ── Main content ── */
+    .content {
+      padding: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .content-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 16px;
+    }
+    .content-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+    }
+    .content-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
+    .refresh-btn {
+      font-size: 12px;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 14px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    .refresh-btn:hover { color: var(--dark); border-color: #A0A09A; }
+
+    /* ── Summary row ── */
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .summary-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 110px;
+    }
+    .summary-chip-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .summary-chip-value { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+
+    /* ── Studio grid ── */
+    .studio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .studio-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 22px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .studio-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); border-color: #C0BCB8; }
+
+    .studio-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .studio-slug {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+      margin-bottom: 14px;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .status-chip {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 6px;
+    }
+    .sc-neu          { background: rgba(186,137,127,0.13); color: #9A6A60; }
+    .sc-gespraech    { background: rgba(181,128,10,0.12);  color: #8A6008; }
+    .sc-ausstehend   { background: rgba(74,128,192,0.12);  color: #2E5A90; }
+    .sc-vereinbart   { background: rgba(47,143,90,0.12);   color: #1E7040; }
+    .sc-archiviert   { background: rgba(140,140,140,0.11); color: #777470; }
+    .status-chip .dot {
+      width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0;
+    }
+    .dot-neu        { background: #BA897F; }
+    .dot-gespraech  { background: #C8820A; }
+    .dot-ausstehend { background: #4A80C0; }
+    .dot-vereinbart { background: #2F8F5A; }
+    .dot-archiviert { background: #A0A0A0; }
+
+    .studio-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #EFEDE9;
+    }
+    .studio-total {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .studio-total strong { color: var(--dark); font-weight: 700; }
+    .preview-link {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .preview-link:hover { color: var(--dark); border-color: #A0A09A; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 32px;
+      color: var(--muted);
+    }
+    .empty-state svg { margin-bottom: 12px; opacity: 0.3; }
+
+    .loading-state {
+      text-align: center;
+      padding: 80px 32px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .spinner {
+      width: 24px; height: 24px;
+      border: 2px solid #E0DDD8;
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .content { padding: 20px 16px; }
+      .header { padding: 14px 16px; }
+      .studio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div class="header-logo">Einfach <span>Anfrage</span></div>
+      <div class="header-tag">Admin</div>
+    </div>
+    <div class="header-right" id="header-right" style="display:none;">
+      <button class="logout-btn" onclick="logout()">Abmelden</button>
+    </div>
+  </header>
+
+  <!-- Login -->
+  <div class="login-wrap" id="login-screen">
+    <div class="login-card">
+      <div class="login-title">Admin-Bereich</div>
+      <div class="login-sub">Nur für Einfach Anfrage Administratoren.</div>
+      <label class="login-label">Passwort</label>
+      <input class="login-input" type="password" id="login-pw" placeholder="••••••••"
+        onkeydown="if(event.key==='Enter') doLogin()">
+      <button class="login-btn" onclick="doLogin()">Anmelden</button>
+      <div class="login-error" id="login-error">Falsches Passwort.</div>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <main class="content" id="main-content" style="display:none;">
+    <div class="content-header">
+      <div>
+        <div class="content-title">Studios</div>
+        <div class="content-sub" id="studios-sub">Alle registrierten Tätowierer und ihre Anfragen.</div>
+      </div>
+      <button class="refresh-btn" onclick="loadData()">↺ Aktualisieren</button>
+    </div>
+
+    <div class="summary-bar" id="summary-bar"></div>
+
+    <div class="studio-grid" id="studio-grid">
+      <div class="loading-state">
+        <div class="spinner"></div><br>Lade Daten…
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const ORIGIN = window.location.origin;
+    let adminToken = sessionStorage.getItem('ea_admin_token') || null;
+
+    // ── Login ──────────────────────────────────────────────────────────────────
+    async function doLogin() {
+      const pw = document.getElementById('login-pw').value.trim();
+      if (!pw) return;
+      const err = document.getElementById('login-error');
+      err.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: pw }),
+        });
+        const data = await res.json();
+        if (!res.ok || !data.token) {
+          err.textContent = data.error || 'Anmeldung fehlgeschlagen.';
+          err.style.display = 'block';
+          return;
+        }
+        // Only admin tokens have slug === null
+        if (data.slug !== null) {
+          err.textContent = 'Kein Admin-Zugriff.';
+          err.style.display = 'block';
+          return;
+        }
+        adminToken = data.token;
+        sessionStorage.setItem('ea_admin_token', adminToken);
+        showMain();
+      } catch (e) {
+        err.textContent = 'Verbindungsfehler.';
+        err.style.display = 'block';
+      }
+    }
+
+    function logout() {
+      sessionStorage.removeItem('ea_admin_token');
+      adminToken = null;
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('main-content').style.display = 'none';
+      document.getElementById('header-right').style.display = 'none';
+      document.getElementById('login-pw').value = '';
+    }
+
+    function showMain() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('main-content').style.display = 'block';
+      document.getElementById('header-right').style.display = 'flex';
+      loadData();
+    }
+
+    // ── Data ───────────────────────────────────────────────────────────────────
+    async function loadData() {
+      const grid = document.getElementById('studio-grid');
+      grid.innerHTML = '<div class="loading-state"><div class="spinner"></div><br>Lade Daten…</div>';
+
+      try {
+        const res = await fetch('/api/admin/overview', {
+          headers: { 'Authorization': 'Bearer ' + adminToken },
+        });
+        if (res.status === 401 || res.status === 403) {
+          logout();
+          return;
+        }
+        const studios = await res.json();
+        renderStudios(studios);
+      } catch (e) {
+        grid.innerHTML = '<div class="loading-state">Fehler beim Laden.<br><small>' + e.message + '</small></div>';
+      }
+    }
+
+    function renderStudios(studios) {
+      const grid    = document.getElementById('studio-grid');
+      const summary = document.getElementById('summary-bar');
+      const sub     = document.getElementById('studios-sub');
+
+      if (!studios.length) {
+        grid.innerHTML = '<div class="empty-state">Noch keine Studios registriert.</div>';
+        summary.innerHTML = '';
+        return;
+      }
+
+      // Totals for summary bar
+      let totNeu = 0, totGes = 0, totAus = 0, totVer = 0, totArch = 0, totAll = 0;
+      for (const s of studios) {
+        totNeu  += s.counts.neu            || 0;
+        totGes  += s.counts.in_bearbeitung || 0;
+        totAus  += s.counts.termin_ausstehend || 0;
+        totVer  += s.counts.beauftragt     || 0;
+        totArch += s.counts.archiviert     || 0;
+        totAll  += s.counts.total          || 0;
+      }
+
+      sub.textContent = studios.length + ' Studio' + (studios.length === 1 ? '' : 's') + ' · ' + totAll + ' Anfragen gesamt';
+
+      summary.innerHTML = `
+        <div class="summary-chip">
+          <span class="summary-chip-label">Studios</span>
+          <span class="summary-chip-value" style="color:var(--dark)">${studios.length}</span>
+        </div>
+        <div class="summary-chip">
+          <span class="summary-chip-label">Gesamt</span>
+          <span class="summary-chip-value" style="color:var(--dark)">${totAll}</span>
+        </div>
+        <div class="summary-chip">
+          <span class="summary-chip-label">Neu</span>
+          <span class="summary-chip-value" style="color:#BA897F">${totNeu}</span>
+        </div>
+        <div class="summary-chip">
+          <span class="summary-chip-label">Im Gespräch</span>
+          <span class="summary-chip-value" style="color:#C8820A">${totGes}</span>
+        </div>
+        <div class="summary-chip">
+          <span class="summary-chip-label">Termin ausst.</span>
+          <span class="summary-chip-value" style="color:#4A80C0">${totAus}</span>
+        </div>
+        <div class="summary-chip">
+          <span class="summary-chip-label">Termin ver.</span>
+          <span class="summary-chip-value" style="color:#2F8F5A">${totVer}</span>
+        </div>
+      `;
+
+      // Sort: most inquiries first
+      studios.sort((a, b) => b.counts.total - a.counts.total);
+
+      grid.innerHTML = studios.map(s => {
+        const c = s.counts;
+        const chips = [];
+        if (c.neu)               chips.push(`<span class="status-chip sc-neu"><span class="dot dot-neu"></span>${c.neu} Neu</span>`);
+        if (c.in_bearbeitung)    chips.push(`<span class="status-chip sc-gespraech"><span class="dot dot-gespraech"></span>${c.in_bearbeitung} Im Gespräch</span>`);
+        if (c.termin_ausstehend) chips.push(`<span class="status-chip sc-ausstehend"><span class="dot dot-ausstehend"></span>${c.termin_ausstehend} Ausstehend</span>`);
+        if (c.beauftragt)        chips.push(`<span class="status-chip sc-vereinbart"><span class="dot dot-vereinbart"></span>${c.beauftragt} Vereinbart</span>`);
+        if (c.archiviert)        chips.push(`<span class="status-chip sc-archiviert"><span class="dot dot-archiviert"></span>${c.archiviert} Archiv</span>`);
+
+        return `
+          <div class="studio-card">
+            <div class="studio-name">${esc(s.name)}</div>
+            <div class="studio-slug">${esc(s.slug)}</div>
+            <div class="status-bar">${chips.length ? chips.join('') : '<span style="font-size:12px;color:var(--muted)">Noch keine Anfragen</span>'}</div>
+            <div class="studio-footer">
+              <div class="studio-total">Gesamt: <strong>${c.total}</strong></div>
+              <a class="preview-link" href="/dashboard?preview=${esc(s.slug)}" target="_blank">Vorschau ↗</a>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function esc(str) {
+      return String(str || '')
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;');
+    }
+
+    // ── Init ───────────────────────────────────────────────────────────────────
+    if (adminToken) {
+      showMain();
+    }
+  </script>
+</body>
+</html>
