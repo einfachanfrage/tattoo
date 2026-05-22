@@ -439,7 +439,8 @@
       .modal-nav { padding: 16px 20px; }
       .step-title { font-size: 22px; }
       .field-row { grid-template-columns: 1fr; }
-      .check-grid { grid-template-columns: 1fr; }
+      .check-grid { grid-template-columns: 1fr 1fr; }
+      .check-item { font-size: 12px; padding: 11px 12px; }
       .radio-group { flex-direction: column; }
       .media-group { grid-template-columns: 1fr; }
     }
@@ -835,13 +836,13 @@
         <div class="welcome-icon">${ICON_NEEDLE}</div>
         <h2 class="step-title">Tattoo-Anfrage<br>stellen</h2>
         <p class="step-subtitle">
-          Damit wir dein Projekt verstehen und ein passendes Angebot machen können –<br>
-          ein paar Fragen, dauert nur <strong>3 Minuten</strong>.
+          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann –
+          ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.
         </p>
         <ul class="feature-list">
-          <li>Alle Angaben auch als "noch unklar" beantwortbar</li>
-          <li>Keine unerwünschten Abonnements oder Werbung</li>
-          <li>Deine Daten werden nur an den Tätowierer weitergeleitet</li>
+          <li>Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
+          <li>Kein Account, keine Werbung</li>
+          <li>Deine Daten gehen nur an ${CONFIG.photographerName}</li>
         </ul>
         <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten →</button>
       </div>
@@ -849,13 +850,7 @@
       <!-- ── Step 2: Das Motiv ── -->
       <div class="step" data-step="2">
         <h2 class="step-title">Das Motiv</h2>
-        <p class="step-subtitle">Was soll gestochen werden – und wo?</p>
-
-        <div class="field">
-          <label class="field-label" for="ea-motif-desc">Beschreibe dein Tattoo <span class="req">*</span></label>
-          <textarea id="ea-motif-desc" name="motifDesc" rows="4" placeholder="z. B. „Ein botanisches Arrangement aus Rosen und Eukalyptus, fein und detailliert – auf dem Unterarm.""></textarea>
-          <div class="err-msg" id="ea-motif-err">Bitte beschreibe kurz dein Tattoo-Motiv.</div>
-        </div>
+        <p class="step-subtitle">Wo soll es hin – und in welcher Größe?</p>
 
         <div class="field-row">
           <div class="field">
@@ -883,27 +878,27 @@
             <label class="field-label" for="ea-size">Ungefähre Größe</label>
             <select id="ea-size" name="size">
               <option value="">– bitte wählen –</option>
-              <option value="Klein (&lt; 5 cm)">Klein (&lt; 5 cm)</option>
+              <option value="Klein (bis 5 cm)">Klein (bis 5 cm)</option>
               <option value="Mittel (5–10 cm)">Mittel (5–10 cm)</option>
               <option value="Groß (10–20 cm)">Groß (10–20 cm)</option>
-              <option value="Sehr groß / Sleeve (&gt; 20 cm)">Sehr groß / Sleeve (&gt; 20 cm)</option>
+              <option value="Sehr groß / Sleeve (über 20 cm)">Sehr groß / Sleeve (über 20 cm)</option>
               <option value="Noch unklar">Noch unklar</option>
             </select>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Cover-Up (Übertattoo)?</label>
+          <label class="field-label">Cover-Up?</label>
           <div class="radio-group" id="ea-coverup">
             <label class="radio-item"><input type="radio" name="isCoverUp" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="isCoverUp" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Ja"> Ja, Cover-Up</label>
             <label class="radio-item"><input type="radio" name="isCoverUp" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
 
         <div class="field" id="ea-coverup-notes-wrap" style="display:none;">
-          <label class="field-label" for="ea-coverup-notes">Was soll abgedeckt werden? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des bestehenden Tattoos – hilft beim Einschätzen der Machbarkeit."></textarea>
+          <label class="field-label" for="ea-coverup-notes">Das bestehende Tattoo <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des alten Tattoos."></textarea>
         </div>
       </div>
 
@@ -916,16 +911,16 @@
           <label class="field-label">Tattoo-Stil</label>
           <div class="check-grid" id="ea-styles">
             <label class="check-item"><input type="checkbox" value="Fine Line"> Fine Line</label>
-            <label class="check-item"><input type="checkbox" value="Realistisch"> Realistisch</label>
-            <label class="check-item"><input type="checkbox" value="Traditional / Old School"> Traditional</label>
-            <label class="check-item"><input type="checkbox" value="Neo Traditional"> Neo Traditional</label>
-            <label class="check-item"><input type="checkbox" value="Japanisch"> Japanisch</label>
-            <label class="check-item"><input type="checkbox" value="Watercolor"> Watercolor</label>
-            <label class="check-item"><input type="checkbox" value="Tribal"> Tribal</label>
-            <label class="check-item"><input type="checkbox" value="Geometric"> Geometric</label>
             <label class="check-item"><input type="checkbox" value="Blackwork / Dotwork"> Blackwork / Dotwork</label>
-            <label class="check-item"><input type="checkbox" value="Illustrativ"> Illustrativ</label>
-            <label class="check-item"><input type="checkbox" value="Minimalistisch"> Minimalistisch</label>
+            <label class="check-item"><input type="checkbox" value="Realistisch"> Realistisch</label>
+            <label class="check-item"><input type="checkbox" value="Portrait"> Portrait</label>
+            <label class="check-item"><input type="checkbox" value="Japanisch / Irezumi"> Japanisch / Irezumi</label>
+            <label class="check-item"><input type="checkbox" value="Traditional / Old School"> Traditional / Old School</label>
+            <label class="check-item"><input type="checkbox" value="Neo Traditional"> Neo Traditional</label>
+            <label class="check-item"><input type="checkbox" value="Watercolor"> Watercolor</label>
+            <label class="check-item"><input type="checkbox" value="Geometric"> Geometric</label>
+            <label class="check-item"><input type="checkbox" value="Ornamental / Mandala"> Ornamental / Mandala</label>
+            <label class="check-item"><input type="checkbox" value="Lettering / Schrift"> Lettering / Schrift</label>
             <label class="check-item"><input type="checkbox" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
@@ -941,14 +936,15 @@
         </div>
       </div>
 
-      <!-- ── Step 4: Referenzbilder ── -->
+      <!-- ── Step 4: Motiv & Referenzen ── -->
       <div class="step" data-step="4">
-        <h2 class="step-title">Referenzen &amp; Wünsche</h2>
-        <p class="step-subtitle">Zeig uns, was dir gefällt – ein Bild sagt mehr als tausend Worte.</p>
+        <h2 class="step-title">Dein Motiv</h2>
+        <p class="step-subtitle">Ein Satz reicht – wir fragen nach, wenn wir mehr brauchen.</p>
 
         <div class="field">
-          <label class="field-label" for="ea-style-notes">Beschreibe deinen Wunsch-Look <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-style-notes" name="styleNotes" placeholder="z. B. „Weiche Linien, viel Schattierung – ich mag den Look von alten botanischen Zeichnungen.""></textarea>
+          <label class="field-label" for="ea-motif-desc">Was stellst du dir vor? <span class="req">*</span></label>
+          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. „Fine-Line Rosen, Unterarm, eher zart""></textarea>
+          <div class="err-msg" id="ea-motif-err">Bitte kurz beschreiben, was du dir vorstellst.</div>
         </div>
 
         <div class="field">
@@ -957,22 +953,19 @@
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
               <strong>Klicken zum Hochladen</strong> oder Bilder hierher ziehen<br>
-              <span style="font-size:12px;color:#B0A898;">Screenshots, Pinterest-Pins, Fotos von Tattoos die dir gefallen</span>
+              <span style="font-size:12px;color:#B0A898;">Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen</span>
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
           <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
-          <div style="margin-top:10px;padding:10px 12px;background:rgba(186,137,127,0.07);border-left:3px solid #BA897F;border-radius:0 6px 6px 0;font-size:11.5px;color:#6B6B6B;line-height:1.55;">
-            <strong style="color:#1B1B1B;font-size:11.5px;">Hinweis:</strong> Bitte lade keine Fotos hoch, auf denen erkennbare Personen ohne deren Einwilligung abgebildet sind. Tattoo-Referenzbilder sind natürlich in Ordnung.
-          </div>
         </div>
       </div>
 
       <!-- ── Step 5: Deine Haut ── -->
       <div class="step" data-step="5">
         <h2 class="step-title">Deine Haut</h2>
-        <p class="step-subtitle">Damit wir dich optimal beraten können – alles freiwillig.</p>
+        <p class="step-subtitle">Hilft beim Vorbereiten der Session – alles freiwillig.</p>
 
         <div class="field">
           <label class="field-label">Ist das dein erstes Tattoo?</label>
@@ -993,7 +986,7 @@
 
         <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
           <label class="field-label" for="ea-allergies-detail">Welche Allergien oder Unverträglichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickel-Allergie, empfindliche Haut, Neurodermitis…"></textarea>
+          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis …"></textarea>
         </div>
       </div>
 
@@ -1027,8 +1020,8 @@
 
       <!-- ── Step 7: Budget ── -->
       <div class="step" data-step="7">
-        <h2 class="step-title">Budget &amp; Anmerkungen</h2>
-        <p class="step-subtitle">Hilft uns, realistisch planen zu können – keine Pflicht.</p>
+        <h2 class="step-title">Budget</h2>
+        <p class="step-subtitle">Hilft beim Einschätzen, ob das Projekt passt – keine Pflicht.</p>
 
         <div class="field">
           <label class="field-label" for="ea-budget">Dein Budgetrahmen</label>
@@ -1043,11 +1036,6 @@
             <option value="800–1.500 €">800–1.500 €</option>
             <option value="über 1.500 €">über 1.500 €</option>
           </select>
-        </div>
-
-        <div class="field">
-          <label class="field-label" for="ea-notes">Noch etwas, das wir wissen sollten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-notes" name="notes" placeholder="Besondere Wünsche, Fragen, Vorüberlegungen…"></textarea>
         </div>
       </div>
 
@@ -1366,7 +1354,7 @@
   function validateStep(step) {
     clearErrors();
 
-    if (step === 2) {
+    if (step === 4) {
       var motifDesc = shadowRoot.getElementById('ea-motif-desc');
       if (!motifDesc || !motifDesc.value.trim()) {
         showError('ea-motif-err', 'ea-motif-desc');
