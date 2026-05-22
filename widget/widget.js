@@ -1,6 +1,6 @@
-/*!
+﻿/*!
  * Einfach Anfrage Widget v2.0.0
- * Das elegante Anfrage-Widget für Tätowierer
+ * Das elegante Anfrage-Widget fÃ¼r TÃ¤towierer
  * https://einfachanfrage.de
  */
 (function (w, d) {
@@ -23,7 +23,7 @@
   const CONFIG = {
     photographerEmail: currentScript.getAttribute('data-email') || '',
     photographerName:
-      currentScript.getAttribute('data-name') || 'Dein/e Tätowierer/in',
+      currentScript.getAttribute('data-name') || 'Dein/e TÃ¤towierer/in',
     photographerSlug: currentScript.getAttribute('data-slug') || '',
     privacyUrl: currentScript.getAttribute('data-privacy') || 'https://einfachanfrage-tattoo.de/datenschutz',
     webhookUrl: currentScript.getAttribute('data-webhook') || '',
@@ -35,9 +35,9 @@
     delivery: currentScript.getAttribute('data-delivery') || 'both',
   };
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // CSS
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const SHADOW_CSS = `
     @import url('https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
@@ -79,7 +79,7 @@
     .progress-bar { height: 2px; background: #E9E7E2; flex-shrink: 0; }
     .progress-fill {
       height: 100%;
-      background: #BA897F;
+      background: #BF7A60;
       transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
       border-radius: 2px;
     }
@@ -153,7 +153,7 @@
       color: #9A9590; text-transform: uppercase;
       letter-spacing: 0.1em; margin-bottom: 8px;
     }
-    .field-label .req { color: #BA897F; margin-left: 2px; }
+    .field-label .req { color: #BF7A60; margin-left: 2px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
     input[type="text"],
@@ -175,10 +175,10 @@
     }
     input::placeholder, textarea::placeholder { color: #C8C4BF; }
     input:focus, select:focus, textarea:focus {
-      border-color: #BA897F;
-      box-shadow: 0 0 0 3px rgba(186,137,127,0.12);
+      border-color: #BF7A60;
+      box-shadow: 0 0 0 3px rgba(191,122,96,0.12);
     }
-    input.err, select.err { border-color: #BA897F; }
+    input.err, select.err { border-color: #BF7A60; }
 
     select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%239A9590' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -189,7 +189,7 @@
     }
     textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
 
-    .err-msg { font-size: 12px; color: #BA897F; margin-top: 6px; display: none; }
+    .err-msg { font-size: 12px; color: #BF7A60; margin-top: 6px; display: none; }
     .err-msg.show { display: block; }
 
     /* Checkboxes */
@@ -205,18 +205,18 @@
       user-select: none;
     }
     .check-item:hover {
-      border-color: #BA897F;
+      border-color: #BF7A60;
       background: #F7F6F3;
-      box-shadow: 0 2px 8px rgba(186,137,127,0.10);
+      box-shadow: 0 2px 8px rgba(191,122,96,0.10);
     }
     .check-item.checked {
-      border-color: #BA897F;
-      background: rgba(186,137,127,0.07);
-      box-shadow: 0 2px 8px rgba(186,137,127,0.12);
+      border-color: #BF7A60;
+      background: rgba(191,122,96,0.07);
+      box-shadow: 0 2px 8px rgba(191,122,96,0.12);
     }
     .check-item input[type="checkbox"] {
       width: 15px; height: 15px;
-      accent-color: #BA897F; flex-shrink: 0; cursor: pointer;
+      accent-color: #BF7A60; flex-shrink: 0; cursor: pointer;
     }
 
     /* Radio pills */
@@ -233,9 +233,9 @@
       user-select: none;
     }
     .radio-item:hover {
-      border-color: #BA897F;
+      border-color: #BF7A60;
       background: #F7F6F3;
-      box-shadow: 0 2px 8px rgba(186,137,127,0.10);
+      box-shadow: 0 2px 8px rgba(191,122,96,0.10);
     }
     .radio-item.checked {
       border-color: #1B1B1B;
@@ -258,9 +258,9 @@
       user-select: none;
     }
     .media-item:hover {
-      border-color: #BA897F;
+      border-color: #BF7A60;
       background: #F7F6F3;
-      box-shadow: 0 4px 14px rgba(186,137,127,0.12);
+      box-shadow: 0 4px 14px rgba(191,122,96,0.12);
       transform: translateY(-1px);
     }
     .media-item.checked {
@@ -280,7 +280,7 @@
     }
     .unclear-row input[type="checkbox"] {
       width: 14px; height: 14px;
-      accent-color: #BA897F; cursor: pointer;
+      accent-color: #BF7A60; cursor: pointer;
     }
     .unclear-row span { font-size: 12px; color: #9A9590; }
 
@@ -294,13 +294,13 @@
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
     }
     .upload-area:hover {
-      border-color: #BA897F;
+      border-color: #BF7A60;
       background: #F7F6F3;
-      box-shadow: 0 4px 14px rgba(186,137,127,0.08);
+      box-shadow: 0 4px 14px rgba(191,122,96,0.08);
     }
     .upload-area.has-files {
-      border-color: #BA897F;
-      background: rgba(186,137,127,0.05);
+      border-color: #BF7A60;
+      background: rgba(191,122,96,0.05);
     }
     .upload-label { font-size: 13px; color: #9A9590; line-height: 1.65; }
     .upload-label strong { color: #1B1B1B; }
@@ -326,7 +326,7 @@
       padding: 0;
     }
     .upload-hint { font-size: 11px; color: #9A9590; margin-top: 8px; }
-    .upload-err { font-size: 12px; color: #BA897F; margin-top: 6px; display: none; }
+    .upload-err { font-size: 12px; color: #BF7A60; margin-top: 6px; display: none; }
     .upload-err.show { display: block; }
 
     /* Divider */
@@ -335,7 +335,7 @@
     /* Welcome */
     .welcome-icon {
       width: 66px; height: 66px;
-      background: rgba(186,137,127,0.10);
+      background: rgba(191,122,96,0.10);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 26px;
@@ -347,7 +347,7 @@
       padding: 7px 0; line-height: 1.55;
     }
     .feature-list li::before {
-      content: '✦'; color: #BA897F;
+      content: 'âœ¦'; color: #BF7A60;
       font-size: 11px; margin-top: 3px; flex-shrink: 0;
     }
 
@@ -400,7 +400,7 @@
     .thankyou-wrap { text-align: center; padding: 12px 0 6px; }
     .thankyou-icon {
       width: 80px; height: 80px;
-      background: rgba(186,137,127,0.10);
+      background: rgba(191,122,96,0.10);
       border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
       margin-bottom: 24px;
@@ -446,193 +446,159 @@
     }
   `;
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // THEME OVERRIDES
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-  // ── BLOOM: Dusty Rose – Fine Line, zartes Blush, feminine Tattoo-Ästhetik ──
+  // ── PEBBLE: Warmes Taupe · Mushroom · Clean & Modern ──
   const THEME_CSS_NACHT = `
-    .overlay { background: rgba(80,40,50,0.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-    .modal { background: #FDF2F4; border-radius: 22px; box-shadow: 0 32px 80px rgba(140,80,90,0.18), 0 2px 8px rgba(140,80,90,0.07); }
+    .overlay { background: rgba(40,32,24,0.48); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .modal { background: #EFEBE5; border-radius: 20px; box-shadow: 0 32px 80px rgba(40,32,24,0.22), 0 4px 16px rgba(40,32,24,0.08); }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
 
-    .progress-bar { background: #F5E0E4; height: 1px; }
-    .progress-fill { background: linear-gradient(90deg, #C97A8C, #E0A0B0); border-radius: 1px; }
+    .progress-bar { background: #E2D8CC; height: 1px; }
+    .progress-fill { background: #AC9278; border-radius: 1px; }
 
-    .logo { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; color: #B86878; letter-spacing: 0.16em; text-transform: uppercase; font-style: italic; }
-    .close-btn { color: #D4A0AA; border-radius: 10px; }
-    .close-btn:hover { background: #F5E0E4; color: #7A3040; border-radius: 10px; }
+    .logo { font-size: 12px; font-weight: 700; color: #8A7A68; letter-spacing: 0.12em; text-transform: uppercase; }
+    .close-btn { color: #B8A898; border-radius: 8px; }
+    .close-btn:hover { background: #E4DDD4; color: #1C1810; border-radius: 8px; }
 
-    .modal-content { scrollbar-color: #E0B0BA transparent; }
-    .modal-content::-webkit-scrollbar-thumb { background: #E0B0BA; border-radius: 2px; }
+    .modal-content { scrollbar-color: #D4CAC0 transparent; }
+    .modal-content::-webkit-scrollbar-thumb { background: #D4CAC0; border-radius: 2px; }
 
-    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #5A2830; line-height: 1.05; letter-spacing: 0.01em; font-style: italic; }
-    .step-subtitle { color: #C09098; font-size: 13px; line-height: 1.7; }
-    .field-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; color: #C4909A; text-transform: uppercase; letter-spacing: 0.15em; }
-    .field-label .req { color: #C97A8C; }
+    .step-title { color: #1C1810; font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+    .step-subtitle { color: #8A7A68; font-size: 14px; line-height: 1.7; }
+    .field-label { font-size: 10px; font-weight: 700; color: #9A8A78; text-transform: uppercase; letter-spacing: 0.12em; }
+    .field-label .req { color: #AC9278; }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
-      background: #FFFFFF;
-      border: 1px solid #EDD0D8;
-      border-radius: 13px;
-      color: #5A2830;
-      padding: 14px 18px;
-      font-size: 14px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      background: #FAF8F5; border: 1px solid #D9D0C4; border-radius: 10px; color: #1C1810;
+      padding: 14px 18px; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input::placeholder, textarea::placeholder { color: #E0C0C8; }
-    input:focus, textarea:focus { border-color: #C97A8C; box-shadow: 0 0 0 3px rgba(201,122,140,0.1); outline: none; }
-    input.err { border-color: #C97A8C; }
+    input::placeholder, textarea::placeholder { color: #C4B8A8; }
+    input:focus, textarea:focus { border-color: #AC9278; box-shadow: 0 0 0 3px rgba(172,146,120,0.1); outline: none; }
+    input.err { border-color: #AC9278; }
     select {
-      background: #FFFFFF;
-      border: 1px solid #EDD0D8;
-      border-radius: 13px;
-      color: #5A2830;
-      padding: 14px 40px 14px 18px;
-      font-size: 14px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23C4909A' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
+      background: #FAF8F5; border: 1px solid #D9D0C4; border-radius: 10px; color: #1C1810;
+      padding: 14px 40px 14px 18px; font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A8A78' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
     }
-    select:focus { border-color: #C97A8C; outline: none; }
-    select.err { border-color: #C97A8C; }
+    select:focus { border-color: #AC9278; outline: none; }
+    select.err { border-color: #AC9278; }
 
-    .check-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 13px; color: #C09098; transition: all 0.18s; }
-    .check-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
-    .check-item.checked { border-color: #C97A8C; background: rgba(201,122,140,0.07); color: #5A2830; }
-    .check-item input[type="checkbox"] { accent-color: #C97A8C; }
+    .check-item { background: #FAF8F5; border: 1px solid #D9D0C4; border-radius: 10px; color: #8A7A68; transition: all 0.18s; }
+    .check-item:hover { border-color: #AC9278; background: #F5F0E8; color: #1C1810; }
+    .check-item.checked { border-color: #AC9278; background: rgba(172,146,120,0.1); color: #1C1810; }
+    .check-item input[type="checkbox"] { accent-color: #AC9278; }
 
-    .radio-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 13px; color: #C09098; }
-    .radio-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
-    .radio-item.checked { border-color: #C97A8C; background: #C97A8C; color: #FDF2F4; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; }
+    .radio-item { background: #FAF8F5; border: 1px solid #D9D0C4; border-radius: 100px; color: #8A7A68; }
+    .radio-item:hover { border-color: #AC9278; background: #F5F0E8; color: #1C1810; }
+    .radio-item.checked { background: #1C1810; border-color: #1C1810; color: #EFE8DE; font-weight: 600; }
 
-    .media-item { background: #FFFFFF; border: 1px solid #EDD0D8; border-radius: 14px; color: #C09098; }
-    .media-item:hover { border-color: #C97A8C; background: #FFF8F9; color: #5A2830; }
-    .media-item.checked { border-color: #C97A8C; background: rgba(201,122,140,0.08); color: #5A2830; }
+    .upload-area { border-color: #D9D0C4; border-radius: 12px; background: #FAF8F5; }
+    .upload-area:hover { border-color: #AC9278; background: #F5F0E8; }
+    .upload-area.has-files { border-color: #AC9278; background: rgba(172,146,120,0.06); }
+    .upload-label { color: #9A8A78; }
+    .upload-label strong { color: #1C1810; }
 
-    .unclear-row span { color: #C4909A; }
-    .unclear-row input[type="checkbox"] { accent-color: #C97A8C; }
+    .divider { background: #E2D8CC; }
+    .welcome-icon { background: rgba(172,146,120,0.1); border-radius: 50%; }
+    .feature-list li { color: #8A7A68; }
+    .feature-list li::before { content: '\u2736'; color: #AC9278; font-size: 10px; margin-top: 3px; }
 
-    .upload-area { border-color: #EDD0D8; border-radius: 14px; background: #FFFFFF; }
-    .upload-area:hover { border-color: #C97A8C; background: #FFF8F9; }
-    .upload-area.has-files { border-color: #C97A8C; background: rgba(201,122,140,0.04); }
-    .upload-label { color: #C4909A; }
-    .upload-label strong { color: #5A2830; }
-
-    .divider { background: #F5E0E4; }
-    .welcome-icon { background: rgba(201,122,140,0.1); border-radius: 50%; }
-    .feature-list li { color: #C09098; }
-    .feature-list li::before { content: '✦'; color: #C97A8C; font-size: 10px; margin-top: 3px; }
-
-    .modal-nav { background: #FDF2F4; border-top: 1px solid #F5E0E4; }
-    .btn-primary { background: #C97A8C; color: #FDF2F4; border-radius: 13px; font-weight: 400; font-size: 13px; letter-spacing: 0.06em; padding: 13px 28px; font-family: 'Cormorant Garamond', serif; font-style: italic; transition: all 0.2s; }
-    .btn-primary:hover { background: #B86878; }
+    .modal-nav { background: #EFEBE5; border-top: 1px solid #E2D8CC; }
+    .btn-primary { background: #1C1810; color: #EFE8DE; border-radius: 100px; transition: all 0.2s; }
+    .btn-primary:hover { background: #2C2818; }
     .btn-primary:disabled { opacity: 0.35; }
-    .btn-primary:disabled:hover { background: #C97A8C; }
-    .btn-ghost { color: #D4A0AA; border: 1px solid #EDD0D8; border-radius: 13px; background: transparent; }
-    .btn-ghost:hover { color: #5A2830; border-color: #C97A8C; }
-    .step-counter { color: #E0C0C8; letter-spacing: 0.06em; }
+    .btn-primary:disabled:hover { background: #1C1810; }
+    .btn-ghost { color: #B8A898; border: none; background: transparent; }
+    .btn-ghost:hover { color: #1C1810; background: rgba(28,24,16,0.06); }
+    .step-counter { color: #B8A898; }
 
-    .thankyou-icon { background: rgba(201,122,140,0.1); border-radius: 50%; }
-    .summary-card { background: #FFFFFF; border-color: #EDD0D8; border-radius: 14px; }
-    .summary-card-title { color: #C4909A; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
-    .summary-row { border-bottom-color: #F8ECF0; }
-    .summary-label { color: #C4909A; }
-    .summary-value { color: #5A2830; font-weight: 400; }
+    .thankyou-icon { background: rgba(172,146,120,0.1); border-radius: 50%; }
+    .summary-card { background: #FAF8F5; border-color: #D9D0C4; border-radius: 12px; }
+    .summary-card-title { color: #9A8A78; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
+    .summary-row { border-bottom-color: #EAE2D8; }
+    .summary-label { color: #9A8A78; }
+    .summary-value { color: #1C1810; font-weight: 500; }
   `;
 
-  // ── NOIR: Cinematisch · tiefschwarz · Blackwork &amp; Dark Tattoo-Ästhetik ──
+  // ── EMBER: Warmes Amber · Linen · Golden & Warm ──
   const THEME_CSS_SAGE = `
-    .overlay { background: rgba(0,0,0,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-    .modal { background: #0A0A0D; border-radius: 22px; box-shadow: 0 48px 120px rgba(0,0,0,0.95), inset 0 1px 0 rgba(200,184,160,0.08); }
+    .overlay { background: rgba(45,30,14,0.50); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .modal { background: #F3EDE0; border-radius: 20px; box-shadow: 0 32px 80px rgba(45,30,14,0.22), 0 4px 16px rgba(45,30,14,0.08); }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
 
-    .progress-bar { background: #151518; height: 1px; }
-    .progress-fill { background: linear-gradient(90deg, #C8B8A0, #E8D8BC); border-radius: 1px; }
+    .progress-bar { background: #E8DCC8; height: 1px; }
+    .progress-fill { background: linear-gradient(90deg, #C8965A, #D4A870); border-radius: 1px; }
 
-    .logo { font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; color: #C8B8A0; letter-spacing: 0.18em; text-transform: uppercase; font-style: italic; }
-    .close-btn { color: #2A2A30; border-radius: 10px; }
-    .close-btn:hover { background: #141418; color: #C8B8A0; border-radius: 10px; }
+    .logo { font-size: 12px; font-weight: 700; color: #7A6248; letter-spacing: 0.12em; text-transform: uppercase; }
+    .close-btn { color: #C4A870; border-radius: 8px; }
+    .close-btn:hover { background: #EBE0CC; color: #221C10; border-radius: 8px; }
 
-    .modal-content { scrollbar-color: #2A2A30 transparent; }
-    .modal-content::-webkit-scrollbar-thumb { background: #2A2A30; border-radius: 2px; }
+    .modal-content { scrollbar-color: #D8C8A8 transparent; }
+    .modal-content::-webkit-scrollbar-thumb { background: #D8C8A8; border-radius: 2px; }
 
-    .step-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #EAE0D4; line-height: 1.05; letter-spacing: 0.02em; font-style: italic; }
-    .step-subtitle { color: #3A3840; font-size: 13px; line-height: 1.7; letter-spacing: 0.01em; }
-    .field-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 500; color: #35333A; text-transform: uppercase; letter-spacing: 0.16em; }
-    .field-label .req { color: #C8B8A0; }
+    .step-title { color: #221C10; font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+    .step-subtitle { color: #8A7258; font-size: 14px; line-height: 1.7; }
+    .field-label { font-size: 10px; font-weight: 700; color: #9A8060; text-transform: uppercase; letter-spacing: 0.12em; }
+    .field-label .req { color: #C8965A; }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
-      background: #111116;
-      border: 1px solid #1E1E26;
-      border-radius: 13px;
-      color: #EAE0D4;
-      padding: 14px 18px;
-      font-size: 14px;
-      transition: border-color 0.22s, background 0.22s;
+      background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #221C10;
+      padding: 14px 18px; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input::placeholder, textarea::placeholder { color: #222228; }
-    input:focus, textarea:focus { border-color: #C8B8A0; background: #13131A; outline: none; }
-    input.err { border-color: #C8B8A0; }
+    input::placeholder, textarea::placeholder { color: #CEC0A0; }
+    input:focus, textarea:focus { border-color: #C8965A; box-shadow: 0 0 0 3px rgba(200,150,90,0.1); outline: none; }
+    input.err { border-color: #C8965A; }
     select {
-      background: #111116;
-      border: 1px solid #1E1E26;
-      border-radius: 13px;
-      color: #EAE0D4;
-      padding: 14px 40px 14px 18px;
-      font-size: 14px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23333338' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
+      background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #221C10;
+      padding: 14px 40px 14px 18px; font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A8060' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
     }
-    select:focus { border-color: #C8B8A0; outline: none; }
-    select.err { border-color: #C8B8A0; }
+    select:focus { border-color: #C8965A; outline: none; }
+    select.err { border-color: #C8965A; }
 
-    .check-item { background: #111116; border: 1px solid #1E1E26; border-radius: 13px; color: #3A3840; transition: all 0.2s; }
-    .check-item:hover { border-color: #2A2A34; background: #131318; color: #C8B8A0; }
-    .check-item.checked { border-color: #C8B8A0; background: rgba(200,184,160,0.06); color: #EAE0D4; }
-    .check-item input[type="checkbox"] { accent-color: #C8B8A0; }
+    .check-item { background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #8A7258; transition: all 0.18s; }
+    .check-item:hover { border-color: #C8965A; background: #F8F0E0; color: #221C10; }
+    .check-item.checked { border-color: #C8965A; background: rgba(200,150,90,0.1); color: #221C10; }
+    .check-item input[type="checkbox"] { accent-color: #C8965A; }
 
-    .radio-item { background: #111116; border: 1px solid #1E1E26; border-radius: 13px; color: #3A3840; }
-    .radio-item:hover { border-color: #2A2A34; color: #C8B8A0; }
-    .radio-item.checked { border-color: #C8B8A0; background: rgba(200,184,160,0.1); color: #EAE0D4; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 400; }
+    .radio-item { background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 100px; color: #8A7258; }
+    .radio-item:hover { border-color: #C8965A; background: #F8F0E0; color: #221C10; }
+    .radio-item.checked { background: #221C10; border-color: #221C10; color: #F3EDE0; font-weight: 600; }
 
-    .media-item { background: #111116; border: 1px solid #1E1E26; border-radius: 14px; color: #3A3840; }
-    .media-item:hover { border-color: #2A2A34; color: #C8B8A0; }
-    .media-item.checked { border-color: #C8B8A0; background: rgba(200,184,160,0.07); color: #EAE0D4; }
+    .upload-area { border-color: #E2D4B8; border-radius: 12px; background: #FDF8EF; }
+    .upload-area:hover { border-color: #C8965A; background: #F8F0E0; }
+    .upload-area.has-files { border-color: #C8965A; background: rgba(200,150,90,0.07); }
+    .upload-label { color: #9A8060; }
+    .upload-label strong { color: #221C10; }
 
-    .unclear-row span { color: #35333A; }
-    .unclear-row input[type="checkbox"] { accent-color: #C8B8A0; }
+    .divider { background: #E8DCC8; }
+    .welcome-icon { background: rgba(200,150,90,0.1); border-radius: 50%; }
+    .feature-list li { color: #8A7258; }
+    .feature-list li::before { content: '\u2736'; color: #C8965A; font-size: 10px; margin-top: 3px; }
 
-    .upload-area { border-color: #1A1A22; border-radius: 14px; background: #0D0D12; }
-    .upload-area:hover { border-color: #C8B8A0; background: rgba(200,184,160,0.03); }
-    .upload-area.has-files { border-color: #C8B8A0; background: rgba(200,184,160,0.04); }
-    .upload-label { color: #35333A; }
-    .upload-label strong { color: #C8B8A0; }
+    .modal-nav { background: #F3EDE0; border-top: 1px solid #E8DCC8; }
+    .btn-primary { background: #221C10; color: #F3EDE0; border-radius: 100px; transition: all 0.2s; }
+    .btn-primary:hover { background: #342E20; }
+    .btn-primary:disabled { opacity: 0.35; }
+    .btn-primary:disabled:hover { background: #221C10; }
+    .btn-ghost { color: #C4A870; border: none; background: transparent; }
+    .btn-ghost:hover { color: #221C10; background: rgba(34,28,16,0.06); }
+    .step-counter { color: #C4A870; }
 
-    .divider { background: #151518; }
-    .welcome-icon { background: rgba(200,184,160,0.07); border-radius: 50%; }
-    .feature-list li { color: #35333A; }
-    .feature-list li::before { content: '·'; color: #C8B8A0; font-size: 18px; margin-top: -2px; }
-
-    .modal-nav { background: #0A0A0D; border-top: 1px solid #151518; }
-    .btn-primary { background: transparent; color: #EAE0D4; border: 1px solid #C8B8A0; border-radius: 13px; font-weight: 400; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; padding: 13px 28px; font-family: 'Inter', sans-serif; transition: all 0.22s; }
-    .btn-primary:hover { background: #C8B8A0; color: #0A0A0D; }
-    .btn-primary:disabled { opacity: 0.2; }
-    .btn-primary:disabled:hover { background: transparent; color: #EAE0D4; }
-    .btn-ghost { color: #2A2A34; border: 1px solid #1A1A22; border-radius: 13px; background: transparent; font-size: 12px; letter-spacing: 0.08em; }
-    .btn-ghost:hover { color: #C8B8A0; border-color: #2A2A34; }
-    .step-counter { color: #1E1E26; letter-spacing: 0.08em; }
-
-    .thankyou-icon { background: rgba(200,184,160,0.07); border-radius: 50%; }
-    .summary-card { background: #111116; border-color: #1E1E26; border-radius: 14px; }
-    .summary-card-title { color: #35333A; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
-    .summary-row { border-bottom-color: #151518; }
-    .summary-label { color: #35333A; }
-    .summary-value { color: #EAE0D4; font-weight: 400; }
+    .thankyou-icon { background: rgba(200,150,90,0.1); border-radius: 50%; }
+    .summary-card { background: #FDF8EF; border-color: #E2D4B8; border-radius: 12px; }
+    .summary-card-title { color: #9A8060; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
+    .summary-row { border-bottom-color: #EDE4CC; }
+    .summary-label { color: #9A8060; }
+    .summary-value { color: #221C10; font-weight: 500; }
   `;
 
-  // ── ATELIER: Editorial · Warm Ivory · Bodoni · Hochwertig wie ein Tattoo-Studio ──
+  // â”€â”€ ATELIER: Editorial Â· Warm Ivory Â· Bodoni Â· Hochwertig wie ein Tattoo-Studio â”€â”€
   const THEME_CSS_CLEAN = `
     @import url('https://fonts.bunny.net/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
@@ -707,7 +673,7 @@
     .divider { background: #EDE8E2; }
     .welcome-icon { background: rgba(42,36,32,0.06); border-radius: 50%; }
     .feature-list li { color: #A09890; }
-    .feature-list li::before { content: '—'; color: #C4917A; font-size: 11px; margin-top: 3px; }
+    .feature-list li::before { content: 'â€”'; color: #C4917A; font-size: 11px; margin-top: 3px; }
 
     .modal-nav { background: #F8F5F1; border-top: 1px solid #EDE8E2; }
     .btn-primary { background: #2A2420; color: #F8F5F1; border-radius: 12px; font-weight: 400; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 28px; font-family: 'Inter', sans-serif; transition: all 0.2s; }
@@ -726,7 +692,7 @@
     .summary-value { color: #1E1A18; font-weight: 400; }
   `;
 
-  // ── SCRIPT: Bold &amp; Grafisch · Uppercase · Stark wie Traditional Tattoo-Art ──
+  // â”€â”€ SCRIPT: Bold &amp; Grafisch Â· Uppercase Â· Stark wie Traditional Tattoo-Art â”€â”€
   const THEME_CSS_MODERN = `
     .overlay { background: rgba(30,26,22,0.65); }
     .modal { background: #EDEAE4; border-radius: 0; box-shadow: 0 32px 80px rgba(0,0,0,0.18); }
@@ -745,7 +711,7 @@
     .field-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: #9A9390; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 2px; }
     .field-label .req { color: #B8A898; }
 
-    /* Felder – nur Unterstrich */
+    /* Felder â€“ nur Unterstrich */
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
       background: transparent;
       border: none;
@@ -764,7 +730,7 @@
       background-repeat: no-repeat; background-position: right 4px center;
     }
 
-    /* Checkboxen – flach, Linie */
+    /* Checkboxen â€“ flach, Linie */
     .check-item { background: transparent; border: none; border-bottom: 1px solid #D4CFC8; border-radius: 0; color: #9A9390; padding: 10px 0; }
     .check-item:hover { background: rgba(0,0,0,0.03); color: #1A1714; }
     .check-item.checked { border-bottom-color: #1A1714; color: #1A1714; background: transparent; }
@@ -792,7 +758,7 @@
     .feature-list li { color: #9A9390; }
     .feature-list li::before { color: #1A1714; }
 
-    /* Navigation – flache Buttons */
+    /* Navigation â€“ flache Buttons */
     .modal-nav { background: #E5E1DB; border-top: 1px solid #C4BFB8; }
     .btn-primary { background: #1A1714; color: #EDEAE4; border-radius: 0; font-weight: 400; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 13px 28px; font-family: 'Inter', sans-serif; }
     .btn-primary:hover { background: #2E2A26; }
@@ -809,65 +775,65 @@
     .summary-value { color: #1A1714; font-weight: 400; }
   `;
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // ICONS
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const ICON_CLOSE =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
   const ICON_DONE =
-    '<svg width="34" height="34" viewBox="0 0 60 60" fill="none" stroke="#BA897F" stroke-width="2.5" stroke-linecap="round"><circle cx="30" cy="30" r="22"/><path d="M20 30 L27 37 L41 21"/></svg>';
+    '<svg width="34" height="34" viewBox="0 0 60 60" fill="none" stroke="#BF7A60" stroke-width="2.5" stroke-linecap="round"><circle cx="30" cy="30" r="22"/><path d="M20 30 L27 37 L41 21"/></svg>';
   const ICON_NEEDLE =
-    '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BA897F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><line x1="15" y1="5" x2="19" y2="9"/></svg>';
+    '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BF7A60" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><line x1="15" y1="5" x2="19" y2="9"/></svg>';
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // HTML (9 Steps)
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const MODAL_HTML = `
     <div class="progress-bar"><div class="progress-fill" id="ea-progress"></div></div>
     <div class="modal-header">
       <span class="logo">einfach anfrage</span>
-      <button class="close-btn" id="ea-close" aria-label="Schließen">${ICON_CLOSE}</button>
+      <button class="close-btn" id="ea-close" aria-label="SchlieÃŸen">${ICON_CLOSE}</button>
     </div>
 
     <div class="modal-content" id="ea-content">
 
-      <!-- ── Step 1: Willkommen ── -->
+      <!-- â”€â”€ Step 1: Willkommen â”€â”€ -->
       <div class="step active" data-step="1">
         <div class="welcome-icon">${ICON_NEEDLE}</div>
         <h2 class="step-title">Tattoo-Anfrage<br>stellen</h2>
         <p class="step-subtitle">
-          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann –
+          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann â€“
           ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.
         </p>
         <ul class="feature-list">
-          <li>Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
+          <li>Fast alles kann auch mit â€žNoch unklar" beantwortet werden</li>
           <li>Kein Account, keine Werbung</li>
           <li>Deine Daten gehen nur an ${CONFIG.photographerName}</li>
         </ul>
-        <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten →</button>
+        <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten â†’</button>
       </div>
 
-      <!-- ── Step 2: Das Motiv ── -->
+      <!-- â”€â”€ Step 2: Das Motiv â”€â”€ -->
       <div class="step" data-step="2">
         <h2 class="step-title">Das Motiv</h2>
-        <p class="step-subtitle">Wo soll es hin – und in welcher Größe?</p>
+        <p class="step-subtitle">Wo soll es hin â€“ und in welcher GrÃ¶ÃŸe?</p>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label" for="ea-placement">Körperstelle</label>
+            <label class="field-label" for="ea-placement">KÃ¶rperstelle</label>
             <select id="ea-placement" name="placement">
-              <option value="">– bitte wählen –</option>
+              <option value="">â€“ bitte wÃ¤hlen â€“</option>
               <option>Unterarm</option>
               <option>Oberarm</option>
               <option>Schulter / Schulterblatt</option>
               <option>Brust / Sternum</option>
-              <option>Rücken</option>
+              <option>RÃ¼cken</option>
               <option>Rippen / Seite</option>
               <option>Bauch</option>
-              <option>Hüfte / Hüftknochen</option>
+              <option>HÃ¼fte / HÃ¼ftknochen</option>
               <option>Oberschenkel</option>
               <option>Unterschenkel / Schienbein</option>
-              <option>Knöchel / Fuß</option>
+              <option>KnÃ¶chel / FuÃŸ</option>
               <option>Hand / Finger</option>
               <option>Hals / Nacken</option>
               <option>Kopf</option>
@@ -875,13 +841,13 @@
             </select>
           </div>
           <div class="field">
-            <label class="field-label" for="ea-size">Ungefähre Größe</label>
+            <label class="field-label" for="ea-size">UngefÃ¤hre GrÃ¶ÃŸe</label>
             <select id="ea-size" name="size">
-              <option value="">– bitte wählen –</option>
+              <option value="">â€“ bitte wÃ¤hlen â€“</option>
               <option value="Klein (bis 5 cm)">Klein (bis 5 cm)</option>
-              <option value="Mittel (5–10 cm)">Mittel (5–10 cm)</option>
-              <option value="Groß (10–20 cm)">Groß (10–20 cm)</option>
-              <option value="Sehr groß / Sleeve (über 20 cm)">Sehr groß / Sleeve (über 20 cm)</option>
+              <option value="Mittel (5â€“10 cm)">Mittel (5â€“10 cm)</option>
+              <option value="GroÃŸ (10â€“20 cm)">GroÃŸ (10â€“20 cm)</option>
+              <option value="Sehr groÃŸ / Sleeve (Ã¼ber 20 cm)">Sehr groÃŸ / Sleeve (Ã¼ber 20 cm)</option>
               <option value="Noch unklar">Noch unklar</option>
             </select>
           </div>
@@ -898,14 +864,14 @@
 
         <div class="field" id="ea-coverup-notes-wrap" style="display:none;">
           <label class="field-label" for="ea-coverup-notes">Das bestehende Tattoo <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des alten Tattoos."></textarea>
+          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, GrÃ¶ÃŸe und Stil des alten Tattoos."></textarea>
         </div>
       </div>
 
-      <!-- ── Step 3: Stil & Look ── -->
+      <!-- â”€â”€ Step 3: Stil & Look â”€â”€ -->
       <div class="step" data-step="3">
         <h2 class="step-title">Stil &amp; Look</h2>
-        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl möglich.</p>
+        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl mÃ¶glich.</p>
 
         <div class="field">
           <label class="field-label">Tattoo-Stil</label>
@@ -930,25 +896,25 @@
           <div class="radio-group" id="ea-color-pref">
             <label class="radio-item"><input type="radio" name="colorPreference" value="Schwarz-Grau"> Schwarz-Grau</label>
             <label class="radio-item"><input type="radio" name="colorPreference" value="Farbe"> Farbe</label>
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides möglich"> Beides möglich</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides mÃ¶glich"> Beides mÃ¶glich</label>
             <label class="radio-item"><input type="radio" name="colorPreference" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
       </div>
 
-      <!-- ── Step 4: Motiv & Referenzen ── -->
+      <!-- â”€â”€ Step 4: Motiv & Referenzen â”€â”€ -->
       <div class="step" data-step="4">
         <h2 class="step-title">Dein Motiv</h2>
-        <p class="step-subtitle">Ein Satz reicht – wir fragen nach, wenn wir mehr brauchen.</p>
+        <p class="step-subtitle">Ein Satz reicht â€“ wir fragen nach, wenn wir mehr brauchen.</p>
 
         <div class="field">
           <label class="field-label" for="ea-motif-desc">Was stellst du dir vor? <span class="req">*</span></label>
-          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. „Fine-Line Rosen, Unterarm, eher zart""></textarea>
+          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. â€žFine-Line Rosen, Unterarm, eher zart""></textarea>
           <div class="err-msg" id="ea-motif-err">Bitte kurz beschreiben, was du dir vorstellst.</div>
         </div>
 
         <div class="field">
-          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional · max. 3 Fotos)</span></label>
+          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional Â· max. 3 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
@@ -957,15 +923,15 @@
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
-          <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
+          <div class="upload-hint">JPG, PNG oder WEBP Â· max. 2 MB pro Bild Â· max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
         </div>
       </div>
 
-      <!-- ── Step 5: Deine Haut ── -->
+      <!-- â”€â”€ Step 5: Deine Haut â”€â”€ -->
       <div class="step" data-step="5">
         <h2 class="step-title">Deine Haut</h2>
-        <p class="step-subtitle">Hilft beim Vorbereiten der Session – alles freiwillig.</p>
+        <p class="step-subtitle">Hilft beim Vorbereiten der Session â€“ alles freiwillig.</p>
 
         <div class="field">
           <label class="field-label">Ist das dein erstes Tattoo?</label>
@@ -976,7 +942,7 @@
         </div>
 
         <div class="field">
-          <label class="field-label">Bekannte Allergien oder Hautunverträglichkeiten?</label>
+          <label class="field-label">Bekannte Allergien oder HautunvertrÃ¤glichkeiten?</label>
           <div class="radio-group" id="ea-allergies">
             <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"> Nein</label>
             <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"> Ja</label>
@@ -985,24 +951,24 @@
         </div>
 
         <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
-          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder Unverträglichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis …"></textarea>
+          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder UnvertrÃ¤glichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis â€¦"></textarea>
         </div>
       </div>
 
-      <!-- ── Step 6: Termin ── -->
+      <!-- â”€â”€ Step 6: Termin â”€â”€ -->
       <div class="step" data-step="6">
         <h2 class="step-title">Wann soll's losgehen?</h2>
-        <p class="step-subtitle">Ungefähr reicht – kein verbindlicher Termin.</p>
+        <p class="step-subtitle">UngefÃ¤hr reicht â€“ kein verbindlicher Termin.</p>
 
         <div class="field">
           <label class="field-label" for="ea-timeframe">Wunsch-Zeitraum</label>
           <select id="ea-timeframe" name="timeframe">
-            <option value="">– bitte wählen –</option>
-            <option value="So bald wie möglich">So bald wie möglich</option>
-            <option value="In 1–3 Monaten">In 1–3 Monaten</option>
-            <option value="In 3–6 Monaten">In 3–6 Monaten</option>
-            <option value="In 6–12 Monaten">In 6–12 Monaten</option>
+            <option value="">â€“ bitte wÃ¤hlen â€“</option>
+            <option value="So bald wie mÃ¶glich">So bald wie mÃ¶glich</option>
+            <option value="In 1â€“3 Monaten">In 1â€“3 Monaten</option>
+            <option value="In 3â€“6 Monaten">In 3â€“6 Monaten</option>
+            <option value="In 6â€“12 Monaten">In 6â€“12 Monaten</option>
             <option value="Kein fester Zeitdruck">Kein fester Zeitdruck</option>
           </select>
         </div>
@@ -1013,51 +979,51 @@
             <label class="radio-item"><input type="radio" name="preferredTime" value="Vormittags"> Vormittags</label>
             <label class="radio-item"><input type="radio" name="preferredTime" value="Nachmittags"> Nachmittags</label>
             <label class="radio-item"><input type="radio" name="preferredTime" value="Abends"> Abends</label>
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine Präferenz"> Keine Präferenz</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine PrÃ¤ferenz"> Keine PrÃ¤ferenz</label>
           </div>
         </div>
       </div>
 
-      <!-- ── Step 7: Budget ── -->
+      <!-- â”€â”€ Step 7: Budget â”€â”€ -->
       <div class="step" data-step="7">
         <h2 class="step-title">Budget</h2>
-        <p class="step-subtitle">Hilft beim Einschätzen, ob das Projekt passt – keine Pflicht.</p>
+        <p class="step-subtitle">Hilft beim EinschÃ¤tzen, ob das Projekt passt â€“ keine Pflicht.</p>
 
         <div class="field">
           <label class="field-label" for="ea-budget">Dein Budgetrahmen</label>
           <select id="ea-budget" name="budget">
-            <option value="">– bitte wählen –</option>
+            <option value="">â€“ bitte wÃ¤hlen â€“</option>
             <option value="Noch unklar">Noch unklar</option>
-            <option value="Möchte ich nicht angeben">Möchte ich nicht angeben</option>
-            <option value="unter 150 €">unter 150 €</option>
-            <option value="150–300 €">150–300 €</option>
-            <option value="300–500 €">300–500 €</option>
-            <option value="500–800 €">500–800 €</option>
-            <option value="800–1.500 €">800–1.500 €</option>
-            <option value="über 1.500 €">über 1.500 €</option>
+            <option value="MÃ¶chte ich nicht angeben">MÃ¶chte ich nicht angeben</option>
+            <option value="unter 150 â‚¬">unter 150 â‚¬</option>
+            <option value="150â€“300 â‚¬">150â€“300 â‚¬</option>
+            <option value="300â€“500 â‚¬">300â€“500 â‚¬</option>
+            <option value="500â€“800 â‚¬">500â€“800 â‚¬</option>
+            <option value="800â€“1.500 â‚¬">800â€“1.500 â‚¬</option>
+            <option value="Ã¼ber 1.500 â‚¬">Ã¼ber 1.500 â‚¬</option>
           </select>
         </div>
       </div>
 
-      <!-- ── Step 8: Kontakt ── -->
+      <!-- â”€â”€ Step 8: Kontakt â”€â”€ -->
       <div class="step" data-step="8">
-        <h2 class="step-title">Wie können wir<br>dich erreichen?</h2>
-        <p class="step-subtitle">Nur die E-Mail ist Pflicht – alles andere ist freiwillig.</p>
+        <h2 class="step-title">Wie kÃ¶nnen wir<br>dich erreichen?</h2>
+        <p class="step-subtitle">Nur die E-Mail ist Pflicht â€“ alles andere ist freiwillig.</p>
 
         <div class="field">
           <label class="field-label" for="ea-name">Dein Name</label>
-          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia Müller">
+          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia MÃ¼ller">
         </div>
 
         <div class="field">
           <label class="field-label" for="ea-email">E-Mail-Adresse <span class="req">*</span></label>
           <input type="email" id="ea-email" name="email" placeholder="deine@email.de">
-          <div class="err-msg" id="ea-email-err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
+          <div class="err-msg" id="ea-email-err">Bitte eine gÃ¼ltige E-Mail-Adresse eingeben.</div>
         </div>
 
         <div class="field">
           <label class="field-label" for="ea-phone">Telefon <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="tel" id="ea-phone" name="phone" placeholder="+49 176 …">
+          <input type="tel" id="ea-phone" name="phone" placeholder="+49 176 â€¦">
         </div>
 
         <div class="field">
@@ -1068,7 +1034,7 @@
         <div class="field">
           <label class="field-label" for="ea-found">Wie hast du uns gefunden?</label>
           <select id="ea-found" name="howFound">
-            <option value="">– bitte wählen –</option>
+            <option value="">â€“ bitte wÃ¤hlen â€“</option>
             <option>Instagram</option>
             <option>Google</option>
             <option>TikTok</option>
@@ -1081,19 +1047,19 @@
 
         <div class="field" style="margin-top:4px;">
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid #D1CDC7;border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
-            <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#BA897F;">
+            <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#BF7A60;">
             <span style="font-size:12.5px;color:#6B6B6B;line-height:1.5;">
-              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BA897F;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BA897F;">*</span>
+              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BF7A60;text-decoration:underline;">DatenschutzerklÃ¤rung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BF7A60;">*</span>
             </span>
           </label>
-          <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
+          <div class="err-msg" id="ea-privacy-err">Bitte die DatenschutzerklÃ¤rung akzeptieren, um fortzufahren.</div>
         </div>
         <div id="ea-submit-err" style="display:none;margin-top:12px;padding:12px 14px;background:#FFF3F0;border:1px solid #F5C6BC;border-radius:8px;font-size:13px;color:#C0392B;line-height:1.5;">
           Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt.
         </div>
       </div>
 
-      <!-- ── Step 9: Bestätigung ── -->
+      <!-- â”€â”€ Step 9: BestÃ¤tigung â”€â”€ -->
       <div class="step" data-step="9">
         <div class="thankyou-wrap">
           <div class="thankyou-icon">${ICON_DONE}</div>
@@ -1109,24 +1075,24 @@
     </div><!-- /modal-content -->
 
     <div class="modal-nav" id="ea-nav">
-      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;">← Zurück</button>
+      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;">â† ZurÃ¼ck</button>
       <span class="step-counter" id="ea-counter"></span>
-      <button class="btn btn-primary" id="ea-next">Weiter →</button>
+      <button class="btn btn-primary" id="ea-next">Weiter â†’</button>
     </div>
   `;
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // STATE
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const TOTAL_STEPS = 9;
   let currentStep = 1;
   let formData = {};
   let uploadedFiles = []; // [{name, data, type}]
   let shadowRoot, overlay, modalEl, progressFill, navEl, backBtn, nextBtn, counter;
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // CREATE WIDGET
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function createWidget() {
     const host = d.createElement('div');
     host.id = 'ea-widget-root';
@@ -1179,7 +1145,7 @@
       handleNext();
     });
 
-    // Check-item interactivity — use 'change' to avoid double-toggle from wrapping label
+    // Check-item interactivity â€” use 'change' to avoid double-toggle from wrapping label
     shadowRoot.querySelectorAll('.check-grid').forEach(function (grid) {
       grid.querySelectorAll('.check-item').forEach(function (item) {
         var cb = item.querySelector('input[type="checkbox"]');
@@ -1235,9 +1201,9 @@
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // FILE UPLOAD
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function initFileUpload() {
     var area     = shadowRoot.getElementById('ea-upload-area');
     var input    = shadowRoot.getElementById('ea-file-input');
@@ -1259,10 +1225,10 @@
 
     area.addEventListener('dragover', function (e) {
       e.preventDefault();
-      area.style.borderColor = '#BA897F';
+      area.style.borderColor = '#BF7A60';
     });
     area.addEventListener('dragleave', function () {
-      area.style.borderColor = uploadedFiles.length ? '#BA897F' : '';
+      area.style.borderColor = uploadedFiles.length ? '#BF7A60' : '';
     });
     area.addEventListener('drop', function (e) {
       e.preventDefault();
@@ -1275,7 +1241,7 @@
     files.forEach(function (file) {
       if (uploadedFiles.length >= 3) { showUploadErr(errEl, 'Maximal 3 Bilder erlaubt.'); return; }
       if (!file.type.startsWith('image/')) { showUploadErr(errEl, 'Nur Bildformate erlaubt (JPG, PNG, WEBP).'); return; }
-      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + ' ist zu groß (max. 2 MB).'); return; }
+      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + ' ist zu groÃŸ (max. 2 MB).'); return; }
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -1295,7 +1261,7 @@
     previews.innerHTML = uploadedFiles.map(function (f, i) {
       return '<div class="upload-thumb-wrap">' +
         '<img class="upload-thumb" src="' + f.data + '" alt="' + f.name + '">' +
-        '<button class="upload-thumb-del" data-idx="' + i + '" title="Entfernen">×</button>' +
+        '<button class="upload-thumb-del" data-idx="' + i + '" title="Entfernen">Ã—</button>' +
         '</div>';
     }).join('');
 
@@ -1316,9 +1282,9 @@
     });
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // NAVIGATION
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function goToStep(n, back) {
     shadowRoot.querySelectorAll('.step').forEach(function (s) { s.classList.remove('active', 'back'); });
     var target = shadowRoot.querySelector('[data-step="' + n + '"]');
@@ -1338,7 +1304,7 @@
     navEl.style.display = (isFirst || isLast) ? 'none' : 'flex';
     if (!isFirst && !isLast) {
       backBtn.style.visibility = currentStep === 2 ? 'hidden' : 'visible';
-      nextBtn.textContent = currentStep === 8 ? 'Abschicken ✓' : 'Weiter →';
+      nextBtn.textContent = currentStep === 8 ? 'Abschicken âœ“' : 'Weiter â†’';
       counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 7';
     }
   }
@@ -1348,9 +1314,9 @@
     progressFill.style.width = pct + '%';
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // VALIDATION
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function validateStep(step) {
     clearErrors();
 
@@ -1373,13 +1339,13 @@
       if (!privacyCb || !privacyCb.checked) {
         showError('ea-privacy-err', null);
         var lbl = shadowRoot.getElementById('ea-privacy-label');
-        if (lbl) lbl.style.borderColor = '#BA897F';
+        if (lbl) lbl.style.borderColor = '#BF7A60';
         return false;
       }
       if (privacyCb) {
         privacyCb.addEventListener('change', function () {
           var lbl = shadowRoot.getElementById('ea-privacy-label');
-          if (lbl) lbl.style.borderColor = privacyCb.checked ? '#BA897F' : '#D1CDC7';
+          if (lbl) lbl.style.borderColor = privacyCb.checked ? '#BF7A60' : '#D1CDC7';
         }, { once: true });
       }
     }
@@ -1401,9 +1367,9 @@
     shadowRoot.querySelectorAll('.err').forEach(function (e) { e.classList.remove('err'); });
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // COLLECT FORM DATA
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function collectFormData() {
     var styles = [];
     shadowRoot.querySelectorAll('#ea-styles input:checked').forEach(function (cb) {
@@ -1460,12 +1426,12 @@
     };
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // SUBMIT
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   async function submitForm() {
     nextBtn.disabled    = true;
-    nextBtn.textContent = 'Wird gesendet…';
+    nextBtn.textContent = 'Wird gesendetâ€¦';
 
     try {
       formData = collectFormData();
@@ -1515,12 +1481,12 @@
       }
 
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Weiter →';
+      nextBtn.textContent = 'Weiter â†’';
       showThankYou();
     } catch (err) {
       console.error('[EinfachAnfrage] Fehler:', err);
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Erneut versuchen →';
+      nextBtn.textContent = 'Erneut versuchen â†’';
       var submitErr = shadowRoot.getElementById('ea-submit-err');
       if (submitErr) submitErr.style.display = 'block';
     }
@@ -1538,11 +1504,11 @@
     if (!summary) return;
 
     var rows = [
-      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? '…' : '') : '–'],
-      ['Körperstelle', (fd.motif && fd.motif.placement) || '–'],
-      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : '–'],
-      ['Termin',       (fd.appointment && fd.appointment.timeframe) || '–'],
-      ['Budget',       (fd.budget && fd.budget.range) || '–'],
+      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? 'â€¦' : '') : 'â€“'],
+      ['KÃ¶rperstelle', (fd.motif && fd.motif.placement) || 'â€“'],
+      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : 'â€“'],
+      ['Termin',       (fd.appointment && fd.appointment.timeframe) || 'â€“'],
+      ['Budget',       (fd.budget && fd.budget.range) || 'â€“'],
       ['E-Mail',       fd.contact.email],
     ];
 
@@ -1556,14 +1522,14 @@
   }
 
   function formatDate(iso) {
-    if (!iso) return '–';
+    if (!iso) return 'â€“';
     var dt = new Date(iso);
     return dt.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // NEXT HANDLER
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function handleNext() {
     if (!validateStep(currentStep)) return;
     if (currentStep === 8) {
@@ -1573,16 +1539,16 @@
     }
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // OPEN / CLOSE
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function openModal() {
     if (!shadowRoot) createWidget();
 
     currentStep   = 1;
     formData      = {};
     uploadedFiles = [];
-    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Weiter →'; }
+    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Weiter â†’'; }
     goToStep(1);
 
     // Reset form fields
@@ -1624,9 +1590,9 @@
     overlay.addEventListener('transitionend', onEnd);
   }
 
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   // INIT
-  // ──────────────────────────────────────────────────────────────────────────
+  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   function init() {
     d.querySelectorAll('[data-einfachanfrage]').forEach(function (btn) {
       btn.addEventListener('click', openModal);
@@ -1655,3 +1621,4 @@
   }
 
 })(window, document);
+
