@@ -154,10 +154,8 @@
     /* ── Hero ── */
     .hero {
       min-height: 88vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 56px;
+      display: flex;
+      align-items: flex-end;
       padding: 80px 6vw 80px;
       background: #1B1B1B;
     }
@@ -309,12 +307,7 @@
     }
 
     @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding: 64px 5vw 56px;
-      }
-      .hero-visual { display: none; }
+      .hero { padding: 64px 5vw 56px; }
       h1 { font-size: clamp(44px, 11vw, 72px); }
     }
 
@@ -1113,46 +1106,6 @@
       <p class="hero-sub">Dein Kunde füllt ein strukturiertes Formular aus. Du bekommst Motiv, Körperstelle, Stil und Budget – alles auf einmal, ohne Rückfragen.</p>
       <a href="#kontakt" class="btn-primary">Kostenlos einrichten lassen →</a>
       <p class="hero-reassurance">Erster Monat kostenlos · Keine Kreditkarte nötig · Setup in 24h</p>
-    </div>
-
-    <!-- Hero: Vorher/Nachher Visual -->
-    <div class="hero-visual">
-      <div class="compare-card">
-        <div class="compare-before">
-          <div class="compare-label">Vorher</div>
-          <span class="chat-msg chat-customer">"Ich hätte gerne ein Tattoo."</span>
-          <span class="chat-msg chat-you">Welches Motiv dachtest du dir?</span>
-          <span class="chat-msg chat-customer">So ein florales, irgendwie?</span>
-          <span class="chat-msg chat-you">Größe? Und welche Körperstelle?</span>
-          <span class="chat-msg chat-customer">Keine Ahnung ehrlich…</span>
-          <span class="chat-msg chat-you">Und dein Budget ungefähr?</span>
-          <span class="chat-msg chat-customer">Das ist mir leider zu teuer…</span>
-        </div>
-        <div class="compare-after">
-          <div class="compare-label">Nachher</div>
-          <div class="data-block">
-            <div class="data-key">Motiv</div>
-            <div class="data-val">Botanisches Arrangement</div>
-            <div class="data-val-light">Rosen &amp; Eukalyptus, fein und detailliert</div>
-          </div>
-          <div class="data-block">
-            <div class="data-key">Körperstelle + Größe</div>
-            <div class="data-val">Unterarm · Groß (10–20 cm)</div>
-          </div>
-          <div class="data-block">
-            <div class="data-key">Stil</div>
-            <div class="data-val">Fine Line · Realistisch · Schwarz-Grau</div>
-          </div>
-          <div class="data-block">
-            <div class="data-key">Budget</div>
-            <div class="data-val">300–500 €</div>
-          </div>
-          <div class="data-block">
-            <div class="data-key">Wünsche</div>
-            <div class="data-val-light">Weiche Linien, viel Schattierung – wie alte botanische Zeichnungen.</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
