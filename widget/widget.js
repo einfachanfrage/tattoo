@@ -1,6 +1,6 @@
 ﻿/*!
  * Einfach Anfrage Widget v2.0.0
- * Das elegante Anfrage-Widget fÃ¼r TÃ¤towierer
+ * Das elegante Anfrage-Widget für Tätowierer
  * https://einfachanfrage.de
  */
 (function (w, d) {
@@ -23,7 +23,7 @@
   const CONFIG = {
     photographerEmail: currentScript.getAttribute('data-email') || '',
     photographerName:
-      currentScript.getAttribute('data-name') || 'Dein/e TÃ¤towierer/in',
+      currentScript.getAttribute('data-name') || 'Dein/e Tätowierer/in',
     photographerSlug: currentScript.getAttribute('data-slug') || '',
     privacyUrl: currentScript.getAttribute('data-privacy') || 'https://einfachanfrage-tattoo.de/datenschutz',
     webhookUrl: currentScript.getAttribute('data-webhook') || '',
@@ -35,9 +35,9 @@
     delivery: currentScript.getAttribute('data-delivery') || 'both',
   };
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // CSS
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   const SHADOW_CSS = `
     @import url('https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
@@ -347,7 +347,7 @@
       padding: 7px 0; line-height: 1.55;
     }
     .feature-list li::before {
-      content: 'âœ¦'; color: #BF7A60;
+      content: '✦'; color: #BF7A60;
       font-size: 11px; margin-top: 3px; flex-shrink: 0;
     }
 
@@ -446,11 +446,11 @@
     }
   `;
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // THEME OVERRIDES
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
 
-  // ── PEBBLE: Warmes Taupe · Mushroom · Clean & Modern ──
+  // ── PEBBLE: Warmes Taupe � Mushroom � Clean & Modern ──
   const THEME_CSS_NACHT = `
     .overlay { background: rgba(40,32,24,0.48); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .modal { background: #EFEBE5; border-radius: 20px; box-shadow: 0 32px 80px rgba(40,32,24,0.22), 0 4px 16px rgba(40,32,24,0.08); }
@@ -524,7 +524,7 @@
     .summary-value { color: #1C1810; font-weight: 500; }
   `;
 
-  // ── EMBER: Warmes Amber · Linen · Golden & Warm ──
+  // ── EMBER: Warmes Amber � Linen � Golden & Warm ──
   const THEME_CSS_SAGE = `
     .overlay { background: rgba(45,30,14,0.50); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .modal { background: #F3EDE0; border-radius: 20px; box-shadow: 0 32px 80px rgba(45,30,14,0.22), 0 4px 16px rgba(45,30,14,0.08); }
@@ -598,7 +598,7 @@
     .summary-value { color: #221C10; font-weight: 500; }
   `;
 
-  // â”€â”€ ATELIER: Editorial Â· Warm Ivory Â· Bodoni Â· Hochwertig wie ein Tattoo-Studio â”€â”€
+  // ── ATELIER: Editorial · Warm Ivory · Bodoni · Hochwertig wie ein Tattoo-Studio ──
   const THEME_CSS_CLEAN = `
     @import url('https://fonts.bunny.net/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400;1,500&display=swap');
 
@@ -673,7 +673,7 @@
     .divider { background: #EDE8E2; }
     .welcome-icon { background: rgba(42,36,32,0.06); border-radius: 50%; }
     .feature-list li { color: #A09890; }
-    .feature-list li::before { content: 'â€”'; color: #C4917A; font-size: 11px; margin-top: 3px; }
+    .feature-list li::before { content: '—'; color: #C4917A; font-size: 11px; margin-top: 3px; }
 
     .modal-nav { background: #F8F5F1; border-top: 1px solid #EDE8E2; }
     .btn-primary { background: #2A2420; color: #F8F5F1; border-radius: 12px; font-weight: 400; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; padding: 13px 28px; font-family: 'Inter', sans-serif; transition: all 0.2s; }
@@ -692,7 +692,7 @@
     .summary-value { color: #1E1A18; font-weight: 400; }
   `;
 
-  // â”€â”€ SCRIPT: Bold &amp; Grafisch Â· Uppercase Â· Stark wie Traditional Tattoo-Art â”€â”€
+  // ── SCRIPT: Bold &amp; Grafisch · Uppercase · Stark wie Traditional Tattoo-Art ──
   const THEME_CSS_MODERN = `
     .overlay { background: rgba(30,26,22,0.65); }
     .modal { background: #EDEAE4; border-radius: 0; box-shadow: 0 32px 80px rgba(0,0,0,0.18); }
@@ -711,7 +711,7 @@
     .field-label { font-family: 'Inter', sans-serif; font-size: 9px; font-weight: 400; color: #9A9390; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 2px; }
     .field-label .req { color: #B8A898; }
 
-    /* Felder â€“ nur Unterstrich */
+    /* Felder – nur Unterstrich */
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], select, textarea {
       background: transparent;
       border: none;
@@ -730,7 +730,7 @@
       background-repeat: no-repeat; background-position: right 4px center;
     }
 
-    /* Checkboxen â€“ flach, Linie */
+    /* Checkboxen – flach, Linie */
     .check-item { background: transparent; border: none; border-bottom: 1px solid #D4CFC8; border-radius: 0; color: #9A9390; padding: 10px 0; }
     .check-item:hover { background: rgba(0,0,0,0.03); color: #1A1714; }
     .check-item.checked { border-bottom-color: #1A1714; color: #1A1714; background: transparent; }
@@ -758,7 +758,7 @@
     .feature-list li { color: #9A9390; }
     .feature-list li::before { color: #1A1714; }
 
-    /* Navigation â€“ flache Buttons */
+    /* Navigation – flache Buttons */
     .modal-nav { background: #E5E1DB; border-top: 1px solid #C4BFB8; }
     .btn-primary { background: #1A1714; color: #EDEAE4; border-radius: 0; font-weight: 400; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 13px 28px; font-family: 'Inter', sans-serif; }
     .btn-primary:hover { background: #2E2A26; }
@@ -775,9 +775,9 @@
     .summary-value { color: #1A1714; font-weight: 400; }
   `;
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // ICONS
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   const ICON_CLOSE =
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
   const ICON_DONE =
@@ -785,55 +785,61 @@
   const ICON_NEEDLE =
     '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#BF7A60" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><line x1="15" y1="5" x2="19" y2="9"/></svg>';
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  // HTML (9 Steps)
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
+  // HTML (7 Steps = Welcome + 5 Inhalts-Schritte + Danke)
+  // ──────────────────────────────────────────────────────────────────────────
   const MODAL_HTML = `
     <div class="progress-bar"><div class="progress-fill" id="ea-progress"></div></div>
     <div class="modal-header">
       <span class="logo">einfach anfrage</span>
-      <button class="close-btn" id="ea-close" aria-label="SchlieÃŸen">${ICON_CLOSE}</button>
+      <button class="close-btn" id="ea-close" aria-label="Schließen">${ICON_CLOSE}</button>
     </div>
 
     <div class="modal-content" id="ea-content">
 
-      <!-- â”€â”€ Step 1: Willkommen â”€â”€ -->
+      <!-- ── Step 1: Willkommen ── -->
       <div class="step active" data-step="1">
         <div class="welcome-icon">${ICON_NEEDLE}</div>
         <h2 class="step-title">Tattoo-Anfrage<br>stellen</h2>
         <p class="step-subtitle">
-          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann â€“
+          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann –
           ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.
         </p>
         <ul class="feature-list">
-          <li>Fast alles kann auch mit â€žNoch unklar" beantwortet werden</li>
+          <li>Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
           <li>Kein Account, keine Werbung</li>
           <li>Deine Daten gehen nur an ${CONFIG.photographerName}</li>
         </ul>
-        <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten â†’</button>
+        <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten →</button>
       </div>
 
-      <!-- â”€â”€ Step 2: Das Motiv â”€â”€ -->
+      <!-- ── Step 2: Motiv & Ort ── -->
       <div class="step" data-step="2">
-        <h2 class="step-title">Das Motiv</h2>
-        <p class="step-subtitle">Wo soll es hin â€“ und in welcher GrÃ¶ÃŸe?</p>
+        <h2 class="step-title">Dein Motiv</h2>
+        <p class="step-subtitle">Was soll gestochen werden – und wo?</p>
+
+        <div class="field">
+          <label class="field-label" for="ea-motif-desc">Was stellst du dir vor? <span class="req">*</span></label>
+          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. „Fine-Line Rosen, eher zart und filigran""></textarea>
+          <div class="err-msg" id="ea-motif-err">Bitte kurz beschreiben, was du dir vorstellst.</div>
+        </div>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label" for="ea-placement">KÃ¶rperstelle</label>
+            <label class="field-label" for="ea-placement">Körperstelle</label>
             <select id="ea-placement" name="placement">
-              <option value="">â€“ bitte wÃ¤hlen â€“</option>
+              <option value="">– bitte wählen –</option>
               <option>Unterarm</option>
               <option>Oberarm</option>
               <option>Schulter / Schulterblatt</option>
               <option>Brust / Sternum</option>
-              <option>RÃ¼cken</option>
+              <option>Rücken</option>
               <option>Rippen / Seite</option>
               <option>Bauch</option>
-              <option>HÃ¼fte / HÃ¼ftknochen</option>
+              <option>Hüfte / Hüftknochen</option>
               <option>Oberschenkel</option>
               <option>Unterschenkel / Schienbein</option>
-              <option>KnÃ¶chel / FuÃŸ</option>
+              <option>Knöchel / Fuß</option>
               <option>Hand / Finger</option>
               <option>Hals / Nacken</option>
               <option>Kopf</option>
@@ -841,13 +847,13 @@
             </select>
           </div>
           <div class="field">
-            <label class="field-label" for="ea-size">UngefÃ¤hre GrÃ¶ÃŸe</label>
+            <label class="field-label" for="ea-size">Ungefähre Größe</label>
             <select id="ea-size" name="size">
-              <option value="">â€“ bitte wÃ¤hlen â€“</option>
+              <option value="">– bitte wählen –</option>
               <option value="Klein (bis 5 cm)">Klein (bis 5 cm)</option>
-              <option value="Mittel (5â€“10 cm)">Mittel (5â€“10 cm)</option>
-              <option value="GroÃŸ (10â€“20 cm)">GroÃŸ (10â€“20 cm)</option>
-              <option value="Sehr groÃŸ / Sleeve (Ã¼ber 20 cm)">Sehr groÃŸ / Sleeve (Ã¼ber 20 cm)</option>
+              <option value="Mittel (5–10 cm)">Mittel (5–10 cm)</option>
+              <option value="Groß (10–20 cm)">Groß (10–20 cm)</option>
+              <option value="Sehr groß / Sleeve (über 20 cm)">Sehr groß / Sleeve (über 20 cm)</option>
               <option value="Noch unklar">Noch unklar</option>
             </select>
           </div>
@@ -864,14 +870,14 @@
 
         <div class="field" id="ea-coverup-notes-wrap" style="display:none;">
           <label class="field-label" for="ea-coverup-notes">Das bestehende Tattoo <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, GrÃ¶ÃŸe und Stil des alten Tattoos."></textarea>
+          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des alten Tattoos."></textarea>
         </div>
       </div>
 
-      <!-- â”€â”€ Step 3: Stil & Look â”€â”€ -->
+      <!-- ── Step 3: Stil & Referenzen ── -->
       <div class="step" data-step="3">
-        <h2 class="step-title">Stil &amp; Look</h2>
-        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl mÃ¶glich.</p>
+        <h2 class="step-title">Stil &amp; Referenzen</h2>
+        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl möglich.</p>
 
         <div class="field">
           <label class="field-label">Tattoo-Stil</label>
@@ -896,25 +902,13 @@
           <div class="radio-group" id="ea-color-pref">
             <label class="radio-item"><input type="radio" name="colorPreference" value="Schwarz-Grau"> Schwarz-Grau</label>
             <label class="radio-item"><input type="radio" name="colorPreference" value="Farbe"> Farbe</label>
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides mÃ¶glich"> Beides mÃ¶glich</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides möglich"> Beides möglich</label>
             <label class="radio-item"><input type="radio" name="colorPreference" value="Noch unklar"> Noch unklar</label>
           </div>
         </div>
-      </div>
-
-      <!-- â”€â”€ Step 4: Motiv & Referenzen â”€â”€ -->
-      <div class="step" data-step="4">
-        <h2 class="step-title">Dein Motiv</h2>
-        <p class="step-subtitle">Ein Satz reicht â€“ wir fragen nach, wenn wir mehr brauchen.</p>
 
         <div class="field">
-          <label class="field-label" for="ea-motif-desc">Was stellst du dir vor? <span class="req">*</span></label>
-          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. â€žFine-Line Rosen, Unterarm, eher zart""></textarea>
-          <div class="err-msg" id="ea-motif-err">Bitte kurz beschreiben, was du dir vorstellst.</div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional Â· max. 3 Fotos)</span></label>
+          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional · max. 3 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
@@ -923,52 +917,24 @@
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
-          <div class="upload-hint">JPG, PNG oder WEBP Â· max. 2 MB pro Bild Â· max. 3 Bilder</div>
+          <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
         </div>
       </div>
 
-      <!-- â”€â”€ Step 5: Deine Haut â”€â”€ -->
-      <div class="step" data-step="5">
-        <h2 class="step-title">Deine Haut</h2>
-        <p class="step-subtitle">Hilft beim Vorbereiten der Session â€“ alles freiwillig.</p>
-
-        <div class="field">
-          <label class="field-label">Ist das dein erstes Tattoo?</label>
-          <div class="radio-group" id="ea-first-tattoo">
-            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Nein"> Nein</label>
-          </div>
-        </div>
-
-        <div class="field">
-          <label class="field-label">Bekannte Allergien oder HautunvertrÃ¤glichkeiten?</label>
-          <div class="radio-group" id="ea-allergies">
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nicht sicher"> Nicht sicher</label>
-          </div>
-        </div>
-
-        <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
-          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder UnvertrÃ¤glichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis â€¦"></textarea>
-        </div>
-      </div>
-
-      <!-- â”€â”€ Step 6: Termin â”€â”€ -->
-      <div class="step" data-step="6">
-        <h2 class="step-title">Wann soll's losgehen?</h2>
-        <p class="step-subtitle">UngefÃ¤hr reicht â€“ kein verbindlicher Termin.</p>
+      <!-- ── Step 4: Termin & Budget ── -->
+      <div class="step" data-step="4">
+        <h2 class="step-title">Termin &amp; Budget</h2>
+        <p class="step-subtitle">Ungefähr reicht – kein verbindlicher Termin.</p>
 
         <div class="field">
           <label class="field-label" for="ea-timeframe">Wunsch-Zeitraum</label>
           <select id="ea-timeframe" name="timeframe">
-            <option value="">â€“ bitte wÃ¤hlen â€“</option>
-            <option value="So bald wie mÃ¶glich">So bald wie mÃ¶glich</option>
-            <option value="In 1â€“3 Monaten">In 1â€“3 Monaten</option>
-            <option value="In 3â€“6 Monaten">In 3â€“6 Monaten</option>
-            <option value="In 6â€“12 Monaten">In 6â€“12 Monaten</option>
+            <option value="">– bitte wählen –</option>
+            <option value="So bald wie möglich">So bald wie möglich</option>
+            <option value="In 1–3 Monaten">In 1–3 Monaten</option>
+            <option value="In 3–6 Monaten">In 3–6 Monaten</option>
+            <option value="In 6–12 Monaten">In 6–12 Monaten</option>
             <option value="Kein fester Zeitdruck">Kein fester Zeitdruck</option>
           </select>
         </div>
@@ -979,51 +945,73 @@
             <label class="radio-item"><input type="radio" name="preferredTime" value="Vormittags"> Vormittags</label>
             <label class="radio-item"><input type="radio" name="preferredTime" value="Nachmittags"> Nachmittags</label>
             <label class="radio-item"><input type="radio" name="preferredTime" value="Abends"> Abends</label>
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine PrÃ¤ferenz"> Keine PrÃ¤ferenz</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine Präferenz"> Keine Präferenz</label>
           </div>
         </div>
-      </div>
-
-      <!-- â”€â”€ Step 7: Budget â”€â”€ -->
-      <div class="step" data-step="7">
-        <h2 class="step-title">Budget</h2>
-        <p class="step-subtitle">Hilft beim EinschÃ¤tzen, ob das Projekt passt â€“ keine Pflicht.</p>
 
         <div class="field">
           <label class="field-label" for="ea-budget">Dein Budgetrahmen</label>
           <select id="ea-budget" name="budget">
-            <option value="">â€“ bitte wÃ¤hlen â€“</option>
+            <option value="">– bitte wählen –</option>
             <option value="Noch unklar">Noch unklar</option>
-            <option value="MÃ¶chte ich nicht angeben">MÃ¶chte ich nicht angeben</option>
-            <option value="unter 150 â‚¬">unter 150 â‚¬</option>
-            <option value="150â€“300 â‚¬">150â€“300 â‚¬</option>
-            <option value="300â€“500 â‚¬">300â€“500 â‚¬</option>
-            <option value="500â€“800 â‚¬">500â€“800 â‚¬</option>
-            <option value="800â€“1.500 â‚¬">800â€“1.500 â‚¬</option>
-            <option value="Ã¼ber 1.500 â‚¬">Ã¼ber 1.500 â‚¬</option>
+            <option value="Möchte ich nicht angeben">Möchte ich nicht angeben</option>
+            <option value="unter 150 €">unter 150 €</option>
+            <option value="150–300 €">150–300 €</option>
+            <option value="300–500 €">300–500 €</option>
+            <option value="500–800 €">500–800 €</option>
+            <option value="800–1.500 €">800–1.500 €</option>
+            <option value="über 1.500 €">über 1.500 €</option>
           </select>
         </div>
       </div>
 
-      <!-- â”€â”€ Step 8: Kontakt â”€â”€ -->
-      <div class="step" data-step="8">
-        <h2 class="step-title">Wie kÃ¶nnen wir<br>dich erreichen?</h2>
-        <p class="step-subtitle">Nur die E-Mail ist Pflicht â€“ alles andere ist freiwillig.</p>
+      <!-- ── Step 5: Deine Haut ── -->
+      <div class="step" data-step="5">
+        <h2 class="step-title">Deine Haut</h2>
+        <p class="step-subtitle">Hilft beim Vorbereiten der Session – alles freiwillig.</p>
+
+        <div class="field">
+          <label class="field-label">Ist das dein erstes Tattoo?</label>
+          <div class="radio-group" id="ea-first-tattoo">
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Nein"> Nein</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">Bekannte Allergien oder Hautunverträglichkeiten?</label>
+          <div class="radio-group" id="ea-allergies">
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"> Nein</label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"> Ja</label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nicht sicher"> Nicht sicher</label>
+          </div>
+        </div>
+
+        <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
+          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder Unverträglichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis …"></textarea>
+        </div>
+      </div>
+
+      <!-- ── Step 6: Kontakt ── -->
+      <div class="step" data-step="6">
+        <h2 class="step-title">Wie können wir<br>dich erreichen?</h2>
+        <p class="step-subtitle">Nur die E-Mail ist Pflicht – alles andere ist freiwillig.</p>
 
         <div class="field">
           <label class="field-label" for="ea-name">Dein Name</label>
-          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia MÃ¼ller">
+          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia Müller">
         </div>
 
         <div class="field">
           <label class="field-label" for="ea-email">E-Mail-Adresse <span class="req">*</span></label>
           <input type="email" id="ea-email" name="email" placeholder="deine@email.de">
-          <div class="err-msg" id="ea-email-err">Bitte eine gÃ¼ltige E-Mail-Adresse eingeben.</div>
+          <div class="err-msg" id="ea-email-err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
         </div>
 
         <div class="field">
           <label class="field-label" for="ea-phone">Telefon <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="tel" id="ea-phone" name="phone" placeholder="+49 176 â€¦">
+          <input type="tel" id="ea-phone" name="phone" placeholder="+49 176 …">
         </div>
 
         <div class="field">
@@ -1034,7 +1022,7 @@
         <div class="field">
           <label class="field-label" for="ea-found">Wie hast du uns gefunden?</label>
           <select id="ea-found" name="howFound">
-            <option value="">â€“ bitte wÃ¤hlen â€“</option>
+            <option value="">– bitte wählen –</option>
             <option>Instagram</option>
             <option>Google</option>
             <option>TikTok</option>
@@ -1049,18 +1037,18 @@
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid #D1CDC7;border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
             <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#BF7A60;">
             <span style="font-size:12.5px;color:#6B6B6B;line-height:1.5;">
-              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BF7A60;text-decoration:underline;">DatenschutzerklÃ¤rung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BF7A60;">*</span>
+              Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BF7A60;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BF7A60;">*</span>
             </span>
           </label>
-          <div class="err-msg" id="ea-privacy-err">Bitte die DatenschutzerklÃ¤rung akzeptieren, um fortzufahren.</div>
+          <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
         </div>
         <div id="ea-submit-err" style="display:none;margin-top:12px;padding:12px 14px;background:#FFF3F0;border:1px solid #F5C6BC;border-radius:8px;font-size:13px;color:#C0392B;line-height:1.5;">
           Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt.
         </div>
       </div>
 
-      <!-- â”€â”€ Step 9: BestÃ¤tigung â”€â”€ -->
-      <div class="step" data-step="9">
+      <!-- ── Step 7: Bestätigung ── -->
+      <div class="step" data-step="7">
         <div class="thankyou-wrap">
           <div class="thankyou-icon">${ICON_DONE}</div>
           <h2 class="step-title">Vielen Dank!</h2>
@@ -1075,24 +1063,24 @@
     </div><!-- /modal-content -->
 
     <div class="modal-nav" id="ea-nav">
-      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;">â† ZurÃ¼ck</button>
+      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;">← Zurück</button>
       <span class="step-counter" id="ea-counter"></span>
-      <button class="btn btn-primary" id="ea-next">Weiter â†’</button>
+      <button class="btn btn-primary" id="ea-next">Weiter →</button>
     </div>
   `;
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // STATE
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-  const TOTAL_STEPS = 9;
+  // ──────────────────────────────────────────────────────────────────────────
+  const TOTAL_STEPS = 7;
   let currentStep = 1;
   let formData = {};
   let uploadedFiles = []; // [{name, data, type}]
   let shadowRoot, overlay, modalEl, progressFill, navEl, backBtn, nextBtn, counter;
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // CREATE WIDGET
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function createWidget() {
     const host = d.createElement('div');
     host.id = 'ea-widget-root';
@@ -1145,7 +1133,7 @@
       handleNext();
     });
 
-    // Check-item interactivity â€” use 'change' to avoid double-toggle from wrapping label
+    // Check-item interactivity — use 'change' to avoid double-toggle from wrapping label
     shadowRoot.querySelectorAll('.check-grid').forEach(function (grid) {
       grid.querySelectorAll('.check-item').forEach(function (item) {
         var cb = item.querySelector('input[type="checkbox"]');
@@ -1201,9 +1189,9 @@
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // FILE UPLOAD
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function initFileUpload() {
     var area     = shadowRoot.getElementById('ea-upload-area');
     var input    = shadowRoot.getElementById('ea-file-input');
@@ -1241,7 +1229,7 @@
     files.forEach(function (file) {
       if (uploadedFiles.length >= 3) { showUploadErr(errEl, 'Maximal 3 Bilder erlaubt.'); return; }
       if (!file.type.startsWith('image/')) { showUploadErr(errEl, 'Nur Bildformate erlaubt (JPG, PNG, WEBP).'); return; }
-      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + ' ist zu groÃŸ (max. 2 MB).'); return; }
+      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + ' ist zu groß (max. 2 MB).'); return; }
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -1261,7 +1249,7 @@
     previews.innerHTML = uploadedFiles.map(function (f, i) {
       return '<div class="upload-thumb-wrap">' +
         '<img class="upload-thumb" src="' + f.data + '" alt="' + f.name + '">' +
-        '<button class="upload-thumb-del" data-idx="' + i + '" title="Entfernen">Ã—</button>' +
+        '<button class="upload-thumb-del" data-idx="' + i + '" title="Entfernen">×</button>' +
         '</div>';
     }).join('');
 
@@ -1282,9 +1270,9 @@
     });
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // NAVIGATION
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function goToStep(n, back) {
     shadowRoot.querySelectorAll('.step').forEach(function (s) { s.classList.remove('active', 'back'); });
     var target = shadowRoot.querySelector('[data-step="' + n + '"]');
@@ -1304,23 +1292,23 @@
     navEl.style.display = (isFirst || isLast) ? 'none' : 'flex';
     if (!isFirst && !isLast) {
       backBtn.style.visibility = currentStep === 2 ? 'hidden' : 'visible';
-      nextBtn.textContent = currentStep === 8 ? 'Abschicken âœ“' : 'Weiter â†’';
-      counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 7';
+      nextBtn.textContent = currentStep === 6 ? 'Abschicken ✓' : 'Weiter →';
+      counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 5';
     }
   }
 
   function updateProgress() {
-    var pct = currentStep === 1 ? 0 : Math.round(((currentStep - 1) / 8) * 100);
+    var pct = currentStep === 1 ? 0 : Math.round(((currentStep - 1) / 6) * 100);
     progressFill.style.width = pct + '%';
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // VALIDATION
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function validateStep(step) {
     clearErrors();
 
-    if (step === 4) {
+    if (step === 2) {
       var motifDesc = shadowRoot.getElementById('ea-motif-desc');
       if (!motifDesc || !motifDesc.value.trim()) {
         showError('ea-motif-err', 'ea-motif-desc');
@@ -1328,7 +1316,7 @@
       }
     }
 
-    if (step === 8) {
+    if (step === 6) {
       var emailInput = shadowRoot.getElementById('ea-email');
       var emailVal   = emailInput.value.trim();
       if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
@@ -1367,9 +1355,9 @@
     shadowRoot.querySelectorAll('.err').forEach(function (e) { e.classList.remove('err'); });
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // COLLECT FORM DATA
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function collectFormData() {
     var styles = [];
     shadowRoot.querySelectorAll('#ea-styles input:checked').forEach(function (cb) {
@@ -1426,12 +1414,12 @@
     };
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // SUBMIT
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   async function submitForm() {
     nextBtn.disabled    = true;
-    nextBtn.textContent = 'Wird gesendetâ€¦';
+    nextBtn.textContent = 'Wird gesendet …';
 
     try {
       formData = collectFormData();
@@ -1481,12 +1469,12 @@
       }
 
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Weiter â†’';
+      nextBtn.textContent = 'Weiter →';
       showThankYou();
     } catch (err) {
       console.error('[EinfachAnfrage] Fehler:', err);
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Erneut versuchen â†’';
+      nextBtn.textContent = 'Erneut versuchen →';
       var submitErr = shadowRoot.getElementById('ea-submit-err');
       if (submitErr) submitErr.style.display = 'block';
     }
@@ -1494,7 +1482,7 @@
 
   function showThankYou() {
     buildSummary();
-    goToStep(9);
+    goToStep(7);
   }
 
   function buildSummary() {
@@ -1504,11 +1492,11 @@
     if (!summary) return;
 
     var rows = [
-      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? 'â€¦' : '') : 'â€“'],
-      ['KÃ¶rperstelle', (fd.motif && fd.motif.placement) || 'â€“'],
-      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : 'â€“'],
-      ['Termin',       (fd.appointment && fd.appointment.timeframe) || 'â€“'],
-      ['Budget',       (fd.budget && fd.budget.range) || 'â€“'],
+      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? '…' : '') : '–'],
+      ['Körperstelle', (fd.motif && fd.motif.placement) || '–'],
+      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : '–'],
+      ['Termin',       (fd.appointment && fd.appointment.timeframe) || '–'],
+      ['Budget',       (fd.budget && fd.budget.range) || '–'],
       ['E-Mail',       fd.contact.email],
     ];
 
@@ -1522,33 +1510,33 @@
   }
 
   function formatDate(iso) {
-    if (!iso) return 'â€“';
+    if (!iso) return '–';
     var dt = new Date(iso);
     return dt.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // NEXT HANDLER
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function handleNext() {
     if (!validateStep(currentStep)) return;
-    if (currentStep === 8) {
+    if (currentStep === 6) {
       submitForm();
-    } else if (currentStep < 8) {
+    } else if (currentStep < 6) {
       goToStep(currentStep + 1);
     }
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // OPEN / CLOSE
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function openModal() {
     if (!shadowRoot) createWidget();
 
     currentStep   = 1;
     formData      = {};
     uploadedFiles = [];
-    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Weiter â†’'; }
+    if (nextBtn) { nextBtn.disabled = false; nextBtn.textContent = 'Weiter →'; }
     goToStep(1);
 
     // Reset form fields
@@ -1590,9 +1578,9 @@
     overlay.addEventListener('transitionend', onEnd);
   }
 
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   // INIT
-  // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ──────────────────────────────────────────────────────────────────────────
   function init() {
     d.querySelectorAll('[data-einfachanfrage]').forEach(function (btn) {
       btn.addEventListener('click', openModal);

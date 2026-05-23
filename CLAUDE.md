@@ -176,16 +176,16 @@ Es gibt 5 Themes. Das CSS ist in zwei Schichten aufgebaut:
 | `modern` | Script | Beige-Editorial, Uppercase, stark & grafisch |
 
 ### Widget-Schritte (Tattoo)
-Das Widget hat folgende Schritte (9 gesamt):
-1. **Willkommen** – Intro-Screen, Feature-Liste
-2. **Das Motiv** – Beschreibung (Pflichtfeld), Körperstelle, Größe, Cover-Up (Ja/Nein), bedingt: Cover-Up-Details
-3. **Stil & Look** – 12 Stil-Checkboxen (Fine Line, Realistisch, Traditional, etc.), Farbe/SW-Präferenz
-4. **Referenzen & Wünsche** – Stil in eigenen Worten, Inspirationsbild-Upload (max. 3, je 2 MB)
-5. **Deine Haut** – Erstes Tattoo (Ja/Nein), Allergien (Nein/Ja/Nicht sicher), bedingt: Allergie-Details
-6. **Wann soll's losgehen?** – Wunsch-Zeitraum (Select), bevorzugte Tageszeit (Radio)
-7. **Budget & Anmerkungen** – Budget-Range (unter 150 € bis über 1.500 €), freie Anmerkungen
-8. **Kontakt** – Name, E-Mail (Pflichtfeld), Telefon, Instagram, Wie gefunden, Datenschutz (Pflichtfeld)
-9. **Danke** – Bestätigung mit Zusammenfassung
+Das Widget hat folgende Schritte (7 intern = Welcome + 5 Inhalts-Schritte + Danke).
+Dem Nutzer wird „Schritt X von 5" angezeigt.
+
+1. **Willkommen** – Intro-Screen, Feature-Liste (kein Zähler)
+2. **Dein Motiv** (Schritt 1/5) – Motiv-Beschreibung (Pflichtfeld), Körperstelle, Größe, Cover-Up, bedingt: Cover-Up-Details
+3. **Stil & Referenzen** (Schritt 2/5) – 12 Stil-Checkboxen, Farbe/SW-Präferenz, Referenzbilder-Upload (max. 3)
+4. **Termin & Budget** (Schritt 3/5) – Wunsch-Zeitraum, bevorzugte Tageszeit, Budget-Range
+5. **Deine Haut** (Schritt 4/5) – Erstes Tattoo (Ja/Nein), Allergien, bedingt: Allergie-Details
+6. **Kontakt** (Schritt 5/5) – Name, E-Mail (Pflichtfeld), Telefon, Instagram, Wie gefunden, Datenschutz (Pflichtfeld)
+7. **Danke** – Bestätigung mit Zusammenfassung (kein Zähler)
 
 ---
 
