@@ -170,6 +170,11 @@
     }
     .icon-btn:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* ── Dashboard lang toggle ────────────────────── */
+    .dash-lang-toggle { display:flex; align-items:center; gap:1px; background:var(--bg-alt); border:1.5px solid var(--border); border-radius:7px; padding:2px; }
+    .dash-lang-btn { background:transparent; border:none; border-radius:5px; padding:4px 9px; font-size:10px; font-weight:700; letter-spacing:0.07em; cursor:pointer; color:var(--muted); font-family:inherit; transition:all 0.15s; }
+    .dash-lang-btn.active { background:#fff; color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,0.1); }
+
     /* ── Content ──────────────────────────────────── */
     .content {
       flex: 1;
@@ -748,11 +753,11 @@
   <div class="login-overlay" id="login-overlay">
     <div class="login-box">
       <div class="login-logo">einfach <span>anfrage</span></div>
-      <div class="login-sub">Dashboard · Melde dich mit deiner persönlichen URL an</div>
+      <div class="login-sub" data-i18n="login.sub">Dashboard · Melde dich mit deiner persönlichen URL an</div>
       <form onsubmit="doLogin(event)">
-        <input class="login-field" type="text" id="login-slug" placeholder="Deine URL (z. B. sandraholm)" autocomplete="username" autocorrect="off" autocapitalize="none" spellcheck="false">
-        <input class="login-field" type="password" id="login-pw" placeholder="Passwort" autocomplete="current-password">
-        <button class="login-btn" type="submit">Anmelden →</button>
+        <input class="login-field" type="text" id="login-slug" placeholder="Deine URL (z. B. sandraholm)" data-i18n-ph="login.slug.ph" autocomplete="username" autocorrect="off" autocapitalize="none" spellcheck="false">
+        <input class="login-field" type="password" id="login-pw" placeholder="Passwort" data-i18n-ph="login.pw.ph" autocomplete="current-password">
+        <button class="login-btn" type="submit" data-i18n="login.btn">Anmelden →</button>
         <div class="login-error" id="login-error"></div>
       </form>
     </div>
@@ -766,47 +771,47 @@
     </div>
 
     <nav class="sidebar-nav">
-      <div class="nav-label">Anfragen</div>
+      <div class="nav-label" data-i18n="nav.section.requests">Anfragen</div>
       <button class="nav-item active" id="nav-all" onclick="setFilter(null, 'nav-all')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-        Alle aktiven
+        <span data-i18n="nav.all">Alle aktiven</span>
       </button>
       <button class="nav-item" id="nav-neu" onclick="setFilter('neu', 'nav-neu')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></span>
-        Neu
+        <span data-i18n="nav.new">Neu</span>
         <span id="nav-badge-neu" style="margin-left:auto;background:rgba(186,137,127,0.25);color:var(--accent);font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;display:none;"></span>
       </button>
       <button class="nav-item" id="nav-progress" onclick="setFilter('in_bearbeitung', 'nav-progress')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-        Im Gespräch
+        <span data-i18n="nav.progress">Im Gespräch</span>
       </button>
       <button class="nav-item" id="nav-sent" onclick="setFilter('termin_ausstehend', 'nav-sent')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
-        Termin ausstehend
+        <span data-i18n="nav.pending">Termin ausstehend</span>
       </button>
       <button class="nav-item" id="nav-booked" onclick="setFilter('beauftragt', 'nav-booked')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg></span>
-        Termin vereinbart
+        <span data-i18n="nav.booked">Termin vereinbart</span>
       </button>
 
-      <div class="nav-label" style="margin-top:10px;">Sonstiges</div>
+      <div class="nav-label" style="margin-top:10px;" data-i18n="nav.section.other">Sonstiges</div>
       <button class="nav-item" id="nav-archive" onclick="setFilter('archiviert', 'nav-archive')">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
-        Archiv
+        <span data-i18n="nav.archive">Archiv</span>
         <span id="nav-badge-archive" style="margin-left:auto;background:rgba(140,140,140,0.15);color:#888;font-size:9px;font-weight:700;padding:1px 7px;border-radius:10px;display:none;"></span>
       </button>
       <button class="nav-item" id="nav-settings" onclick="showSettings()">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-        Einstellungen
+        <span data-i18n="nav.settings">Einstellungen</span>
       </button>
       <button class="nav-item" onclick="copyPreviewLink()">
         <span class="nav-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-        Vorschau-Link kopieren
+        <span data-i18n="nav.preview">Vorschau-Link kopieren</span>
       </button>
     </nav>
 
     <div class="sidebar-footer">
-      <a href="/">← Zurück zur Landing Page</a>
+      <a href="/" data-i18n="sidebar.back">← Zurück zur Landing Page</a>
     </div>
   </aside>
 
@@ -815,14 +820,19 @@
 
     <!-- Preview banner -->
     <div class="preview-banner" id="preview-banner" style="display:none;">
-      <span>Vorschau-Modus – nur lesend, keine Änderungen möglich.</span>
+      <span data-i18n="preview.banner">Vorschau-Modus – nur lesend, keine Änderungen möglich.</span>
       <span id="preview-url-hint" style="font-size:11px;opacity:0.7;"></span>
     </div>
 
     <!-- Topbar -->
     <div class="topbar">
-      <div class="topbar-title" id="topbar-title">Anfragen</div>
+      <div class="topbar-title" id="topbar-title" data-i18n="list.title.all">Anfragen</div>
       <div class="topbar-right">
+        <!-- Dashboard language toggle -->
+        <div class="dash-lang-toggle" id="dash-lang-toggle">
+          <button class="dash-lang-btn active" data-dlang="de" onclick="setDashLang('de')">DE</button>
+          <button class="dash-lang-btn" data-dlang="en" onclick="setDashLang('en')">EN</button>
+        </div>
         <!-- Mobile: settings icon -->
         <button class="icon-btn" onclick="showSettings()" title="Einstellungen" style="display:none;" id="mobile-settings-btn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
@@ -840,24 +850,24 @@
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-label">Gesamt</div>
+          <div class="stat-label" data-i18n="stat.total.label">Gesamt</div>
           <div class="stat-value" id="stat-total">–</div>
-          <div class="stat-sub">aktive Anfragen</div>
+          <div class="stat-sub" data-i18n="stat.total.sub">aktive Anfragen</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Neu</div>
+          <div class="stat-label" data-i18n="stat.new.label">Neu</div>
           <div class="stat-value" id="stat-neu" style="color:var(--rose)">–</div>
-          <div class="stat-sub">unbearbeitet</div>
+          <div class="stat-sub" data-i18n="stat.new.sub">unbearbeitet</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Termin</div>
+          <div class="stat-label" data-i18n="stat.pending.label">Termin</div>
           <div class="stat-value" id="stat-sent" style="color:#4A80C0">–</div>
-          <div class="stat-sub">ausstehend</div>
+          <div class="stat-sub" data-i18n="stat.pending.sub">ausstehend</div>
         </div>
         <div class="stat-card">
-          <div class="stat-label">Vereinbart</div>
+          <div class="stat-label" data-i18n="stat.booked.label">Vereinbart</div>
           <div class="stat-value" id="stat-booked" style="color:#2F8F5A">–</div>
-          <div class="stat-sub">Termine</div>
+          <div class="stat-sub" data-i18n="stat.booked.sub">Termine</div>
         </div>
       </div>
 
@@ -879,8 +889,8 @@
           <div class="detail-placeholder-icon">
             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
-          <div style="font-size:14px;font-weight:500;color:var(--dark);margin-bottom:5px;">Anfrage auswählen</div>
-          <div style="font-size:12px;">Klicke auf eine Anfrage, um alle Details zu sehen.</div>
+          <div style="font-size:14px;font-weight:500;color:var(--dark);margin-bottom:5px;" data-i18n="detail.placeholder.title">Anfrage auswählen</div>
+          <div style="font-size:12px;" data-i18n="detail.placeholder.sub">Klicke auf eine Anfrage, um alle Details zu sehen.</div>
         </div>
       </div>
 
@@ -894,23 +904,23 @@
   <nav class="mobile-nav" id="mobile-nav">
     <button class="mobile-nav-btn active" id="mob-all" onclick="mobileNav(null, 'mob-all')">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      Alle
+      <span data-i18n="mob.all">Alle</span>
     </button>
     <button class="mobile-nav-btn" id="mob-neu" onclick="mobileNav('neu', 'mob-neu')">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Neu
+      <span data-i18n="mob.new">Neu</span>
     </button>
     <button class="mobile-nav-btn" id="mob-aktiv" onclick="mobileNav('in_bearbeitung', 'mob-aktiv')">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      Gespräch
+      <span data-i18n="mob.progress">Gespräch</span>
     </button>
     <button class="mobile-nav-btn" id="mob-booked" onclick="mobileNav('beauftragt', 'mob-booked')">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
-      Vereinbart
+      <span data-i18n="mob.booked">Vereinbart</span>
     </button>
     <button class="mobile-nav-btn" id="mob-archive" onclick="mobileNav('archiviert', 'mob-archive')">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-      Archiv
+      <span data-i18n="mob.archive">Archiv</span>
     </button>
   </nav>
 
@@ -918,12 +928,12 @@
   <div id="settings-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.32);z-index:500;align-items:center;justify-content:center;padding:16px;">
     <div style="background:#fff;border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;padding:32px 36px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.14);">
       <button onclick="hideSettings()" style="position:absolute;top:14px;right:14px;background:#EFEDE9;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:16px;color:#6B6B6B;display:flex;align-items:center;justify-content:center;">✕</button>
-      <div style="font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.02em;color:#1B1B1B;margin-bottom:4px;">Einstellungen</div>
+      <div style="font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:18px;font-weight:700;letter-spacing:0.02em;color:#1B1B1B;margin-bottom:4px;" data-i18n="settings.title">Einstellungen</div>
       <div style="font-size:12px;color:#6B6B6B;margin-bottom:24px;" id="settings-slug-hint"></div>
 
       <!-- Theme -->
       <div style="margin-bottom:24px;">
-        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Widget-Design</div>
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;" data-i18n="settings.theme.title">Widget-Design</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:10px 13px;cursor:pointer;transition:border-color 0.15s;display:block;" id="theme-opt-champagne">
             <input type="radio" name="theme" value="champagne" onchange="previewTheme('champagne')" style="display:none;">
@@ -955,52 +965,52 @@
 
       <!-- Language -->
       <div style="margin-bottom:24px;">
-        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Widget-Sprache</div>
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;" data-i18n="settings.lang.title">Widget-Sprache</div>
         <div style="display:flex;flex-direction:column;gap:7px;">
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-de">
             <input type="radio" name="language" value="de" onchange="selectLanguage('de')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Deutsch</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Widget immer auf Deutsch</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.lang.de.title">Deutsch</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.lang.de.sub">Widget immer auf Deutsch</div></div>
           </label>
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-en">
             <input type="radio" name="language" value="en" onchange="selectLanguage('en')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">English</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Widget always in English</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.lang.en.title">English</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.lang.en.sub">Widget always in English</div></div>
           </label>
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-auto">
             <input type="radio" name="language" value="auto" onchange="selectLanguage('auto')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Nutzer wählt selbst</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">DE/EN-Umschalter im Widget sichtbar</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.lang.auto.title">Nutzer wählt selbst</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.lang.auto.sub">DE/EN-Umschalter im Widget sichtbar</div></div>
           </label>
         </div>
       </div>
 
       <!-- Delivery -->
       <div style="margin-bottom:24px;">
-        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Anfragen-Empfang</div>
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;" data-i18n="settings.delivery.title">Anfragen-Empfang</div>
         <div style="display:flex;flex-direction:column;gap:7px;">
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-both">
             <input type="radio" name="delivery" value="both" onchange="selectDelivery('both')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">E-Mail &amp; Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Per Mail und im Dashboard</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.delivery.both.title">E-Mail &amp; Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.delivery.both.sub">Per Mail und im Dashboard</div></div>
           </label>
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-email">
             <input type="radio" name="delivery" value="email" onchange="selectDelivery('email')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Nur E-Mail</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Kein Dashboard-Eintrag</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.delivery.email.title">Nur E-Mail</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.delivery.email.sub">Kein Dashboard-Eintrag</div></div>
           </label>
           <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="delivery-opt-dashboard">
             <input type="radio" name="delivery" value="dashboard" onchange="selectDelivery('dashboard')" style="margin-top:3px;">
-            <div><div style="font-weight:600;font-size:13px;">Nur Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Keine E-Mail-Benachrichtigung</div></div>
+            <div><div style="font-weight:600;font-size:13px;" data-i18n="settings.delivery.dash.title">Nur Dashboard</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;" data-i18n="settings.delivery.dash.sub">Keine E-Mail-Benachrichtigung</div></div>
           </label>
         </div>
       </div>
 
-      <button onclick="saveSettings()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;margin-bottom:20px;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'">Einstellungen speichern</button>
+      <button onclick="saveSettings()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;margin-bottom:20px;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'" data-i18n="settings.save">Einstellungen speichern</button>
 
       <!-- Password -->
       <div>
-        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Passwort ändern</div>
-        <input id="pw-current" type="password" placeholder="Aktuelles Passwort" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
-        <input id="pw-new"     type="password" placeholder="Neues Passwort (mind. 6 Zeichen)" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
-        <input id="pw-confirm" type="password" placeholder="Neues Passwort bestätigen"        style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;" data-i18n="settings.pw.title">Passwort ändern</div>
+        <input id="pw-current" type="password" placeholder="Aktuelles Passwort" data-i18n-ph="settings.pw.current.ph" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
+        <input id="pw-new"     type="password" placeholder="Neues Passwort (mind. 6 Zeichen)" data-i18n-ph="settings.pw.new.ph" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
+        <input id="pw-confirm" type="password" placeholder="Neues Passwort bestätigen" data-i18n-ph="settings.pw.confirm.ph" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:13px;padding:11px 13px;border:1.5px solid #D1CDC7;border-radius:8px;background:#F7F6F3;color:#1B1B1B;outline:none;margin-bottom:9px;">
         <div id="pw-error" style="font-size:12px;color:#C04040;min-height:18px;margin-bottom:7px;"></div>
-        <button onclick="changePassword()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'">Passwort speichern</button>
+        <button onclick="changePassword()" style="width:100%;font-family:'Plus Jakarta Sans','Inter',sans-serif;font-size:14px;font-weight:600;padding:12px;background:#1B1B1B;color:#F7F6F3;border:none;border-radius:9px;cursor:pointer;transition:background 0.18s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#1B1B1B'" data-i18n="settings.pw.save">Passwort speichern</button>
       </div>
     </div>
   </div>
@@ -1011,6 +1021,162 @@
   <script>
     // ── Preview mode ──────────────────────────────────────────────────────
     const IS_PREVIEW = new URLSearchParams(location.search).has('preview');
+
+    // ── Dashboard i18n ────────────────────────────────────────────────────
+    const DASH_T = {
+      de: {
+        'nav.section.requests':'Anfragen','nav.all':'Alle aktiven','nav.new':'Neu',
+        'nav.progress':'Im Gespräch','nav.pending':'Termin ausstehend','nav.booked':'Termin vereinbart',
+        'nav.section.other':'Sonstiges','nav.archive':'Archiv','nav.settings':'Einstellungen',
+        'nav.preview':'Vorschau-Link kopieren','sidebar.back':'← Zurück zur Landing Page',
+        'login.sub':'Dashboard · Melde dich mit deiner persönlichen URL an',
+        'login.slug.ph':'Deine URL (z. B. sandraholm)','login.pw.ph':'Passwort','login.btn':'Anmelden →',
+        'login.error.slug':'Bitte deine URL eingeben.','login.error.pw':'Bitte Passwort eingeben.',
+        'login.error.wrong':'Falsche Zugangsdaten.','login.error.api':'Verbindungsfehler.',
+        'stat.total.label':'Gesamt','stat.total.sub':'aktive Anfragen',
+        'stat.new.label':'Neu','stat.new.sub':'unbearbeitet',
+        'stat.pending.label':'Termin','stat.pending.sub':'ausstehend',
+        'stat.booked.label':'Vereinbart','stat.booked.sub':'Termine',
+        'list.title.all':'Anfragen','list.loading':'Lade Anfragen…',
+        'list.empty.archive':'Noch nichts im Archiv.','list.empty':'Keine Anfragen gefunden.',
+        'list.count.single':' Anfrage','list.count.plural':' Anfragen',
+        'detail.placeholder.title':'Anfrage auswählen',
+        'detail.placeholder.sub':'Klicke auf eine Anfrage, um alle Details zu sehen.',
+        'detail.select.left':'Klicke auf eine Anfrage links.',
+        'detail.section.motif':'Das Motiv','detail.key.placement':'Körperstelle',
+        'detail.key.size':'Größe','detail.key.coverup':'Cover-Up',
+        'detail.key.description':'Beschreibung','detail.key.coverup.notes':'Cover-Up Details',
+        'detail.section.style':'Stil & Look','detail.key.styles':'Stile',
+        'detail.key.color':'Farbe','detail.key.stylenotes':'Notizen',
+        'detail.section.health':'Gesundheit & Termin','detail.key.firsttattoo':'Erstes Tattoo',
+        'detail.key.allergies':'Allergien','detail.key.allergydetails':'Allergie-Details',
+        'detail.key.timeframe':'Zeitraum','detail.key.time':'Uhrzeit',
+        'detail.section.budget':'Budget','detail.key.range':'Rahmen',
+        'detail.section.wishes':'Besondere Wünsche','detail.section.images':'Inspirationsbilder',
+        'detail.contact.label':'Kontakt aufnehmen','detail.footer.status':'Status',
+        'detail.archive':'Archivieren','detail.restore':'Wiederherstellen',
+        'badge.unclear':'Noch unklar',
+        'status.neu':'Neu','status.in_bearbeitung':'Im Gespräch',
+        'status.termin_ausstehend':'Termin ausstehend','status.beauftragt':'Termin vereinbart',
+        'status.archiviert':'Archiviert',
+        'preview.banner':'Vorschau-Modus – nur lesend, keine Änderungen möglich.',
+        'preview.toast':'Vorschau-Modus – keine Änderungen möglich.',
+        'toast.archived':'📦 Ins Archiv verschoben','toast.status':'✓ Status: ',
+        'toast.preview.link':'Vorschau-Link kopiert!',
+        'toast.settings.saved':'✓ Einstellungen gespeichert!',
+        'toast.settings.all':'Bitte alle Einstellungen wählen.',
+        'toast.error.save':'Fehler.','toast.error.connection':'Verbindungsfehler.',
+        'toast.error.status':'Fehler beim Speichern.','toast.pw.saved':'✓ Passwort gespeichert!',
+        'pw.error.current':'Bitte aktuelles Passwort eingeben.',
+        'pw.error.length':'Neues Passwort mind. 6 Zeichen.',
+        'pw.error.match':'Passwörter stimmen nicht überein.',
+        'load.error':'Konnte Anfragen nicht laden.',
+        'settings.title':'Einstellungen','settings.theme.title':'Widget-Design',
+        'settings.lang.title':'Widget-Sprache',
+        'settings.lang.de.title':'Deutsch','settings.lang.de.sub':'Widget immer auf Deutsch',
+        'settings.lang.en.title':'English','settings.lang.en.sub':'Widget always in English',
+        'settings.lang.auto.title':'Nutzer wählt selbst','settings.lang.auto.sub':'DE/EN-Umschalter im Widget sichtbar',
+        'settings.delivery.title':'Anfragen-Empfang',
+        'settings.delivery.both.title':'E-Mail & Dashboard','settings.delivery.both.sub':'Per Mail und im Dashboard',
+        'settings.delivery.email.title':'Nur E-Mail','settings.delivery.email.sub':'Kein Dashboard-Eintrag',
+        'settings.delivery.dash.title':'Nur Dashboard','settings.delivery.dash.sub':'Keine E-Mail-Benachrichtigung',
+        'settings.save':'Einstellungen speichern','settings.pw.title':'Passwort ändern',
+        'settings.pw.current.ph':'Aktuelles Passwort',
+        'settings.pw.new.ph':'Neues Passwort (mind. 6 Zeichen)',
+        'settings.pw.confirm.ph':'Neues Passwort bestätigen','settings.pw.save':'Passwort speichern',
+        'mob.all':'Alle','mob.new':'Neu','mob.progress':'Gespräch','mob.booked':'Vereinbart','mob.archive':'Archiv',
+      },
+      en: {
+        'nav.section.requests':'Requests','nav.all':'All active','nav.new':'New',
+        'nav.progress':'In Progress','nav.pending':'Appt. Pending','nav.booked':'Appt. Booked',
+        'nav.section.other':'Other','nav.archive':'Archive','nav.settings':'Settings',
+        'nav.preview':'Copy preview link','sidebar.back':'← Back to landing page',
+        'login.sub':'Dashboard · Sign in with your personal URL',
+        'login.slug.ph':'Your URL (e.g. sandraholm)','login.pw.ph':'Password','login.btn':'Sign in →',
+        'login.error.slug':'Please enter your URL.','login.error.pw':'Please enter your password.',
+        'login.error.wrong':'Wrong credentials.','login.error.api':'Connection error.',
+        'stat.total.label':'Total','stat.total.sub':'active inquiries',
+        'stat.new.label':'New','stat.new.sub':'unprocessed',
+        'stat.pending.label':'Appt.','stat.pending.sub':'pending',
+        'stat.booked.label':'Booked','stat.booked.sub':'Appointments',
+        'list.title.all':'Inquiries','list.loading':'Loading inquiries…',
+        'list.empty.archive':'Nothing in archive yet.','list.empty':'No inquiries found.',
+        'list.count.single':' inquiry','list.count.plural':' inquiries',
+        'detail.placeholder.title':'Select inquiry',
+        'detail.placeholder.sub':'Click on an inquiry to see all details.',
+        'detail.select.left':'Click on an inquiry on the left.',
+        'detail.section.motif':'The Motif','detail.key.placement':'Placement',
+        'detail.key.size':'Size','detail.key.coverup':'Cover-Up',
+        'detail.key.description':'Description','detail.key.coverup.notes':'Cover-Up Details',
+        'detail.section.style':'Style & Look','detail.key.styles':'Styles',
+        'detail.key.color':'Color','detail.key.stylenotes':'Notes',
+        'detail.section.health':'Health & Appointment','detail.key.firsttattoo':'First Tattoo',
+        'detail.key.allergies':'Allergies','detail.key.allergydetails':'Allergy Details',
+        'detail.key.timeframe':'Timeframe','detail.key.time':'Time',
+        'detail.section.budget':'Budget','detail.key.range':'Range',
+        'detail.section.wishes':'Special Requests','detail.section.images':'Inspiration Images',
+        'detail.contact.label':'Get in Touch','detail.footer.status':'Status',
+        'detail.archive':'Archive','detail.restore':'Restore',
+        'badge.unclear':'Not yet set',
+        'status.neu':'New','status.in_bearbeitung':'In Progress',
+        'status.termin_ausstehend':'Appt. Pending','status.beauftragt':'Appt. Booked',
+        'status.archiviert':'Archived',
+        'preview.banner':'Preview mode – read only, no changes possible.',
+        'preview.toast':'Preview mode – no changes possible.',
+        'toast.archived':'📦 Moved to archive','toast.status':'✓ Status: ',
+        'toast.preview.link':'Preview link copied!',
+        'toast.settings.saved':'✓ Settings saved!',
+        'toast.settings.all':'Please select all settings.',
+        'toast.error.save':'Error.','toast.error.connection':'Connection error.',
+        'toast.error.status':'Error saving.','toast.pw.saved':'✓ Password saved!',
+        'pw.error.current':'Please enter your current password.',
+        'pw.error.length':'New password must be at least 6 characters.',
+        'pw.error.match':'Passwords do not match.',
+        'load.error':'Could not load inquiries.',
+        'settings.title':'Settings','settings.theme.title':'Widget Design',
+        'settings.lang.title':'Widget Language',
+        'settings.lang.de.title':'Deutsch','settings.lang.de.sub':'Widget always in German',
+        'settings.lang.en.title':'English','settings.lang.en.sub':'Widget always in English',
+        'settings.lang.auto.title':'User chooses','settings.lang.auto.sub':'DE/EN toggle visible in widget',
+        'settings.delivery.title':'Inquiry Delivery',
+        'settings.delivery.both.title':'E-Mail & Dashboard','settings.delivery.both.sub':'Via email and dashboard',
+        'settings.delivery.email.title':'Email only','settings.delivery.email.sub':'No dashboard entry',
+        'settings.delivery.dash.title':'Dashboard only','settings.delivery.dash.sub':'No email notifications',
+        'settings.save':'Save Settings','settings.pw.title':'Change Password',
+        'settings.pw.current.ph':'Current password',
+        'settings.pw.new.ph':'New password (min. 6 chars)',
+        'settings.pw.confirm.ph':'Confirm new password','settings.pw.save':'Save Password',
+        'mob.all':'All','mob.new':'New','mob.progress':'Progress','mob.booked':'Booked','mob.archive':'Archive',
+      },
+    };
+
+    let dashLang = localStorage.getItem('da_lang') || 'de';
+    function TD(key) { return (DASH_T[dashLang] || DASH_T.de)[key] || key; }
+
+    function setDashLang(lang) {
+      dashLang = lang;
+      localStorage.setItem('da_lang', lang);
+      document.querySelectorAll('.dash-lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.dlang === lang);
+      });
+      applyDashTranslations();
+    }
+
+    function applyDashTranslations() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = TD(el.dataset.i18n);
+      });
+      document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+        el.placeholder = TD(el.dataset.i18nPh);
+      });
+      if (submissionsLoaded) {
+        renderList();
+        if (selectedId) {
+          const s = allSubmissions.find(x => x.id === selectedId);
+          if (s) document.getElementById('detail-card').innerHTML = buildDetailHTML(s);
+        }
+      }
+    }
 
     // ── Mobile detection ──────────────────────────────────────────────────
     function isMobile() { return window.innerWidth <= 640; }
@@ -1037,8 +1203,8 @@
       const err  = document.getElementById('login-error');
       err.textContent = '';
 
-      if (!slug) { err.textContent = 'Bitte deine URL eingeben.'; return; }
-      if (!pw)   { err.textContent = 'Bitte Passwort eingeben.'; return; }
+      if (!slug) { err.textContent = TD('login.error.slug'); return; }
+      if (!pw)   { err.textContent = TD('login.error.pw'); return; }
 
       try {
         const res = await fetch('/api/auth', {
@@ -1048,7 +1214,7 @@
         });
         if (!res.ok) {
           const d = await res.json().catch(() => ({}));
-          err.textContent = d.error || 'Falsche Zugangsdaten.';
+          err.textContent = d.error || TD('login.error.wrong');
           return;
         }
         const data = await res.json();
@@ -1062,20 +1228,21 @@
         document.getElementById('sidebar-name').textContent = authName;
         loadSubmissions();
       } catch {
-        err.textContent = 'Verbindungsfehler.';
+        err.textContent = TD('login.error.api');
       }
     }
 
     function copyPreviewLink() {
       const url = location.origin + location.pathname + '?preview';
-      navigator.clipboard.writeText(url).then(() => showToast('Vorschau-Link kopiert!'));
+      navigator.clipboard.writeText(url).then(() => showToast(TD('toast.preview.link')));
     }
 
     // ── State ─────────────────────────────────────────────────────────────
-    let allSubmissions = [];
-    let currentFilter  = null;  // null = active (no archive), string = filter by status
-    let selectedId     = null;
-    let openPopupId    = null;
+    let allSubmissions   = [];
+    let currentFilter    = null;  // null = active (no archive), string = filter by status
+    let selectedId       = null;
+    let openPopupId      = null;
+    let submissionsLoaded = false;
 
     // ── Helpers ───────────────────────────────────────────────────────────
     function fmt(v) {
@@ -1105,13 +1272,13 @@
       archiviert:         { label: 'Archiviert',         dot: 'dot-archiviert' },
     };
 
-    function statusLabel(s) { return STATUS_META[s]?.label || s; }
+    function statusLabel(s) { return TD('status.' + s) || STATUS_META[s]?.label || s; }
     function statusClass(s) { return 'status-' + s; }
 
     function valOrBadge(v) {
       const val = fmt(v);
       if (!val || val.toLowerCase().includes('unklar') || val.toLowerCase().includes('keine angabe')) {
-        return '<span class="badge-unclear">Noch unklar</span>';
+        return '<span class="badge-unclear">' + TD('badge.unclear') + '</span>';
       }
       return val;
     }
@@ -1125,6 +1292,8 @@
 
     // ── API ───────────────────────────────────────────────────────────────
     async function loadSubmissions() {
+      document.getElementById('submission-list').innerHTML =
+        '<div class="loading"><div class="spinner"></div> ' + TD('list.loading') + '</div>';
       try {
         let data;
         if (IS_PREVIEW) {
@@ -1137,16 +1306,17 @@
           data = await res.json();
         }
         allSubmissions = data;
+        submissionsLoaded = true;
         renderList();
         updateStats();
       } catch (e) {
         document.getElementById('submission-list').innerHTML =
-          '<div class="empty">Konnte Anfragen nicht laden.<br><small>' + e.message + '</small></div>';
+          '<div class="empty">' + TD('load.error') + '<br><small>' + e.message + '</small></div>';
       }
     }
 
     async function updateStatus(id, status) {
-      if (IS_PREVIEW) { showToast('Vorschau-Modus – keine Änderungen möglich.'); return; }
+      if (IS_PREVIEW) { showToast(TD('preview.toast')); return; }
       closePopup();
       try {
         const res = await fetch('/api/submissions/' + id + '/status', {
@@ -1168,9 +1338,9 @@
             document.getElementById('detail-card').innerHTML = html;
           }
         }
-        showToast(status === 'archiviert' ? '📦 Ins Archiv verschoben' : '✓ Status: ' + statusLabel(status));
+        showToast(status === 'archiviert' ? TD('toast.archived') : TD('toast.status') + statusLabel(status));
       } catch {
-        showToast('Fehler beim Speichern.');
+        showToast(TD('toast.error.status'));
       }
     }
 
@@ -1235,23 +1405,21 @@
       const filtered = getFiltered();
 
       if (currentFilter === 'archiviert') {
-        title.textContent = 'Archiv';
+        title.textContent = TD('nav.archive');
       } else if (currentFilter) {
-        title.textContent = STATUS_META[currentFilter]?.label || 'Anfragen';
+        title.textContent = statusLabel(currentFilter);
       } else {
-        title.textContent = 'Anfragen';
+        title.textContent = TD('list.title.all');
       }
 
       if (!filtered.length) {
-        const msg = currentFilter === 'archiviert'
-          ? 'Noch nichts im Archiv.'
-          : 'Keine Anfragen gefunden.';
+        const msg = currentFilter === 'archiviert' ? TD('list.empty.archive') : TD('list.empty');
         list.innerHTML = '<div class="empty">' + msg + '</div>';
         count.textContent = '';
         return;
       }
 
-      count.textContent = filtered.length + (filtered.length === 1 ? ' Anfrage' : ' Anfragen');
+      count.textContent = filtered.length + (filtered.length === 1 ? TD('list.count.single') : TD('list.count.plural'));
 
       // Only show non-archive statuses in popup (when archiving from main view, keep archive option)
       const popupStatuses = Object.entries(STATUS_META);
@@ -1265,7 +1433,7 @@
 
         const popupItems = popupStatuses.map(([key, meta]) =>
           `<div class="status-popup-item${s.status === key ? ' current' : ''}" onclick="updateStatus('${s.id}','${key}');event.stopPropagation();">
-            <span class="status-dot ${meta.dot}"></span>${meta.label}
+            <span class="status-dot ${meta.dot}"></span>${TD('status.' + key)}
           </div>`
         ).join('');
 
@@ -1297,18 +1465,18 @@
 
       const popupItems = Object.entries(STATUS_META).map(([key, meta]) =>
         `<div class="status-popup-item${s.status === key ? ' current' : ''}" onclick="updateStatus('${s.id}','${key}');event.stopPropagation();">
-          <span class="status-dot ${meta.dot}"></span>${meta.label}
+          <span class="status-dot ${meta.dot}"></span>${TD('status.' + key)}
         </div>`
       ).join('');
 
       const archiveBtn = isArchived
         ? `<button class="restore-btn" onclick="updateStatus('${s.id}','neu')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
-            Wiederherstellen
+            ${TD('detail.restore')}
            </button>`
         : `<button class="archive-btn" onclick="updateStatus('${s.id}','archiviert')">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5" rx="1"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
-            Archivieren
+            ${TD('detail.archive')}
            </button>`;
 
       return `
@@ -1334,44 +1502,44 @@
 
         <div class="detail-body">
           <div class="detail-section">
-            <div class="detail-section-title">Das Motiv</div>
-            <div class="detail-row"><div class="detail-key">Körperstelle</div><div class="detail-val">${valOrBadge(s.motif?.placement)}</div></div>
-            <div class="detail-row"><div class="detail-key">Größe</div><div class="detail-val">${valOrBadge(s.motif?.size)}</div></div>
-            <div class="detail-row"><div class="detail-key">Cover-Up</div><div class="detail-val">${valOrBadge(s.motif?.isCoverUp)}</div></div>
-            ${s.motif?.description ? `<div class="detail-row"><div class="detail-key">Beschreibung</div><div class="detail-val" style="white-space:pre-line;">${s.motif.description}</div></div>` : ''}
-            ${s.motif?.coverUpNotes ? `<div class="detail-row"><div class="detail-key">Cover-Up Details</div><div class="detail-val" style="white-space:pre-line;">${s.motif.coverUpNotes}</div></div>` : ''}
+            <div class="detail-section-title">${TD('detail.section.motif')}</div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.placement')}</div><div class="detail-val">${valOrBadge(s.motif?.placement)}</div></div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.size')}</div><div class="detail-val">${valOrBadge(s.motif?.size)}</div></div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.coverup')}</div><div class="detail-val">${valOrBadge(s.motif?.isCoverUp)}</div></div>
+            ${s.motif?.description ? `<div class="detail-row"><div class="detail-key">${TD('detail.key.description')}</div><div class="detail-val" style="white-space:pre-line;">${s.motif.description}</div></div>` : ''}
+            ${s.motif?.coverUpNotes ? `<div class="detail-row"><div class="detail-key">${TD('detail.key.coverup.notes')}</div><div class="detail-val" style="white-space:pre-line;">${s.motif.coverUpNotes}</div></div>` : ''}
           </div>
 
           <div class="detail-section">
-            <div class="detail-section-title">Stil &amp; Look</div>
-            <div class="detail-row"><div class="detail-key">Stile</div><div class="detail-val">${valOrBadge((s.style?.styles || []).join(', ') || null)}</div></div>
-            <div class="detail-row"><div class="detail-key">Farbe</div><div class="detail-val">${valOrBadge(s.style?.colorPreference)}</div></div>
-            ${s.style?.styleNotes ? `<div class="detail-row"><div class="detail-key">Notizen</div><div class="detail-val" style="white-space:pre-line;">${s.style.styleNotes}</div></div>` : ''}
+            <div class="detail-section-title">${TD('detail.section.style')}</div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.styles')}</div><div class="detail-val">${valOrBadge((s.style?.styles || []).join(', ') || null)}</div></div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.color')}</div><div class="detail-val">${valOrBadge(s.style?.colorPreference)}</div></div>
+            ${s.style?.styleNotes ? `<div class="detail-row"><div class="detail-key">${TD('detail.key.stylenotes')}</div><div class="detail-val" style="white-space:pre-line;">${s.style.styleNotes}</div></div>` : ''}
           </div>
 
           <div class="detail-section">
-            <div class="detail-section-title">Gesundheit &amp; Termin</div>
-            <div class="detail-row"><div class="detail-key">Erstes Tattoo</div><div class="detail-val">${valOrBadge(s.health?.isFirstTattoo)}</div></div>
-            <div class="detail-row"><div class="detail-key">Allergien</div><div class="detail-val">${valOrBadge(s.health?.knownAllergies)}</div></div>
-            ${s.health?.allergiesDetail ? `<div class="detail-row"><div class="detail-key">Allergie-Details</div><div class="detail-val">${s.health.allergiesDetail}</div></div>` : ''}
-            <div class="detail-row"><div class="detail-key">Zeitraum</div><div class="detail-val">${valOrBadge(s.appointment?.timeframe)}</div></div>
-            <div class="detail-row"><div class="detail-key">Uhrzeit</div><div class="detail-val">${valOrBadge(s.appointment?.preferredTime)}</div></div>
+            <div class="detail-section-title">${TD('detail.section.health')}</div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.firsttattoo')}</div><div class="detail-val">${valOrBadge(s.health?.isFirstTattoo)}</div></div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.allergies')}</div><div class="detail-val">${valOrBadge(s.health?.knownAllergies)}</div></div>
+            ${s.health?.allergiesDetail ? `<div class="detail-row"><div class="detail-key">${TD('detail.key.allergydetails')}</div><div class="detail-val">${s.health.allergiesDetail}</div></div>` : ''}
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.timeframe')}</div><div class="detail-val">${valOrBadge(s.appointment?.timeframe)}</div></div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.time')}</div><div class="detail-val">${valOrBadge(s.appointment?.preferredTime)}</div></div>
           </div>
 
           <div class="detail-section">
-            <div class="detail-section-title">Budget</div>
-            <div class="detail-row"><div class="detail-key">Rahmen</div><div class="detail-val">${valOrBadge(s.budget?.range)}</div></div>
+            <div class="detail-section-title">${TD('detail.section.budget')}</div>
+            <div class="detail-row"><div class="detail-key">${TD('detail.key.range')}</div><div class="detail-val">${valOrBadge(s.budget?.range)}</div></div>
           </div>
 
           ${s.budget?.notes ? `
           <div class="detail-section">
-            <div class="detail-section-title">Besondere Wünsche</div>
+            <div class="detail-section-title">${TD('detail.section.wishes')}</div>
             <div class="notes-box">"${s.budget.notes}"</div>
           </div>` : ''}
 
           ${s.style?.inspirationImages?.length ? `
           <div class="detail-section">
-            <div class="detail-section-title">Inspirationsbilder (${s.style.inspirationImages.length})</div>
+            <div class="detail-section-title">${TD('detail.section.images')} (${s.style.inspirationImages.length})</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:5px;">
               ${s.style.inspirationImages.map(img => `
                 <a href="${img.url}" target="_blank" style="display:block;border-radius:7px;overflow:hidden;border:1.5px solid var(--grey-border);">
@@ -1381,7 +1549,7 @@
           </div>` : ''}
 
           <div class="contact-box">
-            <div class="contact-box-label">Kontakt aufnehmen</div>
+            <div class="contact-box-label">${TD('detail.contact.label')}</div>
             <div class="contact-box-name">${names}</div>
             <div class="contact-box-email"><a href="mailto:${s.contact?.email || ''}" style="color:inherit;">${s.contact?.email || '–'}</a></div>
             ${s.contact?.phone ? `<div class="contact-box-phone">${s.contact.phone}</div>` : ''}
@@ -1393,12 +1561,12 @@
         <div class="detail-footer">
           <div class="detail-footer-row">
             <div class="status-select-wrap">
-              <span class="status-select-label">Status</span>
+              <span class="status-select-label">${TD('detail.footer.status')}</span>
               <select class="status-select" onchange="updateStatus('${s.id}', this.value)">
-                <option value="neu"              ${s.status==='neu'              ?'selected':''}>Neu</option>
-                <option value="in_bearbeitung"   ${s.status==='in_bearbeitung'   ?'selected':''}>In Bearbeitung</option>
-                <option value="angebot_gesendet" ${s.status==='angebot_gesendet' ?'selected':''}>Angebot gesendet</option>
-                <option value="beauftragt"       ${s.status==='beauftragt'       ?'selected':''}>Beauftragt</option>
+                <option value="neu"              ${s.status==='neu'              ?'selected':''}>${TD('status.neu')}</option>
+                <option value="in_bearbeitung"   ${s.status==='in_bearbeitung'   ?'selected':''}>${TD('status.in_bearbeitung')}</option>
+                <option value="termin_ausstehend" ${s.status==='termin_ausstehend' ?'selected':''}>${TD('status.termin_ausstehend')}</option>
+                <option value="beauftragt"       ${s.status==='beauftragt'       ?'selected':''}>${TD('status.beauftragt')}</option>
               </select>
             </div>
             ${archiveBtn}
@@ -1453,8 +1621,8 @@
         <div class="detail-handle" id="detail-handle"></div>
         <div class="detail-placeholder">
           <div class="detail-placeholder-icon"><svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-          <div style="font-size:14px;font-weight:500;color:var(--dark);margin-bottom:5px;">Anfrage auswählen</div>
-          <div style="font-size:12px;">Klicke auf eine Anfrage links.</div>
+          <div style="font-size:14px;font-weight:500;color:var(--dark);margin-bottom:5px;">${TD('detail.placeholder.title')}</div>
+          <div style="font-size:12px;">${TD('detail.select.left')}</div>
         </div>`;
       renderList();
     }
@@ -1520,16 +1688,16 @@
       const theme    = document.querySelector('input[name="theme"]:checked')?.value;
       const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
       const language = document.querySelector('input[name="language"]:checked')?.value;
-      if (!theme || !delivery || !language) { showToast('Bitte alle Einstellungen wählen.'); return; }
+      if (!theme || !delivery || !language) { showToast(TD('toast.settings.all')); return; }
       try {
         const r = await fetch('/api/photographers/' + authSlug, {
           method: 'PATCH',
           headers: authHeaders(),
           body: JSON.stringify({ theme, delivery, language }),
         });
-        if (!r.ok) { const d = await r.json(); showToast(d.error || 'Fehler.'); return; }
-        showToast('✓ Einstellungen gespeichert!');
-      } catch { showToast('Verbindungsfehler.'); }
+        if (!r.ok) { const d = await r.json(); showToast(d.error || TD('toast.error.save')); return; }
+        showToast(TD('toast.settings.saved'));
+      } catch { showToast(TD('toast.error.connection')); }
     }
 
     async function changePassword() {
@@ -1538,9 +1706,9 @@
       const confirm = document.getElementById('pw-confirm').value;
       const errEl   = document.getElementById('pw-error');
       errEl.textContent = '';
-      if (!current)       { errEl.textContent = 'Bitte aktuelles Passwort eingeben.'; return; }
-      if (next.length < 6){ errEl.textContent = 'Neues Passwort mind. 6 Zeichen.'; return; }
-      if (next !== confirm){ errEl.textContent = 'Passwörter stimmen nicht überein.'; return; }
+      if (!current)       { errEl.textContent = TD('pw.error.current'); return; }
+      if (next.length < 6){ errEl.textContent = TD('pw.error.length'); return; }
+      if (next !== confirm){ errEl.textContent = TD('pw.error.match'); return; }
       try {
         const r = await fetch('/api/photographers/' + authSlug, {
           method: 'PATCH',
@@ -1548,15 +1716,21 @@
           body: JSON.stringify({ currentPassword: current, newPassword: next }),
         });
         const d = await r.json();
-        if (!r.ok) { errEl.textContent = d.error || 'Fehler.'; return; }
+        if (!r.ok) { errEl.textContent = d.error || TD('toast.error.save'); return; }
         document.getElementById('pw-current').value = '';
         document.getElementById('pw-new').value     = '';
         document.getElementById('pw-confirm').value = '';
-        showToast('✓ Passwort gespeichert!');
-      } catch { errEl.textContent = 'Verbindungsfehler.'; }
+        showToast(TD('toast.pw.saved'));
+      } catch { errEl.textContent = TD('toast.error.connection'); }
     }
 
     // ── Init ──────────────────────────────────────────────────────────────
+    // Apply initial language (toggle button + static strings)
+    document.querySelectorAll('.dash-lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.dlang === dashLang);
+    });
+    applyDashTranslations();
+
     if (IS_PREVIEW) {
       document.getElementById('login-overlay').style.display = 'none';
       document.getElementById('preview-banner').style.display = 'flex';
