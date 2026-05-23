@@ -1664,10 +1664,10 @@
 
       // Upload inspiration images separately to storage
       if (uploadedFiles.length > 0 && submissionId) {
-        var uploadBase = CONFIG.apiUrl.replace('/submissions', '');
+        var uploadBase = CONFIG.apiUrl.replace(/\/submissions.*$/, '');
         for (var i = 0; i < uploadedFiles.length; i++) {
           try {
-            await fetch(uploadBase + '/upload', {
+            var uploadRes = await fetch(uploadBase + '/upload', {
               method:  'POST',
               headers: { 'Content-Type': 'application/json' },
               body:    JSON.stringify({
@@ -1677,8 +1677,12 @@
                 imageType:    uploadedFiles[i].type,
               }),
             });
+            if (!uploadRes.ok) {
+              var uploadErrData = await uploadRes.json().catch(function () { return {}; });
+              console.warn('[EinfachAnfrage] Bild-Upload fehlgeschlagen (' + uploadRes.status + '):', uploadErrData.error || '');
+            }
           } catch (imgErr) {
-            console.warn('[EinfachAnfrage] Bild-Upload fehlgeschlagen:', imgErr.message);
+            console.warn('[EinfachAnfrage] Bild-Upload Netzwerkfehler:', imgErr.message);
           }
         }
       }
