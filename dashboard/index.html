@@ -953,6 +953,25 @@
         </div>
       </div>
 
+      <!-- Language -->
+      <div style="margin-bottom:24px;">
+        <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Widget-Sprache</div>
+        <div style="display:flex;flex-direction:column;gap:7px;">
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-de">
+            <input type="radio" name="language" value="de" onchange="selectLanguage('de')" style="margin-top:3px;">
+            <div><div style="font-weight:600;font-size:13px;">Deutsch</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Widget immer auf Deutsch</div></div>
+          </label>
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-en">
+            <input type="radio" name="language" value="en" onchange="selectLanguage('en')" style="margin-top:3px;">
+            <div><div style="font-weight:600;font-size:13px;">English</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">Widget always in English</div></div>
+          </label>
+          <label style="border:2px solid #D1CDC7;border-radius:9px;padding:11px 13px;cursor:pointer;transition:border-color 0.15s;display:flex;align-items:flex-start;gap:10px;" id="lang-opt-auto">
+            <input type="radio" name="language" value="auto" onchange="selectLanguage('auto')" style="margin-top:3px;">
+            <div><div style="font-weight:600;font-size:13px;">Nutzer wählt selbst</div><div style="font-size:11px;color:#6B6B6B;margin-top:1px;">DE/EN-Umschalter im Widget sichtbar</div></div>
+          </label>
+        </div>
+      </div>
+
       <!-- Delivery -->
       <div style="margin-bottom:24px;">
         <div style="font-size:10px;font-weight:600;color:#9A9590;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;padding-bottom:5px;border-bottom:1px solid #EFEDE9;">Anfragen-Empfang</div>
@@ -1459,8 +1478,9 @@
       document.getElementById('settings-slug-hint').textContent = 'URL: einfachanfrage.de/p/' + (authSlug || '–');
       fetch('/api/photographers/' + authSlug, { headers: authHeaders() })
         .then(r => r.json()).then(data => {
-          setThemeUI(data.theme    || 'champagne');
+          setThemeUI(data.theme       || 'champagne');
           setDeliveryUI(data.delivery || 'both');
+          setLanguageUI(data.language || 'de');
         }).catch(() => {});
     }
 
@@ -1488,15 +1508,24 @@
     }
     function selectDelivery(delivery) { setDeliveryUI(delivery); }
 
+    function setLanguageUI(language) {
+      document.querySelectorAll('input[name="language"]').forEach(r => {
+        r.checked = r.value === language;
+        r.closest('label').style.borderColor = r.value === language ? '#BA897F' : '#D1CDC7';
+      });
+    }
+    function selectLanguage(language) { setLanguageUI(language); }
+
     async function saveSettings() {
       const theme    = document.querySelector('input[name="theme"]:checked')?.value;
       const delivery = document.querySelector('input[name="delivery"]:checked')?.value;
-      if (!theme || !delivery) { showToast('Bitte Design und Empfang wählen.'); return; }
+      const language = document.querySelector('input[name="language"]:checked')?.value;
+      if (!theme || !delivery || !language) { showToast('Bitte alle Einstellungen wählen.'); return; }
       try {
         const r = await fetch('/api/photographers/' + authSlug, {
           method: 'PATCH',
           headers: authHeaders(),
-          body: JSON.stringify({ theme, delivery }),
+          body: JSON.stringify({ theme, delivery, language }),
         });
         if (!r.ok) { const d = await r.json(); showToast(d.error || 'Fehler.'); return; }
         showToast('✓ Einstellungen gespeichert!');

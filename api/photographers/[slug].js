@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   if (req.method === 'GET') {
     const { data, error } = await supabase
       .from('photographers')
-      .select('slug, name, theme, delivery')
+      .select('slug, name, theme, delivery, language')
       .eq('slug', key)
       .single();
 
@@ -29,14 +29,16 @@ module.exports = async (req, res) => {
       return res.status(403).json({ error: 'Kein Zugriff auf dieses Profil.' });
     }
 
-    const { theme, delivery, newPassword, currentPassword } = req.body || {};
+    const { theme, delivery, language, newPassword, currentPassword } = req.body || {};
     const updates = {};
 
-    // Theme / delivery
+    // Theme / delivery / language
     const VALID_THEMES    = ['champagne', 'nacht', 'sage', 'clean', 'modern'];
     const VALID_DELIVERIES = ['both', 'email', 'dashboard'];
-    if (theme    && VALID_THEMES.includes(theme))       updates.theme    = theme;
+    const VALID_LANGUAGES  = ['de', 'en', 'auto'];
+    if (theme    && VALID_THEMES.includes(theme))        updates.theme    = theme;
     if (delivery && VALID_DELIVERIES.includes(delivery)) updates.delivery = delivery;
+    if (language && VALID_LANGUAGES.includes(language))  updates.language = language;
 
     // Password change
     if (newPassword) {
@@ -71,7 +73,7 @@ module.exports = async (req, res) => {
       .from('photographers')
       .update(updates)
       .eq('slug', key)
-      .select('slug, name, theme, delivery')
+      .select('slug, name, theme, delivery, language')
       .single();
 
     if (error) return res.status(500).json({ error: error.message });

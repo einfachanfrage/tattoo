@@ -3,7 +3,7 @@
 const supabase = require('../_supabase');
 
 function standalonePage(photographer) {
-  const { name, slug, theme = 'champagne', email, delivery } = photographer;
+  const { name, slug, theme = 'champagne', email, delivery, language = 'de' } = photographer;
   const apiBase = '';
 
   return `<!DOCTYPE html>
@@ -14,10 +14,10 @@ function standalonePage(photographer) {
   <title>Anfrage – ${name}</title>
   <!-- Open Graph / Social Media Preview -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://einfachanfrage-hochzeitsfotografie.de/p/${slug}">
-  <meta property="og:title" content="Hochzeitsanfrage bei ${name}">
-  <meta property="og:description" content="Stelle deine Hochzeitsanfrage bei ${name} – einfach, schnell und vollständig. In wenigen Minuten fertig.">
-  <meta property="og:image" content="https://einfachanfrage-hochzeitsfotografie.de/api/og/p/${encodeURIComponent(name)}">
+  <meta property="og:url" content="https://einfachanfrage-tattoo.de/p/${slug}">
+  <meta property="og:title" content="Tattoo-Anfrage bei ${name}">
+  <meta property="og:description" content="Stelle deine Tattoo-Anfrage bei ${name} – einfach, schnell und vollständig. In wenigen Minuten fertig.">
+  <meta property="og:image" content="https://einfachanfrage-tattoo.de/api/og/p/${encodeURIComponent(name)}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
@@ -83,7 +83,7 @@ function standalonePage(photographer) {
 </head>
 <body>
   <div class="pg-name">${name}</div>
-  <p class="pg-sub">Stell deine Hochzeitsanfrage – in 3 Minuten, Schritt für Schritt.</p>
+  <p class="pg-sub">Stell deine Tattoo-Anfrage – in 5 Schritten zum vollständigen Briefing.</p>
   <button class="pg-btn" data-einfachanfrage>
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
     Anfrage stellen
@@ -96,6 +96,7 @@ function standalonePage(photographer) {
     data-slug="${slug}"
     data-theme="${theme}"
     data-delivery="${delivery || 'both'}"
+    data-language="${language}"
     data-api="${apiBase}">
   </script>
   <script>

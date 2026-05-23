@@ -33,7 +33,161 @@
     theme: currentScript.getAttribute('data-theme') || 'champagne',
     // 'email' = nur E-Mail | 'dashboard' = nur Dashboard | 'both' = beides (Standard)
     delivery: currentScript.getAttribute('data-delivery') || 'both',
+    // 'de' = fest Deutsch | 'en' = fest Englisch | 'auto' = Nutzer wählt selbst
+    language: currentScript.getAttribute('data-language') || 'de',
   };
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // TRANSLATIONS  (DE / EN)
+  // ──────────────────────────────────────────────────────────────────────────
+  const TRANSLATIONS = {
+    de: {
+      close: 'Schließen',
+      'btn.start': 'Jetzt starten →', 'btn.next': 'Weiter →', 'btn.back': '← Zurück',
+      'btn.submit': 'Abschicken ✓', 'btn.sending': 'Wird gesendet …', 'btn.retry': 'Erneut versuchen →',
+      counter: 'Schritt {n} von 5',
+      'w.title': 'Tattoo-Anfrage stellen',
+      'w.sub': 'Damit {name} dir ein passendes Angebot machen kann – ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.',
+      'w.li1': 'Fast alles kann auch mit „Noch unklar" beantwortet werden',
+      'w.li2': 'Kein Account, keine Werbung',
+      'w.li3': 'Deine Daten gehen nur an {name}',
+      's2.title': 'Dein Motiv', 's2.sub': 'Was soll gestochen werden – und wo?',
+      's2.desc.lbl': 'Was stellst du dir vor?', 's2.desc.ph': '„Fine-Line Rosen, eher zart und filigran"',
+      's2.desc.err': 'Bitte kurz beschreiben, was du dir vorstellst.',
+      's2.place.lbl': 'Körperstelle', 's2.size.lbl': 'Ungefähre Größe',
+      's2.cu.lbl': 'Cover-Up?', 's2.cu.notes.lbl': 'Das bestehende Tattoo', 's2.cu.notes.opt': '(optional)',
+      's2.cu.notes.ph': 'Farbe, Größe und Stil des alten Tattoos.',
+      'ph': '– bitte wählen –',
+      'place.forearm': 'Unterarm', 'place.upperarm': 'Oberarm', 'place.shoulder': 'Schulter / Schulterblatt',
+      'place.chest': 'Brust / Sternum', 'place.back': 'Rücken', 'place.ribs': 'Rippen / Seite',
+      'place.belly': 'Bauch', 'place.hip': 'Hüfte / Hüftknochen', 'place.thigh': 'Oberschenkel',
+      'place.shin': 'Unterschenkel / Schienbein', 'place.ankle': 'Knöchel / Fuß',
+      'place.hand': 'Hand / Finger', 'place.neck': 'Hals / Nacken', 'place.head': 'Kopf',
+      'place.unclear': 'Noch unklar',
+      'size.s': 'Klein (bis 5 cm)', 'size.m': 'Mittel (5–10 cm)', 'size.l': 'Groß (10–20 cm)',
+      'size.xl': 'Sehr groß / Sleeve (über 20 cm)', 'size.unclear': 'Noch unklar',
+      'cu.no': 'Nein', 'cu.yes': 'Ja, Cover-Up', 'cu.unclear': 'Noch unklar',
+      's3.title': 'Stil & Referenzen', 's3.sub': 'Welchen Stil suchst du? Mehrfachauswahl möglich.',
+      's3.style.lbl': 'Tattoo-Stil', 's3.style.unclear': 'Noch unklar',
+      's3.color.lbl': 'Farbe oder Schwarz-Grau?',
+      's3.upload.lbl': 'Referenzbilder', 's3.upload.opt': '(optional · max. 3 Fotos)',
+      's3.upload.cta': 'Klicken zum Hochladen', 's3.upload.drag': 'oder Bilder hierher ziehen',
+      's3.upload.sub': 'Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen',
+      's3.upload.hint': 'JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder',
+      'col.bw': 'Schwarz-Grau', 'col.color': 'Farbe', 'col.both': 'Beides möglich', 'col.unclear': 'Noch unklar',
+      's4.title': 'Termin & Budget', 's4.sub': 'Ungefähr reicht – kein verbindlicher Termin.',
+      's4.time.lbl': 'Wunsch-Zeitraum', 's4.pref.lbl': 'Bevorzugte Tageszeit', 's4.budget.lbl': 'Dein Budgetrahmen',
+      'tf.asap': 'So bald wie möglich', 'tf.1_3': 'In 1–3 Monaten', 'tf.3_6': 'In 3–6 Monaten',
+      'tf.6_12': 'In 6–12 Monaten', 'tf.none': 'Kein fester Zeitdruck',
+      'pt.morning': 'Vormittags', 'pt.afternoon': 'Nachmittags', 'pt.evening': 'Abends', 'pt.none': 'Keine Präferenz',
+      'bud.unclear': 'Noch unklar', 'bud.private': 'Möchte ich nicht angeben',
+      'bud.u150': 'unter 150 €', 'bud.150_300': '150–300 €', 'bud.300_500': '300–500 €',
+      'bud.500_800': '500–800 €', 'bud.800_1500': '800–1.500 €', 'bud.o1500': 'über 1.500 €',
+      's5.title': 'Deine Haut', 's5.sub': 'Hilft beim Vorbereiten der Session – alles freiwillig.',
+      's5.first.lbl': 'Ist das dein erstes Tattoo?',
+      's5.allergy.lbl': 'Bekannte Allergien oder Hautunverträglichkeiten?',
+      's5.allergy.notes.lbl': 'Welche Allergien oder Unverträglichkeiten?', 's5.allergy.notes.opt': '(optional)',
+      's5.allergy.notes.ph': 'z. B. Nickelallergie, empfindliche Haut, Neurodermitis …',
+      'yn.yes': 'Ja', 'yn.no': 'Nein', 'yn.unsure': 'Nicht sicher',
+      's6.title': 'Wie können wir<br>dich erreichen?',
+      's6.sub': 'Nur die E-Mail ist Pflicht – alles andere ist freiwillig.',
+      's6.name.lbl': 'Dein Name', 's6.name.ph': 'z. B. Mia Müller',
+      's6.email.lbl': 'E-Mail-Adresse', 's6.email.ph': 'deine@email.de',
+      's6.email.err': 'Bitte eine gültige E-Mail-Adresse eingeben.',
+      's6.phone.lbl': 'Telefon', 's6.phone.opt': '(optional)', 's6.phone.ph': '+49 176 …',
+      's6.ig.lbl': 'Instagram-Handle', 's6.ig.opt': '(optional)', 's6.ig.ph': '@deinname',
+      's6.found.lbl': 'Wie hast du uns gefunden?',
+      's6.privacy': 'Ich habe die {link} gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch {name} zu.',
+      's6.privacy.link': 'Datenschutzerklärung',
+      's6.privacy.err': 'Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.',
+      's6.submit.err': 'Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt.',
+      'found.recommendation': 'Empfehlung', 'found.other': 'Sonstiges',
+      's7.title': 'Vielen Dank!',
+      's7.sub': '{name} meldet sich innerhalb von <strong>48 Stunden</strong> bei dir.',
+      's7.summary': 'Deine Zusammenfassung',
+      'sum.motif': 'Motiv', 'sum.place': 'Körperstelle', 'sum.style': 'Stil',
+      'sum.appt': 'Termin', 'sum.budget': 'Budget', 'sum.email': 'E-Mail',
+      'upload.max3': 'Maximal 3 Bilder erlaubt.',
+      'upload.imgonly': 'Nur Bildformate erlaubt (JPG, PNG, WEBP).',
+      'upload.toobig': ' ist zu groß (max. 2 MB).',
+    },
+    en: {
+      close: 'Close',
+      'btn.start': 'Get started →', 'btn.next': 'Next →', 'btn.back': '← Back',
+      'btn.submit': 'Submit ✓', 'btn.sending': 'Sending …', 'btn.retry': 'Try again →',
+      counter: 'Step {n} of 5',
+      'w.title': 'Request a Tattoo',
+      'w.sub': 'So {name} can put together the right quote – a few quick questions, takes only <strong>3 minutes</strong>.',
+      'w.li1': 'Almost anything can be answered with "Not sure yet"',
+      'w.li2': 'No account needed, no ads',
+      'w.li3': 'Your data goes only to {name}',
+      's2.title': 'Your Idea', 's2.sub': 'What should be tattooed – and where?',
+      's2.desc.lbl': 'What do you have in mind?', 's2.desc.ph': 'e.g. "Fine-line roses, rather delicate and filigree"',
+      's2.desc.err': 'Please briefly describe what you have in mind.',
+      's2.place.lbl': 'Body part', 's2.size.lbl': 'Approximate size',
+      's2.cu.lbl': 'Cover-up?', 's2.cu.notes.lbl': 'The existing tattoo', 's2.cu.notes.opt': '(optional)',
+      's2.cu.notes.ph': 'Color, size and style of the old tattoo.',
+      'ph': '– please select –',
+      'place.forearm': 'Forearm', 'place.upperarm': 'Upper arm', 'place.shoulder': 'Shoulder / shoulder blade',
+      'place.chest': 'Chest / sternum', 'place.back': 'Back', 'place.ribs': 'Ribs / side',
+      'place.belly': 'Belly', 'place.hip': 'Hip / hip bone', 'place.thigh': 'Thigh',
+      'place.shin': 'Lower leg / shin', 'place.ankle': 'Ankle / foot',
+      'place.hand': 'Hand / fingers', 'place.neck': 'Neck', 'place.head': 'Head',
+      'place.unclear': 'Not sure yet',
+      'size.s': 'Small (up to 5 cm)', 'size.m': 'Medium (5–10 cm)', 'size.l': 'Large (10–20 cm)',
+      'size.xl': 'Very large / Sleeve (over 20 cm)', 'size.unclear': 'Not sure yet',
+      'cu.no': 'No', 'cu.yes': 'Yes, cover-up', 'cu.unclear': 'Not sure yet',
+      's3.title': 'Style & References', 's3.sub': 'Which style are you looking for? Multiple selection possible.',
+      's3.style.lbl': 'Tattoo style', 's3.style.unclear': 'Not sure yet',
+      's3.color.lbl': 'Color or black & grey?',
+      's3.upload.lbl': 'Reference images', 's3.upload.opt': '(optional · max. 3 photos)',
+      's3.upload.cta': 'Click to upload', 's3.upload.drag': 'or drag images here',
+      's3.upload.sub': 'Screenshots, Pinterest pins, photos of tattoos you like',
+      's3.upload.hint': 'JPG, PNG or WEBP · max. 2 MB per image · max. 3 images',
+      'col.bw': 'Black & grey', 'col.color': 'Color', 'col.both': 'Either works', 'col.unclear': 'Not sure yet',
+      's4.title': 'Appointment & Budget', 's4.sub': 'Approximate is fine – no binding commitment.',
+      's4.time.lbl': 'Preferred timeframe', 's4.pref.lbl': 'Preferred time of day', 's4.budget.lbl': 'Your budget range',
+      'tf.asap': 'As soon as possible', 'tf.1_3': 'In 1–3 months', 'tf.3_6': 'In 3–6 months',
+      'tf.6_12': 'In 6–12 months', 'tf.none': 'No fixed timeline',
+      'pt.morning': 'Morning', 'pt.afternoon': 'Afternoon', 'pt.evening': 'Evening', 'pt.none': 'No preference',
+      'bud.unclear': 'Not sure yet', 'bud.private': 'Prefer not to say',
+      'bud.u150': 'under €150', 'bud.150_300': '€150–300', 'bud.300_500': '€300–500',
+      'bud.500_800': '€500–800', 'bud.800_1500': '€800–1,500', 'bud.o1500': 'over €1,500',
+      's5.title': 'Your Skin', 's5.sub': 'Helps prepare the session – all optional.',
+      's5.first.lbl': 'Is this your first tattoo?',
+      's5.allergy.lbl': 'Any known allergies or skin sensitivities?',
+      's5.allergy.notes.lbl': 'Which allergies or sensitivities?', 's5.allergy.notes.opt': '(optional)',
+      's5.allergy.notes.ph': 'e.g. nickel allergy, sensitive skin, eczema …',
+      'yn.yes': 'Yes', 'yn.no': 'No', 'yn.unsure': 'Not sure',
+      's6.title': 'How can we<br>reach you?',
+      's6.sub': 'Only your e-mail is required – everything else is optional.',
+      's6.name.lbl': 'Your name', 's6.name.ph': 'e.g. Jane Smith',
+      's6.email.lbl': 'E-mail address', 's6.email.ph': 'your@email.com',
+      's6.email.err': 'Please enter a valid e-mail address.',
+      's6.phone.lbl': 'Phone', 's6.phone.opt': '(optional)', 's6.phone.ph': '+1 555 …',
+      's6.ig.lbl': 'Instagram handle', 's6.ig.opt': '(optional)', 's6.ig.ph': '@yourname',
+      's6.found.lbl': 'How did you find us?',
+      's6.privacy': 'I have read the {link} and consent to the processing of my data for handling my request by {name}.',
+      's6.privacy.link': 'Privacy Policy',
+      's6.privacy.err': 'Please accept the privacy policy to continue.',
+      's6.submit.err': 'An error occurred. Please try again or contact us directly.',
+      'found.recommendation': 'Recommendation', 'found.other': 'Other',
+      's7.title': 'Thank you!',
+      's7.sub': '{name} will get back to you within <strong>48 hours</strong>.',
+      's7.summary': 'Your summary',
+      'sum.motif': 'Idea', 'sum.place': 'Body part', 'sum.style': 'Style',
+      'sum.appt': 'Timeline', 'sum.budget': 'Budget', 'sum.email': 'E-mail',
+      'upload.max3': 'Maximum 3 images allowed.',
+      'upload.imgonly': 'Only image formats allowed (JPG, PNG, WEBP).',
+      'upload.toobig': ' is too large (max. 2 MB).',
+    },
+  };
+
+  // Translation helper
+  function T(key) {
+    var dict = TRANSLATIONS[currentLang] || TRANSLATIONS.de;
+    return (dict[key] !== undefined ? dict[key] : (TRANSLATIONS.de[key] !== undefined ? TRANSLATIONS.de[key] : key));
+  }
 
   // ──────────────────────────────────────────────────────────────────────────
   // CSS
@@ -75,6 +229,12 @@
       transition: transform 0.36s cubic-bezier(0.34,1.56,0.64,1);
     }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
+
+    /* Language toggle */
+    .lang-toggle { display:flex; align-items:center; gap:1px; background:rgba(27,27,27,0.07); border-radius:6px; padding:2px; }
+    .lang-btn { background:transparent; border:none; border-radius:4px; padding:3px 8px; font-size:10px; font-weight:700; letter-spacing:0.07em; cursor:pointer; color:rgba(27,27,27,0.35); font-family:inherit; transition:all 0.15s; }
+    .lang-btn.active { background:#fff; color:#1B1B1B; box-shadow:0 1px 3px rgba(0,0,0,0.1); }
+    .modal-header-right { display:flex; align-items:center; gap:6px; }
 
     .progress-bar { height: 2px; background: #E9E7E2; flex-shrink: 0; }
     .progress-fill {
@@ -792,7 +952,13 @@
     <div class="progress-bar"><div class="progress-fill" id="ea-progress"></div></div>
     <div class="modal-header">
       <span class="logo">einfach anfrage</span>
-      <button class="close-btn" id="ea-close" aria-label="Schließen">${ICON_CLOSE}</button>
+      <div class="modal-header-right">
+        <div id="ea-lang-toggle" class="lang-toggle" style="display:${CONFIG.language === 'auto' ? 'flex' : 'none'};">
+          <button class="lang-btn active" data-lang="de">DE</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="close-btn" id="ea-close" aria-label="Schließen">${ICON_CLOSE}</button>
+      </div>
     </div>
 
     <div class="modal-content" id="ea-content">
@@ -800,87 +966,84 @@
       <!-- ── Step 1: Willkommen ── -->
       <div class="step active" data-step="1">
         <div class="welcome-icon">${ICON_NEEDLE}</div>
-        <h2 class="step-title">Tattoo-Anfrage<br>stellen</h2>
-        <p class="step-subtitle">
-          Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann –
-          ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.
-        </p>
+        <h2 class="step-title" data-i18n="w.title">Tattoo-Anfrage stellen</h2>
+        <p class="step-subtitle" data-i18n-html="w.sub">Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann – ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.</p>
         <ul class="feature-list">
-          <li>Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
-          <li>Kein Account, keine Werbung</li>
-          <li>Deine Daten gehen nur an ${CONFIG.photographerName}</li>
+          <li data-i18n="w.li1">Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
+          <li data-i18n="w.li2">Kein Account, keine Werbung</li>
+          <li data-i18n-html="w.li3">Deine Daten gehen nur an ${CONFIG.photographerName}</li>
         </ul>
-        <button class="btn btn-primary btn-full" id="ea-start">Jetzt starten →</button>
+        <button class="btn btn-primary btn-full" id="ea-start" data-i18n="btn.start">Jetzt starten →</button>
       </div>
 
       <!-- ── Step 2: Motiv & Ort ── -->
       <div class="step" data-step="2">
-        <h2 class="step-title">Dein Motiv</h2>
-        <p class="step-subtitle">Was soll gestochen werden – und wo?</p>
+        <h2 class="step-title" data-i18n="s2.title">Dein Motiv</h2>
+        <p class="step-subtitle" data-i18n="s2.sub">Was soll gestochen werden – und wo?</p>
 
         <div class="field">
-          <label class="field-label" for="ea-motif-desc">Was stellst du dir vor? <span class="req">*</span></label>
-          <textarea id="ea-motif-desc" name="motifDesc" rows="3" placeholder="z. B. „Fine-Line Rosen, eher zart und filigran""></textarea>
-          <div class="err-msg" id="ea-motif-err">Bitte kurz beschreiben, was du dir vorstellst.</div>
+          <label class="field-label" for="ea-motif-desc"><span data-i18n="s2.desc.lbl">Was stellst du dir vor?</span> <span class="req">*</span></label>
+          <textarea id="ea-motif-desc" name="motifDesc" rows="3" data-i18n-ph="s2.desc.ph" placeholder="„Fine-Line Rosen, eher zart und filigran""></textarea>
+          <div class="err-msg" id="ea-motif-err" data-i18n="s2.desc.err">Bitte kurz beschreiben, was du dir vorstellst.</div>
         </div>
 
         <div class="field-row">
           <div class="field">
-            <label class="field-label" for="ea-placement">Körperstelle</label>
+            <label class="field-label" for="ea-placement" data-i18n="s2.place.lbl">Körperstelle</label>
             <select id="ea-placement" name="placement">
-              <option value="">– bitte wählen –</option>
-              <option>Unterarm</option>
-              <option>Oberarm</option>
-              <option>Schulter / Schulterblatt</option>
-              <option>Brust / Sternum</option>
-              <option>Rücken</option>
-              <option>Rippen / Seite</option>
-              <option>Bauch</option>
-              <option>Hüfte / Hüftknochen</option>
-              <option>Oberschenkel</option>
-              <option>Unterschenkel / Schienbein</option>
-              <option>Knöchel / Fuß</option>
-              <option>Hand / Finger</option>
-              <option>Hals / Nacken</option>
-              <option>Kopf</option>
-              <option>Noch unklar</option>
+              <option value="" data-i18n="ph">– bitte wählen –</option>
+              <option value="Unterarm" data-i18n="place.forearm">Unterarm</option>
+              <option value="Oberarm" data-i18n="place.upperarm">Oberarm</option>
+              <option value="Schulter / Schulterblatt" data-i18n="place.shoulder">Schulter / Schulterblatt</option>
+              <option value="Brust / Sternum" data-i18n="place.chest">Brust / Sternum</option>
+              <option value="Rücken" data-i18n="place.back">Rücken</option>
+              <option value="Rippen / Seite" data-i18n="place.ribs">Rippen / Seite</option>
+              <option value="Bauch" data-i18n="place.belly">Bauch</option>
+              <option value="Hüfte / Hüftknochen" data-i18n="place.hip">Hüfte / Hüftknochen</option>
+              <option value="Oberschenkel" data-i18n="place.thigh">Oberschenkel</option>
+              <option value="Unterschenkel / Schienbein" data-i18n="place.shin">Unterschenkel / Schienbein</option>
+              <option value="Knöchel / Fuß" data-i18n="place.ankle">Knöchel / Fuß</option>
+              <option value="Hand / Finger" data-i18n="place.hand">Hand / Finger</option>
+              <option value="Hals / Nacken" data-i18n="place.neck">Hals / Nacken</option>
+              <option value="Kopf" data-i18n="place.head">Kopf</option>
+              <option value="Noch unklar" data-i18n="place.unclear">Noch unklar</option>
             </select>
           </div>
           <div class="field">
-            <label class="field-label" for="ea-size">Ungefähre Größe</label>
+            <label class="field-label" for="ea-size" data-i18n="s2.size.lbl">Ungefähre Größe</label>
             <select id="ea-size" name="size">
-              <option value="">– bitte wählen –</option>
-              <option value="Klein (bis 5 cm)">Klein (bis 5 cm)</option>
-              <option value="Mittel (5–10 cm)">Mittel (5–10 cm)</option>
-              <option value="Groß (10–20 cm)">Groß (10–20 cm)</option>
-              <option value="Sehr groß / Sleeve (über 20 cm)">Sehr groß / Sleeve (über 20 cm)</option>
-              <option value="Noch unklar">Noch unklar</option>
+              <option value="" data-i18n="ph">– bitte wählen –</option>
+              <option value="Klein (bis 5 cm)" data-i18n="size.s">Klein (bis 5 cm)</option>
+              <option value="Mittel (5–10 cm)" data-i18n="size.m">Mittel (5–10 cm)</option>
+              <option value="Groß (10–20 cm)" data-i18n="size.l">Groß (10–20 cm)</option>
+              <option value="Sehr groß / Sleeve (über 20 cm)" data-i18n="size.xl">Sehr groß / Sleeve (über 20 cm)</option>
+              <option value="Noch unklar" data-i18n="size.unclear">Noch unklar</option>
             </select>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Cover-Up?</label>
+          <label class="field-label" data-i18n="s2.cu.lbl">Cover-Up?</label>
           <div class="radio-group" id="ea-coverup">
-            <label class="radio-item"><input type="radio" name="isCoverUp" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="isCoverUp" value="Ja"> Ja, Cover-Up</label>
-            <label class="radio-item"><input type="radio" name="isCoverUp" value="Noch unklar"> Noch unklar</label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Nein"><span data-i18n="cu.no">Nein</span></label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Ja"><span data-i18n="cu.yes">Ja, Cover-Up</span></label>
+            <label class="radio-item"><input type="radio" name="isCoverUp" value="Noch unklar"><span data-i18n="cu.unclear">Noch unklar</span></label>
           </div>
         </div>
 
         <div class="field" id="ea-coverup-notes-wrap" style="display:none;">
-          <label class="field-label" for="ea-coverup-notes">Das bestehende Tattoo <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-coverup-notes" name="coverUpNotes" placeholder="Farbe, Größe und Stil des alten Tattoos."></textarea>
+          <label class="field-label" for="ea-coverup-notes"><span data-i18n="s2.cu.notes.lbl">Das bestehende Tattoo</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s2.cu.notes.opt">(optional)</span></label>
+          <textarea id="ea-coverup-notes" name="coverUpNotes" data-i18n-ph="s2.cu.notes.ph" placeholder="Farbe, Größe und Stil des alten Tattoos."></textarea>
         </div>
       </div>
 
       <!-- ── Step 3: Stil & Referenzen ── -->
       <div class="step" data-step="3">
-        <h2 class="step-title">Stil &amp; Referenzen</h2>
-        <p class="step-subtitle">Welchen Stil suchst du? Mehrfachauswahl möglich.</p>
+        <h2 class="step-title" data-i18n="s3.title">Stil &amp; Referenzen</h2>
+        <p class="step-subtitle" data-i18n="s3.sub">Welchen Stil suchst du? Mehrfachauswahl möglich.</p>
 
         <div class="field">
-          <label class="field-label">Tattoo-Stil</label>
+          <label class="field-label" data-i18n="s3.style.lbl">Tattoo-Stil</label>
           <div class="check-grid" id="ea-styles">
             <label class="check-item"><input type="checkbox" value="Fine Line"> Fine Line</label>
             <label class="check-item"><input type="checkbox" value="Blackwork / Dotwork"> Blackwork / Dotwork</label>
@@ -893,156 +1056,156 @@
             <label class="check-item"><input type="checkbox" value="Geometric"> Geometric</label>
             <label class="check-item"><input type="checkbox" value="Ornamental / Mandala"> Ornamental / Mandala</label>
             <label class="check-item"><input type="checkbox" value="Lettering / Schrift"> Lettering / Schrift</label>
-            <label class="check-item"><input type="checkbox" value="Noch unklar"> Noch unklar</label>
+            <label class="check-item"><input type="checkbox" value="Noch unklar"><span data-i18n="s3.style.unclear">Noch unklar</span></label>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Farbe oder Schwarz-Grau?</label>
+          <label class="field-label" data-i18n="s3.color.lbl">Farbe oder Schwarz-Grau?</label>
           <div class="radio-group" id="ea-color-pref">
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Schwarz-Grau"> Schwarz-Grau</label>
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Farbe"> Farbe</label>
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides möglich"> Beides möglich</label>
-            <label class="radio-item"><input type="radio" name="colorPreference" value="Noch unklar"> Noch unklar</label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Schwarz-Grau"><span data-i18n="col.bw">Schwarz-Grau</span></label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Farbe"><span data-i18n="col.color">Farbe</span></label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Beides möglich"><span data-i18n="col.both">Beides möglich</span></label>
+            <label class="radio-item"><input type="radio" name="colorPreference" value="Noch unklar"><span data-i18n="col.unclear">Noch unklar</span></label>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Referenzbilder <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional · max. 3 Fotos)</span></label>
+          <label class="field-label"><span data-i18n="s3.upload.lbl">Referenzbilder</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s3.upload.opt">(optional · max. 3 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
-              <strong>Klicken zum Hochladen</strong> oder Bilder hierher ziehen<br>
-              <span style="font-size:12px;color:#B0A898;">Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen</span>
+              <strong data-i18n="s3.upload.cta">Klicken zum Hochladen</strong> <span data-i18n="s3.upload.drag">oder Bilder hierher ziehen</span><br>
+              <span style="font-size:12px;color:#B0A898;" data-i18n="s3.upload.sub">Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen</span>
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
-          <div class="upload-hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
+          <div class="upload-hint" data-i18n="s3.upload.hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
         </div>
       </div>
 
       <!-- ── Step 4: Termin & Budget ── -->
       <div class="step" data-step="4">
-        <h2 class="step-title">Termin &amp; Budget</h2>
-        <p class="step-subtitle">Ungefähr reicht – kein verbindlicher Termin.</p>
+        <h2 class="step-title" data-i18n="s4.title">Termin &amp; Budget</h2>
+        <p class="step-subtitle" data-i18n="s4.sub">Ungefähr reicht – kein verbindlicher Termin.</p>
 
         <div class="field">
-          <label class="field-label" for="ea-timeframe">Wunsch-Zeitraum</label>
+          <label class="field-label" for="ea-timeframe" data-i18n="s4.time.lbl">Wunsch-Zeitraum</label>
           <select id="ea-timeframe" name="timeframe">
-            <option value="">– bitte wählen –</option>
-            <option value="So bald wie möglich">So bald wie möglich</option>
-            <option value="In 1–3 Monaten">In 1–3 Monaten</option>
-            <option value="In 3–6 Monaten">In 3–6 Monaten</option>
-            <option value="In 6–12 Monaten">In 6–12 Monaten</option>
-            <option value="Kein fester Zeitdruck">Kein fester Zeitdruck</option>
+            <option value="" data-i18n="ph">– bitte wählen –</option>
+            <option value="So bald wie möglich" data-i18n="tf.asap">So bald wie möglich</option>
+            <option value="In 1–3 Monaten" data-i18n="tf.1_3">In 1–3 Monaten</option>
+            <option value="In 3–6 Monaten" data-i18n="tf.3_6">In 3–6 Monaten</option>
+            <option value="In 6–12 Monaten" data-i18n="tf.6_12">In 6–12 Monaten</option>
+            <option value="Kein fester Zeitdruck" data-i18n="tf.none">Kein fester Zeitdruck</option>
           </select>
         </div>
 
         <div class="field">
-          <label class="field-label">Bevorzugte Tageszeit</label>
+          <label class="field-label" data-i18n="s4.pref.lbl">Bevorzugte Tageszeit</label>
           <div class="radio-group" id="ea-preferred-time">
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Vormittags"> Vormittags</label>
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Nachmittags"> Nachmittags</label>
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Abends"> Abends</label>
-            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine Präferenz"> Keine Präferenz</label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Vormittags"><span data-i18n="pt.morning">Vormittags</span></label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Nachmittags"><span data-i18n="pt.afternoon">Nachmittags</span></label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Abends"><span data-i18n="pt.evening">Abends</span></label>
+            <label class="radio-item"><input type="radio" name="preferredTime" value="Keine Präferenz"><span data-i18n="pt.none">Keine Präferenz</span></label>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-budget">Dein Budgetrahmen</label>
+          <label class="field-label" for="ea-budget" data-i18n="s4.budget.lbl">Dein Budgetrahmen</label>
           <select id="ea-budget" name="budget">
-            <option value="">– bitte wählen –</option>
-            <option value="Noch unklar">Noch unklar</option>
-            <option value="Möchte ich nicht angeben">Möchte ich nicht angeben</option>
-            <option value="unter 150 €">unter 150 €</option>
-            <option value="150–300 €">150–300 €</option>
-            <option value="300–500 €">300–500 €</option>
-            <option value="500–800 €">500–800 €</option>
-            <option value="800–1.500 €">800–1.500 €</option>
-            <option value="über 1.500 €">über 1.500 €</option>
+            <option value="" data-i18n="ph">– bitte wählen –</option>
+            <option value="Noch unklar" data-i18n="bud.unclear">Noch unklar</option>
+            <option value="Möchte ich nicht angeben" data-i18n="bud.private">Möchte ich nicht angeben</option>
+            <option value="unter 150 €" data-i18n="bud.u150">unter 150 €</option>
+            <option value="150–300 €" data-i18n="bud.150_300">150–300 €</option>
+            <option value="300–500 €" data-i18n="bud.300_500">300–500 €</option>
+            <option value="500–800 €" data-i18n="bud.500_800">500–800 €</option>
+            <option value="800–1.500 €" data-i18n="bud.800_1500">800–1.500 €</option>
+            <option value="über 1.500 €" data-i18n="bud.o1500">über 1.500 €</option>
           </select>
         </div>
       </div>
 
       <!-- ── Step 5: Deine Haut ── -->
       <div class="step" data-step="5">
-        <h2 class="step-title">Deine Haut</h2>
-        <p class="step-subtitle">Hilft beim Vorbereiten der Session – alles freiwillig.</p>
+        <h2 class="step-title" data-i18n="s5.title">Deine Haut</h2>
+        <p class="step-subtitle" data-i18n="s5.sub">Hilft beim Vorbereiten der Session – alles freiwillig.</p>
 
         <div class="field">
-          <label class="field-label">Ist das dein erstes Tattoo?</label>
+          <label class="field-label" data-i18n="s5.first.lbl">Ist das dein erstes Tattoo?</label>
           <div class="radio-group" id="ea-first-tattoo">
-            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Nein"> Nein</label>
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Ja"><span data-i18n="yn.yes">Ja</span></label>
+            <label class="radio-item"><input type="radio" name="isFirstTattoo" value="Nein"><span data-i18n="yn.no">Nein</span></label>
           </div>
         </div>
 
         <div class="field">
-          <label class="field-label">Bekannte Allergien oder Hautunverträglichkeiten?</label>
+          <label class="field-label" data-i18n="s5.allergy.lbl">Bekannte Allergien oder Hautunverträglichkeiten?</label>
           <div class="radio-group" id="ea-allergies">
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"> Nein</label>
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"> Ja</label>
-            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nicht sicher"> Nicht sicher</label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nein"><span data-i18n="yn.no">Nein</span></label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Ja"><span data-i18n="yn.yes">Ja</span></label>
+            <label class="radio-item"><input type="radio" name="knownAllergies" value="Nicht sicher"><span data-i18n="yn.unsure">Nicht sicher</span></label>
           </div>
         </div>
 
         <div class="field" id="ea-allergies-detail-wrap" style="display:none;">
-          <label class="field-label" for="ea-allergies-detail">Welche Allergien oder Unverträglichkeiten? <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea id="ea-allergies-detail" name="allergiesDetail" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis …"></textarea>
+          <label class="field-label" for="ea-allergies-detail"><span data-i18n="s5.allergy.notes.lbl">Welche Allergien oder Unverträglichkeiten?</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s5.allergy.notes.opt">(optional)</span></label>
+          <textarea id="ea-allergies-detail" name="allergiesDetail" data-i18n-ph="s5.allergy.notes.ph" placeholder="z. B. Nickelallergie, empfindliche Haut, Neurodermitis …"></textarea>
         </div>
       </div>
 
       <!-- ── Step 6: Kontakt ── -->
       <div class="step" data-step="6">
-        <h2 class="step-title">Wie können wir<br>dich erreichen?</h2>
-        <p class="step-subtitle">Nur die E-Mail ist Pflicht – alles andere ist freiwillig.</p>
+        <h2 class="step-title" data-i18n-html="s6.title">Wie können wir<br>dich erreichen?</h2>
+        <p class="step-subtitle" data-i18n="s6.sub">Nur die E-Mail ist Pflicht – alles andere ist freiwillig.</p>
 
         <div class="field">
-          <label class="field-label" for="ea-name">Dein Name</label>
-          <input type="text" id="ea-name" name="name" placeholder="z. B. Mia Müller">
+          <label class="field-label" for="ea-name" data-i18n="s6.name.lbl">Dein Name</label>
+          <input type="text" id="ea-name" name="name" data-i18n-ph="s6.name.ph" placeholder="z. B. Mia Müller">
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-email">E-Mail-Adresse <span class="req">*</span></label>
-          <input type="email" id="ea-email" name="email" placeholder="deine@email.de">
-          <div class="err-msg" id="ea-email-err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
+          <label class="field-label" for="ea-email"><span data-i18n="s6.email.lbl">E-Mail-Adresse</span> <span class="req">*</span></label>
+          <input type="email" id="ea-email" name="email" data-i18n-ph="s6.email.ph" placeholder="deine@email.de">
+          <div class="err-msg" id="ea-email-err" data-i18n="s6.email.err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-phone">Telefon <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="tel" id="ea-phone" name="phone" placeholder="+49 176 …">
+          <label class="field-label" for="ea-phone"><span data-i18n="s6.phone.lbl">Telefon</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.phone.opt">(optional)</span></label>
+          <input type="tel" id="ea-phone" name="phone" data-i18n-ph="s6.phone.ph" placeholder="+49 176 …">
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-instagram">Instagram-Handle <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <input type="text" id="ea-instagram" name="instagram" placeholder="@deinname">
+          <label class="field-label" for="ea-instagram"><span data-i18n="s6.ig.lbl">Instagram-Handle</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.ig.opt">(optional)</span></label>
+          <input type="text" id="ea-instagram" name="instagram" data-i18n-ph="s6.ig.ph" placeholder="@deinname">
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-found">Wie hast du uns gefunden?</label>
+          <label class="field-label" for="ea-found" data-i18n="s6.found.lbl">Wie hast du uns gefunden?</label>
           <select id="ea-found" name="howFound">
-            <option value="">– bitte wählen –</option>
+            <option value="" data-i18n="ph">– bitte wählen –</option>
             <option>Instagram</option>
             <option>Google</option>
             <option>TikTok</option>
-            <option>Empfehlung</option>
+            <option value="Empfehlung" data-i18n="found.recommendation">Empfehlung</option>
             <option>Walk-In</option>
             <option>Pinterest</option>
-            <option>Sonstiges</option>
+            <option value="Sonstiges" data-i18n="found.other">Sonstiges</option>
           </select>
         </div>
 
         <div class="field" style="margin-top:4px;">
           <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:12px 14px;border:1.5px solid #D1CDC7;border-radius:9px;transition:border-color 0.15s;" id="ea-privacy-label">
             <input type="checkbox" id="ea-privacy-consent" style="margin-top:2px;flex-shrink:0;width:16px;height:16px;cursor:pointer;accent-color:#BF7A60;">
-            <span style="font-size:12.5px;color:#6B6B6B;line-height:1.5;">
+            <span style="font-size:12.5px;color:#6B6B6B;line-height:1.5;" data-i18n-privacy>
               Ich habe die <a href="${CONFIG.privacyUrl}" target="_blank" rel="noopener noreferrer" style="color:#BF7A60;text-decoration:underline;">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch <strong>${CONFIG.photographerName}</strong> zu. <span style="color:#BF7A60;">*</span>
             </span>
           </label>
-          <div class="err-msg" id="ea-privacy-err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
+          <div class="err-msg" id="ea-privacy-err" data-i18n="s6.privacy.err">Bitte die Datenschutzerklärung akzeptieren, um fortzufahren.</div>
         </div>
-        <div id="ea-submit-err" style="display:none;margin-top:12px;padding:12px 14px;background:#FFF3F0;border:1px solid #F5C6BC;border-radius:8px;font-size:13px;color:#C0392B;line-height:1.5;">
+        <div id="ea-submit-err" style="display:none;margin-top:12px;padding:12px 14px;background:#FFF3F0;border:1px solid #F5C6BC;border-radius:8px;font-size:13px;color:#C0392B;line-height:1.5;" data-i18n="s6.submit.err">
           Es ist ein Fehler aufgetreten. Bitte versuche es erneut oder kontaktiere uns direkt.
         </div>
       </div>
@@ -1051,8 +1214,8 @@
       <div class="step" data-step="7">
         <div class="thankyou-wrap">
           <div class="thankyou-icon">${ICON_DONE}</div>
-          <h2 class="step-title">Vielen Dank!</h2>
-          <p class="step-subtitle" id="ea-thankyou-text">
+          <h2 class="step-title" data-i18n="s7.title">Vielen Dank!</h2>
+          <p class="step-subtitle" id="ea-thankyou-text" data-i18n-html="s7.sub">
             <strong>${CONFIG.photographerName}</strong> meldet sich innerhalb von<br>
             <strong>48 Stunden</strong> bei dir.
           </p>
@@ -1063,9 +1226,9 @@
     </div><!-- /modal-content -->
 
     <div class="modal-nav" id="ea-nav">
-      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;">← Zurück</button>
+      <button class="btn btn-ghost" id="ea-back" style="visibility:hidden;" data-i18n="btn.back">← Zurück</button>
       <span class="step-counter" id="ea-counter"></span>
-      <button class="btn btn-primary" id="ea-next">Weiter →</button>
+      <button class="btn btn-primary" id="ea-next" data-i18n="btn.next">Weiter →</button>
     </div>
   `;
 
@@ -1074,6 +1237,7 @@
   // ──────────────────────────────────────────────────────────────────────────
   const TOTAL_STEPS = 7;
   let currentStep = 1;
+  let currentLang = CONFIG.language === 'en' ? 'en' : 'de'; // 'auto' defaults to de (set later via browser lang)
   let formData = {};
   let uploadedFiles = []; // [{name, data, type}]
   let shadowRoot, overlay, modalEl, progressFill, navEl, backBtn, nextBtn, counter;
@@ -1185,8 +1349,66 @@
     // File upload
     initFileUpload();
 
+    // Language init (auto: detect browser language)
+    if (CONFIG.language === 'auto') {
+      var browserLang = (navigator.language || 'de').toLowerCase();
+      currentLang = browserLang.startsWith('de') ? 'de' : 'en';
+    }
+    applyTranslations(currentLang);
+
+    // Language toggle buttons
+    var langToggle = shadowRoot.getElementById('ea-lang-toggle');
+    if (langToggle) {
+      langToggle.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentLang = btn.dataset.lang;
+          langToggle.querySelectorAll('.lang-btn').forEach(function (b) {
+            b.classList.toggle('active', b.dataset.lang === currentLang);
+          });
+          applyTranslations(currentLang);
+        });
+      });
+    }
+
     // Escape to close
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+  }
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // APPLY TRANSLATIONS
+  // ──────────────────────────────────────────────────────────────────────────
+  function applyTranslations(lang) {
+    // Plain text
+    shadowRoot.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var v = T(el.dataset.i18n);
+      if (v !== el.dataset.i18n) el.textContent = v;
+    });
+    // HTML (allows <strong>, <br>, {name} substitution)
+    shadowRoot.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var v = T(el.dataset.i18nHtml);
+      if (v !== el.dataset.i18nHtml) el.innerHTML = v.replace(/\{name\}/g, CONFIG.photographerName);
+    });
+    // Placeholders
+    shadowRoot.querySelectorAll('[data-i18n-ph]').forEach(function (el) {
+      var v = T(el.dataset.i18nPh);
+      if (v !== el.dataset.i18nPh) el.setAttribute('placeholder', v);
+    });
+    // Privacy text (special: link + {name} + {link})
+    var privEl = shadowRoot.querySelector('[data-i18n-privacy]');
+    if (privEl) {
+      var tmpl = T('s6.privacy');
+      var linkTxt = T('s6.privacy.link');
+      var linkHtml = '<a href="' + CONFIG.privacyUrl + '" target="_blank" rel="noopener noreferrer" style="color:#BF7A60;text-decoration:underline;">' + linkTxt + '</a>';
+      privEl.innerHTML = tmpl
+        .replace('{link}', linkHtml)
+        .replace('{name}', '<strong>' + CONFIG.photographerName + '</strong>')
+        + ' <span style="color:#BF7A60;">*</span>';
+    }
+    // Close button aria-label
+    var closeEl = shadowRoot.getElementById('ea-close');
+    if (closeEl) closeEl.setAttribute('aria-label', T('close'));
+    // Refresh nav (counter + button texts)
+    updateNav();
   }
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -1227,9 +1449,9 @@
   function handleUploadFiles(files, previews, label, errEl) {
     errEl.classList.remove('show');
     files.forEach(function (file) {
-      if (uploadedFiles.length >= 3) { showUploadErr(errEl, 'Maximal 3 Bilder erlaubt.'); return; }
-      if (!file.type.startsWith('image/')) { showUploadErr(errEl, 'Nur Bildformate erlaubt (JPG, PNG, WEBP).'); return; }
-      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + ' ist zu groß (max. 2 MB).'); return; }
+      if (uploadedFiles.length >= 3) { showUploadErr(errEl, T('upload.max3')); return; }
+      if (!file.type.startsWith('image/')) { showUploadErr(errEl, T('upload.imgonly')); return; }
+      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + T('upload.toobig')); return; }
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -1292,8 +1514,9 @@
     navEl.style.display = (isFirst || isLast) ? 'none' : 'flex';
     if (!isFirst && !isLast) {
       backBtn.style.visibility = currentStep === 2 ? 'hidden' : 'visible';
-      nextBtn.textContent = currentStep === 6 ? 'Abschicken ✓' : 'Weiter →';
-      counter.textContent = 'Schritt ' + (currentStep - 1) + ' von 5';
+      nextBtn.textContent = currentStep === 6 ? T('btn.submit') : T('btn.next');
+      backBtn.textContent = T('btn.back');
+      counter.textContent = T('counter').replace('{n}', String(currentStep - 1));
     }
   }
 
@@ -1419,7 +1642,7 @@
   // ──────────────────────────────────────────────────────────────────────────
   async function submitForm() {
     nextBtn.disabled    = true;
-    nextBtn.textContent = 'Wird gesendet …';
+    nextBtn.textContent = T('btn.sending');
 
     try {
       formData = collectFormData();
@@ -1469,12 +1692,12 @@
       }
 
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Weiter →';
+      nextBtn.textContent = T('btn.next');
       showThankYou();
     } catch (err) {
       console.error('[EinfachAnfrage] Fehler:', err);
       nextBtn.disabled    = false;
-      nextBtn.textContent = 'Erneut versuchen →';
+      nextBtn.textContent = T('btn.retry');
       var submitErr = shadowRoot.getElementById('ea-submit-err');
       if (submitErr) submitErr.style.display = 'block';
     }
@@ -1492,15 +1715,15 @@
     if (!summary) return;
 
     var rows = [
-      ['Motiv',        (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? '…' : '') : '–'],
-      ['Körperstelle', (fd.motif && fd.motif.placement) || '–'],
-      ['Stil',         (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : '–'],
-      ['Termin',       (fd.appointment && fd.appointment.timeframe) || '–'],
-      ['Budget',       (fd.budget && fd.budget.range) || '–'],
-      ['E-Mail',       fd.contact.email],
+      [T('sum.motif'),  (fd.motif && fd.motif.description) ? fd.motif.description.substring(0, 60) + (fd.motif.description.length > 60 ? '…' : '') : '–'],
+      [T('sum.place'), (fd.motif && fd.motif.placement) || '–'],
+      [T('sum.style'), (fd.style && fd.style.styles && fd.style.styles.length) ? fd.style.styles.join(', ') : '–'],
+      [T('sum.appt'),  (fd.appointment && fd.appointment.timeframe) || '–'],
+      [T('sum.budget'),(fd.budget && fd.budget.range) || '–'],
+      [T('sum.email'), fd.contact.email],
     ];
 
-    summary.innerHTML = '<div class="summary-card-title">Deine Zusammenfassung</div>' +
+    summary.innerHTML = '<div class="summary-card-title">' + T('s7.summary') + '</div>' +
       rows.map(function (r) {
         return '<div class="summary-row">' +
           '<span class="summary-label">' + r[0] + '</span>' +
