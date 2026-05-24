@@ -26,100 +26,123 @@ function formatDateTime(isoDate) {
 function buildArtistHtml(submission) {
   const { contact, motif, style, health, appointment, budget } = submission;
   const name = esc(contact.name) || esc(contact.email) || '–';
-  const AC = '#BF7A60'; // Terrakotta Akzent
+  const AC = '#BF7A60';
+  const B  = 'rgba(247,246,243,0.07)'; // border color
+
+  // helper: compact detail row
+  const row = (label, val) => val && val !== '–'
+    ? `<tr>
+        <td style="padding:5px 10px 5px 0;font-size:12px;color:rgba(247,246,243,0.38);white-space:nowrap;vertical-align:top;">${label}</td>
+        <td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;vertical-align:top;">${val}</td>
+       </tr>`
+    : '';
+
+  // helper: text note block
+  const note = (label, text) => text
+    ? `<tr><td style="padding:0 0 8px;">
+        <div style="border-left:2px solid ${AC};padding:8px 12px;background:rgba(255,255,255,0.03);">
+          <p style="margin:0 0 3px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">${label}</p>
+          <p style="margin:0;font-size:12px;color:rgba(247,246,243,0.7);line-height:1.55;">${esc(text)}</p>
+        </div>
+       </td></tr>`
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="de">
-<head><meta charset="UTF-8"><title>Neue Tattoo-Anfrage</title></head>
-<body style="margin:0;padding:0;background:#1B1B1B;font-family:'Helvetica Neue',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#1B1B1B;padding:40px 0;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Neue Tattoo-Anfrage</title>
+  <style>
+    @media only screen and (max-width:500px){
+      .outer{padding:0 !important;}
+      .wrap{border-radius:0 !important;}
+      .pad{padding-left:14px !important;padding-right:14px !important;}
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#141414;font-family:'Helvetica Neue',Arial,sans-serif;">
+<table class="outer" width="100%" cellpadding="0" cellspacing="0" style="background:#141414;padding:16px 0;">
 <tr><td align="center">
-<table width="580" cellpadding="0" cellspacing="0" style="max-width:580px;width:100%;">
+<table class="wrap" width="480" cellpadding="0" cellspacing="0" style="max-width:480px;width:100%;background:#1B1B1B;border-radius:6px;overflow:hidden;">
 
-  <!-- Logo -->
-  <tr><td style="padding:0 0 28px;">
-    <span style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;color:#F7F6F3;letter-spacing:0.18em;text-transform:uppercase;">EINFACH <span style="color:${AC};">ANFRAGE</span></span>
+  <!-- Brand bar -->
+  <tr><td class="pad" style="padding:12px 18px;background:#111;border-bottom:1px solid ${B};">
+    <table width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td><span style="font-size:10px;font-weight:700;color:#F7F6F3;letter-spacing:0.16em;text-transform:uppercase;">EINFACH <span style="color:${AC};">ANFRAGE</span></span></td>
+      <td style="text-align:right;font-size:9px;color:rgba(247,246,243,0.22);">Neue Anfrage · ${formatDateTime(submission.createdAt)}</td>
+    </tr></table>
   </td></tr>
 
-  <!-- Headline -->
-  <tr><td style="padding:0 0 6px;">
-    <p style="margin:0;font-size:10px;font-weight:700;color:rgba(247,246,243,0.3);text-transform:uppercase;letter-spacing:0.14em;">Neue Anfrage</p>
-  </td></tr>
-  <tr><td style="padding:0 0 32px;">
-    <h1 style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:36px;font-weight:800;color:#F7F6F3;letter-spacing:-0.02em;line-height:1.1;">${name}</h1>
-    <p style="margin:6px 0 0;font-size:12px;color:rgba(247,246,243,0.3);">${formatDateTime(submission.createdAt)}</p>
+  <!-- Name + Kontakt -->
+  <tr><td class="pad" style="padding:14px 18px 12px;border-bottom:1px solid ${B};">
+    <p style="margin:0 0 5px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
+    <table cellpadding="0" cellspacing="0"><tr>
+      <td><a href="mailto:${esc(contact.email)}" style="font-size:12px;color:${AC};text-decoration:none;font-weight:600;">${esc(contact.email)}</a></td>
+      ${contact.phone ? `<td style="padding-left:12px;font-size:11px;color:rgba(247,246,243,0.3);">${esc(contact.phone)}</td>` : ''}
+      ${contact.instagram ? `<td style="padding-left:12px;font-size:11px;color:rgba(247,246,243,0.3);">@${esc(contact.instagram)}</td>` : ''}
+    </tr></table>
   </td></tr>
 
-  <!-- Key facts: 2x2 grid -->
-  <tr><td style="padding:0 0 24px;">
+  <!-- Key facts: 2 × 2 kompaktes Grid -->
+  <tr><td style="padding:0;border-bottom:1px solid ${B};">
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="50%" style="padding:16px 20px 16px 0;border-bottom:1px solid rgba(247,246,243,0.08);vertical-align:top;">
-          <p style="margin:0 0 4px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Körperstelle</p>
-          <p style="margin:0;font-size:16px;font-weight:700;color:#F7F6F3;">${esc((motif || {}).placement) || '–'}</p>
+        <td width="50%" style="padding:10px 12px 10px 18px;border-right:1px solid ${B};vertical-align:top;">
+          <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Körperstelle</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${esc((motif || {}).placement) || '–'}</p>
         </td>
-        <td width="50%" style="padding:16px 0 16px 20px;border-bottom:1px solid rgba(247,246,243,0.08);border-left:1px solid rgba(247,246,243,0.08);vertical-align:top;">
-          <p style="margin:0 0 4px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Größe</p>
-          <p style="margin:0;font-size:16px;font-weight:700;color:#F7F6F3;">${esc((motif || {}).size) || '–'}</p>
+        <td width="50%" style="padding:10px 18px 10px 12px;vertical-align:top;">
+          <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Größe</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${esc((motif || {}).size) || '–'}</p>
         </td>
       </tr>
-      <tr>
-        <td width="50%" style="padding:16px 20px 0 0;vertical-align:top;">
-          <p style="margin:0 0 4px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Wunsch-Termin</p>
-          <p style="margin:0;font-size:16px;font-weight:700;color:#F7F6F3;">${esc((appointment || {}).timeframe) || '–'}</p>
+      <tr style="border-top:1px solid ${B};">
+        <td width="50%" style="padding:10px 12px 10px 18px;border-right:1px solid ${B};border-top:1px solid ${B};vertical-align:top;">
+          <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Wunsch-Termin</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${esc((appointment || {}).timeframe) || '–'}</p>
         </td>
-        <td width="50%" style="padding:16px 0 0 20px;border-left:1px solid rgba(247,246,243,0.08);vertical-align:top;">
-          <p style="margin:0 0 4px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Budget</p>
-          <p style="margin:0;font-size:16px;font-weight:700;color:#F7F6F3;">${esc((budget || {}).range) || '–'}</p>
+        <td width="50%" style="padding:10px 18px 10px 12px;border-top:1px solid ${B};vertical-align:top;">
+          <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Budget</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${esc((budget || {}).range) || '–'}</p>
         </td>
       </tr>
     </table>
   </td></tr>
 
-  <!-- Divider -->
-  <tr><td style="padding:0 0 24px;"><div style="height:1px;background:rgba(247,246,243,0.08);"></div></td></tr>
-
-  <!-- Detail rows -->
-  <tr><td style="padding:0 0 24px;">
+  <!-- Detail-Felder -->
+  <tr><td class="pad" style="padding:10px 18px 4px;border-bottom:1px solid ${B};">
     <table width="100%" cellpadding="0" cellspacing="0">
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);width:160px;">Tattoo-Stil</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc(((style || {}).styles || []).join(', ')) || '–'}</td></tr>
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);">Farbe / SW</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc((style || {}).colorPreference) || '–'}</td></tr>
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);">Cover-Up</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc((motif || {}).isCoverUp) || '–'}</td></tr>
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);">Erstes Tattoo</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc((health || {}).isFirstTattoo) || '–'}</td></tr>
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);">Allergien</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc((health || {}).knownAllergies) || '–'}</td></tr>
-      <tr><td style="padding:5px 0;font-size:12px;color:rgba(247,246,243,0.35);">Bevorzugte Zeit</td><td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;">${esc((appointment || {}).preferredTime) || '–'}</td></tr>
+      ${row('Tattoo-Stil',     esc(((style || {}).styles || []).join(', ')) || '–')}
+      ${row('Farbe / SW',      esc((style || {}).colorPreference) || '–')}
+      ${row('Cover-Up',        esc((motif || {}).isCoverUp) || '–')}
+      ${row('Erstes Tattoo',   esc((health || {}).isFirstTattoo) || '–')}
+      ${row('Allergien',       esc((health || {}).knownAllergies) || '–')}
+      ${row('Uhrzeit',         esc((appointment || {}).preferredTime) || '–')}
+      ${contact.howFound ? row('Gefunden über', esc(contact.howFound)) : ''}
     </table>
   </td></tr>
 
-  <!-- Text blocks -->
-  ${(motif || {}).description ? `<tr><td style="padding:0 0 16px;"><div style="border-left:2px solid ${AC};padding:12px 16px;"><p style="margin:0 0 5px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Motiv-Beschreibung</p><p style="margin:0;font-size:13px;color:rgba(247,246,243,0.75);line-height:1.65;">${esc(motif.description)}</p></div></td></tr>` : ''}
-  ${(motif || {}).coverUpNotes ? `<tr><td style="padding:0 0 16px;"><div style="border-left:2px solid ${AC};padding:12px 16px;"><p style="margin:0 0 5px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Cover-Up Details</p><p style="margin:0;font-size:13px;color:rgba(247,246,243,0.75);line-height:1.65;">${esc(motif.coverUpNotes)}</p></div></td></tr>` : ''}
-  ${(style || {}).styleNotes ? `<tr><td style="padding:0 0 16px;"><div style="border-left:2px solid ${AC};padding:12px 16px;"><p style="margin:0 0 5px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Stil in eigenen Worten</p><p style="margin:0;font-size:13px;color:rgba(247,246,243,0.75);line-height:1.65;">${esc(style.styleNotes)}</p></div></td></tr>` : ''}
-  ${(health || {}).allergiesDetail ? `<tr><td style="padding:0 0 16px;"><div style="border-left:2px solid ${AC};padding:12px 16px;"><p style="margin:0 0 5px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Allergie-Details</p><p style="margin:0;font-size:13px;color:rgba(247,246,243,0.75);line-height:1.65;">${esc(health.allergiesDetail)}</p></div></td></tr>` : ''}
-  ${(budget || {}).notes ? `<tr><td style="padding:0 0 16px;"><div style="border-left:2px solid ${AC};padding:12px 16px;"><p style="margin:0 0 5px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.12em;">Besondere Wünsche</p><p style="margin:0;font-size:13px;color:rgba(247,246,243,0.75);line-height:1.65;">${esc(budget.notes)}</p></div></td></tr>` : ''}
-  ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 0 16px;"><div style="border:1px solid rgba(247,246,243,0.1);border-radius:8px;padding:14px 18px;"><p style="margin:0 0 3px;font-size:13px;font-weight:700;color:#F7F6F3;">🖼 ${style.inspirationImageCount} Referenzbild${style.inspirationImageCount > 1 ? 'er' : ''} hochgeladen</p><p style="margin:0;font-size:12px;color:rgba(247,246,243,0.3);">Im Dashboard einsehbar.</p></div></td></tr>` : ''}
-
-  <!-- Divider -->
-  <tr><td style="padding:8px 0 28px;"><div style="height:1px;background:rgba(247,246,243,0.08);"></div></td></tr>
+  <!-- Freitext-Blöcke (nur wenn vorhanden) -->
+  ${(motif || {}).description || (motif || {}).coverUpNotes || (style || {}).styleNotes || (health || {}).allergiesDetail || (budget || {}).notes || ((style || {}).inspirationImageCount > 0) ? `
+  <tr><td class="pad" style="padding:10px 18px 4px;border-bottom:1px solid ${B};">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${note('Motiv-Beschreibung',    (motif || {}).description)}
+      ${note('Cover-Up Details',      (motif || {}).coverUpNotes)}
+      ${note('Stil in eigenen Worten',(style || {}).styleNotes)}
+      ${note('Allergie-Details',      (health || {}).allergiesDetail)}
+      ${note('Besondere Wünsche',     (budget || {}).notes)}
+      ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 0 8px;"><p style="margin:0;font-size:12px;color:rgba(247,246,243,0.4);">🖼 ${style.inspirationImageCount} Referenzbild${style.inspirationImageCount > 1 ? 'er' : ''} → im Dashboard</p></td></tr>` : ''}
+    </table>
+  </td></tr>` : ''}
 
   <!-- CTA -->
-  <tr><td style="padding:0 0 32px;">
-    <a href="${process.env.DASHBOARD_URL || 'https://einfachanfrage-tattoo.de/dashboard'}" style="display:inline-block;background:${AC};color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:0.08em;padding:13px 28px;border-radius:4px;text-decoration:none;text-transform:uppercase;">Im Dashboard ansehen →</a>
-  </td></tr>
-
-  <!-- Contact -->
-  <tr><td style="padding:0 0 8px;">
-    <p style="margin:0 0 3px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.14em;">Kontakt</p>
-    <p style="margin:0 0 4px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.02em;">${name}</p>
-    <p style="margin:0 0 3px;"><a href="mailto:${esc(contact.email)}" style="font-size:13px;color:rgba(247,246,243,0.5);text-decoration:none;">${esc(contact.email)}</a></p>
-    ${contact.phone ? `<p style="margin:0 0 3px;font-size:13px;color:rgba(247,246,243,0.35);">${esc(contact.phone)}</p>` : ''}
-    ${contact.instagram ? `<p style="margin:0 0 3px;font-size:13px;color:rgba(247,246,243,0.35);">Instagram: ${esc(contact.instagram)}</p>` : ''}
-    <p style="margin:8px 0 0;font-size:11px;color:rgba(247,246,243,0.2);">Gefunden über: ${esc(contact.howFound) || '–'}</p>
-  </td></tr>
-
-  <!-- Footer -->
-  <tr><td style="padding:32px 0 0;border-top:1px solid rgba(247,246,243,0.06);">
-    <p style="margin:0;font-size:11px;color:rgba(247,246,243,0.2);">Einfach Anfrage · <a href="https://einfachanfrage-tattoo.de" style="color:rgba(247,246,243,0.2);text-decoration:none;">einfachanfrage-tattoo.de</a></p>
+  <tr><td class="pad" style="padding:14px 18px;text-align:center;">
+    <a href="${process.env.DASHBOARD_URL || 'https://einfachanfrage-tattoo.de/dashboard'}"
+       style="display:inline-block;background:${AC};color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:0.09em;padding:11px 24px;border-radius:4px;text-decoration:none;text-transform:uppercase;">
+      Im Dashboard ansehen →
+    </a>
+    <p style="margin:8px 0 0;font-size:10px;color:rgba(247,246,243,0.18);">Einfach Anfrage · einfachanfrage-tattoo.de</p>
   </td></tr>
 
 </table></td></tr></table>
