@@ -75,6 +75,50 @@
     }
     .info-box p { margin-bottom: 4px; }
     .info-box p:last-child { margin-bottom: 0; }
+    /* Mustertext-Block */
+    .muster-badge {
+      display: inline-block;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid var(--champagne);
+      border-radius: 100px;
+      font-size: 11px; font-weight: 600;
+      color: var(--champagne);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 3px 10px;
+      margin-bottom: 14px;
+    }
+    .muster-wrap {
+      position: relative;
+      background: #fff;
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 20px 20px 16px;
+      margin: 16px 0;
+    }
+    .muster-text {
+      font-size: 13px; line-height: 1.75;
+      color: var(--dark);
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: 'Inter', sans-serif;
+      user-select: all;
+    }
+    .copy-btn {
+      display: flex; align-items: center; gap: 7px;
+      margin-top: 14px;
+      background: var(--dark);
+      color: var(--champagne);
+      font-family: 'Inter', sans-serif;
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.05em;
+      border: none; border-radius: 8px;
+      padding: 9px 16px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .copy-btn:hover { opacity: 0.8; }
+    .copy-btn svg { flex-shrink: 0; }
+
     footer {
       border-top: 1px solid var(--grey-border);
       padding: 28px 5vw;
@@ -249,8 +293,40 @@
     </div>
 
     <!-- ── 11 ── -->
-    <h2>11. Hinweis für Tätowierer (B2B)</h2>
-    <p>Tätowierer, die den Dienst „Einfach Anfrage" in ihre Website einbinden, sind für die Datenverarbeitung gegenüber ihren Kunden eigenverantwortlich. Sie sind verpflichtet, in ihrer eigenen Datenschutzerklärung auf die Nutzung des Widgets und die damit verbundene Verarbeitung durch Einfach Anfrage hinzuweisen. Ein entsprechender Mustertext wird auf Anfrage zur Verfügung gestellt.</p>
+    <h2 id="mustertext">11. Hinweis für Tätowierer (B2B)</h2>
+    <p>Tätowierer, die den Dienst „Einfach Anfrage" in ihre eigene Website einbinden, sind für die Datenverarbeitung gegenüber ihren Kunden eigenverantwortlich und müssen in ihrer Datenschutzerklärung auf die Nutzung des Widgets hinweisen.</p>
+    <p><strong>Wer das Widget nur als Link in der Instagram-Bio nutzt</strong> (über die Adresse einfachanfrage-tattoo.de/p/…), benötigt keinen eigenen Zusatz — die Verarbeitung findet vollständig auf unserer Domain statt und ist durch diese Datenschutzerklärung abgedeckt.</p>
+    <p><strong>Wer das Widget per &lt;script&gt;-Tag auf der eigenen Website einbindet</strong>, kann den folgenden Mustertext in die eigene Datenschutzerklärung übernehmen:</p>
+
+    <div class="muster-badge">Mustertext zum Kopieren</div>
+
+    <div class="muster-wrap">
+      <div class="muster-text" id="muster-content">Tattoo-Anfragen über Einfach Anfrage
+
+Zur Entgegennahme und Bearbeitung von Tattoo-Anfragen nutzen wir den Dienst „Einfach Anfrage" der Sandra Holm (Wielandstr. 11, 12159 Berlin, einfachanfrage@outlook.com).
+
+Wenn du über das eingebundene Formular eine Anfrage stellst, werden folgende Daten erhoben und an Einfach Anfrage übermittelt:
+
+– Kontaktdaten: Name, E-Mail-Adresse, Telefonnummer (optional), Instagram-Handle (optional)
+– Anfragedaten: Motivbeschreibung, Körperstelle, Größe, Tattoo-Stil, Farbpräferenz, Stilnotizen (optional)
+– Gesundheitsbezogene Angaben: Angabe ob erstes Tattoo, bekannte Allergien oder Hautunverträglichkeiten (freiwillig)
+– Terminangaben: Wunschzeitraum, bevorzugte Tageszeit (optional)
+– Budgetangaben: Budgetrahmen (optional)
+– Referenzbilder: optional hochgeladene Bilder (max. 3)
+– Einwilligungsnachweis: Zeitstempel der erteilten Datenschutzeinwilligung
+
+Die Daten werden in der Europäischen Union (Rechenzentrum Frankfurt) gespeichert und ausschließlich zur Bearbeitung deiner Anfrage verwendet. Eine Weitergabe zu Werbe- oder sonstigen Zwecken findet nicht statt.
+
+Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung); für Gesundheitsdaten Art. 9 Abs. 2 lit. a DSGVO (ausdrückliche Einwilligung, die im Formular eingeholt wird).
+
+Mit Einfach Anfrage besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.
+
+Daten werden automatisch nach Ablauf der jeweiligen Aufbewahrungsfrist gelöscht. Weitere Informationen zur Datenverarbeitung durch Einfach Anfrage: https://einfachanfrage-tattoo.de/datenschutz</div>
+      <button class="copy-btn" onclick="copyMuster(this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Text kopieren
+      </button>
+    </div>
 
     <p style="margin-top: 48px; font-size: 12px; color: var(--grey-mid);">Stand: Mai 2026</p>
   </div>
@@ -261,6 +337,26 @@
     <a href="/datenschutz">Datenschutz</a>
     <a href="/agb">AGB</a>
   </footer>
+
+  <script>
+    function copyMuster(btn) {
+      const text = document.getElementById('muster-content').innerText;
+      navigator.clipboard.writeText(text).then(function() {
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Kopiert!';
+        btn.style.background = '#2d6a4f';
+        setTimeout(function() {
+          btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Text kopieren';
+          btn.style.background = '';
+        }, 2200);
+      }).catch(function() {
+        // Fallback: Text markieren
+        var range = document.createRange();
+        range.selectNodeContents(document.getElementById('muster-content'));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+      });
+    }
+  </script>
 
 </body>
 </html>
