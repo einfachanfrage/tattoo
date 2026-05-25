@@ -23,16 +23,27 @@ function formatDateTime(isoDate) {
   }) + ' Uhr';
 }
 
+// Returns a clean international phone number for wa.me links (no +, no spaces)
+function waPhone(phone) {
+  if (!phone) return '';
+  const d = phone.replace(/[\s\-\(\)\.\/]/g, '');
+  if (d.startsWith('00')) return d.slice(2);
+  if (d.startsWith('+'))  return d.slice(1);
+  if (d.startsWith('0'))  return '49' + d.slice(1);
+  return d;
+}
+
 function buildArtistHtml(submission) {
   const { contact, motif, style, health, appointment, budget } = submission;
-  const name = esc(contact.name) || esc(contact.email) || '–';
-  const AC = '#BF7A60';
-  const B  = 'rgba(247,246,243,0.07)'; // border color
+  const name   = esc(contact.name) || esc(contact.email) || '–';
+  const AC     = '#BF7A60';
+  const B      = 'rgba(247,246,243,0.07)';
+  const waNum  = waPhone(contact.phone);  // cleaned number for wa.me, empty string if no phone
 
   // helper: compact detail row
   const row = (label, val) => val && val !== '–'
     ? `<tr>
-        <td style="padding:5px 10px 5px 0;font-size:12px;color:rgba(247,246,243,0.38);white-space:nowrap;vertical-align:top;">${label}</td>
+        <td style="padding:5px 10px 5px 0;font-size:12px;color:rgba(247,246,243,0.38);white-space:nowrap;width:115px;vertical-align:top;">${label}</td>
         <td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;vertical-align:top;">${val}</td>
        </tr>`
     : '';
@@ -74,14 +85,13 @@ function buildArtistHtml(submission) {
     </tr></table>
   </td></tr>
 
-  <!-- Name + Kontakt -->
-  <tr><td class="pad" style="padding:14px 18px 12px;border-bottom:1px solid ${B};">
-    <p style="margin:0 0 5px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
-    <table cellpadding="0" cellspacing="0"><tr>
-      <td><a href="mailto:${esc(contact.email)}" style="font-size:12px;color:${AC};text-decoration:none;font-weight:600;">${esc(contact.email)}</a></td>
-      ${contact.phone ? `<td style="padding-left:12px;font-size:11px;color:rgba(247,246,243,0.3);">${esc(contact.phone)}</td>` : ''}
-      ${contact.instagram ? `<td style="padding-left:12px;font-size:11px;color:rgba(247,246,243,0.3);">@${esc(contact.instagram)}</td>` : ''}
-    </tr></table>
+  <!-- Name + Kontakt + Aktions-Buttons -->
+  <tr><td class="pad" style="padding:14px 18px 14px;border-bottom:1px solid ${B};">
+    <p style="margin:0 0 6px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
+    <p style="margin:0 0 12px;font-size:11px;color:rgba(247,246,243,0.35);line-height:1.8;">${esc(contact.email)}${contact.phone ? ' &nbsp;·&nbsp; ' + esc(contact.phone) : ''}${contact.instagram ? ' &nbsp;·&nbsp; @' + esc((contact.instagram||'').replace(/^@/,'')) : ''}</p>
+    <p style="margin:0;font-size:0;line-height:0;">
+      <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage" style="display:inline-block;background:${AC};color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.07em;padding:8px 14px;border-radius:5px;text-decoration:none;white-space:nowrap;margin:0 5px 5px 0;line-height:1.3;">✉ Antworten</a>${waNum ? `<a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}" style="display:inline-block;background:#25D366;color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.07em;padding:8px 14px;border-radius:5px;text-decoration:none;white-space:nowrap;margin:0 5px 5px 0;line-height:1.3;">💬 WhatsApp</a><a href="tel:${esc(contact.phone)}" style="display:inline-block;background:rgba(247,246,243,0.08);border:1px solid rgba(247,246,243,0.15);color:rgba(247,246,243,0.72);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.07em;padding:7px 13px;border-radius:5px;text-decoration:none;white-space:nowrap;margin:0 5px 5px 0;line-height:1.3;">📞 Anrufen</a>` : ''}${contact.instagram ? `<a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}" style="display:inline-block;background:rgba(247,246,243,0.08);border:1px solid rgba(247,246,243,0.15);color:rgba(247,246,243,0.72);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.07em;padding:7px 13px;border-radius:5px;text-decoration:none;white-space:nowrap;margin:0 5px 5px 0;line-height:1.3;">📸 @${esc((contact.instagram||'').replace(/^@/,''))}</a>` : ''}
+    </p>
   </td></tr>
 
   <!-- Key facts: 2 × 2 kompaktes Grid -->
@@ -100,7 +110,7 @@ function buildArtistHtml(submission) {
       <tr style="border-top:1px solid ${B};">
         <td width="50%" style="padding:10px 12px 10px 18px;border-right:1px solid ${B};border-top:1px solid ${B};vertical-align:top;">
           <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Wunsch-Termin</p>
-          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${esc((appointment || {}).timeframe) || '–'}</p>
+          <p style="margin:0;font-size:14px;font-weight:700;color:#F7F6F3;">${[esc((appointment||{}).timeframe),esc((appointment||{}).preferredTime)].filter(v=>v&&v!=='–').join(' · ') || '–'}</p>
         </td>
         <td width="50%" style="padding:10px 18px 10px 12px;border-top:1px solid ${B};vertical-align:top;">
           <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Budget</p>
@@ -118,7 +128,6 @@ function buildArtistHtml(submission) {
       ${row('Cover-Up',        esc((motif || {}).isCoverUp) || '–')}
       ${row('Erstes Tattoo',   esc((health || {}).isFirstTattoo) || '–')}
       ${row('Allergien',       esc((health || {}).knownAllergies) || '–')}
-      ${row('Uhrzeit',         esc((appointment || {}).preferredTime) || '–')}
       ${contact.howFound ? row('Gefunden über', esc(contact.howFound)) : ''}
     </table>
   </td></tr>

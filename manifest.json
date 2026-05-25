@@ -1,0 +1,20 @@
+{
+  "name": "Einfach Anfrage – Dashboard",
+  "short_name": "Anfragen",
+  "description": "Tattoo-Anfragen verwalten",
+  "start_url": "/dashboard",
+  "scope": "/dashboard",
+  "display": "standalone",
+  "background_color": "#1B1B1B",
+  "theme_color": "#1B1B1B",
+  "orientation": "portrait-primary",
+  "lang": "de",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

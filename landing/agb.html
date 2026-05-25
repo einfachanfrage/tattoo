@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGB – Einfach Anfrage</title>
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --champagne: #C9A96E;
+      --ivory: #FAF7F2;
+      --dark: #1A1A1A;
+      --grey-border: #E2DDD6;
+      --grey-mid: #8A8580;
+      --grey-light: #F0EDE8;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--dark);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,247,242,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--grey-border);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500;
+      color: var(--dark); text-decoration: none;
+    }
+    .nav-logo span { color: var(--champagne); }
+    .nav-back { font-size: 13px; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
+    .nav-back:hover { color: var(--dark); }
+    .page-wrap { max-width: 680px; margin: 72px auto; padding: 0 5vw 80px; }
+    .eyebrow {
+      font-size: 11px; font-weight: 600; color: var(--champagne);
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 400; line-height: 1.1;
+      color: var(--dark); margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 13px; font-weight: 600; color: var(--dark);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin: 44px 0 12px; padding-top: 10px;
+      border-top: 1px solid var(--grey-border);
+    }
+    h2:first-of-type { border-top: none; margin-top: 0; }
+    h3 { font-size: 14px; font-weight: 600; color: var(--dark); margin: 22px 0 8px; }
+    p { color: var(--grey-mid); margin-bottom: 10px; }
+    ul, ol { color: var(--grey-mid); padding-left: 22px; margin-bottom: 10px; }
+    ul li, ol li { margin-bottom: 5px; }
+    a { color: var(--champagne); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .info-box {
+      background: var(--grey-light);
+      border-left: 3px solid var(--champagne);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+    .info-box p { margin-bottom: 4px; }
+    .info-box p:last-child { margin-bottom: 0; }
+    footer {
+      border-top: 1px solid var(--grey-border);
+      padding: 28px 5vw;
+      text-align: center;
+      font-size: 12px; color: var(--grey-mid);
+    }
+    footer a { color: var(--grey-mid); margin: 0 10px; }
+    footer a:hover { color: var(--champagne); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Einfach<span>Anfrage</span></a>
+    <a href="/" class="nav-back">← Zurück zur Website</a>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="eyebrow">Rechtliches</div>
+    <h1>Allgemeine Geschäftsbedingungen</h1>
+
+    <!-- ── 1 ── -->
+    <h2>§ 1 Geltungsbereich und Vertragsparteien</h2>
+
+    <p>Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB") gelten für alle Verträge über die Nutzung des Dienstes „Einfach Anfrage" zwischen</p>
+
+    <div class="info-box">
+      <p><strong>Sandra Holm</strong><br>
+      Einfach Anfrage<br>
+      Wielandstr. 11, 12159 Berlin<br>
+      E-Mail: <a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a><br>
+      (nachfolgend „Anbieterin")</p>
+    </div>
+
+    <p>und dem jeweiligen Kunden (nachfolgend „Kunde").</p>
+
+    <p>Der Dienst richtet sich ausschließlich an Unternehmer im Sinne des § 14 BGB, d. h. an natürliche oder juristische Personen, die bei Vertragsschluss in Ausübung ihrer gewerblichen oder selbständigen beruflichen Tätigkeit handeln. Eine Nutzung durch Verbraucher im Sinne des § 13 BGB ist nicht vorgesehen.</p>
+
+    <p>Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des Kunden werden nicht Vertragsbestandteil, auch wenn die Anbieterin diesen nicht ausdrücklich widerspricht.</p>
+
+    <!-- ── 2 ── -->
+    <h2>§ 2 Leistungsbeschreibung</h2>
+
+    <h3>2.1 Kernleistung</h3>
+    <p>„Einfach Anfrage" ist ein Software-as-a-Service-Dienst (SaaS), der Tätowierern ein einbettbares Formular-Widget zur Entgegennahme strukturierter Kundenanfragen bereitstellt. Der Dienst umfasst:</p>
+    <ul>
+      <li>Ein per <code>&lt;script&gt;</code>-Tag einbettbares Anfrage-Widget mit anpassbarem Design (Themes)</li>
+      <li>Empfang und Speicherung eingehender Anfragen</li>
+      <li>Automatischen E-Mail-Versand an den Tätowierer (Benachrichtigung) und an den Anfragenden (Bestätigung)</li>
+      <li>Ein passwortgeschütztes Web-Dashboard zur Verwaltung und Bearbeitung der Anfragen</li>
+      <li>Bereitstellung einer individuellen Standalone-URL für den Einsatz in Social-Media-Profilen (z. B. Instagram-Bio)</li>
+    </ul>
+
+    <h3>2.2 Einrichtung des Kundenkontos</h3>
+    <p>Die Einrichtung des Kundenkontos erfolgt durch die Anbieterin nach Vertragsschluss. Der Kunde erhält seine persönlichen Zugangsdaten (Slug und Passwort) sowie den für seine Website vorbereiteten Widget-Code per E-Mail.</p>
+
+    <h3>2.3 Nicht enthaltene Leistungen</h3>
+    <p>Nicht zum Leistungsumfang gehören insbesondere:</p>
+    <ul>
+      <li>Einbau des Widgets auf der Website des Kunden</li>
+      <li>Technische Integration in Drittsysteme des Kunden</li>
+      <li>Speicherung von Anfragedaten über die in der Datenschutzerklärung genannten Aufbewahrungsfristen hinaus</li>
+      <li>Individuelle Programmierleistungen oder inhaltliche Anpassungen des Widgets</li>
+    </ul>
+
+    <!-- ── 3 ── -->
+    <h2>§ 3 Vertragsschluss</h2>
+
+    <p>Der Vertrag kommt zustande, sobald</p>
+    <ol>
+      <li>der Kunde der Anbieterin seine Bestellung (per E-Mail, Kontaktformular oder mündlich) übermittelt hat,</li>
+      <li>die Anbieterin die Bestellung schriftlich (per E-Mail) bestätigt und dem Kunden seinen Zugang eingerichtet hat.</li>
+    </ol>
+
+    <p>Maßgeblich für den Vertragsinhalt sind die zum Zeitpunkt des Vertragsschlusses gültigen AGB sowie die im Angebot oder der Bestätigungs-E-Mail genannten Konditionen. Der Kunde stimmt diesen AGB mit seiner Bestellung zu.</p>
+
+    <!-- ── 4 ── -->
+    <h2>§ 4 Vertragslaufzeit und Kündigung</h2>
+
+    <h3>4.1 Laufzeit</h3>
+    <p>Der Vertrag wird auf unbestimmte Zeit geschlossen und verlängert sich monatlich automatisch, sofern er nicht fristgerecht gekündigt wird.</p>
+
+    <h3>4.2 Ordentliche Kündigung</h3>
+    <p>Beide Vertragsparteien können den Vertrag mit einer Frist von <strong>vier (4) Wochen zum Ende des jeweiligen Kalendermonats</strong> ordentlich kündigen. Kündigungen müssen in Textform (E-Mail genügt) erfolgen.</p>
+
+    <h3>4.3 Außerordentliche Kündigung</h3>
+    <p>Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Ein wichtiger Grund liegt für die Anbieterin insbesondere vor, wenn:</p>
+    <ul>
+      <li>der Kunde trotz Mahnung und Nachfristsetzung von 14 Tagen mit fälligen Zahlungen in Verzug ist,</li>
+      <li>der Kunde den Dienst missbräuchlich nutzt oder gegen seine Pflichten aus § 7 verstößt,</li>
+      <li>der Betrieb des Dienstes aus wirtschaftlichen oder technischen Gründen eingestellt wird (mit einer Ankündigungsfrist von mindestens 30 Tagen).</li>
+    </ul>
+
+    <h3>4.4 Folgen der Kündigung</h3>
+    <p>Mit Ablauf der Vertragslaufzeit werden der Zugang des Kunden und das zugehörige Widget deaktiviert. Die gespeicherten Anfragedaten werden nach den in der Datenschutzerklärung genannten Fristen automatisch gelöscht. Eine vorzeitige Löschung auf Wunsch des Kunden ist auf Anfrage möglich. Bereits geleistete Zahlungen für laufende Abrechnungszeiträume werden nicht erstattet.</p>
+
+    <!-- ── 5 ── -->
+    <h2>§ 5 Preise, Zahlung und Rechnungsstellung</h2>
+
+    <h3>5.1 Preise</h3>
+    <p>Der Dienst kostet derzeit <strong>29,00 Euro pro Kalendermonat</strong>. Die Anbieterin ist Kleinunternehmerin gemäß § 19 UStG; es wird keine Umsatzsteuer ausgewiesen und berechnet.</p>
+
+    <h3>5.2 Fälligkeit und Zahlungsweise</h3>
+    <p>Die monatliche Vergütung ist jeweils zum Ersten des Kalendermonats im Voraus fällig. Die Zahlung erfolgt per Überweisung auf das von der Anbieterin mitgeteilte Konto. Die Bankverbindung wird dem Kunden mit der Auftragsbestätigung mitgeteilt.</p>
+
+    <h3>5.3 Verzug</h3>
+    <p>Kommt der Kunde mit einer Zahlung in Verzug, ist die Anbieterin berechtigt, nach einer Mahnung und Nachfristsetzung von 14 Tagen den Zugang des Kunden bis zum Ausgleich der ausstehenden Beträge zu sperren, ohne dass dies als Kündigung gilt. Die Pflicht zur Zahlung der Vergütung bleibt während einer Zugangssperrung bestehen. Gesetzliche Verzugszinsen gemäß § 288 BGB werden geltend gemacht.</p>
+
+    <h3>5.4 Preisanpassungen</h3>
+    <p>Die Anbieterin ist berechtigt, die monatliche Vergütung mit einer Ankündigungsfrist von <strong>sechs (6) Wochen</strong> anzupassen. Die Ankündigung erfolgt per E-Mail an die vom Kunden hinterlegte Adresse. Widerspricht der Kunde der Preisanpassung nicht innerhalb von vier Wochen nach Zugang der Ankündigung, gilt die Preisanpassung als akzeptiert. Bei Widerspruch hat der Kunde das Recht, den Vertrag zum Zeitpunkt des Inkrafttretens der Preisanpassung mit einer Frist von zwei Wochen zu kündigen.</p>
+
+    <!-- ── 6 ── -->
+    <h2>§ 6 Nutzungsrechte</h2>
+
+    <p>Die Anbieterin räumt dem Kunden für die Laufzeit des Vertrages ein einfaches, nicht übertragbares Recht zur Nutzung des Dienstes für eigene geschäftliche Zwecke ein. Dieses umfasst:</p>
+    <ul>
+      <li>die Einbindung des Widgets auf der eigenen Website des Kunden,</li>
+      <li>die Nutzung der Standalone-URL in eigenen Profilen und Kommunikationskanälen des Kunden,</li>
+      <li>den Zugang zum Dashboard zur Verwaltung der eigenen Anfragen.</li>
+    </ul>
+    <p>Nicht gestattet sind insbesondere:</p>
+    <ul>
+      <li>die Weitergabe von Zugangsdaten an Dritte, die nicht dem Betrieb des Kunden angehören,</li>
+      <li>die Nutzung des Dienstes für Dritte oder die Weitervermietung des Dienstes,</li>
+      <li>Reverse Engineering, Dekompilierung oder das Kopieren von Teilen der Software,</li>
+      <li>die Nutzung des Dienstes für rechtswidrige Zwecke.</li>
+    </ul>
+
+    <!-- ── 7 ── -->
+    <h2>§ 7 Pflichten und Obliegenheiten des Kunden</h2>
+
+    <h3>7.1 Korrekte Angaben</h3>
+    <p>Der Kunde ist verpflichtet, bei Vertragsschluss und im laufenden Betrieb korrekte Kontaktdaten (insbesondere E-Mail-Adresse) anzugeben und diese aktuell zu halten.</p>
+
+    <h3>7.2 Zugangsdaten</h3>
+    <p>Der Kunde ist verpflichtet, seine Zugangsdaten (Benutzername, Passwort) vertraulich zu behandeln und vor dem Zugriff Dritter zu schützen. Bei Verdacht auf unbefugten Zugriff ist die Anbieterin unverzüglich zu informieren.</p>
+
+    <h3>7.3 Datenschutzpflichten</h3>
+    <p>Der Kunde ist als Verantwortlicher im Sinne der DSGVO für die rechtmäßige Erhebung personenbezogener Daten seiner Kunden über das Widget eigenverantwortlich. Dies umfasst insbesondere:</p>
+    <ul>
+      <li>die Bereitstellung einer eigenen Datenschutzerklärung, die auf die Nutzung des Widgets und die damit verbundene Datenverarbeitung durch Einfach Anfrage hinweist,</li>
+      <li>die Sicherstellung, dass die Einholung der Einwilligung der Anfragenden der jeweiligen Datenschutzlage entspricht.</li>
+    </ul>
+    <p>Die Anbieterin stellt auf Anfrage einen Mustertext für die Datenschutzerklärung des Kunden zur Verfügung.</p>
+
+    <h3>7.4 Auftragsverarbeitungsvertrag</h3>
+    <p>Da die Anbieterin personenbezogene Daten (Anfragedaten der Kunden des Tätowierers) im Auftrag des Kunden verarbeitet, sind die Parteien verpflichtet, einen Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO abzuschließen. Dieser wird der Anbieterin zusammen mit der Auftragsbestätigung übermittelt und ist vor Aufnahme der Nutzung vom Kunden zu unterzeichnen oder elektronisch zu bestätigen. Ohne gültigen AVV ist die Nutzung des Dienstes datenschutzrechtlich nicht zulässig.</p>
+
+    <!-- ── 8 ── -->
+    <h2>§ 8 Verfügbarkeit und Wartung</h2>
+
+    <h3>8.1 Verfügbarkeitsziel</h3>
+    <p>Die Anbieterin strebt eine Verfügbarkeit des Dienstes von durchschnittlich <strong>99 % im Jahresmittel</strong> an. Geplante Wartungsfenster sowie unvermeidbare Unterbrechungen durch höhere Gewalt, Angriffe Dritter oder Störungen bei Drittanbietern (Hosting, Datenbank, E-Mail-Versand) bleiben dabei unberücksichtigt.</p>
+
+    <h3>8.2 Wartungsfenster</h3>
+    <p>Planmäßige Wartungsarbeiten finden bevorzugt <strong>sonntags zwischen 02:00 und 05:00 Uhr MEZ/MESZ</strong> statt. Die Anbieterin informiert den Kunden über vorhersehbare Ausfallzeiten von mehr als zwei Stunden nach Möglichkeit 24 Stunden im Voraus per E-Mail.</p>
+
+    <h3>8.3 Drittanbieter</h3>
+    <p>Der Dienst basiert auf Infrastruktur- und Drittleistungen (insbesondere Vercel, Supabase, Resend). Ausfälle oder Qualitätsminderungen dieser Dienste liegen nicht im Einflussbereich der Anbieterin. Ein solcher Ausfall begründet keine Haftung der Anbieterin, soweit sie die ihr möglichen Maßnahmen zur Behebung ergriffen hat.</p>
+
+    <!-- ── 9 ── -->
+    <h2>§ 9 Auftragsverarbeitung und Datenschutz</h2>
+
+    <p>Die Verarbeitung personenbezogener Daten der Kunden des Tätowierers erfolgt im Auftrag des Kunden und auf Grundlage eines separaten <a href="/avv" target="_blank">Auftragsverarbeitungsvertrags (AVV)</a> gemäß Art. 28 DSGVO. Dieser AVV ist Bestandteil des Vertragsverhältnisses.</p>
+    <p>Hinsichtlich der Verarbeitung eigener Daten des Kunden (Kontodaten, Einstellungen, Passwort-Hash) gilt die <a href="/datenschutz" target="_blank">Datenschutzerklärung</a> der Anbieterin, auf die ausdrücklich verwiesen wird.</p>
+
+    <!-- ── 10 ── -->
+    <h2>§ 10 Haftung</h2>
+
+    <h3>10.1 Grundsatz</h3>
+    <p>Die Haftung der Anbieterin richtet sich nach den nachfolgenden Bestimmungen.</p>
+
+    <h3>10.2 Unbeschränkte Haftung</h3>
+    <p>Die Anbieterin haftet unbeschränkt für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie für vorsätzlich oder grob fahrlässig verursachte Schäden und für Ansprüche nach dem Produkthaftungsgesetz.</p>
+
+    <h3>10.3 Beschränkte Haftung</h3>
+    <p>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten (Kardinalpflichten), d. h. solcher Pflichten, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Kunde regelmäßig vertrauen darf, ist die Haftung der Anbieterin der Höhe nach beschränkt auf die <strong>im Zeitraum der letzten zwölf (12) Monate vor dem schädigenden Ereignis von dem betroffenen Kunden tatsächlich geleisteten Zahlungen, höchstens jedoch 500,00 Euro</strong>. Diese Haftungsbeschränkung gilt für jeden Schadensfall gesondert.</p>
+
+    <h3>10.4 Ausschluss mittelbarer Schäden</h3>
+    <p>Die Haftung für entgangenen Gewinn, mittelbare Schäden, Folgeschäden und Schäden aus dem Verlust von Daten ist – soweit rechtlich zulässig – ausgeschlossen.</p>
+
+    <h3>10.5 Datenverlust</h3>
+    <p>Für den Verlust von Daten haftet die Anbieterin nur insoweit, als der Schaden auch bei ordnungsgemäßer Datensicherung durch den Kunden eingetreten wäre. Die Anbieterin empfiehlt dem Kunden, wichtige Anfragedaten regelmäßig zu sichern.</p>
+
+    <h3>10.6 Haftung des Kunden</h3>
+    <p>Der Kunde haftet der Anbieterin gegenüber für alle Schäden, die durch eine vertragswidrige Nutzung des Dienstes oder durch einen Verstoß gegen seine Pflichten aus diesen AGB entstehen, insbesondere durch missbräuchliche Weitergabe von Zugangsdaten.</p>
+
+    <!-- ── 11 ── -->
+    <h2>§ 11 Änderungen der AGB und der Leistungen</h2>
+
+    <h3>11.1 Änderungen der AGB</h3>
+    <p>Die Anbieterin ist berechtigt, diese AGB mit einer Ankündigungsfrist von <strong>sechs (6) Wochen</strong> zu ändern. Die geänderten AGB werden dem Kunden per E-Mail an die hinterlegte Adresse übermittelt. Widerspricht der Kunde den Änderungen nicht innerhalb von vier Wochen nach Zugang der Ankündigung, gelten die geänderten AGB als akzeptiert. Auf die Bedeutung des Schweigens wird die Anbieterin im Ankündigungsschreiben ausdrücklich hinweisen. Bei Widerspruch hat der Kunde das Recht, den Vertrag zum Zeitpunkt des Inkrafttretens mit einer Frist von zwei Wochen zu kündigen.</p>
+
+    <h3>11.2 Änderungen der Leistungen</h3>
+    <p>Die Anbieterin ist berechtigt, die angebotenen Leistungen weiterzuentwickeln, zu ergänzen oder zu verändern, soweit dies dem Kunden zumutbar ist und der wesentliche Leistungsumfang erhalten bleibt. Wesentliche Einschränkungen des Leistungsumfangs werden dem Kunden mit einer Ankündigungsfrist von mindestens 30 Tagen mitgeteilt.</p>
+
+    <!-- ── 12 ── -->
+    <h2>§ 12 Schlussbestimmungen</h2>
+
+    <h3>12.1 Anwendbares Recht</h3>
+    <p>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts (CISG).</p>
+
+    <h3>12.2 Gerichtsstand</h3>
+    <p>Ausschließlicher Gerichtsstand für alle Streitigkeiten aus oder im Zusammenhang mit diesem Vertrag ist, soweit gesetzlich zulässig, <strong>Berlin</strong>. Dies gilt auch, wenn der Kunde keinen allgemeinen Gerichtsstand in Deutschland hat oder seinen Wohnsitz nach Vertragsschluss ins Ausland verlegt.</p>
+
+    <h3>12.3 Salvatorische Klausel</h3>
+    <p>Sollte eine Bestimmung dieser AGB unwirksam oder undurchführbar sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. Die unwirksame Bestimmung gilt als durch eine wirksame Bestimmung ersetzt, die dem wirtschaftlichen Zweck der unwirksamen Bestimmung am nächsten kommt.</p>
+
+    <h3>12.4 Textform</h3>
+    <p>Soweit in diesen AGB Textform (z. B. E-Mail) für Erklärungen vorgesehen ist, genügt die Übermittlung per E-Mail an die jeweils letzte bekannte E-Mail-Adresse der anderen Partei.</p>
+
+    <p style="margin-top: 48px; font-size: 12px; color: var(--grey-mid);">Stand: Mai 2026</p>
+
+  </div>
+
+  <footer>
+    <a href="/">Startseite</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="/agb">AGB</a>
+  </footer>
+
+</body>
+</html>

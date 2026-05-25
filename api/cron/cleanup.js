@@ -5,7 +5,7 @@
  *
  * Aufbewahrungsfristen:
  *   archiviert             → 6 Monate
- *   neu / in Bearbeitung / Angebot gesendet → 24 Monate
+ *   neu / in_bearbeitung / termin_ausstehend → 24 Monate
  *   beauftragt             → 36 Monate
  *
  * Der Endpunkt ist durch den CRON_SECRET geschützt.
@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     const { data: stale } = await supabase
       .from('inquiries')
       .select('id, created_at, status')
-      .in('status', ['neu', 'in_bearbeitung', 'angebot_gesendet'])
+      .in('status', ['neu', 'in_bearbeitung', 'termin_ausstehend'])
       .lt('created_at', monthsAgo(MONTHS_NO_CONTRACT));
 
     // ── 3. Beauftragte Anfragen älter als 36 Monate ─────────────────────────

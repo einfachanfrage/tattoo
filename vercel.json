@@ -10,6 +10,8 @@
     { "source": "/demo", "destination": "/landing/demo.html" },
     { "source": "/dashboard", "destination": "/dashboard/index.html" },
     { "source": "/admin", "destination": "/landing/admin.html" },
+    { "source": "/agb", "destination": "/landing/agb.html" },
+    { "source": "/avv", "destination": "/landing/avv.html" },
     { "source": "/impressum", "destination": "/landing/impressum.html" },
     { "source": "/datenschutz", "destination": "/landing/datenschutz.html" },
     { "source": "/", "destination": "/landing/index.html" }

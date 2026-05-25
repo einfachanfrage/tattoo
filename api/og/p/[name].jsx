@@ -4,7 +4,7 @@ export const config = { runtime: 'edge' };
 
 export default function handler(req) {
   const url = new URL(req.url);
-  const name = decodeURIComponent(url.pathname.split('/').pop()) || 'Hochzeitsfotografie';
+  const name = decodeURIComponent(url.pathname.split('/').pop()) || 'Tattoo Studio';
 
   return new ImageResponse(
     <div
@@ -40,7 +40,7 @@ export default function handler(req) {
         textTransform: 'uppercase',
         marginBottom: '24px',
       }}>
-        Hochzeitsanfrage
+        Tattoo-Anfrage
       </div>
 
       {/* Photographer name */}

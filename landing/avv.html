@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auftragsverarbeitungsvertrag – Einfach Anfrage</title>
+  <link rel="preconnect" href="https://fonts.bunny.net">
+  <link href="https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --champagne: #C9A96E;
+      --ivory: #FAF7F2;
+      --dark: #1A1A1A;
+      --grey-border: #E2DDD6;
+      --grey-mid: #8A8580;
+      --grey-light: #F0EDE8;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--ivory);
+      color: var(--dark);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(250,247,242,0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--grey-border);
+      padding: 0 5vw;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500;
+      color: var(--dark); text-decoration: none;
+    }
+    .nav-logo span { color: var(--champagne); }
+    .nav-back { font-size: 13px; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
+    .nav-back:hover { color: var(--dark); }
+    .page-wrap { max-width: 720px; margin: 72px auto; padding: 0 5vw 80px; }
+    .eyebrow {
+      font-size: 11px; font-weight: 600; color: var(--champagne);
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 400; line-height: 1.1;
+      color: var(--dark); margin-bottom: 12px;
+    }
+    .subtitle {
+      font-size: 14px; color: var(--grey-mid);
+      margin-bottom: 48px; line-height: 1.6;
+    }
+    h2 {
+      font-size: 13px; font-weight: 600; color: var(--dark);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin: 44px 0 12px; padding-top: 10px;
+      border-top: 1px solid var(--grey-border);
+    }
+    h2:first-of-type { border-top: none; margin-top: 0; }
+    h3 { font-size: 14px; font-weight: 600; color: var(--dark); margin: 22px 0 8px; }
+    p { color: var(--grey-mid); margin-bottom: 10px; }
+    ul, ol { color: var(--grey-mid); padding-left: 22px; margin-bottom: 10px; }
+    ul li, ol li { margin-bottom: 5px; }
+    a { color: var(--champagne); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .info-box {
+      background: var(--grey-light);
+      border-left: 3px solid var(--champagne);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+    .info-box p { margin-bottom: 4px; }
+    .info-box p:last-child { margin-bottom: 0; }
+
+    /* Parteien-Block */
+    .parties-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    @media (max-width: 560px) { .parties-grid { grid-template-columns: 1fr; } }
+    .party-box {
+      background: var(--grey-light);
+      border: 1px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .party-role {
+      font-size: 9px; font-weight: 700; color: var(--champagne);
+      text-transform: uppercase; letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .party-box p { font-size: 13px; margin-bottom: 3px; }
+    .placeholder {
+      background: rgba(201,169,110,0.12);
+      border: 1.5px dashed var(--champagne);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 12px;
+      color: var(--champagne);
+      font-style: italic;
+      display: inline-block;
+    }
+
+    /* Tabelle Unterauftragsverarbeiter */
+    .sub-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    .sub-table th {
+      background: var(--grey-light);
+      font-weight: 600; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--dark);
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--grey-border);
+    }
+    .sub-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--grey-border);
+      color: var(--grey-mid);
+      vertical-align: top;
+    }
+    .sub-table tr:last-child td { border-bottom: none; }
+
+    /* TOM-Tabelle */
+    .tom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    .tom-table th {
+      background: var(--grey-light);
+      font-weight: 600; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--dark);
+      padding: 9px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--grey-border);
+    }
+    .tom-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--grey-border);
+      color: var(--grey-mid);
+      vertical-align: top;
+    }
+    .tom-table tr:last-child td { border-bottom: none; }
+    .tom-table td:first-child {
+      font-weight: 600; color: var(--dark);
+      font-size: 12px; white-space: nowrap;
+      width: 200px;
+    }
+
+    /* Online-Akzeptanz-Formular */
+    .accept-intro { font-size: 14px; color: var(--grey-mid); margin-bottom: 24px; line-height: 1.65; }
+    .accept-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;
+    }
+    @media (max-width: 560px) { .accept-grid { grid-template-columns: 1fr; } }
+    .accept-field { display: flex; flex-direction: column; gap: 6px; }
+    .accept-field label {
+      font-size: 11px; font-weight: 600; color: var(--dark);
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .accept-field label span { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--grey-mid); }
+    .accept-field input {
+      background: #fff;
+      border: 1px solid var(--grey-border);
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .accept-field input:focus { border-color: var(--champagne); }
+    .accept-field input::placeholder { color: var(--grey-mid); }
+    .accept-checkbox-row {
+      display: flex; align-items: flex-start; gap: 12px;
+      background: var(--grey-light);
+      border: 1.5px solid var(--grey-border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 20px 0 22px;
+      cursor: pointer;
+    }
+    .accept-checkbox-row input[type="checkbox"] {
+      width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+      accent-color: var(--champagne); cursor: pointer;
+    }
+    .accept-checkbox-row label {
+      font-size: 13px; color: var(--dark); line-height: 1.55; cursor: pointer;
+    }
+    .accept-btn {
+      display: block; width: 100%;
+      background: var(--dark);
+      color: var(--champagne);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px; font-weight: 600;
+      letter-spacing: 0.04em;
+      border: none; border-radius: 10px;
+      padding: 16px 24px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .accept-btn:hover { opacity: 0.82; }
+    .accept-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .accept-error {
+      display: none; margin-top: 12px;
+      font-size: 13px; color: #c0392b;
+      background: #fdf0ee; border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .accept-success {
+      display: none;
+      background: var(--grey-light);
+      border: 1.5px solid var(--champagne);
+      border-radius: 12px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .accept-success-icon {
+      font-size: 32px; margin-bottom: 12px;
+    }
+    .accept-success h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 400;
+      color: var(--dark); margin-bottom: 8px;
+      text-transform: none; letter-spacing: 0;
+      border-top: none; padding-top: 0;
+    }
+    .accept-success p { font-size: 13px; color: var(--grey-mid); margin-bottom: 5px; }
+
+    .annex-divider {
+      background: var(--grey-light);
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--grey-mid);
+      margin: 48px 0 24px;
+    }
+
+    footer {
+      border-top: 1px solid var(--grey-border);
+      padding: 28px 5vw;
+      text-align: center;
+      font-size: 12px; color: var(--grey-mid);
+    }
+    footer a { color: var(--grey-mid); margin: 0 10px; }
+    footer a:hover { color: var(--champagne); }
+
+    @media print {
+      nav { display: none; }
+      .page-wrap { margin: 20px auto; }
+      body { background: white; font-size: 12pt; }
+      .info-box, .party-box { border: 1px solid #ccc; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">Einfach<span>Anfrage</span></a>
+    <a href="/agb" class="nav-back">← AGB</a>
+  </nav>
+
+  <div class="page-wrap">
+    <div class="eyebrow">DSGVO · Art. 28</div>
+    <h1>Auftragsverarbeitungs&shy;vertrag</h1>
+    <p class="subtitle">
+      Dieser Vertrag regelt die Verarbeitung personenbezogener Daten durch Einfach Anfrage
+      als Auftragsverarbeiter im Sinne des Art. 28 DSGVO.
+    </p>
+
+    <!-- ── Parteien ── -->
+    <h2>Vertragsparteien</h2>
+
+    <div class="parties-grid">
+      <div class="party-box">
+        <div class="party-role">Verantwortlicher</div>
+        <p><strong><span class="placeholder">[Name des Tätowierers / Studio-Name]</span></strong></p>
+        <p><span class="placeholder">[Straße, Hausnummer]</span></p>
+        <p><span class="placeholder">[PLZ Ort]</span></p>
+        <p><span class="placeholder">[E-Mail-Adresse]</span></p>
+        <p style="margin-top:8px;font-size:12px;color:var(--grey-mid);">(nachfolgend „Verantwortlicher")</p>
+      </div>
+      <div class="party-box">
+        <div class="party-role">Auftragsverarbeiter</div>
+        <p><strong>Sandra Holm</strong></p>
+        <p>Einfach Anfrage</p>
+        <p>Wielandstr. 11, 12159 Berlin</p>
+        <p><a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a></p>
+        <p style="margin-top:8px;font-size:12px;color:var(--grey-mid);">(nachfolgend „Auftragsverarbeiter")</p>
+      </div>
+    </div>
+
+    <p>Verantwortlicher und Auftragsverarbeiter werden nachfolgend gemeinsam auch als „Parteien" bezeichnet.</p>
+
+    <!-- ── 1 ── -->
+    <h2>§ 1 Gegenstand, Art und Zweck der Verarbeitung</h2>
+
+    <p>Der Auftragsverarbeiter erbringt für den Verantwortlichen Leistungen im Rahmen des Dienstes „Einfach Anfrage" (SaaS-Anfrage-Widget für Tätowierer). Im Rahmen dieser Leistungserbringung verarbeitet der Auftragsverarbeiter personenbezogene Daten der Kunden des Verantwortlichen (Tattoo-Interessenten, die über das Widget eine Anfrage stellen).</p>
+
+    <p>Die Verarbeitung erfolgt ausschließlich zur Ermöglichung folgender Funktionen:</p>
+    <ul>
+      <li>Entgegennahme und strukturierte Speicherung eingehender Tattoo-Anfragen</li>
+      <li>Weiterleitung der Anfragedaten per E-Mail an den Verantwortlichen</li>
+      <li>Versand einer Bestätigungs-E-Mail an den Anfragenden</li>
+      <li>Bereitstellung der Anfragen im passwortgeschützten Dashboard des Verantwortlichen</li>
+      <li>Speicherung von hochgeladenen Referenzbildern in einem privaten Dateispeicher</li>
+    </ul>
+
+    <p>Eine Verarbeitung zu anderen Zwecken – insbesondere zu Werbezwecken, für eigene Analysen oder zur Weitergabe an Dritte – findet nicht statt.</p>
+
+    <!-- ── 2 ── -->
+    <h2>§ 2 Art der Daten und Kategorien der Betroffenen</h2>
+
+    <h3>2.1 Kategorien betroffener Personen</h3>
+    <p>Personen, die über das Widget des Verantwortlichen eine Tattoo-Anfrage einreichen (Kunden des Verantwortlichen).</p>
+
+    <h3>2.2 Verarbeitete Datenkategorien</h3>
+    <ul>
+      <li><strong>Kontaktdaten:</strong> Name, E-Mail-Adresse, Telefonnummer (optional), Instagram-Handle (optional)</li>
+      <li><strong>Anfragedaten:</strong> Beschreibung des gewünschten Motivs, Körperstelle, Größe, Tattoo-Stil (Auswahl), Farbpräferenz, Stil-Notizen (optional)</li>
+      <li><strong>Gesundheitsbezogene Angaben:</strong> Angabe ob erstes Tattoo, bekannte Allergien/Hautunverträglichkeiten (freiwillig, optional)</li>
+      <li><strong>Terminangaben:</strong> Wunsch-Zeitraum, bevorzugte Tageszeit (optional)</li>
+      <li><strong>Budgetangaben:</strong> Budgetrahmen (optional), besondere Wünsche (optional)</li>
+      <li><strong>Dateien:</strong> Vom Anfragenden hochgeladene Referenzbilder (optional, max. 3 Bilder)</li>
+      <li><strong>Einwilligungsdaten:</strong> Zeitstempel der erteilten Datenschutzeinwilligung</li>
+      <li><strong>Herkunftsangabe:</strong> Wie der Anfragende auf den Verantwortlichen aufmerksam wurde (optional)</li>
+    </ul>
+
+    <p><strong>Hinweis zu Gesundheitsdaten:</strong> Die freiwilligen Angaben zu Allergien und Hautunverträglichkeiten können im Sinne des Art. 9 DSGVO als Gesundheitsdaten einzustufen sein. Die Verarbeitung erfolgt ausschließlich auf Grundlage der ausdrücklichen Einwilligung der betroffenen Personen (Art. 9 Abs. 2 lit. a DSGVO), die im Widget eingeholt wird.</p>
+
+    <!-- ── 3 ── -->
+    <h2>§ 3 Dauer der Verarbeitung</h2>
+
+    <p>Die Verarbeitung erfolgt für die Dauer des zwischen den Parteien bestehenden Nutzungsvertrags über den Dienst „Einfach Anfrage".</p>
+    <p>Nach Vertragsende werden die Daten gemäß den in der Datenschutzerklärung des Auftragsverarbeiters definierten Fristen automatisch gelöscht (wöchentlicher Bereinigungslauf). Auf ausdrücklichen Wunsch des Verantwortlichen erfolgt die Löschung früher.</p>
+
+    <!-- ── 4 ── -->
+    <h2>§ 4 Pflichten des Auftragsverarbeiters</h2>
+
+    <h3>4.1 Weisungsgebundenheit</h3>
+    <p>Der Auftragsverarbeiter verarbeitet personenbezogene Daten ausschließlich gemäß den dokumentierten Weisungen des Verantwortlichen, es sei denn, er ist nach dem Unionsrecht oder dem Recht eines Mitgliedstaats, dem er unterliegt, zur Verarbeitung verpflichtet. In einem solchen Fall informiert er den Verantwortlichen vor der Verarbeitung über diese rechtliche Anforderung, sofern das jeweilige Recht dies nicht aus wichtigen Gründen des öffentlichen Interesses verbietet.</p>
+    <p>Die Weisungen des Verantwortlichen ergeben sich aus dem Nutzungsvertrag, diesen AGB, diesem AVV und etwaigen ergänzenden schriftlichen Weisungen. Der Auftragsverarbeiter informiert den Verantwortlichen unverzüglich, wenn er der Ansicht ist, dass eine Weisung gegen die DSGVO oder andere Datenschutzvorschriften verstößt.</p>
+
+    <h3>4.2 Vertraulichkeit</h3>
+    <p>Der Auftragsverarbeiter stellt sicher, dass alle zur Verarbeitung der personenbezogenen Daten befugten Personen zur Vertraulichkeit verpflichtet sind oder einer gesetzlichen Verschwiegenheitspflicht unterliegen.</p>
+
+    <h3>4.3 Technische und organisatorische Maßnahmen (TOM)</h3>
+    <p>Der Auftragsverarbeiter trifft geeignete technische und organisatorische Maßnahmen im Sinne des Art. 32 DSGVO. Diese sind in <strong>Anlage 2</strong> dieses Vertrags festgelegt. Der Auftragsverarbeiter ist berechtigt, die TOM weiterzuentwickeln, sofern das Schutzniveau nicht unterschritten wird.</p>
+
+    <h3>4.4 Unterauftragsverarbeiter</h3>
+    <p>Der Auftragsverarbeiter setzt die in <strong>Anlage 1</strong> aufgeführten Unterauftragsverarbeiter ein. Der Verantwortliche erteilt hiermit seine allgemeine Genehmigung für den Einsatz der dort genannten Unterauftragsverarbeiter.</p>
+    <p>Bei beabsichtigten Änderungen (Hinzufügen oder Ersetzen von Unterauftragsverarbeitern) informiert der Auftragsverarbeiter den Verantwortlichen rechtzeitig, mindestens jedoch <strong>vier (4) Wochen</strong> vor Wirksamwerden der Änderung. Der Verantwortliche kann Änderungen aus berechtigten, schriftlich darzulegenden Gründen widersprechen.</p>
+    <p>Der Auftragsverarbeiter stellt sicher, dass Unterauftragsverarbeiter vertraglich gleichwertige Datenschutzverpflichtungen übernehmen wie diejenigen in diesem Vertrag.</p>
+
+    <h3>4.5 Unterstützung bei Betroffenenrechten</h3>
+    <p>Soweit möglich, unterstützt der Auftragsverarbeiter den Verantwortlichen durch geeignete technische und organisatorische Maßnahmen bei der Erfüllung der Rechte der betroffenen Personen (Art. 15–22 DSGVO): insbesondere Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Datenübertragbarkeit.</p>
+    <p>Geht beim Auftragsverarbeiter direkt ein Antrag einer betroffenen Person ein, leitet er diesen unverzüglich an den Verantwortlichen weiter.</p>
+
+    <h3>4.6 Unterstützung bei weiteren Pflichten des Verantwortlichen</h3>
+    <p>Der Auftragsverarbeiter unterstützt den Verantwortlichen unter Berücksichtigung der Art der Verarbeitung und der ihm zur Verfügung stehenden Informationen bei der Einhaltung der Pflichten gemäß Art. 32–36 DSGVO:</p>
+    <ul>
+      <li>Sicherheit der Verarbeitung (Art. 32 DSGVO)</li>
+      <li>Meldung von Datenschutzverletzungen an Aufsichtsbehörden und Betroffene (Art. 33, 34 DSGVO)</li>
+      <li>Datenschutz-Folgenabschätzung (Art. 35 DSGVO), sofern erforderlich</li>
+    </ul>
+    <p>Im Falle einer Verletzung des Schutzes personenbezogener Daten unterrichtet der Auftragsverarbeiter den Verantwortlichen unverzüglich, spätestens jedoch innerhalb von <strong>72 Stunden</strong> nach Bekanntwerden.</p>
+
+    <h3>4.7 Löschung und Rückgabe von Daten</h3>
+    <p>Nach Abschluss der Erbringung der Verarbeitungsleistungen (Vertragsende) löscht der Auftragsverarbeiter alle personenbezogenen Daten im Rahmen der automatischen Bereinigungsroutine oder auf ausdrückliche Weisung des Verantwortlichen früher. Dies schließt alle Kopien ein, soweit nicht eine Verpflichtung nach Unionsrecht oder dem Recht eines Mitgliedstaats zur weiteren Aufbewahrung besteht.</p>
+
+    <h3>4.8 Nachweise und Kontrollen</h3>
+    <p>Der Auftragsverarbeiter stellt dem Verantwortlichen alle Informationen zur Verfügung, die zur Nachweisführung der Einhaltung der in Art. 28 DSGVO festgelegten Pflichten erforderlich sind. Er ermöglicht Überprüfungen durch den Verantwortlichen oder von diesem beauftragte Prüfer und trägt zu diesen bei.</p>
+    <p>Kontrollen werden mit angemessener Vorankündigung (mindestens 14 Tage) und während üblicher Geschäftszeiten durchgeführt, um den laufenden Betrieb nicht zu beeinträchtigen.</p>
+
+    <!-- ── 5 ── -->
+    <h2>§ 5 Pflichten des Verantwortlichen</h2>
+
+    <p>Der Verantwortliche ist für die Einhaltung der datenschutzrechtlichen Anforderungen auf seiner Seite allein verantwortlich. Insbesondere stellt er sicher, dass:</p>
+    <ul>
+      <li>er über eine eigene Datenschutzerklärung verfügt, die auf die Nutzung des Widgets und die Verarbeitung durch Einfach Anfrage hinweist,</li>
+      <li>die Einholung der Einwilligung der Anfragenden den gesetzlichen Anforderungen entspricht (die Einwilligungscheckbox im Widget dient als technische Unterstützung, entbindet den Verantwortlichen jedoch nicht von seiner Verantwortung),</li>
+      <li>er Anfragen betroffener Personen zu ihren Datenschutzrechten bearbeitet und den Auftragsverarbeiter hierüber informiert, soweit eine Mitwirkung des Auftragsverarbeiters erforderlich ist,</li>
+      <li>er den Auftragsverarbeiter unverzüglich informiert, wenn er Kenntnis von einer möglichen Datenschutzverletzung erlangt.</li>
+    </ul>
+
+    <!-- ── 6 ── -->
+    <h2>§ 6 Haftung</h2>
+
+    <p>Jede Partei haftet gegenüber der anderen Partei nach den allgemeinen gesetzlichen Bestimmungen, soweit diese durch einen Verstoß gegen ihre jeweiligen Pflichten aus diesem Vertrag entstanden sind.</p>
+    <p>Die Haftungsbeschränkungen aus § 10 der AGB gelten auch für diesen Vertrag, soweit die Haftung des Auftragsverarbeiters im Verhältnis zum Verantwortlichen betroffen ist.</p>
+    <p>Sofern ein Dritter (betroffene Person) gegen eine Partei Ansprüche geltend macht, die in der Verantwortung der anderen Partei liegen, ist die andere Partei verpflichtet, die erstzugenannte Partei von diesen Ansprüchen freizustellen.</p>
+
+    <!-- ── 7 ── -->
+    <h2>§ 7 Schlussbestimmungen</h2>
+
+    <p>Dieser Vertrag unterliegt dem Recht der Bundesrepublik Deutschland. Änderungen oder Ergänzungen dieses Vertrags bedürfen der Textform.</p>
+    <p>Sollten einzelne Bestimmungen dieses Vertrags unwirksam sein oder werden, berührt dies die Wirksamkeit der übrigen Bestimmungen nicht.</p>
+    <p>Dieser Vertrag ersetzt etwaige frühere Vereinbarungen der Parteien zur Auftragsverarbeitung.</p>
+
+    <!-- ── Online-Akzeptanz ── -->
+    <h2>Jetzt online bestätigen</h2>
+
+    <div id="avv-form-wrap">
+      <p class="accept-intro">
+        Lies den Vertrag durch und bestätige deine Zustimmung unten. Die Online-Bestätigung
+        gilt als Textform nach § 126b BGB und hat dieselbe Rechtswirkung wie eine Unterschrift.
+        Du bekommst sofort eine Bestätigungs-E-Mail als Nachweis.
+      </p>
+
+      <form id="avv-form" onsubmit="submitAvv(event)" novalidate>
+        <div class="accept-grid">
+          <div class="accept-field">
+            <label>Dein Name <span>*</span></label>
+            <input type="text" id="avv-name" name="name" required autocomplete="name"
+              placeholder="Julia Meier">
+          </div>
+          <div class="accept-field">
+            <label>Studio-Name <span>(optional)</span></label>
+            <input type="text" id="avv-studio" name="studio" autocomplete="organization"
+              placeholder="Ink by Nova">
+          </div>
+        </div>
+        <div class="accept-grid">
+          <div class="accept-field">
+            <label>E-Mail-Adresse <span>*</span></label>
+            <input type="email" id="avv-email" name="email" required autocomplete="email"
+              placeholder="julia@ink-by-nova.de">
+          </div>
+          <div class="accept-field">
+            <label>Website <span>(optional)</span></label>
+            <input type="url" id="avv-website" name="website" autocomplete="url"
+              placeholder="https://ink-by-nova.de">
+          </div>
+        </div>
+
+        <div class="accept-checkbox-row">
+          <input type="checkbox" id="avv-consent" name="consent" required>
+          <label for="avv-consent">
+            Ich habe den Auftragsverarbeitungsvertrag einschließlich Anlage 1 (Unterauftragsverarbeiter)
+            und Anlage 2 (TOM) vollständig gelesen und erkenne seinen Inhalt verbindlich an.
+          </label>
+        </div>
+
+        <button type="submit" class="accept-btn" id="avv-submit-btn">
+          AVV verbindlich bestätigen
+        </button>
+        <p class="accept-error" id="avv-error"></p>
+      </form>
+
+      <div class="accept-success" id="avv-success">
+        <div class="accept-success-icon">✓</div>
+        <h3>AVV bestätigt</h3>
+        <p id="avv-success-name" style="font-weight:600;color:var(--dark);font-size:15px;"></p>
+        <p id="avv-success-ts"></p>
+        <p style="margin-top:14px;">Eine Bestätigungs-E-Mail ist unterwegs zu dir.<br>Du meldest dich bei mir, sobald du bereit bist.</p>
+      </div>
+    </div>
+
+    <!-- ═══════════════ ANLAGE 1 ═══════════════ -->
+    <div class="annex-divider">Anlage 1 – Unterauftragsverarbeiter</div>
+
+    <p>Folgende Unterauftragsverarbeiter werden vom Auftragsverarbeiter zur Erbringung der Kernleistungen eingesetzt:</p>
+
+    <table class="sub-table">
+      <thead>
+        <tr>
+          <th>Anbieter</th>
+          <th>Zweck</th>
+          <th>Sitz / Serverstandort</th>
+          <th>Übermittlungsgrundlage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Supabase Inc.</strong><br>970 Toa Payoh North #07-04, Singapur</td>
+          <td>Speicherung der Anfragedaten (PostgreSQL-Datenbank) und der Referenzbilder (Objektspeicher)</td>
+          <td>Server: EU (Frankfurt, AWS eu-central-1)</td>
+          <td>Standardvertragsklauseln der EU-Kommission (SCCs)<br><a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer">supabase.com/privacy</a></td>
+        </tr>
+        <tr>
+          <td><strong>Resend Inc.</strong><br>2261 Market Street STE 5913, San Francisco, CA 94114, USA</td>
+          <td>Transaktionaler E-Mail-Versand (Benachrichtigungen an Tätowierer, Bestätigungen an Anfragende)</td>
+          <td>USA</td>
+          <td>Standardvertragsklauseln der EU-Kommission (SCCs)<br><a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">resend.com/legal/privacy-policy</a></td>
+        </tr>
+        <tr>
+          <td><strong>Vercel Inc.</strong><br>340 Pine Street, Suite 701, San Francisco, CA 94104, USA</td>
+          <td>Hosting der Webanwendung, API-Endpunkte, Serverless Functions und automatische Bereinigungsroutinen</td>
+          <td>USA (Edge-Netzwerk global; API-Logik primär EU-Region)</td>
+          <td>Standardvertragsklauseln der EU-Kommission (SCCs)<br><a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">vercel.com/legal/privacy-policy</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>Änderungen an dieser Liste werden dem Verantwortlichen gemäß § 4 Abs. 4 dieses Vertrags rechtzeitig mitgeteilt.</p>
+
+    <!-- ═══════════════ ANLAGE 2 ═══════════════ -->
+    <div class="annex-divider">Anlage 2 – Technische und organisatorische Maßnahmen (TOM)</div>
+
+    <p>Der Auftragsverarbeiter trifft folgende technische und organisatorische Maßnahmen gemäß Art. 32 DSGVO. Die Maßnahmen werden laufend an den Stand der Technik angepasst.</p>
+
+    <table class="tom-table">
+      <thead>
+        <tr>
+          <th>Schutzziel</th>
+          <th>Maßnahmen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Verschlüsselung der Übertragung</td>
+          <td>Alle Datenübertragungen zwischen Nutzer und Server erfolgen ausschließlich über HTTPS/TLS (mindestens TLS 1.2). Das SSL-Zertifikat wird automatisch über Vercel bereitgestellt und erneuert.</td>
+        </tr>
+        <tr>
+          <td>Verschlüsselung der Speicherung</td>
+          <td>Daten in der Supabase-Datenbank werden at rest verschlüsselt (AES-256, bereitgestellt durch AWS/Supabase). Referenzbilder im Objektspeicher werden ebenfalls verschlüsselt gespeichert.</td>
+        </tr>
+        <tr>
+          <td>Zugriffskontrolle – Tätowierer</td>
+          <td>Zugang zum Dashboard erfolgt über individuelle Zugangsdaten (Slug + Passwort). Passwörter werden ausschließlich als bcrypt-Hash (Kostenfaktor 12) gespeichert; das Klartextpasswort ist dem Auftragsverarbeiter nicht bekannt. Nach dem Login wird ein kurzlebiges JWT-Token (sessionStorage, kein persistenter Cookie) verwendet.</td>
+        </tr>
+        <tr>
+          <td>Zugriffskontrolle – interne Systeme</td>
+          <td>Zugang zur Datenbankverwaltung über Supabase Dashboard erfolgt ausschließlich mit dem Administrator-Account der Anbieterin (2FA aktiviert). API-Endpunkte für Verwaltungsoperationen sind durch ein separates TOKEN_SECRET geschützt.</td>
+        </tr>
+        <tr>
+          <td>Datensparsamkeit</td>
+          <td>Das Widget erhebt nur die für die Anfrage notwendigen Daten. Alle nicht zwingend erforderlichen Felder sind als optional gekennzeichnet. Es werden keine Tracking-Cookies, keine Analytics-Skripte und keine Nutzerprofile erstellt.</td>
+        </tr>
+        <tr>
+          <td>Bilder / Dateizugang</td>
+          <td>Referenzbilder werden in einem privaten Supabase-Bucket gespeichert. Der Direktzugriff auf Bucketdaten ist ohne gültige Authentifizierung nicht möglich. Bildvorschauen im Dashboard erfolgen über direkte HTTPS-URLs, die nur für authentifizierte Dashboard-Nutzer zugänglich sind.</td>
+        </tr>
+        <tr>
+          <td>Datentrennung</td>
+          <td>Jeder Tätowierer sieht ausschließlich eigene Anfragen. Die Trennung wird auf Datenbankebene durch einen photographer_slug-Filter in allen Abfragen sowie auf API-Ebene durch die Token-Authentifizierung sichergestellt.</td>
+        </tr>
+        <tr>
+          <td>Löschung und Aufbewahrungsfristen</td>
+          <td>Ein automatischer Bereinigungslauf (Cron-Job, wöchentlich sonntags 03:00 Uhr) löscht Datensätze gemäß den definierten Aufbewahrungsfristen (archiviert: 6 Monate; offen: 24 Monate; beauftragt: 36 Monate). Die Löschung umfasst sowohl Datenbankeinträge als auch zugehörige Dateien im Objektspeicher.</td>
+        </tr>
+        <tr>
+          <td>Sicherheitsupdates</td>
+          <td>Abhängigkeiten (npm-Pakete) werden regelmäßig auf Sicherheitslücken geprüft und aktualisiert. Das Hosting durch Vercel stellt automatisch aktuelle Laufzeitumgebungen bereit.</td>
+        </tr>
+        <tr>
+          <td>Datensicherung</td>
+          <td>Supabase erstellt tägliche automatische Backups der Datenbank (Point-in-time Recovery je nach Supabase-Plan). Für Objektspeicher-Daten (Bilder) wird keine separate Sicherungskopie erstellt; bei Verlust sind die Daten nicht wiederherstellbar.</td>
+        </tr>
+        <tr>
+          <td>Incident Response</td>
+          <td>Bei Kenntnis einer Datenpanne informiert die Anbieterin den Verantwortlichen unverzüglich, spätestens innerhalb von 72 Stunden, per E-Mail. Die Meldung enthält Art der Verletzung, betroffene Datenkategorien, ungefähre Anzahl betroffener Personen und ergriffene Maßnahmen.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 48px; font-size: 12px; color: var(--grey-mid);">Stand: Mai 2026 · Version 1.0</p>
+
+  </div>
+
+  <footer>
+    <a href="/">Startseite</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="/agb">AGB</a>
+  </footer>
+
+  <script>
+    async function submitAvv(e) {
+      e.preventDefault();
+
+      const name    = document.getElementById('avv-name').value.trim();
+      const studio  = document.getElementById('avv-studio').value.trim();
+      const email   = document.getElementById('avv-email').value.trim();
+      const website = document.getElementById('avv-website').value.trim();
+      const consent = document.getElementById('avv-consent').checked;
+
+      const errEl = document.getElementById('avv-error');
+      const btn   = document.getElementById('avv-submit-btn');
+
+      errEl.style.display = 'none';
+      errEl.textContent   = '';
+
+      if (!name)    { showErr('Bitte gib deinen Namen ein.'); return; }
+      if (!email || !email.includes('@')) { showErr('Bitte gib eine gültige E-Mail-Adresse ein.'); return; }
+      if (!consent) { showErr('Bitte bestätige, dass du den AVV gelesen hast.'); return; }
+
+      btn.disabled    = true;
+      btn.textContent = 'Wird gesendet …';
+
+      try {
+        const res = await fetch('/api/avv-accept', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ name, studio, email, website }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          showErr(data.error || 'Ein Fehler ist aufgetreten. Bitte versuch es nochmal.');
+          btn.disabled    = false;
+          btn.textContent = 'AVV verbindlich bestätigen';
+          return;
+        }
+
+        // Erfolg
+        document.getElementById('avv-form').style.display          = 'none';
+        document.querySelector('.accept-intro').style.display      = 'none';
+        document.getElementById('avv-success').style.display       = 'block';
+        document.getElementById('avv-success-name').textContent    = data.name;
+        document.getElementById('avv-success-ts').textContent      = data.timestamp;
+
+        // Sanft zur Bestätigung scrollen
+        document.getElementById('avv-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      } catch (err) {
+        showErr('Verbindungsfehler – bitte prüf deine Internetverbindung und versuch es nochmal.');
+        btn.disabled    = false;
+        btn.textContent = 'AVV verbindlich bestätigen';
+      }
+
+      function showErr(msg) {
+        errEl.textContent   = msg;
+        errEl.style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>

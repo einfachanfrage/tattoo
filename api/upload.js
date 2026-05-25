@@ -1,14 +1,23 @@
 'use strict';
 
+const crypto  = require('crypto');
 const supabase = require('./_supabase-admin');
 
+/**
+ * POST /api/upload
+ *
+ * Lädt ein Bild in Supabase Storage und gibt die signierte URL zurück.
+ * submissionId ist optional – wenn nicht angegeben, wird ein UUID als Pfad-Präfix genutzt.
+ * Es wird KEIN DB-Update gemacht; die URL wird stattdessen direkt vom Widget in die
+ * initiale Submission eingebettet (sauberer, RLS-unabhängiger Ansatz).
+ */
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end();
 
   const { submissionId, imageData, imageName, imageType } = req.body || {};
 
-  if (!submissionId || !imageData || !imageName) {
-    return res.status(400).json({ error: 'submissionId, imageData und imageName sind Pflicht.' });
+  if (!imageData || !imageName) {
+    return res.status(400).json({ error: 'imageData und imageName sind Pflicht.' });
   }
 
   try {
@@ -17,11 +26,11 @@ module.exports = async (req, res) => {
     const buffer = Buffer.from(base64, 'base64');
 
     // Sanitize filename and create unique path
-    const ext      = (imageName.match(/\.\w+$/) || ['.jpg'])[0].toLowerCase();
-    const safeName = imageName.replace(/[^a-zA-Z0-9._-]/g, '_');
-    const path     = `${submissionId}/${Date.now()}_${safeName}`;
+    const safeName   = imageName.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const pathPrefix = submissionId || crypto.randomUUID();
+    const path       = `${pathPrefix}/${Date.now()}_${safeName}`;
 
-    // Upload to Supabase Storage (uses service key → no RLS issues)
+    // Upload to Supabase Storage
     const { error: uploadError } = await supabase.storage
       .from('inquiry-images')
       .upload(path, buffer, {
@@ -34,8 +43,7 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: 'Bild-Upload fehlgeschlagen: ' + uploadError.message });
     }
 
-    // Get signed URL (valid for 5 years)
-    // 5 years in seconds: 5 * 365 * 24 * 60 * 60 = 157_680_000
+    // Get signed URL (valid for 5 years = 157_680_000 seconds)
     let imageUrl;
     const { data: urlData, error: signError } = await supabase.storage
       .from('inquiry-images')
@@ -55,40 +63,10 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: 'Bild-URL konnte nicht generiert werden.' });
     }
 
-    // Append image URL to the submission in the DB
-    // (uses service key → SELECT + UPDATE work regardless of RLS)
-    const { data: existing, error: fetchErr } = await supabase
-      .from('inquiries')
-      .select('data')
-      .eq('id', submissionId)
-      .single();
-
-    if (fetchErr || !existing) {
-      console.warn('Submission nicht gefunden für Upload:', submissionId, fetchErr?.message);
-      // Still return success – image was uploaded, just not linked to submission
-      return res.json({ success: true, url: imageUrl });
-    }
-
-    const images = existing.data?.style?.inspirationImages || [];
-    images.push({ name: imageName, url: imageUrl });
-
-    const updatedData = {
-      ...existing.data,
-      style: { ...existing.data.style, inspirationImages: images },
-    };
-
-    const { error: updateErr } = await supabase
-      .from('inquiries')
-      .update({ data: updatedData })
-      .eq('id', submissionId);
-
-    if (updateErr) {
-      console.error('DB-Update fehlgeschlagen:', updateErr.message);
-      // Image is uploaded, URL generated, but not saved to DB
-      return res.status(500).json({ error: 'Bild gespeichert, aber DB-Update fehlgeschlagen: ' + updateErr.message });
-    }
-
+    // Return the URL – the widget embeds it into the submission before the POST to /api/submissions.
+    // No DB update needed here (avoids RLS issues entirely).
     return res.json({ success: true, url: imageUrl });
+
   } catch (err) {
     console.error('Upload exception:', err.message);
     return res.status(500).json({ error: err.message });

@@ -114,10 +114,10 @@
     <p>Im Rahmen dieser Website und des Dienstes werden folgende Kategorien personenbezogener Daten verarbeitet:</p>
     <ul>
       <li>Kontaktdaten (Name, E-Mail-Adresse, Telefonnummer)</li>
-      <li>Hochzeitsbezogene Angaben (Datum, Ort, Gästezahl, Stil, Budget)</li>
-      <li>Vom Nutzer hochgeladene Bilder (Inspirationsfotos)</li>
+      <li>Tattoo-bezogene Angaben (Motiv, Körperstelle, Größe, Stil, Budget)</li>
+      <li>Vom Nutzer hochgeladene Bilder (Referenzfotos)</li>
       <li>Technische Zugriffsdaten (IP-Adresse, Browser, Uhrzeit) – durch Hosting-Anbieter</li>
-      <li>Anmeldedaten für Fotografen (verschlüsseltes Passwort, Sitzungstoken)</li>
+      <li>Anmeldedaten für Tätowierer (verschlüsseltes Passwort, Sitzungstoken)</li>
     </ul>
 
     <!-- ── 3 ── -->
@@ -150,32 +150,32 @@
     <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung eingehender Anfragen).</p>
 
     <!-- ── 6 ── -->
-    <h2>6. Hochzeitsanfrage-Widget (Kerndienstleistung)</h2>
-    <p>Das zentrale Angebot von Einfach Anfrage ist ein einbettbares Formular-Widget, das Hochzeitsfotografen auf ihrer eigenen Website einsetzen. Wenn ein Brautpaar dieses Widget ausfüllt, werden folgende Daten verarbeitet:</p>
+    <h2>6. Tattoo-Anfrage-Widget (Kerndienstleistung)</h2>
+    <p>Das zentrale Angebot von Einfach Anfrage ist ein einbettbares Formular-Widget, das Tätowierer auf ihrer eigenen Website oder als Standalone-Link einsetzen. Wenn ein Kunde dieses Widget ausfüllt, werden folgende Daten verarbeitet:</p>
 
     <h3>Erhobene Daten</h3>
     <ul>
-      <li><strong>Kontakt:</strong> Vornamen beider Partner, E-Mail-Adresse, Telefonnummer (optional)</li>
-      <li><strong>Hochzeit:</strong> Datum, Uhrzeit der Trauung, ungefähre Dauer</li>
-      <li><strong>Location:</strong> Bundesland, Ort, Typ(en), Innen/Außen, Adresse (optional)</li>
-      <li><strong>Leistungen:</strong> Foto/Video, Getting Ready, 2. Fotograf, Album</li>
-      <li><strong>Stil:</strong> Wunsch-Look, Gästezahl, Freitextfeld, Inspirationsbilder (optional, max. 3 Fotos)</li>
+      <li><strong>Kontakt:</strong> Name, E-Mail-Adresse, Telefonnummer (optional), Instagram-Handle (optional)</li>
+      <li><strong>Motiv:</strong> Beschreibung, Körperstelle, Größe, Cover-Up (ja/nein), Cover-Up-Details (optional)</li>
+      <li><strong>Stil:</strong> Tattoo-Stile (Mehrfachauswahl), Farbpräferenz, Notizen (optional), Referenzbilder (optional, max. 3 Fotos)</li>
+      <li><strong>Gesundheit:</strong> Erstes Tattoo (ja/nein), bekannte Allergien, Allergie-Details (optional)</li>
+      <li><strong>Termin:</strong> Wunsch-Zeitraum, bevorzugte Tageszeit (optional)</li>
       <li><strong>Budget:</strong> Budgetrahmen (optional), besondere Wünsche (optional)</li>
       <li><strong>Einwilligung:</strong> Zeitstempel der erteilten Datenschutzeinwilligung</li>
-      <li><strong>Herkunft:</strong> Wie das Brautpaar auf den Fotografen aufmerksam wurde (optional)</li>
+      <li><strong>Herkunft:</strong> Wie der Kunde auf den Tätowierer aufmerksam wurde (optional)</li>
     </ul>
 
     <h3>Verarbeitung und Speicherung</h3>
-    <p>Die Anfragedaten werden in einer Datenbank bei Supabase (siehe Abschnitt 8) gespeichert. Inspirationsbilder werden in einem privaten Speicher-Bucket bei Supabase abgelegt; der Zugriff erfolgt ausschließlich über zeitlich begrenzte, signierte URLs. Der jeweilige Fotograf kann die Anfragen über sein passwortgeschütztes Dashboard einsehen.</p>
+    <p>Die Anfragedaten werden in einer Datenbank bei Supabase (siehe Abschnitt 8) gespeichert. Referenzbilder werden in einem privaten Speicher-Bucket bei Supabase abgelegt; der Zugriff erfolgt ausschließlich über zeitlich begrenzte, signierte URLs. Der jeweilige Tätowierer kann die Anfragen über sein passwortgeschütztes Dashboard einsehen.</p>
     <p>Nach Eingang der Anfrage werden automatisch E-Mails versendet:</p>
     <ul>
-      <li>Eine Benachrichtigungsmail mit allen Anfragedaten an den Fotografen</li>
-      <li>Eine Bestätigungsmail an das Brautpaar</li>
+      <li>Eine Benachrichtigungsmail mit allen Anfragedaten an den Tätowierer</li>
+      <li>Eine Bestätigungsmail an den Kunden</li>
     </ul>
     <p>Der E-Mail-Versand erfolgt über Resend (siehe Abschnitt 8).</p>
 
     <h3>Rechtsgrundlage</h3>
-    <p>Die Verarbeitung erfolgt auf Grundlage der ausdrücklichen Einwilligung des Brautpaares gemäß Art. 6 Abs. 1 lit. a DSGVO (Einwilligungscheckbox im Formular). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden (Kontakt: <a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a>).</p>
+    <p>Die Verarbeitung erfolgt auf Grundlage der ausdrücklichen Einwilligung des Kunden gemäß Art. 6 Abs. 1 lit. a DSGVO (Einwilligungscheckbox im Formular). Die Einwilligung kann jederzeit mit Wirkung für die Zukunft widerrufen werden (Kontakt: <a href="mailto:einfachanfrage@outlook.com">einfachanfrage@outlook.com</a>).</p>
 
     <h3>Speicherdauer und automatische Löschung</h3>
     <p>Die Anfragedaten werden entsprechend den nachfolgenden Fristen automatisch und unwiderruflich gelöscht (wöchentlicher Bereinigungslauf):</p>
@@ -187,12 +187,12 @@
     <p>Bei der Löschung werden sowohl der Datenbankeintrag als auch alle zugehörigen Bilder aus dem Speicher entfernt. Eine vorzeitige Löschung ist auf Anfrage jederzeit möglich.</p>
 
     <!-- ── 7 ── -->
-    <h2>7. Fotografen-Dashboard und Anmeldung</h2>
-    <p>Fotografen, die den Dienst nutzen, können sich über einen personalisierten Link mit Benutzername (Slug) und Passwort in ihr Dashboard einloggen.</p>
+    <h2>7. Tätowierer-Dashboard und Anmeldung</h2>
+    <p>Tätowierer, die den Dienst nutzen, können sich über einen personalisierten Link mit Benutzername (Slug) und Passwort in ihr Dashboard einloggen.</p>
     <ul>
       <li><strong>Passwort:</strong> Wird ausschließlich als bcrypt-Hash (Einwegverschlüsselung) in der Datenbank gespeichert – das Klartext-Passwort ist uns nicht bekannt.</li>
       <li><strong>Sitzungstoken:</strong> Nach dem Login wird ein temporäres Authentifizierungstoken im <code>sessionStorage</code> des Browsers gespeichert. Dieses wird beim Schließen des Browser-Tabs automatisch gelöscht. Es werden keine dauerhaften Cookies für die Authentifizierung eingesetzt.</li>
-      <li><strong>Kontodaten:</strong> Name, Slug, E-Mail-Adresse und Einstellungen des Fotografen werden in der Supabase-Datenbank gespeichert.</li>
+      <li><strong>Kontodaten:</strong> Name, Slug, E-Mail-Adresse und Einstellungen des Tätowierers werden in der Supabase-Datenbank gespeichert.</li>
     </ul>
     <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</p>
 
@@ -249,8 +249,8 @@
     </div>
 
     <!-- ── 11 ── -->
-    <h2>11. Hinweis für Fotografen (B2B)</h2>
-    <p>Fotografen, die den Dienst „Einfach Anfrage" in ihre Website einbinden, sind für die Datenverarbeitung gegenüber ihren Brautpaaren eigenverantwortlich. Sie sind verpflichtet, in ihrer eigenen Datenschutzerklärung auf die Nutzung des Widgets und die damit verbundene Verarbeitung durch Einfach Anfrage hinzuweisen. Ein entsprechender Mustertext wird auf Anfrage zur Verfügung gestellt.</p>
+    <h2>11. Hinweis für Tätowierer (B2B)</h2>
+    <p>Tätowierer, die den Dienst „Einfach Anfrage" in ihre Website einbinden, sind für die Datenverarbeitung gegenüber ihren Kunden eigenverantwortlich. Sie sind verpflichtet, in ihrer eigenen Datenschutzerklärung auf die Nutzung des Widgets und die damit verbundene Verarbeitung durch Einfach Anfrage hinzuweisen. Ein entsprechender Mustertext wird auf Anfrage zur Verfügung gestellt.</p>
 
     <p style="margin-top: 48px; font-size: 12px; color: var(--grey-mid);">Stand: Mai 2026</p>
   </div>
@@ -259,6 +259,7 @@
     <a href="/">Startseite</a>
     <a href="/impressum">Impressum</a>
     <a href="/datenschutz">Datenschutz</a>
+    <a href="/agb">AGB</a>
   </footer>
 
 </body>

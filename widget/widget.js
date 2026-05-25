@@ -70,6 +70,7 @@
       's3.title': 'Stil & Referenzen', 's3.sub': 'Welchen Stil suchst du? Mehrfachauswahl möglich.',
       's3.style.lbl': 'Tattoo-Stil', 's3.style.unclear': 'Noch unklar',
       's3.color.lbl': 'Farbe oder Schwarz-Grau?',
+      's3.notes.lbl': 'Stil-Notizen', 's3.notes.opt': '(optional)', 's3.notes.ph': 'z. B. „eher minimalistisch, keine dicken Linien, soll zeitlos wirken" …',
       's3.upload.lbl': 'Referenzbilder', 's3.upload.opt': '(optional · max. 3 Fotos)',
       's3.upload.cta': 'Klicken zum Hochladen', 's3.upload.drag': 'oder Bilder hierher ziehen',
       's3.upload.sub': 'Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen',
@@ -77,6 +78,7 @@
       'col.bw': 'Schwarz-Grau', 'col.color': 'Farbe', 'col.both': 'Beides möglich', 'col.unclear': 'Noch unklar',
       's4.title': 'Termin & Budget', 's4.sub': 'Ungefähr reicht – kein verbindlicher Termin.',
       's4.time.lbl': 'Wunsch-Zeitraum', 's4.pref.lbl': 'Bevorzugte Tageszeit', 's4.budget.lbl': 'Dein Budgetrahmen',
+      's4.notes.lbl': 'Besondere Wünsche oder Fragen', 's4.notes.opt': '(optional)', 's4.notes.ph': 'z. B. besonderer Anlass, offene Fragen, Terminwünsche …',
       'tf.asap': 'So bald wie möglich', 'tf.1_3': 'In 1–3 Monaten', 'tf.3_6': 'In 3–6 Monaten',
       'tf.6_12': 'In 6–12 Monaten', 'tf.none': 'Kein fester Zeitdruck',
       'pt.morning': 'Vormittags', 'pt.afternoon': 'Nachmittags', 'pt.evening': 'Abends', 'pt.none': 'Keine Präferenz',
@@ -140,6 +142,7 @@
       's3.title': 'Style & References', 's3.sub': 'Which style are you looking for? Multiple selection possible.',
       's3.style.lbl': 'Tattoo style', 's3.style.unclear': 'Not sure yet',
       's3.color.lbl': 'Color or black & grey?',
+      's3.notes.lbl': 'Style notes', 's3.notes.opt': '(optional)', 's3.notes.ph': 'e.g. "minimalist, no thick lines, should feel timeless" …',
       's3.upload.lbl': 'Reference images', 's3.upload.opt': '(optional · max. 3 photos)',
       's3.upload.cta': 'Click to upload', 's3.upload.drag': 'or drag images here',
       's3.upload.sub': 'Screenshots, Pinterest pins, photos of tattoos you like',
@@ -147,6 +150,7 @@
       'col.bw': 'Black & grey', 'col.color': 'Color', 'col.both': 'Either works', 'col.unclear': 'Not sure yet',
       's4.title': 'Appointment & Budget', 's4.sub': 'Approximate is fine – no binding commitment.',
       's4.time.lbl': 'Preferred timeframe', 's4.pref.lbl': 'Preferred time of day', 's4.budget.lbl': 'Your budget range',
+      's4.notes.lbl': 'Special requests or questions', 's4.notes.opt': '(optional)', 's4.notes.ph': 'e.g. special occasion, open questions, preferred dates …',
       'tf.asap': 'As soon as possible', 'tf.1_3': 'In 1–3 months', 'tf.3_6': 'In 3–6 months',
       'tf.6_12': 'In 6–12 months', 'tf.none': 'No fixed timeline',
       'pt.morning': 'Morning', 'pt.afternoon': 'Afternoon', 'pt.evening': 'Evening', 'pt.none': 'No preference',
@@ -593,6 +597,7 @@
 
     /* Responsive */
     @media (max-width: 520px) {
+      .upload-drag-hint { display: none; }
       .modal { border-radius: 20px; max-height: 96vh; }
       .modal-header { padding: 18px 20px 12px; }
       .modal-content { padding: 4px 20px 28px; }
@@ -1071,11 +1076,16 @@
         </div>
 
         <div class="field">
+          <label class="field-label" for="ea-style-notes"><span data-i18n="s3.notes.lbl">Stil-Notizen</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s3.notes.opt">(optional)</span></label>
+          <textarea id="ea-style-notes" name="styleNotes" rows="2" data-i18n-ph="s3.notes.ph" placeholder="z. B. „eher minimalistisch, keine dicken Linien, soll zeitlos wirken" …"></textarea>
+        </div>
+
+        <div class="field">
           <label class="field-label"><span data-i18n="s3.upload.lbl">Referenzbilder</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s3.upload.opt">(optional · max. 3 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
-              <strong data-i18n="s3.upload.cta">Klicken zum Hochladen</strong> <span data-i18n="s3.upload.drag">oder Bilder hierher ziehen</span><br>
+              <strong data-i18n="s3.upload.cta">Klicken zum Hochladen</strong> <span class="upload-drag-hint" data-i18n="s3.upload.drag">oder Bilder hierher ziehen</span><br>
               <span style="font-size:12px;color:#B0A898;" data-i18n="s3.upload.sub">Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen</span>
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
@@ -1125,6 +1135,11 @@
             <option value="800–1.500 €" data-i18n="bud.800_1500">800–1.500 €</option>
             <option value="über 1.500 €" data-i18n="bud.o1500">über 1.500 €</option>
           </select>
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="ea-notes"><span data-i18n="s4.notes.lbl">Besondere Wünsche oder Fragen</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s4.notes.opt">(optional)</span></label>
+          <textarea id="ea-notes" name="notes" rows="2" data-i18n-ph="s4.notes.ph" placeholder="z. B. besonderer Anlass, offene Fragen, Terminwünsche …"></textarea>
         </div>
       </div>
 
@@ -1647,10 +1662,38 @@
     try {
       formData = collectFormData();
 
-      // Strip image data for the main API call to keep payload small
+      // Upload images FIRST so the URLs are embedded in the submission
+      var uploadBase = CONFIG.apiUrl.replace(/\/submissions.*$/, '');
+      var imageUrls  = [];
+      if (uploadedFiles.length > 0) {
+        for (var i = 0; i < uploadedFiles.length; i++) {
+          try {
+            var uploadRes = await fetch(uploadBase + '/upload', {
+              method:  'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body:    JSON.stringify({
+                imageData: uploadedFiles[i].data,
+                imageName: uploadedFiles[i].name,
+                imageType: uploadedFiles[i].type,
+              }),
+            });
+            if (uploadRes.ok) {
+              var uploadData = await uploadRes.json();
+              if (uploadData.url) imageUrls.push({ name: uploadedFiles[i].name, url: uploadData.url });
+            } else {
+              var uploadErrData = await uploadRes.json().catch(function () { return {}; });
+              console.warn('[EinfachAnfrage] Bild-Upload fehlgeschlagen (' + uploadRes.status + '):', uploadErrData.error || '');
+            }
+          } catch (imgErr) {
+            console.warn('[EinfachAnfrage] Bild-Upload Netzwerkfehler:', imgErr.message);
+          }
+        }
+      }
+
+      // Build payload: replace raw base64 data with uploaded URLs
       var payloadForApi = JSON.parse(JSON.stringify(formData));
+      payloadForApi.style.inspirationImages     = imageUrls;
       payloadForApi.style.inspirationImageCount = uploadedFiles.length;
-      if (payloadForApi.style) delete payloadForApi.style.inspirationImages;
 
       var res = await fetch(CONFIG.apiUrl, {
         method:  'POST',
@@ -1660,32 +1703,6 @@
       if (!res.ok) throw new Error('API error ' + res.status);
 
       var resData = await res.json();
-      var submissionId = resData.id;
-
-      // Upload inspiration images separately to storage
-      if (uploadedFiles.length > 0 && submissionId) {
-        var uploadBase = CONFIG.apiUrl.replace(/\/submissions.*$/, '');
-        for (var i = 0; i < uploadedFiles.length; i++) {
-          try {
-            var uploadRes = await fetch(uploadBase + '/upload', {
-              method:  'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body:    JSON.stringify({
-                submissionId: submissionId,
-                imageData:    uploadedFiles[i].data,
-                imageName:    uploadedFiles[i].name,
-                imageType:    uploadedFiles[i].type,
-              }),
-            });
-            if (!uploadRes.ok) {
-              var uploadErrData = await uploadRes.json().catch(function () { return {}; });
-              console.warn('[EinfachAnfrage] Bild-Upload fehlgeschlagen (' + uploadRes.status + '):', uploadErrData.error || '');
-            }
-          } catch (imgErr) {
-            console.warn('[EinfachAnfrage] Bild-Upload Netzwerkfehler:', imgErr.message);
-          }
-        }
-      }
 
       if (CONFIG.webhookUrl) {
         fetch(CONFIG.webhookUrl, {

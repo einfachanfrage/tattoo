@@ -59,14 +59,20 @@ Dieses Dokument beschreibt die vollständige Architektur, alle relevanten Dateie
 ├── .env                     ← Lokale Env-Variablen (nicht im Repo)
 ├── .env.example             ← Vorlage für benötigte Env-Variablen
 │
+├── manifest.json            ← PWA-Manifest (Dashboard als Homescreen-App)
+├── icons/
+│   └── icon.svg             ← App-Icon (SVG, für PWA + Apple Touch Icon)
+│
 ├── landing/
 │   ├── index.html           ← Landingpage (Marketing + Widget-Mockup)
 │   ├── demo.html            ← Demo-Seite (Widget live ausprobieren)
-│   ├── impressum.html       ← Impressum
-│   └── datenschutz.html     ← Datenschutzerklärung
+│   ├── impressum.html       ← Impressum (§ 5 DDG)
+│   ├── datenschutz.html     ← Datenschutzerklärung (DSGVO)
+│   ├── agb.html             ← Allgemeine Geschäftsbedingungen (B2B)
+│   └── avv.html             ← Auftragsverarbeitungsvertrag-Muster (Art. 28 DSGVO)
 │
 ├── dashboard/
-│   └── index.html           ← Dashboard-SPA (Anfragen verwalten)
+│   └── index.html           ← Dashboard-SPA (Anfragen verwalten, PWA-fähig)
 │
 ├── widget/
 │   └── widget.js            ← Das Widget (Shadow DOM, alle Themes)
@@ -106,9 +112,16 @@ Rewrites:
   /widget.js      → /widget/widget.js
   /demo           → /landing/demo.html
   /dashboard      → /dashboard/index.html
+  /admin          → /landing/admin.html
+  /agb            → /landing/agb.html
+  /avv            → /landing/avv.html
   /impressum      → /landing/impressum.html
   /datenschutz    → /landing/datenschutz.html
   /               → /landing/index.html
+
+Redirects:
+  /impressum.html → /impressum (permanent)
+  /datenschutz.html → /datenschutz (permanent)
 
 ⚠️ WICHTIG: Niemals eine index.html ins Root-Verzeichnis legen (weder per Git noch per GitHub-Upload).
    Vercel serviert Root-Dateien DIREKT und umgeht dadurch den "/" → "/landing/index.html" Rewrite.

@@ -70,7 +70,7 @@ export default function handler() {
         fontFamily: 'Arial, sans-serif',
         fontWeight: '300',
       }}>
-        Das smarte Anfrage-Widget für Hochzeitsfotografen
+        Das smarte Anfrage-Widget für Tätowierer
       </div>
     </div>,
     {
