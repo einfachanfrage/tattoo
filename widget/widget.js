@@ -97,7 +97,7 @@
       's6.email.lbl': 'E-Mail-Adresse', 's6.email.ph': 'deine@email.de',
       's6.email.err': 'Bitte eine gültige E-Mail-Adresse eingeben.',
       's6.phone.lbl': 'Telefon', 's6.phone.opt': '(optional)', 's6.phone.ph': '+49 176 …',
-      's6.ig.lbl': 'Instagram-Handle', 's6.ig.opt': '(optional)', 's6.ig.ph': '@deinname',
+      's6.ig.lbl': 'Instagram-Handle', 's6.ig.opt': '(optional)', 's6.ig.ph': 'deinname',
       's6.found.lbl': 'Wie hast du uns gefunden?',
       's6.privacy': 'Ich habe die {link} gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage durch {name} zu.',
       's6.privacy.link': 'Datenschutzerklärung',
@@ -169,7 +169,7 @@
       's6.email.lbl': 'E-mail address', 's6.email.ph': 'your@email.com',
       's6.email.err': 'Please enter a valid e-mail address.',
       's6.phone.lbl': 'Phone', 's6.phone.opt': '(optional)', 's6.phone.ph': '+1 555 …',
-      's6.ig.lbl': 'Instagram handle', 's6.ig.opt': '(optional)', 's6.ig.ph': '@yourname',
+      's6.ig.lbl': 'Instagram handle', 's6.ig.opt': '(optional)', 's6.ig.ph': 'yourname',
       's6.found.lbl': 'How did you find us?',
       's6.privacy': 'I have read the {link} and consent to the processing of my data for handling my request by {name}.',
       's6.privacy.link': 'Privacy Policy',
@@ -319,6 +319,13 @@
     }
     .field-label .req { color: #BF7A60; margin-left: 2px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field-pfx-wrap { position: relative; }
+    .field-pfx {
+      position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+      font-size: 14px; color: #C8C4BF; pointer-events: none; user-select: none;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    }
+    .field-pfx-wrap input { padding-left: 30px !important; }
 
     input[type="text"],
     input[type="email"],
@@ -1194,7 +1201,10 @@
 
         <div class="field">
           <label class="field-label" for="ea-instagram"><span data-i18n="s6.ig.lbl">Instagram-Handle</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.ig.opt">(optional)</span></label>
-          <input type="text" id="ea-instagram" name="instagram" data-i18n-ph="s6.ig.ph" placeholder="@deinname">
+          <div class="field-pfx-wrap">
+            <span class="field-pfx">@</span>
+            <input type="text" id="ea-instagram" name="instagram" data-i18n-ph="s6.ig.ph" placeholder="deinname" autocomplete="off">
+          </div>
         </div>
 
         <div class="field">
