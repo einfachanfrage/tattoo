@@ -3,7 +3,8 @@
 const supabase = require('../_supabase');
 
 function standalonePage(photographer) {
-  const { name, slug, theme = 'champagne', email, delivery, language = 'de' } = photographer;
+  const { name, slug, theme = 'champagne', email, delivery, language = 'de', required_contact } = photographer;
+  const reqContact = (required_contact && required_contact.length) ? required_contact.join(',') : 'email';
   const apiBase = '';
 
   return `<!DOCTYPE html>
@@ -97,6 +98,7 @@ function standalonePage(photographer) {
     data-theme="${theme}"
     data-delivery="${delivery || 'both'}"
     data-language="${language}"
+    data-required-contact="${reqContact}"
     data-api="${apiBase}">
   </script>
   <script>

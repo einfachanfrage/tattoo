@@ -35,6 +35,11 @@
     delivery: currentScript.getAttribute('data-delivery') || 'both',
     // 'de' = fest Deutsch | 'en' = fest Englisch | 'auto' = Nutzer wählt selbst
     language: currentScript.getAttribute('data-language') || 'de',
+    // Pflichtfelder im Kontaktschritt, kommasepariert z. B. 'email,phone'
+    requiredContact: (function () {
+      var raw = currentScript.getAttribute('data-required-contact') || 'email';
+      return raw.split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+    })(),
   };
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -94,7 +99,9 @@
       's6.title': 'Wie können wir<br>dich erreichen?',
       's6.sub': 'Nur die E-Mail ist Pflicht – alles andere ist freiwillig.',
       's6.name.lbl': 'Dein Name', 's6.name.ph': 'z. B. Mia Müller',
-      's6.email.lbl': 'E-Mail-Adresse', 's6.email.ph': 'deine@email.de',
+      's6.email.lbl': 'E-Mail-Adresse', 's6.email.ph': 'deine@email.de', 's6.email.opt': '(optional)', 's6.email.err2': 'Bitte eine gültige E-Mail eingeben oder das Pflichtfeld leer lassen.',
+      's6.phone.err': 'Bitte eine Telefonnummer eingeben.',
+      's6.ig.err': 'Bitte deinen Instagram-Handle eingeben.',
       's6.email.err': 'Bitte eine gültige E-Mail-Adresse eingeben.',
       's6.phone.lbl': 'Telefon', 's6.phone.opt': '(optional)', 's6.phone.ph': '+49 176 …',
       's6.ig.lbl': 'Instagram-Handle', 's6.ig.opt': '(optional)', 's6.ig.ph': 'deinname',
@@ -166,7 +173,9 @@
       's6.title': 'How can we<br>reach you?',
       's6.sub': 'Only your e-mail is required – everything else is optional.',
       's6.name.lbl': 'Your name', 's6.name.ph': 'e.g. Jane Smith',
-      's6.email.lbl': 'E-mail address', 's6.email.ph': 'your@email.com',
+      's6.email.lbl': 'E-mail address', 's6.email.ph': 'your@email.com', 's6.email.opt': '(optional)',
+      's6.phone.err': 'Please enter a phone number.',
+      's6.ig.err': 'Please enter your Instagram handle.',
       's6.email.err': 'Please enter a valid e-mail address.',
       's6.phone.lbl': 'Phone', 's6.phone.opt': '(optional)', 's6.phone.ph': '+1 555 …',
       's6.ig.lbl': 'Instagram handle', 's6.ig.opt': '(optional)', 's6.ig.ph': 'yourname',
@@ -1189,22 +1198,36 @@
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-email"><span data-i18n="s6.email.lbl">E-Mail-Adresse</span> <span class="req">*</span></label>
+          <label class="field-label" for="ea-email">
+            <span data-i18n="s6.email.lbl">E-Mail-Adresse</span>
+            <span class="rc-req" data-rc="email"><span class="req">*</span></span>
+            <span class="rc-opt" data-rc="email" style="display:none;font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.email.opt">(optional)</span>
+          </label>
           <input type="email" id="ea-email" name="email" data-i18n-ph="s6.email.ph" placeholder="deine@email.de">
           <div class="err-msg" id="ea-email-err" data-i18n="s6.email.err">Bitte eine gültige E-Mail-Adresse eingeben.</div>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-phone"><span data-i18n="s6.phone.lbl">Telefon</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.phone.opt">(optional)</span></label>
+          <label class="field-label" for="ea-phone">
+            <span data-i18n="s6.phone.lbl">Telefon</span>
+            <span class="rc-req" data-rc="phone" style="display:none;"><span class="req">*</span></span>
+            <span class="rc-opt" data-rc="phone" style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.phone.opt">(optional)</span>
+          </label>
           <input type="tel" id="ea-phone" name="phone" data-i18n-ph="s6.phone.ph" placeholder="+49 176 …">
+          <div class="err-msg" id="ea-phone-err" data-i18n="s6.phone.err">Bitte eine Telefonnummer eingeben.</div>
         </div>
 
         <div class="field">
-          <label class="field-label" for="ea-instagram"><span data-i18n="s6.ig.lbl">Instagram-Handle</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.ig.opt">(optional)</span></label>
+          <label class="field-label" for="ea-instagram">
+            <span data-i18n="s6.ig.lbl">Instagram-Handle</span>
+            <span class="rc-req" data-rc="instagram" style="display:none;"><span class="req">*</span></span>
+            <span class="rc-opt" data-rc="instagram" style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s6.ig.opt">(optional)</span>
+          </label>
           <div class="field-pfx-wrap">
             <span class="field-pfx">@</span>
             <input type="text" id="ea-instagram" name="instagram" data-i18n-ph="s6.ig.ph" placeholder="deinname" autocomplete="off">
           </div>
+          <div class="err-msg" id="ea-ig-err" data-i18n="s6.ig.err">Bitte deinen Instagram-Handle eingeben.</div>
         </div>
 
         <div class="field">
@@ -1391,9 +1414,13 @@
             b.classList.toggle('active', b.dataset.lang === currentLang);
           });
           applyTranslations(currentLang);
+          applyRequiredContactUI();
         });
       });
     }
+
+    // Pflichtfeld-UI auf Kontakt-Schritt anwenden
+    applyRequiredContactUI();
 
     // Escape to close
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
@@ -1565,12 +1592,36 @@
     }
 
     if (step === 6) {
+      var req = CONFIG.requiredContact || ['email'];
+
+      // E-Mail: Pflicht-Validierung oder Format-Validierung wenn ausgefüllt
       var emailInput = shadowRoot.getElementById('ea-email');
-      var emailVal   = emailInput.value.trim();
-      if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-        showError('ea-email-err', 'ea-email');
-        return false;
+      var emailVal   = emailInput ? emailInput.value.trim() : '';
+      if (req.indexOf('email') !== -1) {
+        if (!emailVal || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+          showError('ea-email-err', 'ea-email'); return false;
+        }
+      } else if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+        // Optional aber falsch formatiert
+        showError('ea-email-err', 'ea-email'); return false;
       }
+
+      // Telefon
+      if (req.indexOf('phone') !== -1) {
+        var phoneInput = shadowRoot.getElementById('ea-phone');
+        if (!phoneInput || !phoneInput.value.trim()) {
+          showError('ea-phone-err', 'ea-phone'); return false;
+        }
+      }
+
+      // Instagram
+      if (req.indexOf('instagram') !== -1) {
+        var igInput = shadowRoot.getElementById('ea-instagram');
+        if (!igInput || !igInput.value.trim()) {
+          showError('ea-ig-err', 'ea-instagram'); return false;
+        }
+      }
+
       var privacyCb = shadowRoot.getElementById('ea-privacy-consent');
       if (!privacyCb || !privacyCb.checked) {
         showError('ea-privacy-err', null);
@@ -1601,6 +1652,47 @@
   function clearErrors() {
     shadowRoot.querySelectorAll('.err-msg').forEach(function (e) { e.classList.remove('show'); });
     shadowRoot.querySelectorAll('.err').forEach(function (e) { e.classList.remove('err'); });
+  }
+
+  // Setzt * / (optional) auf den Kontaktfeldern basierend auf CONFIG.requiredContact
+  function applyRequiredContactUI() {
+    var req = CONFIG.requiredContact || ['email'];
+    ['email', 'phone', 'instagram'].forEach(function (field) {
+      var isReq = req.indexOf(field) !== -1;
+      shadowRoot.querySelectorAll('.rc-req[data-rc="' + field + '"]').forEach(function (el) {
+        el.style.display = isReq ? '' : 'none';
+      });
+      shadowRoot.querySelectorAll('.rc-opt[data-rc="' + field + '"]').forEach(function (el) {
+        el.style.display = isReq ? 'none' : '';
+      });
+    });
+    // Dynamischer Untertitel im Kontakt-Schritt
+    var subtitle = shadowRoot.querySelector('[data-step="6"] .step-subtitle');
+    if (subtitle) subtitle.textContent = buildContactSubtitle(req);
+  }
+
+  function buildContactSubtitle(req) {
+    var isDE = currentLang !== 'en';
+    var names = {
+      email: isDE ? 'E-Mail' : 'email',
+      phone: isDE ? 'Telefonnummer' : 'phone number',
+      instagram: 'Instagram',
+    };
+    if (!req || req.length === 0) {
+      return isDE ? 'Alle Felder sind freiwillig.' : 'All fields are optional.';
+    }
+    var reqNames = req.map(function (f) { return names[f] || f; });
+    if (reqNames.length === 1) {
+      return isDE
+        ? 'Nur ' + reqNames[0] + ' ist Pflicht – alles andere ist freiwillig.'
+        : 'Only ' + reqNames[0] + ' is required – everything else is optional.';
+    }
+    var copy = reqNames.slice();
+    var last = copy.pop();
+    var joined = copy.join(', ') + (isDE ? ' und ' : ' and ') + last;
+    return isDE
+      ? joined + ' sind Pflichtfelder – alles andere ist freiwillig.'
+      : joined + ' are required – everything else is optional.';
   }
 
   // ──────────────────────────────────────────────────────────────────────────

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   if (req.method === 'GET') {
     const { data, error } = await supabase
       .from('photographers')
-      .select('slug, name, theme, delivery, language')
+      .select('slug, name, theme, delivery, language, required_contact')
       .eq('slug', key)
       .single();
 
@@ -29,16 +29,29 @@ module.exports = async (req, res) => {
       return res.status(403).json({ error: 'Kein Zugriff auf dieses Profil.' });
     }
 
-    const { theme, delivery, language, newPassword, currentPassword } = req.body || {};
+    const { theme, delivery, language, newPassword, currentPassword, required_contact } = req.body || {};
     const updates = {};
 
     // Theme / delivery / language
-    const VALID_THEMES    = ['champagne', 'nacht', 'sage', 'clean', 'modern'];
-    const VALID_DELIVERIES = ['both', 'email', 'dashboard'];
-    const VALID_LANGUAGES  = ['de', 'en', 'auto'];
+    const VALID_THEMES         = ['champagne', 'nacht', 'sage', 'clean', 'modern'];
+    const VALID_DELIVERIES     = ['both', 'email', 'dashboard'];
+    const VALID_LANGUAGES      = ['de', 'en', 'auto'];
+    const VALID_CONTACT_FIELDS = ['email', 'phone', 'instagram'];
     if (theme    && VALID_THEMES.includes(theme))        updates.theme    = theme;
     if (delivery && VALID_DELIVERIES.includes(delivery)) updates.delivery = delivery;
     if (language && VALID_LANGUAGES.includes(language))  updates.language = language;
+
+    // Pflichtfelder Kontakt
+    if (required_contact !== undefined) {
+      if (!Array.isArray(required_contact)) {
+        return res.status(400).json({ error: 'required_contact muss ein Array sein.' });
+      }
+      const invalid = required_contact.filter(f => !VALID_CONTACT_FIELDS.includes(f));
+      if (invalid.length) {
+        return res.status(400).json({ error: 'Ungültige Felder: ' + invalid.join(', ') });
+      }
+      updates.required_contact = required_contact;
+    }
 
     // Password change
     if (newPassword) {
@@ -73,7 +86,7 @@ module.exports = async (req, res) => {
       .from('photographers')
       .update(updates)
       .eq('slug', key)
-      .select('slug, name, theme, delivery, language')
+      .select('slug, name, theme, delivery, language, required_contact')
       .single();
 
     if (error) return res.status(500).json({ error: error.message });
