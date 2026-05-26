@@ -1795,7 +1795,7 @@
       // Build payload: replace raw base64 data with uploaded URLs
       var payloadForApi = JSON.parse(JSON.stringify(formData));
       payloadForApi.style.inspirationImages     = imageUrls;
-      payloadForApi.style.inspirationImageCount = uploadedFiles.length;
+      payloadForApi.style.inspirationImageCount = imageUrls.length; // nur erfolgreich hochgeladene
 
       var res = await fetch(CONFIG.apiUrl, {
         method:  'POST',

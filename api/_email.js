@@ -148,7 +148,16 @@ function buildArtistHtml(submission) {
       ${note('Stil in eigenen Worten',(style || {}).styleNotes)}
       ${note('Allergie-Details',      (health || {}).allergiesDetail)}
       ${note('Besondere Wünsche',     (budget || {}).notes)}
-      ${((style || {}).inspirationImageCount > 0) ? `<tr><td style="padding:0 0 8px;"><p style="margin:0;font-size:12px;color:rgba(247,246,243,0.4);">🖼 ${style.inspirationImageCount} Referenzbild${style.inspirationImageCount > 1 ? 'er' : ''} → im Dashboard</p></td></tr>` : ''}
+      ${((style || {}).inspirationImages && style.inspirationImages.length > 0) ? `
+      <tr><td style="padding:2px 0 12px;">
+        <p style="margin:0 0 7px;font-size:9px;font-weight:700;color:rgba(247,246,243,0.3);text-transform:uppercase;letter-spacing:0.12em;">Referenzbilder</p>
+        <table cellpadding="0" cellspacing="0"><tr>${style.inspirationImages.map(function(img){return `
+          <td style="padding:0 5px 0 0;vertical-align:top;">
+            <a href="${esc(img.url)}" target="_blank" style="display:block;border-radius:6px;overflow:hidden;border:1px solid rgba(247,246,243,0.1);text-decoration:none;line-height:0;">
+              <img src="${esc(img.url)}" width="72" height="72" alt="" style="display:block;width:72px;height:72px;object-fit:cover;border:0;outline:0;">
+            </a>
+          </td>`}).join('')}</tr></table>
+      </td></tr>` : ''}
     </table>
   </td></tr>` : ''}
 
