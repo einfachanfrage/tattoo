@@ -69,8 +69,6 @@ function buildArtistHtml(submission) {
       .outer{padding:0 !important;}
       .wrap{border-radius:0 !important;}
       .pad{padding-left:14px !important;padding-right:14px !important;}
-      .btn-cell{display:block !important;width:100% !important;padding:0 0 6px 0 !important;}
-      .btn-cell:last-child{padding-bottom:0 !important;}
     }
   </style>
 </head>
@@ -98,48 +96,8 @@ function buildArtistHtml(submission) {
       <a href="mailto:${esc(contact.email)}" style="color:rgba(247,246,243,0.45);text-decoration:none;">${esc(contact.email)}</a>${contact.phone ? `&nbsp;&nbsp;·&nbsp;&nbsp;<a href="tel:${esc(contact.phone)}" style="color:rgba(247,246,243,0.45);text-decoration:none;">${esc(contact.phone)}</a>` : ''}${contact.instagram ? `&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}" style="color:rgba(247,246,243,0.45);text-decoration:none;">@${esc((contact.instagram||'').replace(/^@/,''))}</a>` : ''}
     </p>
 
-    <!-- Buttons: 2-Spalten, mobile → 1-Spalte -->
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <!-- Primär: E-Mail antworten -->
-        <td class="btn-cell" width="50%" valign="top" style="padding-right:5px;">
-          <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
-             style="display:block;background:rgba(191,122,96,0.14);border:1px solid rgba(191,122,96,0.35);color:#F7F6F3;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:10px 10px;border-radius:6px;text-decoration:none;text-align:center;text-transform:uppercase;line-height:1.3;">
-            Antworten
-          </a>
-        </td>
-        <!-- WhatsApp (wenn Telefon vorhanden) -->
-        ${waNum
-          ? `<td class="btn-cell" width="50%" valign="top" style="padding-left:5px;">
-              <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}"
-                 style="display:block;background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.1);color:rgba(247,246,243,0.55);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:10px 10px;border-radius:6px;text-decoration:none;text-align:center;text-transform:uppercase;line-height:1.3;">
-                WhatsApp
-              </a>
-            </td>`
-          : '<td width="50%"></td>'}
-      </tr>
-      ${contact.phone || contact.instagram ? `
-      <tr>
-        <!-- Anrufen (wenn Telefon vorhanden) -->
-        ${contact.phone
-          ? `<td class="btn-cell" width="50%" valign="top" style="padding-right:5px;padding-top:6px;">
-              <a href="tel:${esc(contact.phone)}"
-                 style="display:block;background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.1);color:rgba(247,246,243,0.55);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:10px 10px;border-radius:6px;text-decoration:none;text-align:center;text-transform:uppercase;line-height:1.3;">
-                Anrufen
-              </a>
-            </td>`
-          : '<td width="50%"></td>'}
-        <!-- Instagram (wenn vorhanden) -->
-        ${contact.instagram
-          ? `<td class="btn-cell" width="50%" valign="top" style="padding-left:5px;padding-top:6px;">
-              <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
-                 style="display:block;background:rgba(247,246,243,0.05);border:1px solid rgba(247,246,243,0.1);color:rgba(247,246,243,0.55);font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:10px 10px;border-radius:6px;text-decoration:none;text-align:center;text-transform:uppercase;line-height:1.3;">
-                @${esc((contact.instagram||'').replace(/^@/,''))}
-              </a>
-            </td>`
-          : '<td width="50%"></td>'}
-      </tr>` : ''}
-    </table>
+    <!-- Schnell-Aktionen: kompakte Chips -->
+    <p style="margin:0;font-size:0;line-height:1;"><a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage" style="display:inline-block;margin:0 5px 5px 0;background:rgba(191,122,96,0.13);border:1px solid rgba(191,122,96,0.32);color:#C9A96E;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.01em;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x2709;&thinsp; Antworten</a>${waNum ? `<a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x2197;&thinsp; WhatsApp</a>` : ''}${contact.phone ? `<a href="tel:${esc(contact.phone)}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x260E;&thinsp; Anrufen</a>` : ''}${contact.instagram ? `<a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">@&thinsp;${esc((contact.instagram||'').replace(/^@/,''))}</a>` : ''}</p>
 
   </td></tr>
 
