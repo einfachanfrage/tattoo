@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="108" fill="#1B1B1B"/>
-  <text x="256" y="308" font-family="Arial,Helvetica,sans-serif" font-size="190" font-weight="800" fill="#BA897F" text-anchor="middle" dominant-baseline="auto">EA</text>
+  <rect width="512" height="512" rx="110" fill="#1B1B1B"/>
+  <!-- Needle diamond body -->
+  <path d="M256 72 L390 228 L256 448 L122 228 Z" fill="#C9A96E"/>
+  <!-- Needle eye (hole) -->
+  <ellipse cx="256" cy="222" rx="46" ry="40" fill="#1B1B1B"/>
 </svg>

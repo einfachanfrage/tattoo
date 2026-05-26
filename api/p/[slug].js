@@ -22,6 +22,7 @@ function standalonePage(photographer) {
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="https://einfachanfrage-tattoo.de/icons/icon.svg">
   <link rel="preconnect" href="https://fonts.bunny.net">
   <link href="https://fonts.bunny.net/css2?family=cormorant-garamond:ital,wght@0,400;0,500;1,400&family=inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
