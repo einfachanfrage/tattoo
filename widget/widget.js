@@ -76,10 +76,10 @@
       's3.style.lbl': 'Tattoo-Stil', 's3.style.unclear': 'Noch unklar',
       's3.color.lbl': 'Farbe oder Schwarz-Grau?',
       's3.notes.lbl': 'Stil-Notizen', 's3.notes.opt': '(optional)', 's3.notes.ph': 'z. B. „eher minimalistisch, keine dicken Linien, soll zeitlos wirken" …',
-      's3.upload.lbl': 'Referenzbilder', 's3.upload.opt': '(optional · max. 3 Fotos)',
+      's3.upload.lbl': 'Referenzbilder', 's3.upload.opt': '(optional · max. 5 Fotos)',
       's3.upload.cta': 'Klicken zum Hochladen', 's3.upload.drag': 'oder Bilder hierher ziehen',
       's3.upload.sub': 'Screenshots, Pinterest-Pins, Fotos von Tattoos, die dir gefallen',
-      's3.upload.hint': 'JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder',
+      's3.upload.hint': 'JPG, PNG oder WEBP · max. 5 MB pro Bild · max. 5 Bilder',
       'col.bw': 'Schwarz-Grau', 'col.color': 'Farbe', 'col.both': 'Beides möglich', 'col.unclear': 'Noch unklar',
       's4.title': 'Termin & Budget', 's4.sub': 'Ungefähr reicht – kein verbindlicher Termin.',
       's4.time.lbl': 'Wunsch-Zeitraum', 's4.pref.lbl': 'Bevorzugte Tageszeit', 's4.budget.lbl': 'Dein Budgetrahmen',
@@ -116,9 +116,9 @@
       's7.summary': 'Deine Zusammenfassung',
       'sum.motif': 'Motiv', 'sum.place': 'Körperstelle', 'sum.style': 'Stil',
       'sum.appt': 'Termin', 'sum.budget': 'Budget', 'sum.email': 'E-Mail',
-      'upload.max3': 'Maximal 3 Bilder erlaubt.',
+      'upload.max3': 'Maximal 5 Bilder erlaubt.',
       'upload.imgonly': 'Nur Bildformate erlaubt (JPG, PNG, WEBP).',
-      'upload.toobig': ' ist zu groß (max. 2 MB).',
+      'upload.toobig': ' ist zu groß (max. 5 MB).',
     },
     en: {
       close: 'Close',
@@ -150,10 +150,10 @@
       's3.style.lbl': 'Tattoo style', 's3.style.unclear': 'Not sure yet',
       's3.color.lbl': 'Color or black & grey?',
       's3.notes.lbl': 'Style notes', 's3.notes.opt': '(optional)', 's3.notes.ph': 'e.g. "minimalist, no thick lines, should feel timeless" …',
-      's3.upload.lbl': 'Reference images', 's3.upload.opt': '(optional · max. 3 photos)',
+      's3.upload.lbl': 'Reference images', 's3.upload.opt': '(optional · max. 5 photos)',
       's3.upload.cta': 'Click to upload', 's3.upload.drag': 'or drag images here',
       's3.upload.sub': 'Screenshots, Pinterest pins, photos of tattoos you like',
-      's3.upload.hint': 'JPG, PNG or WEBP · max. 2 MB per image · max. 3 images',
+      's3.upload.hint': 'JPG, PNG or WEBP · max. 5 MB per image · max. 5 images',
       'col.bw': 'Black & grey', 'col.color': 'Color', 'col.both': 'Either works', 'col.unclear': 'Not sure yet',
       's4.title': 'Appointment & Budget', 's4.sub': 'Approximate is fine – no binding commitment.',
       's4.time.lbl': 'Preferred timeframe', 's4.pref.lbl': 'Preferred time of day', 's4.budget.lbl': 'Your budget range',
@@ -190,9 +190,9 @@
       's7.summary': 'Your summary',
       'sum.motif': 'Idea', 'sum.place': 'Body part', 'sum.style': 'Style',
       'sum.appt': 'Timeline', 'sum.budget': 'Budget', 'sum.email': 'E-mail',
-      'upload.max3': 'Maximum 3 images allowed.',
+      'upload.max3': 'Maximum 5 images allowed.',
       'upload.imgonly': 'Only image formats allowed (JPG, PNG, WEBP).',
-      'upload.toobig': ' is too large (max. 2 MB).',
+      'upload.toobig': ' is too large (max. 5 MB).',
     },
   };
 
@@ -1097,7 +1097,7 @@
         </div>
 
         <div class="field">
-          <label class="field-label"><span data-i18n="s3.upload.lbl">Referenzbilder</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s3.upload.opt">(optional · max. 3 Fotos)</span></label>
+          <label class="field-label"><span data-i18n="s3.upload.lbl">Referenzbilder</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;" data-i18n="s3.upload.opt">(optional · max. 5 Fotos)</span></label>
           <div class="upload-area" id="ea-upload-area">
             <input type="file" id="ea-file-input" accept="image/jpeg,image/png,image/webp" multiple>
             <div class="upload-label" id="ea-upload-label">
@@ -1106,7 +1106,7 @@
             </div>
             <div class="upload-previews" id="ea-upload-previews"></div>
           </div>
-          <div class="upload-hint" data-i18n="s3.upload.hint">JPG, PNG oder WEBP · max. 2 MB pro Bild · max. 3 Bilder</div>
+          <div class="upload-hint" data-i18n="s3.upload.hint">JPG, PNG oder WEBP · max. 5 MB pro Bild · max. 5 Bilder</div>
           <div class="upload-err" id="ea-upload-err"></div>
         </div>
       </div>
@@ -1477,7 +1477,7 @@
 
     area.addEventListener('click', function (e) {
       if (e.target.classList.contains('upload-thumb-del')) return;
-      if (uploadedFiles.length < 3) input.click();
+      if (uploadedFiles.length < 5) input.click();
     });
 
     input.addEventListener('change', function () {
@@ -1501,9 +1501,9 @@
   function handleUploadFiles(files, previews, label, errEl) {
     errEl.classList.remove('show');
     files.forEach(function (file) {
-      if (uploadedFiles.length >= 3) { showUploadErr(errEl, T('upload.max3')); return; }
+      if (uploadedFiles.length >= 5) { showUploadErr(errEl, T('upload.max3')); return; }
       if (!file.type.startsWith('image/')) { showUploadErr(errEl, T('upload.imgonly')); return; }
-      if (file.size > 2 * 1024 * 1024) { showUploadErr(errEl, file.name + T('upload.toobig')); return; }
+      if (file.size > 5 * 1024 * 1024) { showUploadErr(errEl, file.name + T('upload.toobig')); return; }
 
       var reader = new FileReader();
       reader.onload = function (e) {
@@ -1527,7 +1527,7 @@
         '</div>';
     }).join('');
 
-    if (label) label.style.display = uploadedFiles.length >= 3 ? 'none' : '';
+    if (label) label.style.display = uploadedFiles.length >= 5 ? 'none' : '';
 
     var area = shadowRoot.getElementById('ea-upload-area');
     if (area) area.classList.toggle('has-files', uploadedFiles.length > 0);
@@ -1955,4 +1955,8 @@
   }
 
 })(window, document);
+
+
+
+
 
