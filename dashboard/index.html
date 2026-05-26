@@ -67,21 +67,24 @@
     }
 
     .sidebar-logo {
-      padding: 24px 20px 18px;
+      padding: 22px 20px 16px;
       border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .logo-text {
       font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-      font-size: 15px;
+      font-size: 13.5px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: var(--ivory);
       text-decoration: none;
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    .logo-mark { flex-shrink: 0; }
     .logo-text span { color: var(--accent); }
-    .logo-sub { font-size: 11px; color: rgba(247,246,243,0.35); margin-top: 2px; }
+    .logo-sub { font-size: 11px; color: rgba(247,246,243,0.35); margin-top: 5px; padding-left: 26px; }
 
     .sidebar-nav {
       flex: 1;
@@ -805,7 +808,13 @@
   <!-- ── Sidebar ── -->
   <aside class="sidebar">
     <div class="sidebar-logo">
-      <a href="/" class="logo-text">einfach <span>anfrage</span></a>
+      <a href="/" class="logo-text">
+        <svg class="logo-mark" width="12" height="22" viewBox="0 0 12 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 0 L12 7.5 L6 22 L0 7.5 Z" fill="#C9A96E"/>
+          <ellipse cx="6" cy="7" rx="2.2" ry="2" fill="#1B1B1B"/>
+        </svg>
+        einfach<span>&nbsp;anfrage</span>
+      </a>
       <div class="logo-sub" id="sidebar-name">Tätowierer-Dashboard</div>
     </div>
 
