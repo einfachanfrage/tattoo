@@ -705,78 +705,80 @@
     .summary-value { color: #1C1810; font-weight: 500; }
   `;
 
-  // ── EMBER: Warmes Amber � Linen � Golden & Warm ──
+    // ── NOIR: Dunkelgrau · Kühl · Rough · Space Grotesk ──
   const THEME_CSS_SAGE = `
-    .overlay { background: rgba(45,30,14,0.50); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-    .modal { background: #F3EDE0; border-radius: 20px; box-shadow: 0 32px 80px rgba(45,30,14,0.22), 0 4px 16px rgba(45,30,14,0.08); }
+    @import url('https://fonts.bunny.net/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
+
+    .overlay { background: rgba(0,0,0,0.75); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+    .modal { background: #1D1D22; border-radius: 16px; box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06); }
     .overlay.visible .modal { transform: translateY(0) scale(1); }
 
-    .progress-bar { background: #E8DCC8; height: 1px; }
-    .progress-fill { background: linear-gradient(90deg, #C8965A, #D4A870); border-radius: 1px; }
+    .progress-bar { background: rgba(255,255,255,0.09); height: 1px; }
+    .progress-fill { background: #EDEDEB; border-radius: 1px; }
 
-    .logo { font-size: 12px; font-weight: 700; color: #7A6248; letter-spacing: 0.12em; text-transform: uppercase; }
-    .close-btn { color: #C4A870; border-radius: 8px; }
-    .close-btn:hover { background: #EBE0CC; color: #221C10; border-radius: 8px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 700; color: rgba(237,237,235,0.3); letter-spacing: 0.2em; text-transform: uppercase; }
+    .close-btn { color: rgba(237,237,235,0.28); border-radius: 6px; }
+    .close-btn:hover { background: rgba(255,255,255,0.07); color: #EDEDEB; border-radius: 6px; }
 
-    .modal-content { scrollbar-color: #D8C8A8 transparent; }
-    .modal-content::-webkit-scrollbar-thumb { background: #D8C8A8; border-radius: 2px; }
+    .modal-content { scrollbar-color: rgba(255,255,255,0.1) transparent; }
+    .modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 
-    .step-title { color: #221C10; font-size: 26px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
-    .step-subtitle { color: #8A7258; font-size: 14px; line-height: 1.7; }
-    .field-label { font-size: 10px; font-weight: 700; color: #9A8060; text-transform: uppercase; letter-spacing: 0.12em; }
-    .field-label .req { color: #C8965A; }
+    .step-title { font-family: 'Space Grotesk', sans-serif; font-size: 27px; font-weight: 700; color: #EDEDEB; line-height: 1.15; letter-spacing: -0.02em; }
+    .step-subtitle { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.42); font-size: 13px; line-height: 1.65; }
+    .field-label { font-family: 'Space Grotesk', sans-serif; font-size: 9px; font-weight: 700; color: rgba(237,237,235,0.32); text-transform: uppercase; letter-spacing: 0.18em; }
+    .field-label .req { color: rgba(237,237,235,0.48); }
 
     input[type="text"], input[type="email"], input[type="tel"], input[type="date"], textarea {
-      background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #221C10;
-      padding: 14px 18px; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s;
+      background: #26262C; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #EDEDEB;
+      padding: 14px 18px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input::placeholder, textarea::placeholder { color: #CEC0A0; }
-    input:focus, textarea:focus { border-color: #C8965A; box-shadow: 0 0 0 3px rgba(200,150,90,0.1); outline: none; }
-    input.err { border-color: #C8965A; }
+    input::placeholder, textarea::placeholder { color: rgba(237,237,235,0.18); }
+    input:focus, textarea:focus { border-color: rgba(237,237,235,0.28); box-shadow: 0 0 0 3px rgba(237,237,235,0.05); outline: none; }
+    input.err { border-color: rgba(220,80,80,0.5); }
     select {
-      background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #221C10;
-      padding: 14px 40px 14px 18px; font-size: 14px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239A8060' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background: #26262C; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: #EDEDEB;
+      padding: 14px 40px 14px 18px; font-family: 'Space Grotesk', sans-serif; font-size: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='rgba(237,237,235,0.32)' stroke-width='1.5'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
       background-repeat: no-repeat; background-position: right 14px center;
     }
-    select:focus { border-color: #C8965A; outline: none; }
-    select.err { border-color: #C8965A; }
+    select:focus { border-color: rgba(237,237,235,0.28); outline: none; }
+    select.err { border-color: rgba(220,80,80,0.5); }
 
-    .check-item { background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 10px; color: #8A7258; transition: all 0.18s; }
-    .check-item:hover { border-color: #C8965A; background: #F8F0E0; color: #221C10; }
-    .check-item.checked { border-color: #C8965A; background: rgba(200,150,90,0.1); color: #221C10; }
-    .check-item input[type="checkbox"] { accent-color: #C8965A; }
+    .check-item { background: #26262C; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; color: rgba(237,237,235,0.42); transition: all 0.15s; }
+    .check-item:hover { border-color: rgba(255,255,255,0.18); background: #2C2C33; color: #EDEDEB; }
+    .check-item.checked { border-color: rgba(237,237,235,0.5); background: #EFEEEC; color: #18181F; }
+    .check-item input[type="checkbox"] { accent-color: #EDEDEB; }
 
-    .radio-item { background: #FDF8EF; border: 1px solid #E2D4B8; border-radius: 100px; color: #8A7258; }
-    .radio-item:hover { border-color: #C8965A; background: #F8F0E0; color: #221C10; }
-    .radio-item.checked { background: #221C10; border-color: #221C10; color: #F3EDE0; font-weight: 600; }
+    .radio-item { background: #26262C; border: 1px solid rgba(255,255,255,0.08); border-radius: 100px; color: rgba(237,237,235,0.42); }
+    .radio-item:hover { border-color: rgba(255,255,255,0.18); background: #2C2C33; color: #EDEDEB; }
+    .radio-item.checked { background: #EFEEEC; border-color: #EFEEEC; color: #18181F; font-weight: 700; }
 
-    .upload-area { border-color: #E2D4B8; border-radius: 12px; background: #FDF8EF; }
-    .upload-area:hover { border-color: #C8965A; background: #F8F0E0; }
-    .upload-area.has-files { border-color: #C8965A; background: rgba(200,150,90,0.07); }
-    .upload-label { color: #9A8060; }
-    .upload-label strong { color: #221C10; }
+    .upload-area { border-color: rgba(255,255,255,0.09); border-radius: 10px; background: #26262C; }
+    .upload-area:hover { border-color: rgba(255,255,255,0.2); background: #2C2C33; }
+    .upload-area.has-files { border-color: rgba(237,237,235,0.22); background: #26262C; }
+    .upload-label { color: rgba(237,237,235,0.32); font-family: 'Space Grotesk', sans-serif; }
+    .upload-label strong { color: rgba(237,237,235,0.75); }
 
-    .divider { background: #E8DCC8; }
-    .welcome-icon { background: rgba(200,150,90,0.1); border-radius: 50%; }
-    .feature-list li { color: #8A7258; }
-    .feature-list li::before { content: '\u2736'; color: #C8965A; font-size: 10px; margin-top: 3px; }
+    .divider { background: rgba(255,255,255,0.07); }
+    .welcome-icon { background: rgba(255,255,255,0.06); border-radius: 50%; }
+    .feature-list li { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.48); }
+    .feature-list li::before { content: '+'; color: rgba(237,237,235,0.28); font-size: 13px; font-weight: 700; margin-top: 1px; }
 
-    .modal-nav { background: #F3EDE0; border-top: 1px solid #E8DCC8; }
-    .btn-primary { background: #221C10; color: #F3EDE0; border-radius: 100px; transition: all 0.2s; }
-    .btn-primary:hover { background: #342E20; }
-    .btn-primary:disabled { opacity: 0.35; }
-    .btn-primary:disabled:hover { background: #221C10; }
-    .btn-ghost { color: #C4A870; border: none; background: transparent; }
-    .btn-ghost:hover { color: #221C10; background: rgba(34,28,16,0.06); }
-    .step-counter { color: #C4A870; }
+    .modal-nav { background: #1D1D22; border-top: 1px solid rgba(255,255,255,0.07); }
+    .btn-primary { background: #EDEDEB; color: #18181F; border-radius: 100px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; transition: all 0.18s; }
+    .btn-primary:hover { background: #FFFFFF; }
+    .btn-primary:disabled { opacity: 0.22; }
+    .btn-primary:disabled:hover { background: #EDEDEB; }
+    .btn-ghost { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.38); border: none; background: transparent; }
+    .btn-ghost:hover { color: #EDEDEB; background: rgba(255,255,255,0.06); }
+    .step-counter { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.28); letter-spacing: 0.06em; }
 
-    .thankyou-icon { background: rgba(200,150,90,0.1); border-radius: 50%; }
-    .summary-card { background: #FDF8EF; border-color: #E2D4B8; border-radius: 12px; }
-    .summary-card-title { color: #9A8060; letter-spacing: 0.12em; text-transform: uppercase; font-size: 9px; }
-    .summary-row { border-bottom-color: #EDE4CC; }
-    .summary-label { color: #9A8060; }
-    .summary-value { color: #221C10; font-weight: 500; }
+    .thankyou-icon { background: rgba(255,255,255,0.06); border-radius: 50%; }
+    .summary-card { background: #26262C; border-color: rgba(255,255,255,0.08); border-radius: 10px; }
+    .summary-card-title { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.28); letter-spacing: 0.16em; text-transform: uppercase; font-size: 9px; }
+    .summary-row { border-bottom-color: rgba(255,255,255,0.06); }
+    .summary-label { font-family: 'Space Grotesk', sans-serif; color: rgba(237,237,235,0.38); }
+    .summary-value { font-family: 'Space Grotesk', sans-serif; color: #EDEDEB; font-weight: 500; }
   `;
 
   // ── ATELIER: Editorial · Warm Ivory · Bodoni · Hochwertig wie ein Tattoo-Studio ──

@@ -85,20 +85,63 @@ function buildArtistHtml(submission) {
     </tr></table>
   </td></tr>
 
-  <!-- Name + Kontakt + Aktions-Buttons -->
-  <tr><td class="pad" style="padding:16px 18px 16px;border-bottom:1px solid ${B};">
+  <!-- Name + Aktions-Buttons -->
+  <tr><td style="padding:16px 18px 0;border-bottom:1px solid ${B};">
 
     <!-- Name -->
-    <p style="margin:0 0 4px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
+    <p style="margin:0 0 14px;font-size:22px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
 
-    <!-- Kontakt-Zeile: klickbar -->
-    <p style="margin:0 0 14px;font-size:11px;color:rgba(247,246,243,0.32);line-height:1.9;">
-      <a href="mailto:${esc(contact.email)}" style="color:rgba(247,246,243,0.45);text-decoration:none;">${esc(contact.email)}</a>${contact.phone ? `&nbsp;&nbsp;·&nbsp;&nbsp;<a href="tel:${esc(contact.phone)}" style="color:rgba(247,246,243,0.45);text-decoration:none;">${esc(contact.phone)}</a>` : ''}${contact.instagram ? `&nbsp;&nbsp;·&nbsp;&nbsp;<a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}" style="color:rgba(247,246,243,0.45);text-decoration:none;">@${esc((contact.instagram||'').replace(/^@/,''))}</a>` : ''}
-    </p>
+    <!-- Gestapelte Aktions-Rows -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,0.09);margin-bottom:18px;">
 
-    <!-- Schnell-Aktionen: kompakte Chips -->
-    <p style="margin:0;font-size:0;line-height:1;"><a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage" style="display:inline-block;margin:0 5px 5px 0;background:rgba(191,122,96,0.13);border:1px solid rgba(191,122,96,0.32);color:#C9A96E;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:600;letter-spacing:0.01em;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x2709;&thinsp; Antworten</a>${waNum ? `<a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x2197;&thinsp; WhatsApp</a>` : ''}${contact.phone ? `<a href="tel:${esc(contact.phone)}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">&#x260E;&thinsp; Anrufen</a>` : ''}${contact.instagram ? `<a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}" style="display:inline-block;margin:0 5px 5px 0;background:transparent;border:1px solid rgba(247,246,243,0.12);color:rgba(247,246,243,0.4);font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:500;padding:5px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;">@&thinsp;${esc((contact.instagram||'').replace(/^@/,''))}</a>` : ''}</p>
+      <!-- E-Mail antworten – primäre Aktion -->
+      <tr><td>
+        <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
+           style="display:block;padding:14px 16px;background:#C9A96E;text-decoration:none;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;color:#1B1B1B;letter-spacing:-0.01em;">E-Mail antworten</td>
+            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(27,27,27,0.48);white-space:nowrap;padding-left:8px;">${esc(contact.email)}</td>
+          </tr></table>
+        </a>
+      </td></tr>
 
+      ${waNum ? `
+      <!-- WhatsApp -->
+      <tr><td style="border-top:1px solid rgba(255,255,255,0.07);">
+        <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}"
+           style="display:block;padding:13px 16px;background:rgba(255,255,255,0.04);text-decoration:none;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">WhatsApp senden</td>
+            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(247,246,243,0.32);white-space:nowrap;padding-left:8px;">${esc(contact.phone)}</td>
+          </tr></table>
+        </a>
+      </td></tr>` : ''}
+
+      ${contact.phone ? `
+      <!-- Anrufen -->
+      <tr><td style="border-top:1px solid rgba(255,255,255,0.07);">
+        <a href="tel:${esc(contact.phone)}"
+           style="display:block;padding:13px 16px;background:rgba(255,255,255,0.04);text-decoration:none;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">Anrufen</td>
+            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(247,246,243,0.32);white-space:nowrap;padding-left:8px;">${esc(contact.phone)}</td>
+          </tr></table>
+        </a>
+      </td></tr>` : ''}
+
+      ${contact.instagram ? `
+      <!-- Instagram -->
+      <tr><td style="border-top:1px solid rgba(255,255,255,0.07);">
+        <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
+           style="display:block;padding:13px 16px;background:rgba(255,255,255,0.04);text-decoration:none;">
+          <table width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">Instagram</td>
+            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(247,246,243,0.32);white-space:nowrap;padding-left:8px;">@${esc((contact.instagram||'').replace(/^@/,''))}</td>
+          </tr></table>
+        </a>
+      </td></tr>` : ''}
+
+    </table>
   </td></tr>
 
   <!-- Key facts: 2 × 2 kompaktes Grid -->
