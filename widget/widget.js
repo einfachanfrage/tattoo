@@ -1059,7 +1059,7 @@
           <li data-i18n="w.li1">Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
           <li data-i18n="w.li2">Kein Account, keine Werbung</li>
           ${isDemo
-            ? `<li>Deine Daten gehen nur an <span style="display:inline-flex;align-items:center;background:rgba(191,122,96,0.1);border:1px dashed rgba(191,122,96,0.38);color:#BF7A60;font-size:11px;font-weight:700;padding:2px 9px;border-radius:100px;white-space:nowrap;">Deinen Künstlernamen</span></li>`
+            ? `<li>Deine Daten gehen nur an <span style="display:inline-flex;align-items:center;background:rgba(191,122,96,0.1);border:1px dashed rgba(191,122,96,0.38);color:#BF7A60;font-size:11px;font-weight:700;padding:2px 9px;border-radius:100px;white-space:nowrap;">Dein Künstlername</span></li>`
             : `<li data-i18n-html="w.li3">Deine Daten gehen nur an ${CONFIG.photographerName}</li>`
           }
         </ul>
