@@ -42,6 +42,8 @@
     })(),
   };
 
+  const isDemo = CONFIG.photographerSlug === 'demo';
+
   // ──────────────────────────────────────────────────────────────────────────
   // TRANSLATIONS  (DE / EN)
   // ──────────────────────────────────────────────────────────────────────────
@@ -611,19 +613,70 @@
     .summary-label { color: #9A9590; width: 130px; flex-shrink: 0; }
     .summary-value { color: #1B1B1B; font-weight: 500; }
 
-    /* Responsive */
+    /* Responsive – Bottom Sheet auf Mobile */
     @media (max-width: 520px) {
       .upload-drag-hint { display: none; }
-      .modal { border-radius: 20px; max-height: 96vh; }
-      .modal-header { padding: 18px 20px 12px; }
-      .modal-content { padding: 4px 20px 28px; }
-      .modal-nav { padding: 16px 20px; }
-      .step-title { font-size: 22px; }
-      .field-row { grid-template-columns: 1fr; }
-      .check-grid { grid-template-columns: 1fr 1fr; }
-      .check-item { font-size: 12px; padding: 11px 12px; }
-      .radio-group { flex-direction: column; }
-      .media-group { grid-template-columns: 1fr; }
+      /* Overlay: Inhalt kommt von unten */
+      .overlay { padding: 0; align-items: flex-end; }
+      .overlay.visible .modal { transform: translateY(0) scale(1); }
+      /* Modal als Bottom Sheet */
+      .modal {
+        border-radius: 22px 22px 0 0;
+        max-height: 93dvh; max-height: 93vh;
+        transform: translateY(100%);
+        transition: transform 0.38s cubic-bezier(0.32,0.72,0,1);
+      }
+      /* Handle-Bar oben */
+      .modal::before {
+        content: '';
+        display: block;
+        width: 36px; height: 4px;
+        background: rgba(0,0,0,0.12);
+        border-radius: 2px;
+        margin: 10px auto 0;
+        flex-shrink: 0;
+      }
+      /* Kompaktere Abstände */
+      .modal-header { padding: 10px 18px 10px; }
+      .modal-content { padding: 4px 18px 20px; }
+      .modal-nav { padding: 14px 18px; }
+      /* Kleinere Texte + Abstände */
+      .step-title { font-size: 21px; margin-bottom: 6px; }
+      .step-subtitle { font-size: 13px; line-height: 1.6; margin-bottom: 18px; }
+      .field { margin-bottom: 16px; }
+      .field-label { font-size: 10px; margin-bottom: 6px; }
+      .divider { margin: 16px 0; }
+      /* Eingabefelder kompakter */
+      input[type="text"], input[type="email"], input[type="tel"],
+      input[type="date"], select, textarea { padding: 12px 14px; font-size: 14px; }
+      textarea { min-height: 80px; }
+      /* Layout */
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      /* Checkboxen: 2 Spalten behalten, etwas kompakter */
+      .check-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .check-item { font-size: 12px; padding: 10px 10px; gap: 7px; }
+      /* Radio-Pills: horizontal wrappend, nicht vertikal */
+      .radio-group { flex-direction: row; flex-wrap: wrap; gap: 7px; }
+      .radio-item { flex: 1; min-width: 90px; padding: 10px 8px; font-size: 12px; }
+      /* Media-Tiles: 2 Spalten statt 1 */
+      .media-group { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .media-item { padding: 14px 8px; font-size: 12px; gap: 5px; }
+      /* Welcome Screen */
+      .welcome-icon { width: 48px; height: 48px; margin-bottom: 14px; }
+      .feature-list { margin-bottom: 18px; }
+      .feature-list li { font-size: 13px; padding: 5px 0; }
+      /* Buttons */
+      .btn { padding: 12px 22px; font-size: 14px; }
+      .btn-full { padding: 14px; font-size: 14px; }
+      /* Summary */
+      .summary-card { padding: 14px 14px; margin-top: 18px; }
+      .summary-label { width: 100px; font-size: 12px; }
+      .summary-value { font-size: 12px; }
+      /* Upload */
+      .upload-area { padding: 18px 16px; }
+      .upload-thumb { width: 60px; height: 60px; }
+      /* Step counter sichtbarer */
+      .step-counter { font-size: 12px; font-weight: 600; }
     }
   `;
 
@@ -974,7 +1027,12 @@
   const MODAL_HTML = `
     <div class="progress-bar"><div class="progress-fill" id="ea-progress"></div></div>
     <div class="modal-header">
-      <span class="logo">einfach anfrage</span>
+      ${isDemo
+        ? `<span class="logo" style="display:flex;align-items:center;gap:8px;">
+            <span style="background:rgba(191,122,96,0.12);border:1px dashed rgba(191,122,96,0.4);color:#BF7A60;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:100px;text-transform:uppercase;white-space:nowrap;">← Dein Logo</span>
+          </span>`
+        : `<span class="logo">einfach anfrage</span>`
+      }
       <div class="modal-header-right">
         <div id="ea-lang-toggle" class="lang-toggle" style="display:${CONFIG.language === 'auto' ? 'flex' : 'none'};">
           <button class="lang-btn active" data-lang="de">DE</button>
@@ -989,12 +1047,18 @@
       <!-- ── Step 1: Willkommen ── -->
       <div class="step active" data-step="1">
         <div class="welcome-icon">${ICON_NEEDLE}</div>
-        <h2 class="step-title" data-i18n="w.title">Tattoo-Anfrage stellen</h2>
-        <p class="step-subtitle" data-i18n-html="w.sub">Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann – ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.</p>
+        ${isDemo
+          ? `<h2 class="step-title" style="display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;">
+              <span data-i18n="w.title">Tattoo-Anfrage stellen</span>
+            </h2>
+            <p class="step-subtitle">Damit <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(191,122,96,0.1);border:1px dashed rgba(191,122,96,0.38);color:#BF7A60;font-size:12px;font-weight:700;padding:2px 9px;border-radius:100px;vertical-align:middle;white-space:nowrap;">Dein Künstlername</span> dir ein passendes Angebot machen kann – ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.</p>`
+          : `<h2 class="step-title" data-i18n="w.title">Tattoo-Anfrage stellen</h2>
+            <p class="step-subtitle" data-i18n-html="w.sub">Damit ${CONFIG.photographerName} dir ein passendes Angebot machen kann – ein paar kurze Fragen, dauert nur <strong>3 Minuten</strong>.</p>`
+        }
         <ul class="feature-list">
           <li data-i18n="w.li1">Fast alles kann auch mit „Noch unklar" beantwortet werden</li>
           <li data-i18n="w.li2">Kein Account, keine Werbung</li>
-          <li data-i18n-html="w.li3">Deine Daten gehen nur an ${CONFIG.photographerName}</li>
+          <li data-i18n-html="w.li3">Deine Daten gehen nur an ${isDemo ? '<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(191,122,96,0.1);border:1px dashed rgba(191,122,96,0.38);color:#BF7A60;font-size:11px;font-weight:700;padding:1px 8px;border-radius:100px;white-space:nowrap;">Dich</span>' : CONFIG.photographerName}</li>
         </ul>
         <button class="btn btn-primary btn-full" id="ea-start" data-i18n="btn.start">Jetzt starten →</button>
       </div>
