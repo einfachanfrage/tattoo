@@ -43,17 +43,17 @@ function buildArtistHtml(submission) {
   // helper: compact detail row
   const row = (label, val) => val && val !== '–'
     ? `<tr>
-        <td style="padding:5px 10px 5px 0;font-size:12px;color:rgba(247,246,243,0.38);white-space:nowrap;width:115px;vertical-align:top;">${label}</td>
-        <td style="padding:5px 0;font-size:12px;color:#F7F6F3;font-weight:500;vertical-align:top;">${val}</td>
+        <td style="padding:4px 10px 4px 0;font-size:11px;color:rgba(247,246,243,0.36);white-space:nowrap;width:110px;vertical-align:top;">${label}</td>
+        <td style="padding:4px 0;font-size:11px;color:#F7F6F3;font-weight:500;vertical-align:top;">${val}</td>
        </tr>`
     : '';
 
   // helper: text note block
   const note = (label, text) => text
-    ? `<tr><td style="padding:0 0 8px;">
-        <div style="border-left:2px solid ${AC};padding:8px 12px;background:rgba(255,255,255,0.03);">
-          <p style="margin:0 0 3px;font-size:9px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">${label}</p>
-          <p style="margin:0;font-size:12px;color:rgba(247,246,243,0.7);line-height:1.55;">${esc(text)}</p>
+    ? `<tr><td style="padding:0 0 7px;">
+        <div style="border-left:2px solid ${AC};padding:6px 10px;background:rgba(255,255,255,0.03);">
+          <p style="margin:0 0 2px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">${label}</p>
+          <p style="margin:0;font-size:12px;color:rgba(247,246,243,0.7);line-height:1.5;">${esc(text)}</p>
         </div>
        </td></tr>`
     : '';
@@ -170,17 +170,33 @@ function buildArtistHtml(submission) {
     </table>
   </td></tr>
 
-  <!-- Motiv-Beschreibung (wichtigstes Freitext-Feld) -->
-  ${(motif||{}).description ? `
-  <tr><td style="padding:10px 16px;border-bottom:1px solid ${B};">
-    <p style="margin:0 0 4px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Motiv</p>
-    <p style="margin:0;font-size:12px;color:rgba(247,246,243,0.75);line-height:1.55;">${esc((motif||{}).description)}</p>
+  <!-- Extra Facts: Cover-Up, Gesundheit, Sonstiges -->
+  ${((motif||{}).isCoverUp || (health||{}).isFirstTattoo || (health||{}).knownAllergies || contact.howFound) ? `
+  <tr><td style="padding:8px 16px 4px;border-bottom:1px solid ${B};">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${row('Cover-Up',      esc((motif||{}).isCoverUp))}
+      ${row('Erstes Tattoo', esc((health||{}).isFirstTattoo))}
+      ${row('Allergien',     esc((health||{}).knownAllergies))}
+      ${contact.howFound ? row('Gefunden über', esc(contact.howFound)) : ''}
+    </table>
+  </td></tr>` : ''}
+
+  <!-- Freitext-Blöcke -->
+  ${((motif||{}).description || (motif||{}).coverUpNotes || (style||{}).styleNotes || (health||{}).allergiesDetail || (budget||{}).notes) ? `
+  <tr><td style="padding:9px 16px 2px;border-bottom:1px solid ${B};">
+    <table width="100%" cellpadding="0" cellspacing="0">
+      ${note('Motiv',              (motif||{}).description)}
+      ${note('Cover-Up Details',   (motif||{}).coverUpNotes)}
+      ${note('Stil-Notizen',       (style||{}).styleNotes)}
+      ${note('Allergie-Details',   (health||{}).allergiesDetail)}
+      ${note('Budget-Wünsche',     (budget||{}).notes)}
+    </table>
   </td></tr>` : ''}
 
   <!-- Referenzbilder -->
   ${((style||{}).inspirationImages && style.inspirationImages.length > 0) ? `
-  <tr><td style="padding:10px 16px;border-bottom:1px solid ${B};">
-    <p style="margin:0 0 7px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Referenzbilder</p>
+  <tr><td style="padding:9px 16px;border-bottom:1px solid ${B};">
+    <p style="margin:0 0 6px;font-size:8px;font-weight:700;color:${AC};text-transform:uppercase;letter-spacing:0.1em;">Referenzbilder</p>
     <table cellpadding="0" cellspacing="0"><tr>${style.inspirationImages.map(function(img){return `
       <td style="padding:0 5px 0 0;vertical-align:top;">
         <a href="${esc(img.url)}" target="_blank" style="display:block;border-radius:5px;overflow:hidden;border:1px solid rgba(247,246,243,0.1);text-decoration:none;line-height:0;">
