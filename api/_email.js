@@ -84,53 +84,41 @@ function buildArtistHtml(submission) {
     </tr></table>
   </td></tr>
 
-  <!-- Name + Aktions-Buttons -->
+  <!-- Name + 4 Icon-Kontakt-Buttons -->
   <tr><td style="padding:14px 16px 0;border-bottom:1px solid ${B};">
 
-    <p style="margin:0 0 10px;font-size:20px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
+    <p style="margin:0 0 12px;font-size:20px;font-weight:800;color:#F7F6F3;letter-spacing:-0.01em;line-height:1.1;">${name}</p>
 
-    <!-- Gestapelte Aktions-Rows -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="border-radius:7px;overflow:hidden;border:1px solid rgba(255,255,255,0.09);margin-bottom:14px;">
-      <tr><td>
-        <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
-           style="display:block;padding:11px 14px;background:#C9A96E;text-decoration:none;">
-          <table width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:13px;font-weight:700;color:#1B1B1B;">E-Mail antworten</td>
-            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(27,27,27,0.45);white-space:nowrap;padding-left:8px;">${esc(contact.email)}</td>
-          </tr></table>
-        </a>
-      </td></tr>
+    <table width="100%" cellpadding="0" cellspacing="4" style="margin-bottom:14px;">
+      <tr>
+        <td>
+          <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
+             style="display:block;padding:13px 0;background:rgba(201,169,110,0.14);border:1px solid rgba(201,169,110,0.3);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C9A96E" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          </a>
+        </td>
 
-      ${(waNum || contact.phone) ? `
-      <tr><td style="border-top:1px solid rgba(255,255,255,0.07);">
-        <table width="100%" cellpadding="0" cellspacing="0"><tr>
-          ${waNum ? `<td width="${contact.phone && waNum ? '50%' : '100%'}" style="${contact.phone && waNum ? 'border-right:1px solid rgba(255,255,255,0.07);' : ''}">
-            <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + ', danke für deine Anfrage – ich melde mich gleich!')}"
-               style="display:block;padding:10px 14px;background:rgba(255,255,255,0.04);text-decoration:none;">
-              <p style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">WhatsApp</p>
-              <p style="margin:2px 0 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;color:rgba(247,246,243,0.3);">${esc(contact.phone)}</p>
-            </a>
-          </td>` : ''}
-          ${contact.phone ? `<td width="${contact.phone && waNum ? '50%' : '100%'}">
-            <a href="tel:${esc(contact.phone)}"
-               style="display:block;padding:10px 14px;background:rgba(255,255,255,0.04);text-decoration:none;">
-              <p style="margin:0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">Anrufen</p>
-              <p style="margin:2px 0 0;font-family:'Helvetica Neue',Arial,sans-serif;font-size:10px;color:rgba(247,246,243,0.3);">${esc(contact.phone)}</p>
-            </a>
-          </td>` : ''}
-        </tr></table>
-      </td></tr>` : ''}
+        ${waNum ? `<td>
+          <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + '!')}"
+             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </a>
+        </td>` : ''}
 
-      ${contact.instagram ? `
-      <tr><td style="border-top:1px solid rgba(255,255,255,0.07);">
-        <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
-           style="display:block;padding:10px 14px;background:rgba(255,255,255,0.04);text-decoration:none;">
-          <table width="100%" cellpadding="0" cellspacing="0"><tr>
-            <td style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:500;color:#F7F6F3;">Instagram</td>
-            <td style="text-align:right;font-family:'Helvetica Neue',Arial,sans-serif;font-size:11px;color:rgba(247,246,243,0.3);">@${esc((contact.instagram||'').replace(/^@/,''))}</td>
-          </tr></table>
-        </a>
-      </td></tr>` : ''}
+        ${contact.phone ? `<td>
+          <a href="tel:${esc(contact.phone)}"
+             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 12 19.79 19.79 0 0 1 1 3.59 2 2 0 0 1 3 1.41h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </a>
+        </td>` : ''}
+
+        ${contact.instagram ? `<td>
+          <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
+             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5"/></svg>
+          </a>
+        </td>` : ''}
+      </tr>
     </table>
   </td></tr>
 
