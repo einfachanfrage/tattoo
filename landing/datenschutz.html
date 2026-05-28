@@ -6,19 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Datenschutzerklärung – Einfach Anfrage</title>
   <link rel="preconnect" href="https://fonts.bunny.net">
-  <link href="https://fonts.bunny.net/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.bunny.net/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --champagne: #C9A96E;
-      --ivory: #FAF7F2;
-      --dark: #1A1A1A;
-      --grey-border: #E2DDD6;
-      --grey-mid: #8A8580;
-      --grey-light: #F0EDE8;
+      --champagne: #BF7A60;
+      --ivory: #F7F6F3;
+      --dark: #1B1B1B;
+      --grey-border: #D1CDC7;
+      --grey-mid: #6B6B6B;
+      --grey-light: #EFEDE9;
     }
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       background: var(--ivory);
       color: var(--dark);
       font-size: 15px;
@@ -26,17 +26,18 @@
     }
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(250,247,242,0.94);
-      backdrop-filter: blur(10px);
+      background: rgba(247,246,243,0.96);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--grey-border);
       padding: 0 5vw;
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
     .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 500;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700;
       color: var(--dark); text-decoration: none;
+      letter-spacing: 0.12em; text-transform: uppercase;
     }
     .nav-logo span { color: var(--champagne); }
     .nav-back { font-size: 13px; color: var(--grey-mid); text-decoration: none; transition: color 0.15s; }
@@ -47,8 +48,9 @@
       text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px;
     }
     h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px; font-weight: 400; line-height: 1.1;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      font-size: clamp(28px, 4vw, 38px); font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.02em;
       color: var(--dark); margin-bottom: 48px;
     }
     h2 {
