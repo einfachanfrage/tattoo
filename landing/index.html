@@ -1280,55 +1280,193 @@
       <h2 style="color:#F7F6F3;letter-spacing:-0.02em;">Vollständiges Briefing. <em>Sofort.</em></h2>
       <p class="section-lead" style="color:rgba(247,246,243,0.42);margin-bottom:56px;">Nach jeder Anfrage hast du alles auf einen Blick: Stil, Budget, Körperstelle, Wunsch-Termin. Du entscheidest, ob es passt – bevor du auch nur eine Nachricht schreibst.</p>
 
-      <div class="briefing-wrap">
-        <div class="brf">
-          <div class="brf-top"></div>
-          <div class="brf-head">
-            <div>
-              <div class="brf-meta" style="margin-bottom:6px;">Von: <strong style="color:#1B1B1B;">Einfach Anfrage</strong> &lt;anfrage@einfach-anfrage.com&gt;</div>
-              <div class="brf-name">Neue Tattoo-Anfrage – Mia Müller</div>
-              <div class="brf-meta" style="margin-top:4px;">22. Mai 2026 · 09:14 Uhr</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;" class="db-delivery-grid">
+
+        <!-- ── E-MAIL MOCKUP ── -->
+        <div>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(247,246,243,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            <span style="font-size:10px;font-weight:700;color:rgba(247,246,243,0.4);text-transform:uppercase;letter-spacing:0.14em;">Per E-Mail</span>
+          </div>
+
+          <div style="border-radius:10px;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,0.55);font-family:'Plus Jakarta Sans','Inter',sans-serif;">
+            <!-- Mail client top bar -->
+            <div style="background:#EDEAD6;padding:8px 13px;border-bottom:1px solid #DDD9CE;display:flex;align-items:center;gap:9px;">
+              <div style="display:flex;gap:5px;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#FF5F57;display:inline-block;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#FFBD2E;display:inline-block;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#28CA41;display:inline-block;"></span>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:11px;font-weight:600;color:#2A2520;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Neue Tattoo-Anfrage – Mia Müller</div>
+                <div style="font-size:9px;color:#9A9590;margin-top:1px;">Von: Einfach Anfrage &lt;anfrage@einfach-anfrage.com&gt;</div>
+              </div>
+              <div style="font-size:9px;color:#9A9590;white-space:nowrap;flex-shrink:0;">09:14</div>
+            </div>
+
+            <!-- Email body -->
+            <div style="background:#1B1B1B;padding:0 0 16px;">
+              <div style="height:2px;background:#C9A96E;margin-bottom:16px;"></div>
+              <div style="padding:0 16px;">
+
+                <!-- Name + date -->
+                <div style="margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid rgba(255,255,255,0.06);">
+                  <div style="font-size:9px;font-weight:700;color:rgba(247,246,243,0.2);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:3px;">Neue Tattoo-Anfrage</div>
+                  <div style="font-size:15px;font-weight:700;color:#F7F6F3;letter-spacing:-0.02em;">Mia Müller</div>
+                  <div style="font-size:9px;color:rgba(247,246,243,0.28);margin-top:2px;">22. Mai 2026 · 09:14 Uhr</div>
+                </div>
+
+                <!-- 3×2 facts grid -->
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;margin-bottom:10px;">
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Körperstelle</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">Unterarm</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Größe</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">Groß</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Termin</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">1–3 Mo.</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Budget</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">300–500 €</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Stil</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">Fine Line</div>
+                  </div>
+                  <div style="background:rgba(255,255,255,0.04);border-radius:4px;padding:6px 8px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Farbe</div>
+                    <div style="font-size:11px;font-weight:600;color:#F7F6F3;line-height:1.2;">SW-Grau</div>
+                  </div>
+                </div>
+
+                <!-- Motiv description -->
+                <div style="background:rgba(255,255,255,0.03);border-radius:4px;border-left:2px solid rgba(201,169,110,0.35);padding:8px 9px;margin-bottom:10px;font-size:10px;color:rgba(247,246,243,0.6);line-height:1.55;">
+                  Botanisches Arrangement – Rosen &amp; Eukalyptus, fein und detailliert, kein zu krasses Schwarz
+                </div>
+
+                <!-- Reference images -->
+                <div style="margin-bottom:12px;">
+                  <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;">Referenzbilder (2)</div>
+                  <div style="display:flex;gap:5px;">
+                    <div style="width:52px;height:52px;border-radius:5px;background:linear-gradient(135deg,#D4C4A8,#B8A080);border:1px solid rgba(255,255,255,0.09);flex-shrink:0;"></div>
+                    <div style="width:52px;height:52px;border-radius:5px;background:linear-gradient(135deg,#A89878,#786050);border:1px solid rgba(255,255,255,0.09);flex-shrink:0;"></div>
+                  </div>
+                </div>
+
+                <!-- Action buttons with "direkt anklickbar" badge -->
+                <div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;">
+                    <div style="font-size:7px;font-weight:700;color:rgba(247,246,243,0.22);text-transform:uppercase;letter-spacing:0.1em;">Kontaktieren</div>
+                    <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(191,122,96,0.1);border:1px solid rgba(191,122,96,0.3);border-radius:100px;padding:2px 7px;">
+                      <span style="width:4px;height:4px;background:#BF7A60;border-radius:50%;display:inline-block;flex-shrink:0;"></span>
+                      <span style="font-size:8px;font-weight:700;color:#BF7A60;letter-spacing:0.04em;">direkt anklickbar</span>
+                    </div>
+                  </div>
+                  <!-- E-Mail primary button -->
+                  <div style="background:#C9A96E;border-radius:5px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;margin-bottom:3px;">
+                    <span style="font-size:11px;font-weight:700;color:#1B1B1B;">E-Mail antworten</span>
+                    <span style="font-size:9px;color:rgba(27,27,27,0.5);">mia.mueller@gmail.com</span>
+                  </div>
+                  <!-- WhatsApp + Anrufen -->
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;">
+                    <div style="background:rgba(255,255,255,0.07);border-radius:5px;padding:9px 10px;">
+                      <div style="font-size:11px;font-weight:700;color:#F7F6F3;">WhatsApp</div>
+                      <div style="font-size:9px;color:rgba(247,246,243,0.28);margin-top:1px;">+49 176 987 65 43</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.07);border-radius:5px;padding:9px 10px;">
+                      <div style="font-size:11px;font-weight:700;color:#F7F6F3;">Anrufen</div>
+                      <div style="font-size:9px;color:rgba(247,246,243,0.28);margin-top:1px;">+49 176 987 65 43</div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
-
-          <div class="brf-sec">
-            <div class="brf-sec-title">Motiv</div>
-            <div class="brf-row"><span class="brf-k">Beschreibung</span><span class="brf-v">Botanisches Arrangement – Rosen &amp; Eukalyptus, fein und detailliert, kein zu krasses Schwarz</span></div>
-            <div class="brf-row"><span class="brf-k">Körperstelle</span><span class="brf-v">Unterarm</span></div>
-            <div class="brf-row"><span class="brf-k">Größe</span><span class="brf-v">Groß (10–20 cm)</span></div>
-            <div class="brf-row"><span class="brf-k">Cover-Up</span><span class="brf-v">Nein</span></div>
-          </div>
-
-          <div class="brf-sec">
-            <div class="brf-sec-title">Stil &amp; Look</div>
-            <div class="brf-row"><span class="brf-k">Tattoo-Stil</span><span class="brf-v">Fine Line · Realistisch</span></div>
-            <div class="brf-row"><span class="brf-k">Farbe / SW</span><span class="brf-v">Schwarz-Grau</span></div>
-            <div class="brf-row"><span class="brf-k">Referenzbilder</span><span class="brf-v">2 Bilder (im Dashboard)</span></div>
-          </div>
-
-          <div class="brf-sec">
-            <div class="brf-sec-title">Gesundheit</div>
-            <div class="brf-row"><span class="brf-k">Erstes Tattoo</span><span class="brf-v">Nein</span></div>
-            <div class="brf-row"><span class="brf-k">Allergien</span><span class="brf-v">Nein</span></div>
-          </div>
-
-          <div class="brf-sec">
-            <div class="brf-sec-title">Termin &amp; Budget</div>
-            <div class="brf-row"><span class="brf-k">Wunsch-Zeitraum</span><span class="brf-v">In 1–3 Monaten</span></div>
-            <div class="brf-row"><span class="brf-k">Tageszeit</span><span class="brf-v">Nachmittags</span></div>
-            <div class="brf-row"><span class="brf-k">Budget</span><span class="brf-v">300–500 €</span></div>
-          </div>
-
-          <div class="brf-sec">
-            <div class="brf-sec-title">Kontakt</div>
-            <div class="brf-row"><span class="brf-k">Name</span><span class="brf-v">Mia Müller</span></div>
-            <div class="brf-row"><span class="brf-k">E-Mail</span><span class="brf-v">mia.mueller@gmail.com</span></div>
-            <div class="brf-row"><span class="brf-k">Telefon</span><span class="brf-v">+49 176 987 65 43</span></div>
-            <div class="brf-row"><span class="brf-k">Instagram</span><span class="brf-v">@mia.tattoo</span></div>
-            <div class="brf-row"><span class="brf-k">Wie gefunden</span><span class="brf-v">Instagram</span></div>
-          </div>
-
         </div>
+
+        <!-- ── DASHBOARD MOCKUP ── -->
+        <div>
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:14px;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(247,246,243,0.45)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <span style="font-size:10px;font-weight:700;color:rgba(247,246,243,0.4);text-transform:uppercase;letter-spacing:0.14em;">Im Dashboard</span>
+          </div>
+
+          <div style="background:#F7F6F3;border-radius:10px;overflow:hidden;box-shadow:0 28px 70px rgba(0,0,0,0.55);font-family:'Plus Jakarta Sans','Inter',sans-serif;">
+            <!-- Dashboard header bar -->
+            <div style="background:#1B1B1B;padding:12px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+              <div>
+                <div style="font-size:15px;font-weight:700;color:#F7F6F3;letter-spacing:-0.02em;margin-bottom:3px;">Mia Müller</div>
+                <div style="font-size:10px;color:rgba(247,246,243,0.32);">22. Mai 2026 · Fine Line · Unterarm</div>
+              </div>
+              <span style="font-size:8px;font-weight:700;background:rgba(186,137,127,0.18);color:#BA897F;padding:3px 9px;border-radius:3px;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;margin-top:2px;flex-shrink:0;">Neu</span>
+            </div>
+
+            <div style="padding:14px 16px;">
+
+              <!-- Tattoo info grid -->
+              <div style="font-size:7px;font-weight:700;color:#BA897F;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:7px;">Das Tattoo</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:12px;">
+                <div style="background:#EFEDE9;border-radius:4px;padding:7px 8px;">
+                  <div style="font-size:8px;color:#9A9590;margin-bottom:1px;">Motiv</div>
+                  <div style="font-size:11px;font-weight:600;color:#1B1B1B;line-height:1.3;">Botanical · Rosen &amp; Eukalyptus</div>
+                </div>
+                <div style="background:#EFEDE9;border-radius:4px;padding:7px 8px;">
+                  <div style="font-size:8px;color:#9A9590;margin-bottom:1px;">Stil</div>
+                  <div style="font-size:11px;font-weight:600;color:#1B1B1B;">Fine Line · SW</div>
+                </div>
+                <div style="background:#EFEDE9;border-radius:4px;padding:7px 8px;">
+                  <div style="font-size:8px;color:#9A9590;margin-bottom:1px;">Körperstelle</div>
+                  <div style="font-size:11px;font-weight:600;color:#1B1B1B;">Unterarm innen</div>
+                </div>
+                <div style="background:#EFEDE9;border-radius:4px;padding:7px 8px;">
+                  <div style="font-size:8px;color:#9A9590;margin-bottom:1px;">Größe · Budget</div>
+                  <div style="font-size:11px;font-weight:600;color:#1B1B1B;">Groß · 300–500 €</div>
+                </div>
+              </div>
+
+              <!-- Reference images -->
+              <div style="font-size:7px;font-weight:700;color:#BA897F;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:6px;">Referenzbilder (2)</div>
+              <div style="display:flex;gap:6px;margin-bottom:12px;">
+                <div style="width:68px;height:68px;border-radius:6px;background:linear-gradient(135deg,#D4C4A8,#B8A080);border:1px solid #D1CDC7;flex-shrink:0;"></div>
+                <div style="width:68px;height:68px;border-radius:6px;background:linear-gradient(135deg,#A89878,#786050);border:1px solid #D1CDC7;flex-shrink:0;"></div>
+              </div>
+
+              <!-- Contact section with "direkt anklickbar" badge -->
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <div style="font-size:7px;font-weight:700;color:#BA897F;text-transform:uppercase;letter-spacing:0.14em;">Kontakt</div>
+                <div style="display:inline-flex;align-items:center;gap:4px;background:rgba(191,122,96,0.08);border:1px solid rgba(191,122,96,0.28);border-radius:100px;padding:2px 7px;">
+                  <span style="width:4px;height:4px;background:#BF7A60;border-radius:50%;display:inline-block;flex-shrink:0;"></span>
+                  <span style="font-size:8px;font-weight:700;color:#BF7A60;letter-spacing:0.04em;">direkt anklickbar</span>
+                </div>
+              </div>
+              <div style="background:#1B1B1B;border-radius:6px;padding:11px 13px;">
+                <div style="font-size:12px;font-weight:700;color:#F7F6F3;margin-bottom:8px;">Mia Müller</div>
+                <div style="display:flex;flex-direction:column;gap:5px;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:9px;color:rgba(247,246,243,0.28);width:50px;flex-shrink:0;">E-Mail</span>
+                    <span style="font-size:10px;color:#C9A96E;text-decoration:underline;text-underline-offset:2px;">mia.mueller@gmail.com</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:9px;color:rgba(247,246,243,0.28);width:50px;flex-shrink:0;">Telefon</span>
+                    <span style="font-size:10px;color:#C9A96E;text-decoration:underline;text-underline-offset:2px;">+49 176 987 65 43</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span style="font-size:9px;color:rgba(247,246,243,0.28);width:50px;flex-shrink:0;">Instagram</span>
+                    <span style="font-size:10px;color:#C9A96E;text-decoration:underline;text-underline-offset:2px;">@mia.tattoo</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
