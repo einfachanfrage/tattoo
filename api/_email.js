@@ -93,29 +93,33 @@ function buildArtistHtml(submission) {
       <tr>
         ${waNum ? `<td>
           <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + '!')}"
-             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
-            💬
+             style="display:block;padding:9px 0 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;color:#F7F6F3;">
+            <span style="display:block;font-size:18px;line-height:1.2;">💬</span>
+            <span style="display:block;font-size:9px;font-weight:600;color:rgba(247,246,243,0.38);letter-spacing:0.05em;margin-top:3px;font-family:'Helvetica Neue',Arial,sans-serif;">WhatsApp</span>
           </a>
         </td>` : ''}
 
         ${contact.instagram ? `<td>
           <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
-             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
-            📷
+             style="display:block;padding:9px 0 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;color:#F7F6F3;">
+            <span style="display:block;font-size:18px;line-height:1.2;">📷</span>
+            <span style="display:block;font-size:9px;font-weight:600;color:rgba(247,246,243,0.38);letter-spacing:0.05em;margin-top:3px;font-family:'Helvetica Neue',Arial,sans-serif;">Instagram</span>
           </a>
         </td>` : ''}
 
         ${contact.phone ? `<td>
           <a href="tel:${esc(contact.phone)}"
-             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
-            📞
+             style="display:block;padding:9px 0 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;color:#F7F6F3;">
+            <span style="display:block;font-size:18px;line-height:1.2;">📞</span>
+            <span style="display:block;font-size:9px;font-weight:600;color:rgba(247,246,243,0.38);letter-spacing:0.05em;margin-top:3px;font-family:'Helvetica Neue',Arial,sans-serif;">Anrufen</span>
           </a>
         </td>` : ''}
 
         <td>
           <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
-             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
-            ✉️
+             style="display:block;padding:9px 0 8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;color:#F7F6F3;">
+            <span style="display:block;font-size:18px;line-height:1.2;">✉️</span>
+            <span style="display:block;font-size:9px;font-weight:600;color:rgba(247,246,243,0.38);letter-spacing:0.05em;margin-top:3px;font-family:'Helvetica Neue',Arial,sans-serif;">E-Mail</span>
           </a>
         </td>
       </tr>
