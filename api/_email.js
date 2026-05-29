@@ -93,29 +93,29 @@ function buildArtistHtml(submission) {
       <tr>
         ${waNum ? `<td>
           <a href="https://wa.me/${waNum}?text=${encodeURIComponent('Hey ' + (contact.name || '') + '!')}"
-             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
+            💬
           </a>
         </td>` : ''}
 
         ${contact.instagram ? `<td>
           <a href="https://instagram.com/${esc((contact.instagram||'').replace(/^@/,''))}"
-             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke-width="2.5"/></svg>
+             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
+            📷
           </a>
         </td>` : ''}
 
         ${contact.phone ? `<td>
           <a href="tel:${esc(contact.phone)}"
-             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 12 19.79 19.79 0 0 1 1 3.59 2 2 0 0 1 3 1.41h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
+            📞
           </a>
         </td>` : ''}
 
         <td>
           <a href="mailto:${esc(contact.email)}?subject=Re%3A%20Deine%20Tattoo-Anfrage"
-             style="display:block;padding:13px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;line-height:0;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F7F6F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+             style="display:block;padding:11px 0;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:7px;text-align:center;text-decoration:none;font-size:20px;line-height:1.3;color:#F7F6F3;">
+            ✉️
           </a>
         </td>
       </tr>
